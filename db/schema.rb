@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_24_224156) do
+ActiveRecord::Schema.define(version: 2019_06_24_231754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "comments", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.bigint "video_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_comments_on_user_id"
+    t.index ["video_id"], name: "index_comments_on_video_id"
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "category"
+    t.string "title"
+    t.text "overview"
+    t.string "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "enrollments", force: :cascade do |t|
+    t.integer "rating"
+    t.text "review"
+    t.string "role"
+    t.bigint "user_id"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_enrollments_on_course_id"
+    t.index ["user_id"], name: "index_enrollments_on_user_id"
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.bigint "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_lessons_on_course_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -45,4 +86,20 @@ ActiveRecord::Schema.define(version: 2019_06_24_224156) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "url"
+    t.bigint "lesson_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_videos_on_lesson_id"
+  end
+
+  add_foreign_key "comments", "users"
+  add_foreign_key "comments", "videos"
+  add_foreign_key "enrollments", "courses"
+  add_foreign_key "enrollments", "users"
+  add_foreign_key "lessons", "courses"
+  add_foreign_key "videos", "lessons"
 end
