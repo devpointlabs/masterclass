@@ -2,11 +2,11 @@ import React from "react";
 import { Header, } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 
-const About = () => (
+const Courses = () => (
   <Header as="h3" textAlign="center">
-    About Dev Point Labs
+    Courses
     <Link to="/"> Home</Link>
   </Header>
 );
 
-export default About;
+export default Courses;
