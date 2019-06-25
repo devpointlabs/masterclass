@@ -1,5 +1,6 @@
 class Api::EnrollmentsController < ApplicationController
-  before_action :set_course
+  before_action :authenticate_user!
+  before_action :set_course, only: [:show, :index, :create, :destroy]
 
   def index
     render json: Enrollment.all
