@@ -8,9 +8,8 @@ const Login = (props) =>{
     email: "",
     password: "", 
   }
-  const [form, setForm] = useState(emptyForm)
-  // const [email, setEmail] = useState("")
-  const {handleLogin,} = useContext(AuthContext)
+  const [form, setForm] = useState(emptyForm); 
+  const {handleLogin,} = useContext(AuthContext); 
 
   
   const handleSubmit = (e) => {
@@ -19,10 +18,8 @@ const Login = (props) =>{
   }
 
   const handleChange = (name) => (e) => {
-    // const { value, } = e.target;
     setForm({...form, [name]: e.target.value})
   }
-  // const handleChange = (e, {name, value}) =>this.setState({[name]:value})
 
   return(
     <Segment basic>
@@ -36,7 +33,6 @@ const Login = (props) =>{
           value={form.email}
           placeholder='Email'
           onChange={handleChange('email')}
-          // onChange={e=> setEmail(e.target.value)}
         />
         <Form.Input
           label="Password"
