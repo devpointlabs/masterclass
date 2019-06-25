@@ -4,6 +4,7 @@ import { Container, } from "semantic-ui-react";
 import { Switch, Route, } from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
+import Course from "./components/Course";
 import NoMatch from "./components/layout/NoMatch";
 import Navbar from "./components/layout/Navbar";
 // import Courses from "./components/Courses";
@@ -19,6 +20,7 @@ const App = () => (
       <Container>
         <Switch>
           {/* <ProtectedRoute exact path="/" component={Home} /> */}
+          <Route exact path="/courses/:id" component={Course} />
           <Route exact path="/home" component={Home} />
           <Route exact path="/my-courses" component={Enrollment} />
           <Route exact path="/login" component={Login} />
