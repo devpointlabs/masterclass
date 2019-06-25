@@ -4,7 +4,7 @@ import { Link, } from "react-router-dom";
 
 const NoMatch = () => (
   <Header as="h3" textAlign="center">
-    Page not found. Return
+    Page not found.
     <Link to="/"> Home</Link>
   </Header>
 );
