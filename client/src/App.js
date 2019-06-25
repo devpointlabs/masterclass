@@ -7,7 +7,9 @@ import Register from "./components/auth/Register";
 import Course from "./components/Course";
 import NoMatch from "./components/layout/NoMatch";
 import Navbar from "./components/layout/Navbar";
-import FetchUser from "./components/auth/FetchUser";
+// import Courses from "./components/Courses";
+import Enrollment from './components/Enrollment'
+import FetchUser from "./components/auth/FetchUser"
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -20,6 +22,7 @@ const App = () => (
           {/* <ProtectedRoute exact path="/" component={Home} /> */}
           <Route exact path="/courses/:id" component={Course} />
           <Route exact path="/" component={Home} />
+          <Route exact path="/my-courses" component={Enrollment} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           <Route component={NoMatch} />
