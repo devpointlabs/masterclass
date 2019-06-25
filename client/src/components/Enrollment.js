@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from "react";
-import { Header, } from "semantic-ui-react";
+import { Header, Card, Container} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
@@ -10,18 +10,34 @@ const Enrollment = () => {
 
   // axios call to get enrollments
   useEffect(()=>{
-    axios.get("/api/my-courses", user.id)
-      .then(res => setEnrollments(res.data))
+    axios.get("/api/my-courses")
+      .then(res => {
+        setEnrollments(res.data)})
   },[])
-  console.log(enrollments)
   
+  const renderEnrollments = () =>{
+    // const {id } = props.match.params
+    return enrollments.map(e =>(
+      <div>
+        <Card key= {e.id}>
+          <Card.Description>
+            {e.title}
+          </Card.Description>
+        </Card>
+      </div>
+    ))
+  }
   
   return (
+    <Container>
+
   <Header as="h3" textAlign="center">
-    Enrollment
-    {/* <Link to="/"> Home</Link> */}
+    Welcom {user.name} here are your current enrollments
+    {renderEnrollments()}
   </Header>
   
+  <Link to="/"> Home</Link>
+    </Container>
   
   )
 
