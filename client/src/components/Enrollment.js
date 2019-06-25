@@ -32,11 +32,10 @@ const Enrollment = () => {
     <Container>
 
   <Header as="h3" textAlign="center">
-    Welcom {user.name} here are your current enrollments
+    {user ? `Welcome ${user.name} here are your current enrollments` : <Link to = "/">Home</Link> }
+   
     {renderEnrollments()}
   </Header>
-  
-  <Link to="/"> Home</Link>
     </Container>
   
   )

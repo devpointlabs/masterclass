@@ -9,6 +9,14 @@ const Navbar = (props) => {
     if (user) {
       return (
         <Menu.Menu position="right">
+          <Link to ="/my-courses">
+
+          <Menu.Item
+            name="My Courses"
+            active={props.location.pathname === "/my-courses"}
+            
+            />
+            </Link>
           <Menu.Item
             name="Logout"
             onClick={ () => handleLogout(props.history) }

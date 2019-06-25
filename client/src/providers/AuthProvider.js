@@ -39,7 +39,7 @@ export const AuthProvider = (props) =>  {
   axios.delete("/api/auth/sign_out")
   .then(res=>{
     setUser(null)
-    history.push('/login')
+    history.push('/')
   })
   .catch(err =>{
     console.log(err)
