@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do 
 
     resources :users 
+    get "my-courses", to: "enrollments#my_courses"
 
     resources :courses do 
       resources :enrollment, only: [:index, :new, :create, :destroy]
@@ -18,6 +19,5 @@ Rails.application.routes.draw do
       resources :comments 
     end
 
-    get "/my-courses", to: "enrollments#my_courses"
 end
 end

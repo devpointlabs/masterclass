@@ -38,9 +38,8 @@ export const AuthProvider = (props) =>  {
  const handleLogout = (history) =>{
   axios.delete("/api/auth/sign_out")
   .then(res=>{
-    debugger
     setUser(null)
-    history.push('/login')
+    history.push('/')
   })
   .catch(err =>{
     console.log(err)
