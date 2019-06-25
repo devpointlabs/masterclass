@@ -5,16 +5,22 @@ import { Link, } from "react-router-dom";
 
 const Video = (props) => {
   const [video, setVideo] = useState([])
+  const [comments, setComments] = useState([])
 
-  useEffect( (id) => {
+  useEffect( () => {
+    debugger
+    const {id } = props.match.params
     axios.get(`/api/videos/${id}`)
-      .then( res => setVideo(res.data))
+      .then( res => setVideo(res.data) )
+
+    axios.get(`/api/videos/${id}/comments`)
+      .then( res => setComments(res.data) )
   }, [])
 
   return(
     <>
       <Header textAlign="center">
-        Video Title
+        
       </Header>
       <Image
         centered

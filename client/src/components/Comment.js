@@ -3,13 +3,17 @@ import axios from "axios";
 import { Header, } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 
-const Comment = () => {
+const Comment = (props) => {
   const [comments, setComments] = useState([])
 
   useEffect( (video_id) => {
     axios.get(`/api/videos/${video_id}/comments`)
       .then( res => { setComments(res.data) } )
   }, [])
+
+  const renderComments = () => {
+    
+  }
 
   return(
     <>
