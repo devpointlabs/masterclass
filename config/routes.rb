@@ -18,5 +18,6 @@ Rails.application.routes.draw do
       resources :comments 
     end
 
+    get "/my-courses", to: "enrollments#my_courses"
 end
 end
