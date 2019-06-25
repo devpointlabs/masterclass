@@ -1,13 +1,13 @@
 import React from 'react';
-import Home from "./components/Home";
+import Home from './components/layout/Home'
 import { Container, } from "semantic-ui-react";
 import { Switch, Route, } from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import NoMatch from "./components/NoMatch";
-import Navbar from "./components/Navbar";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import NoMatch from "./components/layout/NoMatch";
+import Navbar from "./components/layout/Navbar";
 // import Courses from "./components/Courses";
-// import FetchUser from "./components/FetchUser";
+import FetchUser from "./components/auth/FetchUser"
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 

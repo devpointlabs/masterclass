@@ -14,7 +14,7 @@ const Login = (props) =>{
   
   const handleSubmit = (e) => {
     e.preventDefault()
-    handleLogin({...form}, props.history, handleError)
+    handleLogin({...form}, props.history,)
   }
 
   const handleChange = (name) => (e) => {
