@@ -1,36 +1,33 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 // import axios from 'axios';
 
 export const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
-export class AuthProvider extends Component {
-  state = {
-    user: null
-  };
+export const AuthProvider = (props) =>  {
+  const [user, setUser] = useState(null); 
 
-  // update user(id, user)
+  // update user(id, user) - optional 
    
 
   // handle register
-  handleRegister = (user, history) => {
-    axios
-       .post("/api/auth", user)
-      .then(res => {
-          this.setState({ user: res.data });
-          history.push("/");
-       }) 
-       .catch(err => {
-          console.log(err); 
-       });
- };
+  const handleRegister = (user, history) =>{
+    axios.post("/api/auth",user)
+    .then(res=>{
+      setUser(res.data.data)
+      history.push('/')
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
 
   //  handle login
-  handleLogin = (user, history) => {
+  const handleLogin = (user, history) => {
     axios
        .post("/api/auth/sign_in", user)
        .then(res => {
-          this.setState({ user: res.data.data });
+          setUser(res.data.data)
           history.push("/");
        })
        .catch(err => {
@@ -38,36 +35,32 @@ export class AuthProvider extends Component {
        });
  };
 
-  //  handle logout
-  handleLogout = history => {
-    axios
-       .delete("/api/auth/sign_out")
-       .then(res => {
-          this.setState({ user: null });
-          history.push("/login");
-       })
-       .catch(err => {
-          console.log(err);
-       });
- };
+ const handleLogout = (history) =>{
+  axios.delete("/api/auth/sign_out")
+  .then(res=>{
+    debugger
+    setUser(null)
+    history.push('/login')
+  })
+  .catch(err =>{
+    console.log(err)
+  })
+}
 
-  render() {
     return (
       <AuthContext.Provider
         value={{
-          ...this.state,
-          authenticated: this.state.user !== null,
-          handleRegister: this.handleRegister,
-          handleLogin: this.handleLogin,
-          handleLogout: this.handleLogout,
-          setUser: (user) => this.setState({ user }),
-          updateUser: this.updateUser
+          user, 
+          authenticated: user !==null,
+          handleLogin: handleLogin,
+          handleRegister: handleRegister,
+          handleLogout: handleLogout,
+          setUser: (user) => setUser(user)
         }}
       >
-        {this.props.children}
+        {props.children}
       </AuthContext.Provider>
     );
-  }
 }
 
 export default AuthProvider;

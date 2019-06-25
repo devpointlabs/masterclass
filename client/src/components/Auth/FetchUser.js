@@ -1,51 +1,44 @@
-import React from 'react';
+import {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
-import {AuthConsumer} from '../../providers/AuthProvider';
+import { AuthContext} from '../../providers/AuthProvider';
 
-class FetchUser extends React.Component {
-    state = {loaded: false};
+const FetchUser = ({children}) =>  {
+    const [loaded, setLoaded] = useState(false); 
+    const {authenticated, setUser} = useContext(AuthContext); 
 
-    componentDidMount() {
-        const {auth: {authenticated, setUser } } = this.props;
+
+    useEffect( () => {
         if(authenticated) {
-            this.loaded();
+            setLoaded(true); 
         } else {
-            if(this.checkLocalToken()) {
+            if(checkLocalToken()) {
                 axios.get('/api/auth/validate_token')
                 .then(res => {
                     setUser(res.data.data);
-                    this.loaded();
+                    setLoaded(true); 
                 })
                 .catch(err => {
                     console.log(err);
-                    this.loaded();
+                    setLoaded(true); 
                 })
             } else {
-                this.loaded();
+                setLoaded(true); 
             }
         }
-    }
+    }, []); 
 
-    checkLocalToken = () => {
+
+
+    const checkLocalToken = () => {
         const token = localStorage.getItem('access-token');
         return token;
     }
+ 
 
-    loaded = () => this.setState({ loaded: true })
-
-    render() {
         return(
-            this.state.loaded ? this.props.children : null
+            loaded ? children : null
         )
-    }
 }
 
-const ConnectedFetchUser = (props) => (
-    <AuthConsumer>
-        {auth => 
-            <FetchUser {...props} auth={auth} />
-        }
-    </AuthConsumer>
-)
 
-export default ConnectedFetchUser;
+export default FetchUser;
