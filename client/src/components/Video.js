@@ -1,37 +1,45 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { Header, Image, List, Card } from "semantic-ui-react";
+import { Header, Image, List, Card, Segment, } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 
 const Video = (props) => {
-  const [video, setVideo] = useState([])
+  const [videos, setVideos] = useState([])
   const [comments, setComments] = useState([])
 
   useEffect( () => {
-    debugger
-    const {id } = props.match.params
-    axios.get(`/api/videos/${id}`)
-      .then( res => setVideo(res.data) )
+    const video_id = props.match.params.id
+    axios.get(`/api/videos/${video_id}`)
+      .then( res => setVideos(res.data) )
 
-    axios.get(`/api/videos/${id}/comments`)
+    axios.get(`/api/videos/${video_id}/comments`)
       .then( res => setComments(res.data) )
   }, [])
 
+  const renderVideos = () => {
+    return videos.map( video => 
+      <Segment key={video.id}>
+        <Header textAlign="center">{video.title}</Header>
+        <Image
+          centered
+          src={video.url}
+          alt="video"
+        />
+        <p>{video.description}</p>
+      </Segment>
+      )
+  }
+
   return(
     <>
-      <Header textAlign="center">
-        
-      </Header>
-      <Image
-        centered
-        src=""
-        alt="video"
-      />
+      <Segment>
+        {renderVideos()}
+      </Segment>
       <List>
         <Card centered fluid>
           Comments
         </Card>
-      </List>
+      </List>     
     </>
   );
 };
