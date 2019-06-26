@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :users 
     get "my-courses", to: "enrollments#my_courses"
     post "my-courses/:course_id", to: "enrollments#create"
+    delete "my-courses/:course_id", to: "enrollments#destroy"
 
     resources :courses do 
       resources :enrollment, only: [:index, :new, :create, :destroy]
