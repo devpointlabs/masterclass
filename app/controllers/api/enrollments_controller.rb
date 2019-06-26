@@ -1,6 +1,6 @@
 class Api::EnrollmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_course, only: [:show, :index, :create, :destroy]
+  before_action :set_course, only: [:show, :index, :create, :destroy, :update]
 
   def index
     render json: Enrollment.all
@@ -36,6 +36,6 @@ class Api::EnrollmentsController < ApplicationController
   end
 
   def enrollment_params
-    params.require(:enrollment).permit(:role, :rating, :review)
+    params.require(:enrollment).permit(:role, :rating, :review, :user_id, :course_id)
   end
 end
