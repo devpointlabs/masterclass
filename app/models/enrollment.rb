@@ -9,6 +9,8 @@ class Enrollment < ApplicationRecord
       on courses.id = enrollments.course_id
       where user_id = ?", id 
     ])
+   
   end
+ 
   
 end
