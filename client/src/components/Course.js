@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import CourseForm from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
 import { AuthContext } from "../providers/AuthProvider";
+
 
 const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   const {user } = useContext(AuthContext)
 
   useEffect(() => {
@@ -43,11 +46,25 @@ const Course = (props) => {
     ))
   }
 
+  const courseEdit = (data) => {
+    setCourse(data)
+  }
+
+  const toggleForm = () => {
+    setShowForm(false)
+  }
+
   return (
     <>
       <Header as="h1">{course.title}</Header>
       {user ? <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button> : null}
    
+      <br />
+      {showForm ? <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} /> : null}
+
+      <Button onClick={() => setShowForm(!showForm)}>
+        {showForm ? "Close Form" : "Edit Course"}
+      </Button>
       <br />
       <List>
         {renderLessons()}
