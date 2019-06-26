@@ -10,6 +10,7 @@ const Course = (props) => {
     const course_id = props.match.params.id
     axios.get(`/api/courses/${course_id}/lessons`)
       .then(res => {
+        // debugger
         // console.log(res.data)
         setLessons(res.data);
       })
