@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { List, Header, Segment, } from "semantic-ui-react";
+import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
 
 const Course = (props) => {
   const [lessons, setLessons] = useState([]);
@@ -21,14 +21,20 @@ const Course = (props) => {
       })
 
   }, [])
+  const enroll = () =>{
+
+  }
 
   const renderLessons = () => {
     return lessons.map(lesson => (
-      <Segment key={lesson.id}>
+      <Segment key={lesson.id} style={{display:"flex", justifyContent: "space-between"}}>
+        <div>
         <List.Header as="h3">{lesson.name}</List.Header>
         <List.Description>
           {lesson.description}
         </List.Description>
+        </div>
+        <Button icon color = "green"><Icon name="add circle"/></Button>
       </Segment>
     ))
   }
