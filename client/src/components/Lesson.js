@@ -6,7 +6,6 @@ const Lesson = () => (
   <Header as="h3" textAlign="center">
     Lesson
     <Link to="/"> Home</Link>
-    <Video {...props} />
   </Header>
 );
 

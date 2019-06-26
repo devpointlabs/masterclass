@@ -12,23 +12,19 @@ const Videos = (props) => {
       .then( res => setVideos(res.data) )
   }, [])
 
-  const renderVideos = () => {
-    return videos.map( video => (
-      <Segment key={video.id}>
-        <Header textAlign="center">{video.title}</Header>
-        <Image
-          centered
-          src={video.url}
-          alt="video"
-          />
-        <p>{video.description}</p>
-      </Segment>
-    ));
-  };
-
   return(
     <>
-      {renderVideos()}
+      {videos.map( video => (
+        <Segment key={video.id}>
+          <Header textAlign="center">{video.title}</Header>
+          <Image
+            centered
+            src={video.url}
+            alt="video"
+            />
+          <p>{video.description}</p>
+        </Segment>
+    ))}
     </>
   );
 };
