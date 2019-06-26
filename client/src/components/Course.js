@@ -6,7 +6,6 @@ import { AuthContext } from "../providers/AuthProvider";
 const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
-  const [enrollments, setEnrollments] = useState([])
   const {user } = useContext(AuthContext)
 
   useEffect(() => {
