@@ -26,7 +26,7 @@ class Api::EnrollmentsController < ApplicationController
   end
 
   def destroy
-    @enrollment = @course.enrollments.find(params[:id])
+    @enrollment = @course.enrollments.find_by(user_id: current_user.id, course_id: params[:course_id])
     @enrollment.destroy
   end
 
