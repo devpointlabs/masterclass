@@ -1,11 +1,11 @@
 import { useState, } from 'react'
 
 
-export const useFormInput = (initialValue) =>{
+export const useFormInput = (initialValue) => {
   const [value, setValue] = useState(initialValue)
 
   return {
-    value, 
+    value,
     onChange: (e) => setValue(e.target.value)
   }
 

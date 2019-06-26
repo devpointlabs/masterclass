@@ -1,10 +1,12 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { List, Header, Segment, } from "semantic-ui-react";
+import { List, Header, Segment, Button } from "semantic-ui-react";
+import CourseForm from './CourseForm';
 
 const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     const course_id = props.match.params.id
@@ -33,9 +35,23 @@ const Course = (props) => {
     ))
   }
 
+  const courseEdit = (data) => {
+    setCourse(data)
+  }
+
+  const toggleForm = () => {
+    setShowForm(false)
+  }
+
   return (
     <>
       <Header as="h1">{course.title}</Header>
+      <br />
+      {showForm ? <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} /> : null}
+
+      <Button onClick={() => setShowForm(!showForm)}>
+        {showForm ? "Close Form" : "Edit Course"}
+      </Button>
       <br />
       <List>
         {renderLessons()}
