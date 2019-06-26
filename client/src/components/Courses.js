@@ -28,7 +28,11 @@ const Courses = (props) => {
             {item.image} 
             Image Goes Here
           </Card.Content>
-          <Card.Header as="h3">{item.title}</Card.Header>
+          <Card.Header as="h3">
+          <Link to={{pathname: `/courses/${item.id}`}}>
+          {item.title}
+          </Link>
+          </Card.Header>
           <Card.Meta> 
             Overview goes here
             {item.overview}
