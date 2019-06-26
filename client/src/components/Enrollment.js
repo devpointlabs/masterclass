@@ -4,7 +4,7 @@ import { Link, } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
-const Enrollment = () => {
+const Enrollment = (props) => {
   const {user } = useContext(AuthContext)
   const [enrollments, setEnrollments] = useState([])
 
@@ -25,6 +25,7 @@ const Enrollment = () => {
   
   const renderEnrollments = () =>{
     // const {id } = props.match.params
+    {console.log(enrollments)}
     return enrollments.map(e =>(
       <div>
         <Card key= {e.id}>
@@ -32,7 +33,7 @@ const Enrollment = () => {
             <Card.Header>{e.title}</Card.Header>
           </Card.Content>
           <Card.Description>
-          <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.id)}>
+          <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
             <Button.Content visible>Unenroll</Button.Content>
               <Button.Content hidden>
                 <Icon name="minus" />
