@@ -6,7 +6,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Course from "./components/Course";
 import NoMatch from "./components/layout/NoMatch";
-import Video from "./components/Video";
+import Videos from "./components/Videos";
 import Navbar from "./components/layout/Navbar";
 // import Courses from "./components/Courses";
 import Enrollment from './components/Enrollment'
@@ -26,7 +26,7 @@ const App = () => (
           <Route exact path="/my-courses" component={Enrollment} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
-          <Route exact path="/videos/:id" component={Video} />
+          <Route exact path="/lessons/:lesson_id/videos" component={Videos} />
           <Route component={NoMatch} />
         </Switch>
       </Container>
