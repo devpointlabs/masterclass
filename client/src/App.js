@@ -13,6 +13,7 @@ import Navbar from "./components/layout/Navbar";
 // import Courses from "./components/Courses";
 import Enrollment from './components/Enrollment'
 import FetchUser from "./components/auth/FetchUser"
+import LessonForm from './components/LessonForm';
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route exact path="/my-courses" component={Enrollment} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/lesson_form" component={LessonForm}/>
           <Route exact path="/lessons/:lesson_id/videos" component={Videos} />
           <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
           <Route component={NoMatch} />

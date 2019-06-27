@@ -9,6 +9,8 @@ const CourseForm = props => {
   const [overview, setOverview] = useState(useFormInput(""))
   const [image, setImage] = useState(useFormInput(""))
 
+  
+
   useEffect((e) => {
     if (props.course) {
       setTitle(props.course.title)
