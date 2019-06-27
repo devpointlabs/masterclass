@@ -28,16 +28,15 @@ const Courses = (props) => {
   }
 
 
+
   return (
     <Fragment>
       <Container>
         {showForm &&
-          <CourseForm
-            toggleForm={setShowForm}
+          <CourseForm toggleForm={setShowForm}
             add={course => setCourses([...courses, course])}
           />
         }
-        {showForm ? <CourseForm toggleForm={toggleForm} /> : null}
         <Button inverted color='green' onClick={() => setShowForm(!showForm)}>
           <Icon name="add" />
           Add a Course
