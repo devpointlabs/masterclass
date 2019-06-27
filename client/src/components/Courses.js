@@ -5,13 +5,13 @@ import Course from "./Course";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+
+
+
+
 const Courses = (props) => {
   const [showForm, setShowForm] = useState(false);
-
-  const [
-    courses,
-    setCourses
-  ] = useState([]);
+  const [courses, setCourses] = useState([]);
 
 
   useEffect((e) => {
@@ -22,6 +22,8 @@ const Courses = (props) => {
       })
 
   }, [])
+
+
 
 
 
@@ -55,6 +57,7 @@ const Courses = (props) => {
             {item.overview}
           </Card.Meta>
         </Card>
+
       ))}
     </Fragment>
 

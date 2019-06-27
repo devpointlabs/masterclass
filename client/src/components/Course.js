@@ -32,6 +32,7 @@ const Course = (props) => {
       })
   }
 
+
   const renderLessons = () => {
     return lessons.map(lesson => (
       <Segment key={lesson.id} style={{ display: "flex", justifyContent: "space-between" }}>
@@ -53,6 +54,12 @@ const Course = (props) => {
   const toggleForm = () => {
     setShowForm(false)
   }
+  const deleteCourse = () => {
+    axios.delete(`/api/courses/${props.match.params.id}`)
+      .then(res => {
+        props.history.push("/")
+      })
+  }
 
   return (
     <>
@@ -65,6 +72,7 @@ const Course = (props) => {
       <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}
       </Button>
+      <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>
       <br />
       <List>
         {renderLessons()}
