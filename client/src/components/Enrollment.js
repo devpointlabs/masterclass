@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from "react";
-import { Header, Card, Container, Button, Icon} from "semantic-ui-react";
+import { Header, Card, Container, Button, Icon, Divider} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
@@ -24,22 +24,23 @@ const Enrollment = (props) => {
   }
   
   const renderEnrollments = () =>{
-    // const {id } = props.match.params
     {console.log(enrollments)}
     return enrollments.map(e =>(
-      <div>
-        <Card key= {e.id}>
-          <Card.Content>
-            <Card.Header>{e.title}</Card.Header>
-          </Card.Content>
-          <Card.Description>
+      <div key = {e.course_id}>
+        <Card>
+          <Link to={{pathname: `/courses/${e.course_id}`}}>
+        <Card.Header as ='h2'>{e.title}</Card.Header>
+          <Card.Description>{e.overview || "This will have an overview"}</Card.Description>
+          </Link>
+          <Divider />
+          <Card.Meta>
           <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
             <Button.Content visible>Unenroll</Button.Content>
               <Button.Content hidden>
                 <Icon name="minus" />
               </Button.Content>
             </Button>
-          </Card.Description>
+          </Card.Meta>
         </Card>
       </div>
     ))
