@@ -24,7 +24,6 @@ const Enrollment = (props) => {
   }
   
   const renderEnrollments = () =>{
-    {console.log(enrollments)}
     return enrollments.map(e =>(
       <div key = {e.course_id}>
         <Card>
