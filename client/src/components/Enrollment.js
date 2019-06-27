@@ -24,13 +24,14 @@ const Enrollment = (props) => {
   }
   
   const renderEnrollments = () =>{
-    // const {id } = props.match.params
-    {console.log(enrollments)}
     return enrollments.map(e =>(
-      <div>
-        <Card key= {e.id}>
+      <div key = {e.course_id}>
+        <Card>
+        <Link to={{pathname: `/courses/${e.id}`}}>
+        <Card.Header as ='h2'>{e.title}</Card.Header>
+          </Link>
           <Card.Content>
-            <Card.Header>{e.title}</Card.Header>
+            
           </Card.Content>
           <Card.Description>
           <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>

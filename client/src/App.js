@@ -8,7 +8,7 @@ import Course from "./components/Course";
 import NoMatch from "./components/layout/NoMatch";
 import Videos from "./components/Videos";
 import Video from "./components/Video";
-import Comments from "./components/Comments";
+// import Comments from "./components/Comments";
 import Navbar from "./components/layout/Navbar";
 // import Courses from "./components/Courses";
 import Enrollment from './components/Enrollment'

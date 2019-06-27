@@ -1,6 +1,6 @@
-import React, {Fragment, useState, useEffect} from "react";
+import React, {Fragment, useState, } from "react";
 import Courses from '../Courses';
-import { Header, Segment, Card,  Icon, Image} from "semantic-ui-react";
+import { Header, Segment, Card, } from "semantic-ui-react";
 
 const Home = () => {
   const [heading, setHeading] = useState("Browse Courses")
