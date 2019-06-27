@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Header, Card, Container, Button, Icon } from "semantic-ui-react";
+import { Card, Container, Button, Icon } from "semantic-ui-react";
 import CourseForm from './CourseForm';
 import Course from "./Course";
 import { Link } from "react-router-dom";
@@ -18,7 +18,6 @@ const Courses = (props) => {
     // if ()
     axios.get("/api/courses")
       .then(res => {
-        // console.log(res.data)
         setCourses(res.data)
       })
 
