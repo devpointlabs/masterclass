@@ -28,7 +28,9 @@ const Course = (props) => {
   }, [])
   const enroll = (id) =>{
     axios.post(`/api/my-courses/${id}`, {user_id: user.id})
-    // setEnrollments()
+      .then(res =>{
+        props.history.push("/")
+      })
   }
 
   const renderLessons = () => {

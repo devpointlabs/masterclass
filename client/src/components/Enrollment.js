@@ -18,13 +18,12 @@ const Enrollment = (props) => {
   const removeCourse = (id) => {
     axios.delete(`/api/my-courses/${id}`)
     .then(res => {
-      setEnrollments(enrollments.filter((course) => course.id !== id))
+        setEnrollments(enrollments.filter(e => e.course_id !== id))
     })
 
   }
   
   const renderEnrollments = () =>{
-    {console.log(enrollments)}
     return enrollments.map(e =>(
       <div key = {e.course_id}>
         <Card>
