@@ -23,10 +23,6 @@ const Courses = (props) => {
 
   }, [])
 
-  const toggleForm = () => {
-    setShowForm(false)
-  }
-
 
 
   return (
