@@ -9,29 +9,49 @@ const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [enrollments, setEnrollments] = useState([])
+  const [notEnrollment, setNotEnrollment] = useState(true)
   const {user } = useContext(AuthContext)
 
   useEffect(() => {
     const course_id = props.match.params.id
+    axios.get("/api/my-courses")
+    .then(res => {
+      setEnrollments(res.data)
+      
+    })
+    
     axios.get(`/api/courses/${course_id}/lessons`)
-      .then(res => {
-        // debugger
-        // console.log(res.data)
-        setLessons(res.data);
-      })
-
+    .then(res => {
+      // debugger
+      // console.log(res.data)
+      setLessons(res.data);
+    })
+    
     axios.get(`/api/courses/${course_id}`)
-      .then(res => {
-        setCourse(res.data);
-      })
-
+    .then(res => {
+      setCourse(res.data);
+    })
   }, [])
-  const enroll = (id) =>{
-    axios.post(`/api/my-courses/${id}`, {user_id: user.id})
-      .then(res =>{
-        props.history.push("/")
-      })
+    
+    const enroll = (id) =>{
+      axios.post(`/api/my-courses/${id}`, {user_id: user.id})
+        .then(res =>{
+          props.history.push("/")
+        })
+    }
+
+ const checkEnroll = () =>{
+  return  enrollments.map(e=>{
+  if(e.course_id != props.match.params.id ){
+    return null
+  }else{
+    setNotEnrollment(false)  
   }
+})}
+
+
+
 
   const renderLessons = () => {
     return lessons.map(lesson => (
@@ -55,10 +75,15 @@ const Course = (props) => {
     setShowForm(false)
   }
 
+  // useCallBack function for checkEnroll
+  console.log(enrollments)
   return (
     <>
+    <Button onClick={()=>checkEnroll()}>Check Enroll</Button>
+    {/* {checkEnroll()} */}
+    {console.log(notEnrollment)}
       <Header as="h1">{course.title}</Header>
-      {user ? <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button> : null}
+      {notEnrollment ? <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button> : null}
    
       <br />
       {showForm ? <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} /> : null}
