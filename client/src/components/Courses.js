@@ -1,45 +1,69 @@
-import React, { Fragment, useState, useEffect} from "react";
-import { Header, Card } from "semantic-ui-react";
+import React, { Fragment, useState, useEffect } from "react";
+import { Header, Card, Container, Button, Icon } from "semantic-ui-react";
+import CourseForm from './CourseForm';
 import Course from "./Course";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Courses = (props) => {
+  const [showForm, setShowForm] = useState(false);
+
   const [
     courses,
     setCourses
   ] = useState([]);
 
-  useEffect(() => {
+
+  useEffect((e) => {
+    // if ()
     axios.get("/api/courses")
-    .then(res => {
-      // console.log(res.data)
-      setCourses(res.data)
-    })
+      .then(res => {
+        // console.log(res.data)
+        setCourses(res.data)
+      })
 
   }, [])
+
+  const toggleForm = () => {
+    setShowForm(false)
+  }
 
 
   return (
     <Fragment>
+      <Container>
+        {showForm &&
+          <CourseForm
+            toggleForm={setShowForm}
+            add={course => setCourses([...courses, course])}
+          />
+        }
+        {showForm ? <CourseForm toggleForm={toggleForm} /> : null}
+        <Button inverted color='green' onClick={() => setShowForm(!showForm)}>
+          <Icon name="add" />
+          Add a Course
+              </Button>
+      </Container>
+      <br />
       {courses.map((item) => (
         <Card key={item.id}>
           <Card.Content textAlign="center">
-            {item.image} 
+            {item.image}
             Image Goes Here
           </Card.Content>
           <Card.Header as="h3">
-          <Link to={{pathname: `/courses/${item.id}`}}>
-          {item.title}
-          </Link>
+            <Link to={{ pathname: `/courses/${item.id}` }}>
+              {item.title}
+            </Link>
           </Card.Header>
-          <Card.Meta> 
+          <Card.Meta>
             Overview goes here
             {item.overview}
           </Card.Meta>
         </Card>
       ))}
     </Fragment>
+
   );
 };
 
