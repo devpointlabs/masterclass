@@ -1,15 +1,18 @@
-import React, { Fragment, useState, useEffect} from 'react'; 
+import React, { Fragment, useState, useEffect, useCallback} from 'react'; 
 import axios from 'axios'; 
+// import {AuthContext } from '../providers/AuthProvider'; 
 import {Form,} from 'semantic-ui-react'; 
 import {useFormInput} from '../hooks/useFormInput'; 
 import {useDropzone} from 'react-dropzone';
 import styled from 'styled-components';
+import Videos from './Videos';
 
 //TODO: render link in create new course form with a pathway and props being passed in an object
 
 const LessonForm = (props) => {
   const [name, setName] = useState(useFormInput("")); 
-  const [description, setDescription] = useState(useFormInput("")); 
+  const [description, setDescription] = useState(useFormInput(""));
+  const [file, setFile] = useState(""); 
   const [editing, setEditing] = useState(false); 
 
 
@@ -30,15 +33,25 @@ const LessonForm = (props) => {
 
    }
 
+// function to append data to form and if editing, spread existing content 
+const addFile 
 
-   function StyledDropzone(props) {
+
+// styled component functionality 
+   const StyledDropzone = (props) => {
+      // taken from docs 
+      const onDrop = useCallback(acceptedFiles => {
+        // Do something with the files
+        setFile(acceptedFiles[0]); 
+      }, [])
+
     const {
       getRootProps,
       getInputProps,
       isDragActive,
       isDragAccept,
       isDragReject
-    } = useDropzone({accept: 'image/*'});
+    } = useDropzone({onDrop});
     
     return (
       <div className="container">
@@ -56,16 +69,17 @@ const LessonForm = (props) => {
       <Form.Group widths='equal'>
         <Form.Input
           label='Name'
-          placeholder='Name'
+          placeholder='What best describes what will be taught?'
           name='name'
           required
           value={name}
           onChange={(e) => setName(e.target.value)}
 
         />
+        {/* TODO: Turn to textarea - keeps saying that value is not a valid prop */}
         <Form.Input
           label='Description'
-          placeholder='description'
+          placeholder='What will the lesson cover? '
           name='description'
           required
           value={description}
@@ -75,6 +89,7 @@ const LessonForm = (props) => {
       <Form.Button>Submit</Form.Button>
     </Form>
     <br/>
+    {/* render all existing videos */}
     <StyledDropzone />
     </Fragment>
   )
