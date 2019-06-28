@@ -24,8 +24,6 @@ const CourseForm = props => {
   }, []
   )
 
-
-
   const handleSubmit = e => {
     e.preventDefault();
     if (props.course) {
@@ -85,8 +83,8 @@ const CourseForm = props => {
           onChange={(e) => setImage(e.target.value)}
         />
       </Form.Group>
-      <Form.Button floated="right" color="green" button>Add Lessons</Form.Button>
-      <Form.Button>Submit</Form.Button>
+      <Form.Button floated="right" color="green" inverted button>Add Lessons</Form.Button>
+      <Form.Button color="green" inverted>Submit</Form.Button>
     </Form >
   );
 };
