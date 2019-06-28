@@ -50,6 +50,16 @@ const Course = (props) => {
     //     setEnrolled(false)  
     //   }
     // })}
+  const removeLesson = (id) => {
+    debugger
+    axios.delete(`/api/courses/${props.match.params.id}/lessons/${id}`)
+    .then(res => {
+        setLessons(lessons.filter(l => l.id !== id))
+    })
+
+  }
+
+
   const renderLessons = () => {
     return lessons.map(l => (
       <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
@@ -60,15 +70,12 @@ const Course = (props) => {
             {l.description}
           </List.Description>
           <Button  size="tiny" color="red" onClick={() => removeLesson(l.id)}> 
-          <Icon name="trash alternate outline" />
-          </Button>
-          <Button  size="tiny" color="Blue" onClick={() => removeLesson(l.id)}> 
-          <Icon name="edit" />
-          </Button>
+          <Icon name="minus" />
+            </Button>
         </div>
+
       </Segment>
-    ))
-  }
+    ))}
 
   const courseEdit = (data) => {
     setCourse(data)
