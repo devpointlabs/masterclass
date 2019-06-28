@@ -23,10 +23,6 @@ const Courses = (props) => {
 
   }, [])
 
-
-
-
-
   return (
     <Fragment>
       <Container>
@@ -36,10 +32,10 @@ const Courses = (props) => {
           />
         }
         <Button inverted color='green' onClick={() => setShowForm(!showForm)}>
-          <Icon name="add" />
-          Add a Course
-              </Button>
+          {showForm ? "Cancel" : "Add Course"}
+        </Button>
       </Container>
+
       <br />
       {courses.map((item) => (
         <Card key={item.id}>
