@@ -41,6 +41,10 @@ const Course = (props) => {
 
   }
 
+  // const lessonEdit = (data) => {
+  //   setLesson(data)
+  // }
+
 
   const renderLessons = () => {
     return lessons.map(l => (
@@ -52,8 +56,11 @@ const Course = (props) => {
             {l.description}
           </List.Description>
           <Button  size="tiny" color="red" onClick={() => removeLesson(l.id)}> 
-          <Icon name="minus" />
-            </Button>
+          <Icon name="trash alternate outline" />
+          </Button>
+          <Button  size="tiny" color="Blue" onClick={() => removeLesson(l.id)}> 
+          <Icon name="edit" />
+          </Button>
         </div>
 
       </Segment>
