@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import axios from "axios";
 import CourseForm, { toggleForm } from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
@@ -10,7 +10,6 @@ const Course = (props) => {
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [enrollments, setEnrollments] = useState([])
-  const [notEnrollment, setNotEnrollment] = useState(true)
   const {user } = useContext(AuthContext)
 
   useEffect(() => {
@@ -23,8 +22,6 @@ const Course = (props) => {
     
     axios.get(`/api/courses/${course_id}/lessons`)
     .then(res => {
-      // debugger
-      // console.log(res.data)
       setLessons(res.data);
     })
     
@@ -40,8 +37,16 @@ const Course = (props) => {
           props.history.push("/")
         })
     }
-
+    // function reducer(state, action){
+    //     enrollments.map(e=>{
+    //     if(e.course_id != props.match.params.id ){
+    //       return null
+    //     }else{
+    //       setNotEnrollment(false)  
+    //     }
+    // })}
  const checkEnroll = () =>{
+   
   return  enrollments.map(e=>{
   if(e.course_id != props.match.params.id ){
     return null
