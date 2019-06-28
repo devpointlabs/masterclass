@@ -6,8 +6,14 @@ class Api::CoursesController < ApplicationController
   end
 
   def show
-    render json: @course
+    if current_user
+    e = Enrollment.find_by(course_id: @course.id, user_id: current_user.id)
+    else
+      e = nil
+    end
+    render json: {course: @course, registered: e ? true : false }
   end
+  # 
 
   def create
     course = Course.new(course_params)

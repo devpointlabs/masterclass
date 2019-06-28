@@ -10,15 +10,15 @@ const Course = (props) => {
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [enrollments, setEnrollments] = useState([])
-  const [notEnrollment, setNotEnrollment] = useState(true)
+  const [enrolled, setEnrolled] = useState(true)
   const {user } = useContext(AuthContext)
 
   useEffect(() => {
+  
     const course_id = props.match.params.id
     axios.get("/api/my-courses")
     .then(res => {
       setEnrollments(res.data)
-      
     })
     
     axios.get(`/api/courses/${course_id}/lessons`)
@@ -28,39 +28,28 @@ const Course = (props) => {
     
     axios.get(`/api/courses/${course_id}`)
     .then(res => {
-      setCourse(res.data);
+      setCourse(res.data.course);
+      console.log(res.data.course)
+      setEnrolled(res.data.registered)
     })
   }, [])
     
     const enroll = (id) =>{
       axios.post(`/api/my-courses/${id}`, {user_id: user.id})
         .then(res =>{
-          setNotEnrollment(false)
-          // props.history.push("/")
+          setEnrolled(false)
+          props.history.push("/")
         })
     }
-    // function reducer(state, action){
-    //     enrollments.map(e=>{
-    //     if(e.course_id != props.match.params.id ){
-    //       return null
-    //     }else{
-    //       setNotEnrollment(false)  
-    //     }
+    // function checkEnroll(){
+    //   return  enrollments.map(e=>{
+    //     const {id }= props.match.params
+    //   if(e.course_id != id ){
+    //     return null
+    //   }else{
+    //     setEnrolled(false)  
+    //   }
     // })}
- const checkEnroll = () =>{
-   
-  return  enrollments.map(e=>{
-    const {id }= props.match.params
-  if(e.course_id != id ){
-    return null
-  }else{
-    setNotEnrollment(false)  
-  }
-})}
-
-
-
-
   const renderLessons = () => {
     return lessons.map(lesson => (
       <Segment key={lesson.id} style={{ display: "flex", justifyContent: "space-between" }}>
@@ -70,7 +59,6 @@ const Course = (props) => {
             {lesson.description}
           </List.Description>
         </div>
-
       </Segment>
     ))
   }
@@ -89,15 +77,13 @@ const Course = (props) => {
       })
   }
 
-  // useCallBack function for checkEnroll
-  console.log(enrollments)
   return (
     <>
-    <Button onClick={()=>checkEnroll()}>Check Enroll</Button>
-    {()=>checkEnroll()}
-    {console.log(notEnrollment)}
+  
+    {console.log(enrolled)}
       <Header as="h1">{course.title}</Header>
-      {notEnrollment ? <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button> : null}
+      {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
+      {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button>}
    
       <br />
       {showForm ? <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} /> : null}
