@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import CourseForm from './CourseForm';
+import CourseForm, { toggleForm } from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
-import { AuthContext } from "../providers/AuthProvider";
+import { AuthContext } from "../providers/AuthProvider"
 
 
 const Course = (props) => {
@@ -55,14 +55,14 @@ const Course = (props) => {
 
   const renderLessons = () => {
     return lessons.map(lesson => (
-      <Segment key={lesson.id} style={{display:"flex", justifyContent: "space-between"}}>
+      <Segment key={lesson.id} style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-        <List.Header as="h3">{lesson.name}</List.Header>
-        <List.Description>
-          {lesson.description}
-        </List.Description>
+          <List.Header as="h3">{lesson.name}</List.Header>
+          <List.Description>
+            {lesson.description}
+          </List.Description>
         </div>
-      
+
       </Segment>
     ))
   }
@@ -73,6 +73,12 @@ const Course = (props) => {
 
   const toggleForm = () => {
     setShowForm(false)
+  }
+  const deleteCourse = () => {
+    axios.delete(`/api/courses/${props.match.params.id}`)
+      .then(res => {
+        props.history.push("/")
+      })
   }
 
   // useCallBack function for checkEnroll
@@ -88,9 +94,10 @@ const Course = (props) => {
       <br />
       {showForm ? <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} /> : null}
 
-      <Button onClick={() => setShowForm(!showForm)}>
+      <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}
       </Button>
+      <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>
       <br />
       <List>
         {renderLessons()}
