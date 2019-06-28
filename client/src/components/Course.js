@@ -10,6 +10,7 @@ const Course = (props) => {
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [enrollments, setEnrollments] = useState([])
+  const [notEnrollment, setNotEnrollment] = useState(true)
   const {user } = useContext(AuthContext)
 
   useEffect(() => {
@@ -34,7 +35,8 @@ const Course = (props) => {
     const enroll = (id) =>{
       axios.post(`/api/my-courses/${id}`, {user_id: user.id})
         .then(res =>{
-          props.history.push("/")
+          setNotEnrollment(false)
+          // props.history.push("/")
         })
     }
     // function reducer(state, action){
@@ -48,7 +50,8 @@ const Course = (props) => {
  const checkEnroll = () =>{
    
   return  enrollments.map(e=>{
-  if(e.course_id != props.match.params.id ){
+    const {id }= props.match.params
+  if(e.course_id != id ){
     return null
   }else{
     setNotEnrollment(false)  
@@ -91,7 +94,7 @@ const Course = (props) => {
   return (
     <>
     <Button onClick={()=>checkEnroll()}>Check Enroll</Button>
-    {/* {checkEnroll()} */}
+    {()=>checkEnroll()}
     {console.log(notEnrollment)}
       <Header as="h1">{course.title}</Header>
       {notEnrollment ? <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button> : null}
