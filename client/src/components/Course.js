@@ -51,13 +51,20 @@ const Course = (props) => {
     //   }
     // })}
   const renderLessons = () => {
-    return lessons.map(lesson => (
-      <Segment key={lesson.id} style={{ display: "flex", justifyContent: "space-between" }}>
+    return lessons.map(l => (
+      <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-          <List.Header as="h3">{lesson.name}</List.Header>
+          
+          <List.Header as="h3">{l.name}</List.Header>
           <List.Description>
-            {lesson.description}
+            {l.description}
           </List.Description>
+          <Button  size="tiny" color="red" onClick={() => removeLesson(l.id)}> 
+          <Icon name="trash alternate outline" />
+          </Button>
+          <Button  size="tiny" color="Blue" onClick={() => removeLesson(l.id)}> 
+          <Icon name="edit" />
+          </Button>
         </div>
       </Segment>
     ))
