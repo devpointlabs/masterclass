@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Form, StepTitle } from "semantic-ui-react";
+import { Form, } from "semantic-ui-react";
 import { useFormInput, } from "../hooks/useFormInput";
 
 const CourseForm = props => {
@@ -18,10 +18,13 @@ const CourseForm = props => {
       setOverview(props.course.overview)
       setImage(props.course.image)
     }
+    else
+      setTitle("")
+    setCategory("")
+    setOverview("")
+    setImage("")
   }, []
   )
-
-
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -35,8 +38,6 @@ const CourseForm = props => {
     }
 
     else {
-
-
       axios
         .post("/api/courses", { title: title, category: category, overview: overview, image: image })
         .then(res => {
@@ -45,6 +46,8 @@ const CourseForm = props => {
         });
     };
   }
+
+
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
@@ -59,8 +62,8 @@ const CourseForm = props => {
         />
         <Form.Input
           label='Category'
-          placeholder='Categoy'
-          name='cagegory'
+          placeholder='Category'
+          name='category'
           required
           value={category}
           onChange={(e) => setCategory(e.target.value)}
@@ -82,8 +85,9 @@ const CourseForm = props => {
           onChange={(e) => setImage(e.target.value)}
         />
       </Form.Group>
-      <Form.Button>Submit</Form.Button>
-    </Form>
+      <Form.Button floated="right" color="green" inverted button>Add Lessons</Form.Button>
+      <Form.Button color="green" inverted>Submit</Form.Button>
+    </Form >
   );
 };
 
