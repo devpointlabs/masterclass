@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import CourseForm, { toggleForm } from './CourseForm';
+import CourseForm from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
 import { AuthContext } from "../providers/AuthProvider"
 
@@ -15,7 +15,6 @@ const Course = (props) => {
     const course_id = props.match.params.id
     axios.get(`/api/courses/${course_id}/lessons`)
       .then(res => {
-        // console.log(res.data)
         setLessons(res.data);
       })
 
@@ -32,15 +31,35 @@ const Course = (props) => {
       })
   }
 
+  const removeLesson = (id) => {
+    debugger
+    axios.delete(`/api/courses/${props.match.params.id}/lessons/${id}`)
+    .then(res => {
+        setLessons(lessons.filter(l => l.id !== id))
+    })
+
+  }
+
+  // const lessonEdit = (data) => {
+  //   setLesson(data)
+  // }
+
 
   const renderLessons = () => {
-    return lessons.map(lesson => (
-      <Segment key={lesson.id} style={{ display: "flex", justifyContent: "space-between" }}>
+    return lessons.map(l => (
+      <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-          <List.Header as="h3">{lesson.name}</List.Header>
+          
+          <List.Header as="h3">{l.name}</List.Header>
           <List.Description>
-            {lesson.description}
+            {l.description}
           </List.Description>
+          <Button  size="tiny" color="red" onClick={() => removeLesson(l.id)}> 
+          <Icon name="trash alternate outline" />
+          </Button>
+          <Button  size="tiny" color="Blue" onClick={() => removeLesson(l.id)}> 
+          <Icon name="edit" />
+          </Button>
         </div>
 
       </Segment>

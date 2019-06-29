@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect, useCallback} from 'react';
 import axios from 'axios'; 
 // import {AuthContext } from '../providers/AuthProvider'; 
 import {Form,} from 'semantic-ui-react'; 
-import {useFormInput} from '../hooks/useFormInput'; 
+// import {useFormInput} from '../hooks/useFormInput'; 
 import {useDropzone} from 'react-dropzone';
 import styled from 'styled-components';
 import Videos from './Videos';
@@ -10,9 +10,9 @@ import Videos from './Videos';
 //TODO: render link in create new course form with a pathway and props being passed in an object
 
 const LessonForm = (props) => {
-  const [name, setName] = useState(useFormInput("")); 
-  const [description, setDescription] = useState(useFormInput(""));
-  const [file, setFile] = useState(""); 
+  const [name, setName] = useState(); 
+  const [description, setDescription] = useState();
+  const [file, setFile] = useState(); 
   const [editing, setEditing] = useState(false); 
 
 
