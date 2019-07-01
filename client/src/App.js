@@ -30,6 +30,7 @@ const App = () => (
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
           {/* <Route exact path="/:course_id/lesson_form/:lesson_id/edit" component={LessonForm}/> */}
+          <Route exact path="/edit_lesson/:lesson_id" component={LessonForm} />
           <Route exact path="/lessons/:lesson_id/videos" component={Videos} />
           <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
           <Route component={NoMatch} />

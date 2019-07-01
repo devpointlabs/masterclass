@@ -1,5 +1,5 @@
 class Api::LessonsController < ApplicationController
-  before_action :set_course
+  before_action :set_course, only: [:create, :index]
   before_action :set_lesson, only: [:show, :update, :destroy]
 
   def index
@@ -7,6 +7,7 @@ class Api::LessonsController < ApplicationController
   end
 
   def show
+    render json: @lesson
   end
 
   def create
