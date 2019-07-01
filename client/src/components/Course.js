@@ -30,7 +30,7 @@ const Course = (props) => {
   }, [])
     
     const enroll = (id) =>{
-      axios.post(`/api/my-courses/${id}`, {user_id: user.id})
+      axios.post(`/api/my-courses/${id}`, {user_id: user.id, role: "student"})
         .then(res =>{
           setEnrolled(true)
           // props.history.push("/")
@@ -97,7 +97,6 @@ const Course = (props) => {
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button>}
-      {console.log(enrollments)}
       <br />
       {(showForm && user)&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
 

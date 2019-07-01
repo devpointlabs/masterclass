@@ -34,7 +34,7 @@ const Enrollment = (props) => {
           </Link>
           <Divider />
           <Card.Meta>
-         { e.role === 'student' && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+         { (e.role === 'student' || e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
             <Button.Content visible>Unenroll</Button.Content>
               <Button.Content hidden>
                 <Icon name="minus" />
