@@ -3,8 +3,6 @@ class Api::EnrollmentsController < ApplicationController
   before_action :set_course, only: [:show, :index, :create, :destroy, :update]
 
   def index
-    # render json: @teachers = @course.enrollments.where(role: "teacher")
-    # render json: @students = @course.enrollments.where(role: "student")
     render json: Enrollment.all
   end
 

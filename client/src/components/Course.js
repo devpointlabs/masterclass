@@ -15,15 +15,12 @@ const Course = (props) => {
   useEffect(() => {
   
     const course_id = props.match.params.id
-    axios.get("/api/my-courses")
-    .then(res => {
-      setEnrollments(res.data)
-    })
-    
     axios.get(`/api/courses/${course_id}/lessons`)
     .then(res => {
       setLessons(res.data);
     })
+    axios.get("/api/my-courses")
+    .then(res => setEnrollments(res.data))
     
     axios.get(`/api/courses/${course_id}`)
     .then(res => {
@@ -35,19 +32,11 @@ const Course = (props) => {
     const enroll = (id) =>{
       axios.post(`/api/my-courses/${id}`, {user_id: user.id})
         .then(res =>{
-          setEnrolled(false)
-          props.history.push("/")
+          setEnrolled(true)
+          // props.history.push("/")
         })
     }
-    // function checkEnroll(){
-    //   return  enrollments.map(e=>{
-    //     const {id }= props.match.params
-    //   if(e.course_id != id ){
-    //     return null
-    //   }else{
-    //     setEnrolled(false)  
-    //   }
-    // })}
+  
   const removeLesson = (id) => {
     axios.delete(`/api/courses/${props.match.params.id}/lessons/${id}`)
       .then(res => {
@@ -69,7 +58,7 @@ const Course = (props) => {
           <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
             <Icon name="trash alternate outline" />
           </Button>
-          <Button size="tiny" color="Blue" >
+          <Button size="tiny" color="blue" >
             <Icon name="edit" />
           </Button>
         </div>
@@ -79,7 +68,6 @@ const Course = (props) => {
       return lessons.map(l => (
         <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
-  
             <List.Header as="h3">{l.name}</List.Header>
             <List.Description>
               {l.description}
@@ -109,7 +97,7 @@ const Course = (props) => {
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button>}
-   
+      {console.log(enrollments)}
       <br />
       {(showForm && user)&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
 
