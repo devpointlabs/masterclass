@@ -51,7 +51,7 @@ const Course = (props) => {
     if (user) {
     return lessons.map(l => (
       <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
+          <div>
           <List.Header as="h3">{l.name}</List.Header>
           <List.Description>
             {l.description}
@@ -59,12 +59,12 @@ const Course = (props) => {
           <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
             <Icon name="trash alternate outline" />
           </Button>
-          <Button size="tiny" color="blue" >
+          <Link to={`/edit_lesson/${l.id}`}> <Button size="tiny" color="blue">
             <Icon name="edit" />
           </Button>
           </Link>
         </div>
-      </Segment>
+          </Segment>
     ))}
     else {
       return lessons.map(l => (
@@ -98,6 +98,7 @@ const Course = (props) => {
       
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
+      {console.log(enrollments)}
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button>}
       <br />
       {(showForm && user)&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
