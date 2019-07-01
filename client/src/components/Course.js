@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useReducer } from "react";
 import axios from "axios";
 import CourseForm from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
+import { Link } from 'react-router-dom'
 import { AuthContext } from "../providers/AuthProvider"
 
 
@@ -13,7 +14,7 @@ const Course = (props) => {
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
 
   useEffect(() => {
-  
+
     const course_id = props.match.params.id
     axios.get(`/api/courses/${course_id}/lessons`)
     .then(res => {
@@ -61,6 +62,7 @@ const Course = (props) => {
           <Button size="tiny" color="blue" >
             <Icon name="edit" />
           </Button>
+          </Link>
         </div>
       </Segment>
     ))}
