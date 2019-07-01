@@ -1,9 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useContext } from "react";
 import { Card, Container, Button, Icon } from "semantic-ui-react";
 import CourseForm from './CourseForm';
 import Course from "./Course";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../providers/AuthProvider";
+
 
 
 
@@ -12,6 +14,8 @@ import axios from "axios";
 const Courses = (props) => {
   const [showForm, setShowForm] = useState(false);
   const [courses, setCourses] = useState([]);
+  const {user } = useContext(AuthContext)
+
 
 
   useEffect((e) => {
@@ -31,9 +35,9 @@ const Courses = (props) => {
             add={course => setCourses([...courses, course])}
           />
         }
-        <Button inverted color='green' onClick={() => setShowForm(!showForm)}>
+        {user && <Button inverted color='green' onClick={() => setShowForm(!showForm)}>
           {showForm ? "Cancel" : "Add Course"}
-        </Button>
+        </Button>}
       </Container>
 
       <br />

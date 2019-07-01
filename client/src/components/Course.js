@@ -29,7 +29,6 @@ const Course = (props) => {
     axios.get(`/api/courses/${course_id}`)
     .then(res => {
       setCourse(res.data.course);
-      console.log(res.data.course)
       setEnrolled(res.data.registered)
     })
   }, [])
@@ -51,7 +50,6 @@ const Course = (props) => {
     //   }
     // })}
   const removeLesson = (id) => {
-    debugger
     axios.delete(`/api/courses/${props.match.params.id}/lessons/${id}`)
       .then(res => {
         setLessons(lessons.filter(l => l.id !== id))
@@ -61,10 +59,10 @@ const Course = (props) => {
 
 
   const renderLessons = () => {
+    if (user) {
     return lessons.map(l => (
       <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-
           <List.Header as="h3">{l.name}</List.Header>
           <List.Description>
             {l.description}
@@ -76,9 +74,21 @@ const Course = (props) => {
             <Icon name="edit" />
           </Button>
         </div>
-
       </Segment>
     ))}
+    else {
+      return lessons.map(l => (
+        <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+  
+            <List.Header as="h3">{l.name}</List.Header>
+            <List.Description>
+              {l.description}
+            </List.Description>
+          </div>
+        </Segment>
+      ))}
+  }
 
   const courseEdit = (data) => {
     setCourse(data)
@@ -96,19 +106,19 @@ const Course = (props) => {
 
   return (
     <>
-  
-    {console.log(enrolled)}
+      
+      {console.log(enrollments)}
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button>}
    
       <br />
-      {showForm ? <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} /> : null}
+      {(showForm && user)&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
 
-      <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
+     { user && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}
-      </Button>
-      <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>
+      </Button>}
+      {user && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>}
       <br />
       <List>
         {renderLessons()}
