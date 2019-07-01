@@ -34,9 +34,9 @@ const Course = (props) => {
   const removeLesson = (id) => {
     debugger
     axios.delete(`/api/courses/${props.match.params.id}/lessons/${id}`)
-    .then(res => {
+      .then(res => {
         setLessons(lessons.filter(l => l.id !== id))
-    })
+      })
 
   }
 
@@ -49,16 +49,16 @@ const Course = (props) => {
     return lessons.map(l => (
       <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
         <div>
-          
+
           <List.Header as="h3">{l.name}</List.Header>
           <List.Description>
             {l.description}
           </List.Description>
-          <Button  size="tiny" color="red" onClick={() => removeLesson(l.id)}> 
-          <Icon name="trash alternate outline" />
+          <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
+            <Icon name="trash alternate outline" />
           </Button>
-          <Button  size="tiny" color="Blue" onClick={() => removeLesson(l.id)}> 
-          <Icon name="edit" />
+          <Button size="tiny" color="Blue" >
+            <Icon name="edit" />
           </Button>
         </div>
 
