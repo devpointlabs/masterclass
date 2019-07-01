@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import {Link} from 'react-router-dom'; 
 import { Form, } from "semantic-ui-react";
 import { useFormInput, } from "../hooks/useFormInput";
 
@@ -78,7 +79,7 @@ const CourseForm = (props) => {
           onChange={(e) => setImage(e.target.value)}
         />
       </Form.Group>
-      <Form.Button floated="right" color="green" inverted button>Add Lessons</Form.Button>
+      
       <Form.Button color="green" inverted>Submit</Form.Button>
     </Form >
   );

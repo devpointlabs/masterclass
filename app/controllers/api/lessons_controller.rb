@@ -22,7 +22,7 @@ class Api::LessonsController < ApplicationController
     if @lesson.update(lesson_params)
       render json: @lesson
     else
-      render json: lesson.errros, status: 422
+      render json: lesson.errors, status: 422
     end
   end
 
@@ -40,6 +40,6 @@ class Api::LessonsController < ApplicationController
   end
 
   def lesson_params
-    params.require(:lesson).permit(:name, :description)
+    params.require(:lesson).permit(:name, :description, :course_id)
   end
 end

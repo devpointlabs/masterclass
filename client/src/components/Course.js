@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useReducer } from "react";
 import axios from "axios";
 import CourseForm from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
+import {Link} from 'react-router-dom'
 import { AuthContext } from "../providers/AuthProvider"
 
 
@@ -51,7 +52,6 @@ const Course = (props) => {
     //   }
     // })}
   const removeLesson = (id) => {
-    debugger
     axios.delete(`/api/courses/${props.match.params.id}/lessons/${id}`)
       .then(res => {
         setLessons(lessons.filter(l => l.id !== id))
@@ -72,8 +72,8 @@ const Course = (props) => {
           <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
             <Icon name="trash alternate outline" />
           </Button>
-          <Button size="tiny" color="Blue" >
-            <Icon name="edit" />
+          <Button  size="tiny" color="blue"> 
+          <Icon name="edit" />
           </Button>
         </div>
 

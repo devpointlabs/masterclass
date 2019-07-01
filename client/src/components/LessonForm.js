@@ -1,67 +1,84 @@
 import React, { Fragment, useState, useEffect, useCallback} from 'react'; 
 import axios from 'axios'; 
-// import {AuthContext } from '../providers/AuthProvider'; 
 import {Form,} from 'semantic-ui-react'; 
-// import {useFormInput} from '../hooks/useFormInput'; 
 import {useDropzone} from 'react-dropzone';
 import styled from 'styled-components';
 import Videos from './Videos';
 
-//TODO: render link in create new course form with a pathway and props being passed in an object
 
 const LessonForm = (props) => {
+  const [lesson, setLesson] = useState({})
   const [name, setName] = useState(); 
   const [description, setDescription] = useState();
   const [file, setFile] = useState(); 
-  const [editing, setEditing] = useState(false); 
 
 
   // check if form is editing and render different title and all existing lesson videos with options to delete each video. 
   // populate video title and video url. 
    useEffect((e) => {
-     if(props.lesson) {
-       setName(props.lesson.name)
-       setDescription(props.lesson.description)
-     } else {
-       setName(""); 
-       setDescription(""); 
-     }
+     const {lesson_id} = props.match.params.lesson_id
+     debugger
+     axios.get(`/api/courses/lessons/${lesson_id}`)
+     .then(res => console.log(res.data))
+
+    //  if(lesson) {
+    //    setName(lesson.name)
+    //    setDescription(lesson.description)
+    //  } else {
+    //    setName(""); 
+    //    setDescription(""); 
+    //  }
    }, [])
 
-   const handleSubmit = (e) => {
-    e.preventDefault(); 
+   const handleSubmit = e => {
+     debugger
+    e.preventDefault();
+    if (props.course) {
+      axios
+        .put(`/api/courses/${course_id}/lessons/${lesson_id}`, { name: name, description: description})
+        .then(res => {
+          console.log(res.data)
+          // props.edit(res.data);
+        })
+    }
 
-   }
-
-// function to append data to form and if editing, spread existing content 
-const addFile 
+    else {
+      axios
+        .post("/api/courses/${course_id}/lessons", { name: name, description: description })
+        .then(res => {
+          console.log(res.data)
+          // add(res.data);
+          
+        });
+    };
+  }
 
 
 // styled component functionality 
-   const StyledDropzone = (props) => {
-      // taken from docs 
-      const onDrop = useCallback(acceptedFiles => {
-        // Do something with the files
-        setFile(acceptedFiles[0]); 
-      }, [])
+  //  const StyledDropzone = (props) => {
+  //     // taken from docs 
+  //     const onDrop = useCallback(acceptedFiles => {
+  //       // Do something with the files
+  //       setFile(acceptedFiles[0]); 
+  //     }, [])
 
-    const {
-      getRootProps,
-      getInputProps,
-      isDragActive,
-      isDragAccept,
-      isDragReject
-    } = useDropzone({onDrop});
+  //   const {
+  //     getRootProps,
+  //     getInputProps,
+  //     isDragActive,
+  //     isDragAccept,
+  //     isDragReject
+  //   } = useDropzone({onDrop});
     
-    return (
-      <div className="container">
-        <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
-          <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        </Container>
-      </div>
-    );
-  }
+  //   return (
+  //     <div className="container">
+  //       <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
+  //         <input {...getInputProps()} />
+  //         <p>Drag 'n' drop some files here, or click to select files</p>
+  //       </Container>
+  //     </div>
+  //   );
+  // }
 
   return (
     <Fragment>
@@ -86,46 +103,48 @@ const addFile
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
-      <Form.Button>Submit</Form.Button>
-    </Form>
-    <br/>
+      <br/>
     {/* render all existing videos */}
-    <StyledDropzone />
+    {/* <StyledDropzone /> */}
+      <br/>
+      <Form.Button fluid>Submit</Form.Button>
+    </Form>
+   
     </Fragment>
   )
 }
 
 
-// styles for StyledDropZone
-const getColor = (props) => {
-  if (props.isDragAccept) {
-      return '#00e676';
-  }
-  if (props.isDragReject) {
-      return '#ff1744';
-  }
-  if (props.isDragActive) {
-      return '#2196f3';
-  }
-  return '#bdbdbd';
-}
+// // styles for StyledDropZone
+// const getColor = (props) => {
+//   if (props.isDragAccept) {
+//       return '#00e676';
+//   }
+//   if (props.isDragReject) {
+//       return '#ff1744';
+//   }
+//   if (props.isDragActive) {
+//       return '#2196f3';
+//   }
+//   return '#bdbdbd';
+// }
 
-const Container = styled.div`
-  flex: 1;
-  text-align: center; 
-  height: 250px; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  border-width: 3px;
-  border-radius: 2px;
-  border-color: ${props => getColor(props)};
-  border-style: dashed;
-  background-color: #eeee;
-  color: #bdbdbd;
-  outline: none;
-  transition: border .24s ease-in-out;
-`;
+// const Container = styled.div`
+//   flex: 1;
+//   text-align: center; 
+//   height: 250px; 
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 20px;
+//   border-width: 3px;
+//   border-radius: 2px;
+//   border-color: ${props => getColor(props)};
+//   border-style: dashed;
+//   background-color: #eeee;
+//   color: #bdbdbd;
+//   outline: none;
+//   transition: border .24s ease-in-out;
+// `;
 
 export default LessonForm; 
