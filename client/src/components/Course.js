@@ -9,9 +9,8 @@ const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [enrollments, setEnrollments] = useState([])
   const [enrolled, setEnrolled] = useState(true)
-  const {user } = useContext(AuthContext)
+  const {user, enrollments, setEnrollments } = useContext(AuthContext)
 
   useEffect(() => {
   
@@ -107,7 +106,6 @@ const Course = (props) => {
   return (
     <>
       
-      {console.log(enrollments)}
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button>}
