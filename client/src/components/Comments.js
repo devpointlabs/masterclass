@@ -8,9 +8,10 @@ import { Link, } from "react-router-dom";
 const Comments = (props) => {
   const [comments, setComments] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const video_id = props.match.params.video_id
+  const video_id = props.match.params.id
 
   useEffect( () => {
+    debugger
     axios.get(`/api/videos/${video_id}/comments`)
       .then( res => { setComments(res.data) } )
   }, [])
@@ -51,7 +52,7 @@ const Comments = (props) => {
       {comments.map( comment => (
         <Segment key={comment.id}>
           <Comment {...props}
-            video_id={props.video_id} 
+            video_id={props.id} 
             comment_id={comment.id} 
             comment_title={comment.title}
             comment_body={comment.body}
@@ -60,7 +61,7 @@ const Comments = (props) => {
           <Button onClick={() => deleteComment(comment.id)}>
             Delete
           </Button>
-          <Button onClick={() => }></Button>
+          <Button ></Button>
         </Segment>
       ))}
     </>

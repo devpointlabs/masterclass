@@ -52,10 +52,12 @@ const Course = (props) => {
     return lessons.map(l => (
       <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
+            <Link to = {`/lessons/${l.id}`}> 
           <List.Header as="h3">{l.name}</List.Header>
           <List.Description>
             {l.description}
           </List.Description>
+            </Link>
           <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
             <Icon name="trash alternate outline" />
           </Button>
