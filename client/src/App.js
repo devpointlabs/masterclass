@@ -6,7 +6,6 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import Course from "./components/Course";
 import NoMatch from "./components/layout/NoMatch";
-import Videos from "./components/Videos";
 import Video from "./components/Video";
 import Lesson from "./components/Lesson";
 import Navbar from "./components/layout/Navbar";
@@ -32,7 +31,6 @@ const App = () => (
           {/* <Route exact path="/:course_id/lesson_form/:lesson_id/edit" component={LessonForm}/> */}
           <Route exact path= "/lessons/:id" component={Lesson}/>
           <Route exact path="/edit_lesson/:lesson_id" component={LessonForm} />
-          <Route exact path="/lessons/:lesson_id/videos" component={Videos} />
           <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
           <Route component={NoMatch} />
         </Switch>

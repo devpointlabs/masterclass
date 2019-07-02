@@ -3,7 +3,6 @@ import axios from 'axios';
 import { Form, } from 'semantic-ui-react';
 import { useDropzone } from 'react-dropzone';
 import styled from 'styled-components';
-import Videos from './Videos';
 
 
 const LessonForm = (props) => {

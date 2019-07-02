@@ -1,19 +1,19 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import Comment from "./Comment";
 import CommentForm from "./CommentForm"
 import { Header, Segment, List, Button, } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 
 const Comments = (props) => {
   const [comments, setComments] = useState([]);
+  const [video, setVideo] = useState([])
+
   const [showForm, setShowForm] = useState(false);
-  const video_id = props.match.params.id
+  // const video_id = props.match.params.id
 
   useEffect( () => {
-    debugger
-    axios.get(`/api/videos/${video_id}/comments`)
-      .then( res => { setComments(res.data) } )
+    // axios.get(`/api/videos/${video_id}/comments`)
+      // .then( res => { setComments(res.data) } )
   }, [])
   
   const toggleForm = () => {
@@ -37,15 +37,15 @@ const Comments = (props) => {
   }
 
   const deleteComment = (id) => {
-    axios.delete(`/api/videos/${video_id}/comments/${id}`)
-      .then( res => {
-        setComments(comments.filter( comment => comment.id !== id))
-      })
+    // axios.delete(`/api/videos/${video_id}/comments/${id}`)
+    //   .then( res => {
+    //     setComments(comments.filter( comment => comment.id !== id))
+      // })
   }
 
   return(
     <>
-      <Button onClick={() => toggleForm()}>
+      {/* <Button onClick={() => toggleForm()}>
         {showForm ? "Close Form" : "Add Comment"}
       </Button>
       {showForm ? <CommentForm video_id={props.match.params.video_id} lesson_id={props.match.params.lesson_id} toggleForm={toggleForm} addComment={addComment}/> : null}
@@ -61,9 +61,9 @@ const Comments = (props) => {
           <Button onClick={() => deleteComment(comment.id)}>
             Delete
           </Button>
-          <Button ></Button>
+          <Button >Edit</Button>
         </Segment>
-      ))}
+      ))} */}
     </>
   )
 };
