@@ -57,9 +57,10 @@ const Comments = (props) => {
             comment_body={comment.body}
             editComment={editComment}
           />
-          <Button onClick={()=> deleteComment(comment.id)}>
+          <Button onClick={() => deleteComment(comment.id)}>
             Delete
           </Button>
+          <Button onClick={() => }></Button>
         </Segment>
       ))}
     </>
