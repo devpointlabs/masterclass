@@ -19,6 +19,7 @@ class Api::CoursesController < ApplicationController
   def create
     course = Course.new(course_params)
     if course.save
+      Enrollment.create(role: "teacher", course_id: course.id, user_id: current_user.id)
       render json: course
     else
       render json: course.errors, status: 422

@@ -37,15 +37,8 @@ const CourseForm = (props) => {
         .post("/api/courses", { title: title, category: category, overview: overview, image: image })
         .then(res => {
           props.add(res.data);
-          debugger
-          props.enroll(res.data.id)
           props.toggleForm();
 
-
-            
-
-            
-          
         });
        
     };

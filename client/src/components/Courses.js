@@ -24,12 +24,7 @@ const Courses = (props) => {
 
   }, [])
 
-  const enroll = () =>{
-    axios.post(`/api/my-courses/${id}`, {user_id: user.id, role: "teacher"})
-      .then(res =>{
-        // props.history.push("/")
-      })
-  }
+  
 
   return (
     <Fragment >
@@ -39,7 +34,6 @@ const Courses = (props) => {
         {showForm &&
           <CourseForm toggleForm={setShowForm}
             add={course => setCourses([...courses, course])}
-            {...props}
           />
         }
         {user && <Button inverted color='green' onClick={() => setShowForm(!showForm)}>
