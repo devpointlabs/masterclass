@@ -9,11 +9,12 @@ const Comments = (props)=>{
   const [showForm, setShowForm] = useState(false)
 
   useEffect(()=>{
-    debugger
-    // const id = props.match.params.id
-    // axios.get(`/api/videos/${id}/comments`)
-    // .then(res => setComments(res.data))
-  })
+    const id = props.video_id
+    axios.get(`/api/videos/${id}/comments`)
+    .then(res => {
+      debugger
+      setComments(res.data)})
+  },[])
 
   const toggle = () =>{
     setShowForm(!showForm)
@@ -28,7 +29,7 @@ const Comments = (props)=>{
       return(
         <CommentForm
         addComment ={addComment}
-        video_id = {props.match.id}
+        video_id = {props.video_id}
         toggle={toggle}
         />
       )
@@ -37,7 +38,7 @@ const Comments = (props)=>{
   }
   
   const deleteComment = (c_id) =>{
-    axios.delete(`/api/videos/${props.match.id}/comments/${c_id}`)
+    axios.delete(`/api/videos/${props.video_id}/comments/${c_id}`)
     .then(res =>{
       const comments = comments.filter(c =>{
         if(c.id !== c_id)
@@ -82,7 +83,7 @@ const Comments = (props)=>{
             <Link to ={{
               pathname: `/comments/${c.id}/edit`,
               state: {
-                  video_id: props.match.params.id,
+                  video_id: props.video_id,
               }
             }}>  <Button icon color="blue">
             <Icon name="edit"/>

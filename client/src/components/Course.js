@@ -66,6 +66,8 @@ const Course = (props) => {
           </Button>
           </Link>
         </div>
+        {/* <button icon="carrot"/>
+        {showVieos? <Videos l.id/> : null*/}
           </Segment>
     ))}
     else {

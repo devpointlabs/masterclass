@@ -9,7 +9,6 @@ const Video = (props) => {
   const video_id = props.match.params.video_id
 
   useEffect( () => {
-    debugger
     const lesson_id = props.match.params.lesson_id
     const video_id = props.match.params.video_id
     axios.get(`/api/lessons/${lesson_id}/videos/${video_id}`)
@@ -24,7 +23,7 @@ const Video = (props) => {
         this.props.history.push(`/lessons/${lesson_id}`)
       })
   }
-  const {id } = props.match.params
+  const {id } = props.match.params.video_id
   
   return(
     <>
@@ -54,7 +53,7 @@ const Video = (props) => {
 
           </div>
         </div>
-        <Comments id = {video.id}/>
+        <Comments video_id = {props.match.params.video_id}/>
      </Container>
     </>
   )
