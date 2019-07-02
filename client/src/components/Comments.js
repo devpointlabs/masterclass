@@ -1,71 +1,117 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
 import CommentForm from "./CommentForm"
-import { Header, Segment, List, Button, } from "semantic-ui-react";
+import { Card, Rating, Icon, Segment, List, Button, } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 
-const Comments = (props) => {
-  const [comments, setComments] = useState([]);
-  const [video, setVideo] = useState([])
+const Comments = (props)=>{
+  const [comments, setComments] = useState([])
+  const [showForm, setShowForm] = useState(false)
 
-  const [showForm, setShowForm] = useState(false);
-  // const video_id = props.match.params.id
+  useEffect(()=>{
+    debugger
+    // const id = props.match.params.id
+    // axios.get(`/api/videos/${id}/comments`)
+    // .then(res => setComments(res.data))
+  })
 
-  useEffect( () => {
-    // axios.get(`/api/videos/${video_id}/comments`)
-      // .then( res => { setComments(res.data) } )
-  }, [])
-  
-  const toggleForm = () => {
+  const toggle = () =>{
     setShowForm(!showForm)
   }
-  
-  const addComment = (comment) => {
-    setComments([...comments, comment])
-  };
 
-  const editComment = (id, comment) => {
-    const newComment = comments.map(c => {
-      if (c.id === id) {
-        return comment
-      } 
-      else {
-        return c
-      }
-    })
-    return setComments(newComment)
+  const addComment = (comment) =>{
+    setComments({comments, ...comment})
   }
 
-  const deleteComment = (id) => {
-    // axios.delete(`/api/videos/${video_id}/comments/${id}`)
-    //   .then( res => {
-    //     setComments(comments.filter( comment => comment.id !== id))
-      // })
+  const renderForm = () =>{
+    if(showForm){
+      return(
+        <CommentForm
+        addComment ={addComment}
+        video_id = {props.match.id}
+        toggle={toggle}
+        />
+      )
+      return null
+    }
+  }
+  
+  const deleteComment = (c_id) =>{
+    axios.delete(`/api/videos/${props.match.id}/comments/${c_id}`)
+    .then(res =>{
+      const comments = comments.filter(c =>{
+        if(c.id !== c_id)
+        return c
+      })
+      setComments({comments, })
+    })
+  }
+
+
+ const  showComments = () =>{
+    // const video_id = props.match.params.id
+    return comments.map(c=>(
+      <Card fluid>
+        <Card.Content>
+          <Rating 
+          rating = {c.rating}
+          defaultRating = {5}
+          maxRating= {5}
+          disabled
+          icon='thumgs up'
+          size= "massive"
+          />
+
+        </Card.Content>
+        <Card.Content>
+        <Card.Header>
+            {c.title}
+          </Card.Header>
+          <Card.Description>
+            {c.body}
+          </Card.Description>
+          <div style = {{
+            display: 'flex',
+            alignSelf:'flex-end',
+            marginTop:'10px',
+            width: '100px'
+          }}>
+            <Button icon color='red' onClick={()=> deleteComment(c.id)}>
+            <Icon name='trash'/>
+            </Button>
+            <Link to ={{
+              pathname: `/comments/${c.id}/edit`,
+              state: {
+                  video_id: props.match.params.id,
+              }
+            }}>  <Button icon color="blue">
+            <Icon name="edit"/>
+          </Button>
+        </Link></div>
+        </Card.Content>
+      </Card>
+    ))
   }
 
   return(
     <>
-      {/* <Button onClick={() => toggleForm()}>
-        {showForm ? "Close Form" : "Add Comment"}
-      </Button>
-      {showForm ? <CommentForm video_id={props.match.params.video_id} lesson_id={props.match.params.lesson_id} toggleForm={toggleForm} addComment={addComment}/> : null}
-      {comments.map( comment => (
-        <Segment key={comment.id}>
-          <Comment {...props}
-            video_id={props.id} 
-            comment_id={comment.id} 
-            comment_title={comment.title}
-            comment_body={comment.body}
-            editComment={editComment}
-          />
-          <Button onClick={() => deleteComment(comment.id)}>
-            Delete
+     <div style= {{marginTop: '30px'}}>
+          <hr/>
+          <h1>Comments</h1>
+          <Button color='teal' onClick={showForm}>
+            <Icon name='comment alternate outline'/>
+            Write a Comment
           </Button>
-          <Button >Edit</Button>
-        </Segment>
-      ))} */}
+          {renderForm()}
+          <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
+            <Card.Group itemsPerRow={3}>
+              {showComments()}
+            </Card.Group>
+          </div>
+        </div>
     </>
   )
-};
+  
+}
 
 export default Comments;
