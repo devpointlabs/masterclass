@@ -5,9 +5,9 @@ import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Enrollment = (props) => {
-  const {user } = useContext(AuthContext)
-  const [enrollments, setEnrollments] = useState([])
-
+  const {user, enrollments, setEnrollments } = useContext(AuthContext)
+  // const [enrollments, setEnrollments] = useState([])
+   
   // axios call to get enrollments
   useEffect(()=>{
     axios.get("/api/my-courses")
@@ -26,6 +26,7 @@ const Enrollment = (props) => {
   const renderEnrollments = () =>{
     return enrollments.map(e =>(
       <div key = {e.course_id}>
+        <Header as = 'h1'>{e.role}</Header>
         <Card>
           <Link to={{pathname: `/courses/${e.course_id}`}}>
         <Card.Header as ='h2'>{e.title}</Card.Header>
@@ -33,12 +34,12 @@ const Enrollment = (props) => {
           </Link>
           <Divider />
           <Card.Meta>
-          <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+         { (e.role === 'student' || e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
             <Button.Content visible>Unenroll</Button.Content>
               <Button.Content hidden>
                 <Icon name="minus" />
               </Button.Content>
-            </Button>
+            </Button>}
           </Card.Meta>
         </Card>
       </div>
@@ -58,7 +59,7 @@ const Enrollment = (props) => {
   
   return (
     <Container>
-
+      {console.log(enrollments)}
   <Header as="h3" textAlign="center">
     {user ? `Welcome, ${user.name || defaultRole() }, here are your current enrollments` : <Link to = "/">Home</Link> }
    

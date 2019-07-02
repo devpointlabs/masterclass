@@ -6,6 +6,7 @@ export const AuthConsumer = AuthContext.Consumer;
 
 export const AuthProvider = (props) =>  {
   const [user, setUser] = useState(null); 
+  const [enrollments, setEnrollments ] = useState([])
 
   // update user(id, user) - optional 
    
@@ -28,6 +29,9 @@ export const AuthProvider = (props) =>  {
        .post("/api/auth/sign_in", user)
        .then(res => {
           setUser(res.data.data)
+          axios.get("/api/my-courses")
+         .then(res => {
+           setEnrollments(res.data)})
           history.push("/");
        })
        .catch(err => {
@@ -54,7 +58,9 @@ export const AuthProvider = (props) =>  {
           handleLogin: handleLogin,
           handleRegister: handleRegister,
           handleLogout: handleLogout,
-          setUser: (user) => setUser(user)
+          enrollments: enrollments, 
+          setUser: (user) => setUser(user),
+          setEnrollments: (enrollment) => setEnrollments(enrollment)
         }}
       >
         {props.children}
