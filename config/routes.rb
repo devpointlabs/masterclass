@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get "my-courses", to: "enrollments#my_courses"
     post "my-courses/:course_id", to: "enrollments#create"
     delete "my-courses/:course_id", to: "enrollments#destroy"
+    post "create-comment", to: "comments#create"
 
     resources :courses do 
       resources :enrollment, only: [:index, :new, :create, :destroy]
@@ -18,7 +19,7 @@ Rails.application.routes.draw do
       resources :videos
     end
     resources :videos do
-      resources :comments 
+      resources :comments, except: [:create]
     end
 
 end
