@@ -6,7 +6,7 @@ import { Link, } from "react-router-dom";
 
 const Comments = (props)=>{
   const [comments, setComments] = useState([])
-  const [showForm, setShowForm] = useState(true)
+  const [showForm, setShowForm] = useState(false)
 
   useEffect(()=>{
     const id = props.video_id
