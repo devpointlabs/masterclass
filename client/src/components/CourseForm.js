@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {Link} from 'react-router-dom'; 
 import { Form, } from "semantic-ui-react";
-import { useFormInput, } from "../hooks/useFormInput";
 
 const CourseForm = (props) => {
   const [title, setTitle] = useState()
