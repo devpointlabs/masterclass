@@ -6,13 +6,12 @@ import { Link, } from "react-router-dom";
 
 const Comments = (props)=>{
   const [comments, setComments] = useState([])
-  const [showForm, setShowForm] = useState(false)
+  const [showForm, setShowForm] = useState(true)
 
   useEffect(()=>{
     const id = props.video_id
     axios.get(`/api/videos/${id}/comments`)
     .then(res => {
-      debugger
       setComments(res.data)})
   },[])
 
@@ -40,12 +39,9 @@ const Comments = (props)=>{
   const deleteComment = (c_id) =>{
     axios.delete(`/api/videos/${props.video_id}/comments/${c_id}`)
     .then(res =>{
-      const comments = comments.filter(c =>{
-        if(c.id !== c_id)
-        return c
+      setComments(comments.filter(c => c.id !== c_id))
       })
-      setComments({comments, })
-    })
+     
   }
 
 
@@ -99,7 +95,7 @@ const Comments = (props)=>{
      <div style= {{marginTop: '30px'}}>
           <hr/>
           <h1>Comments</h1>
-          <Button color='teal' onClick={showForm}>
+          <Button color='teal' onClick={toggle}>
             <Icon name='comment alternate outline'/>
             Write a Comment
           </Button>

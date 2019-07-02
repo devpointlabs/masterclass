@@ -7,27 +7,21 @@ import { useFormInput, } from "../hooks/useFormInput";
 const CommentForm = (props) => {
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
-  const [videoId, setVideoId] = useState(props.video_id);
 
   const video_id = props.video_id
   const lesson_id = props.lesson_id
 
-  // useEffect( (e) => {
-  //   if(props.comment_id){
-  //     setTitle(props.comment_title)
-  //     setBody(props.comment_body)
-  //   } else {
-  //     setTitle("")
-  //     setBody("")
-  //   }
-  // }, []);
-
-  useEffect(() => {
-    if (props.comment) {
+  useEffect( () => {
+    if(props.comment_id){
       setTitle(props.comment_title)
       setBody(props.comment_body)
+    } else {
+      setTitle("")
+      setBody("")
     }
-  }, [])
+  }, []);
+
+
 
   
   const handleSubmit = e => {
@@ -47,17 +41,17 @@ const CommentForm = (props) => {
         .post(`/api/create-comment`, {
           title: title,
           body: body,
-          video_id: videoId
+          video_id: props.video_id
         })
         .then(res => {
-          props.addComment({title: title, body: body, video_id: videoId})
+          props.addComment({title: title, body: body,})
           props.toggleForm();
         });
       };
     }
     
   // const handleSubmit = (e) => {
-    //   const video_id = props.video_id
+  //     const video_id = props.video_id
   //   const comment_id = props.comment_id
   //   e.preventDefault();
   //   if (props.comment_id) {
@@ -77,7 +71,8 @@ const CommentForm = (props) => {
   //   };
   // };
 
-  return ( <Form onSubmit = {handleSubmit}>
+  return ( 
+  <Form onSubmit = {handleSubmit}>
     <Form.Group>
     <Form.Input 
       label = "Title"

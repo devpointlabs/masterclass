@@ -10,6 +10,7 @@ const Lesson = (props) =>{
 
   useEffect(()=>{
     const {id } = props.match.params
+    
     axios.get(`/api/lessons/${id}`)
     .then(res =>setLesson(res.data))
 
