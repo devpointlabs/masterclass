@@ -1,8 +1,8 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
 import CommentForm from "./CommentForm"
-import { Card, Rating, Icon, Segment, List, Button, } from "semantic-ui-react";
-import { Link, } from "react-router-dom";
+import Comment from './Comment'
+import { Card, Icon, Button, } from "semantic-ui-react";
 
 const Comments = (props)=>{
   const [comments, setComments] = useState([])
@@ -20,20 +20,19 @@ const Comments = (props)=>{
   }
 
   const addComment = (comment) =>{
-    setComments({comments, ...comment})
+    setComments([...comments, comment])
   }
 
-  const renderForm = () =>{
-    if(showForm){
-      return(
-        <CommentForm
-        addComment ={addComment}
-        video_id = {props.video_id}
-        toggle={toggle}
-        />
-      )
-      return null
-    }
+  const editComment = (id, comment) => {
+    const editedComment = comments.map(c => {
+      if (c.id === id) {
+        return comment
+      } 
+      else {
+        return c
+      }
+    })
+    return setComments(editedComment)
   }
   
   const deleteComment = (c_id) =>{
@@ -41,71 +40,50 @@ const Comments = (props)=>{
     .then(res =>{
       setComments(comments.filter(c => c.id !== c_id))
       })
-     
   }
 
-
- const  showComments = () =>{
-    // const video_id = props.match.params.id
-    return comments.map(c=>(
-      <Card fluid>
-        <Card.Content>
-          <Rating 
-          rating = {c.rating}
-          defaultRating = {5}
-          maxRating= {5}
-          disabled
-          icon='thumgs up'
-          size= "massive"
-          />
-
-        </Card.Content>
-        <Card.Content>
-        <Card.Header>
-            {c.title}
-          </Card.Header>
-          <Card.Description>
-            {c.body}
-          </Card.Description>
-          <div style = {{
-            display: 'flex',
-            alignSelf:'flex-end',
-            marginTop:'10px',
-            width: '100px'
-          }}>
-            <Button icon color='red' onClick={()=> deleteComment(c.id)}>
-            <Icon name='trash'/>
-            </Button>
-            <Link to ={{
-              pathname: `/comments/${c.id}/edit`,
-              state: {
-                  video_id: props.video_id,
-              }
-            }}>  <Button icon color="blue">
-            <Icon name="edit"/>
-          </Button>
-        </Link></div>
-        </Card.Content>
+  const showComments = () => {
+    return (
+      comments.map( c => (
+      <Card key={c.id}>
+        <Comment
+          video_id={props.video_id}
+          comment_id={c.id}
+          comment_title={c.title}
+          comment_body={c.body}
+          comment_rating={c.rating}
+          delete_comment={deleteComment}
+          edit_comment={editComment}
+        />
       </Card>
-    ))
+      )))
   }
 
   return(
     <>
-     <div style= {{marginTop: '30px'}}>
-          <hr/>
-          <h1>Comments</h1>
-          <Button color='teal' onClick={toggle}>
-            <Icon name='comment alternate outline'/>
-            Write a Comment
-          </Button>
-          {renderForm()}
-          <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
-            <Card.Group itemsPerRow={3}>
-              {showComments()}
-            </Card.Group>
-          </div>
+      <div style= {{marginTop: '30px'}}>
+        <hr/>
+        <h1>Comments</h1>
+        <Button color='teal' onClick={toggle}>
+          <Icon name='comment alternate outline'/>
+          Write a Comment
+        </Button>
+        { showForm ? 
+            <CommentForm
+              showComments={showComments}
+              comments={comments}
+              setComments={setComments}
+              addComment={addComment}
+              video_id={props.video_id}
+              toggleForm={toggle}
+            /> : 
+            null}
+        <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
+          <Card.Group itemsPerRow={1}>
+            {showComments()}
+          </Card.Group>
         </div>
+      </div>
     </>
   )
   
