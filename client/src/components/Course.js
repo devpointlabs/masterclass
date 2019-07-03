@@ -134,7 +134,7 @@ const Course = (props) => {
      { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}
       </Button>}
-      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>} */}
+      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>}
       <br />
       <List>
         {renderLessons()}
