@@ -17,7 +17,6 @@ const CommentForm = (props) => {
       setTitle("")
       setBody("")
     }
-
   }, []);
   
   const handleSubmit = e => {
