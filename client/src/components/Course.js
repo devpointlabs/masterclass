@@ -26,13 +26,12 @@ const Course = (props) => {
     
     axios.get(`/api/courses/${course_id}`)
     .then(res => {
-      debugger
       setCourse(res.data.course);
       setEnrolled(res.data.registered)
       setRole(res.data.role)
     })
    
-  }, [])
+  }, [enrolled])
     
     const enroll = (id) =>{
       axios.post(`/api/my-courses/${id}`, {user_id: user.id, role: "student"})
@@ -79,7 +78,21 @@ const Course = (props) => {
          </Segment>
        
       ))}
-  
+       else if (role == 'student'){
+         return lessons.map(l => (
+        
+          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+          <Link to = {`/lessons/${l.id}`}> 
+         <List.Header as="h3">{l.name}</List.Header>
+         <List.Description>
+           {l.description}
+         </List.Description>
+           </Link>
+          </div>
+        </Segment>
+         ))
+       }
     else {
       return lessons.map(l => (
         
