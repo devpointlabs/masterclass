@@ -60,7 +60,10 @@ export const AuthProvider = (props) =>  {
           handleLogout: handleLogout,
           enrollments: enrollments, 
           setUser: (user) => setUser(user),
-          setEnrollments: (enrollment) => setEnrollments(enrollment)
+          setEnrollments: (enrollment) => setEnrollments(enrollment),
+          videos, 
+          setVideos: (videos) => setVideos(videos), 
+          updateVideos: updateVideos, 
         }}
       >
         {props.children}
