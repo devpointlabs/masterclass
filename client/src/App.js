@@ -12,7 +12,7 @@ import Navbar from "./components/layout/Navbar";
 // import Courses from "./components/Courses";
 import Enrollment from './components/Enrollment'
 import FetchUser from "./components/auth/FetchUser"
-import LessonForm from './components/LessonForm';
+import LessonForm from './components/forms/lessons/LessonForm';
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 
@@ -31,7 +31,7 @@ const App = () => (
           {/* <Route exact path="/:course_id/lesson_form/:lesson_id/edit" component={LessonForm}/> */}
           <Route exact path = "/"/>
           <Route exact path= "/lessons/:id" component={Lesson}/>
-          <Route exact path="/edit_lesson/:lesson_id" component={LessonForm} />
+          <Route exact path="/lessons/:lesson_id/edit" component={LessonForm} />
           <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
           <Route component={NoMatch} />
         </Switch>
