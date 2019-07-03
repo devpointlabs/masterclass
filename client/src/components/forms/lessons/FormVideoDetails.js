@@ -10,7 +10,6 @@ const FormVideoDetails = (props) => {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [showForm, setShowForm] = useState(false)
-  // const [addVideos, setAddVideos] = useState(false); 
   const [videos, setVideos] = useState(); 
   const [file, setFile] = useState();
 
@@ -28,56 +27,32 @@ const FormVideoDetails = (props) => {
 
   // populate video title and video url. 
   useEffect((e) => {
-    // if (props.match.params.lesson_id) {
-    //   const { lesson_id } = props.match.params
-    //   axios
-    //     .get(`/api/lessons/${lesson_id}`)
-    //     .then(res => {
-    //       setName(res.data.name)
-    //       setDescription(res.data.description)
-
-    //     })
-    // }
-    // RENDER EXISTING VIDEOS 
-     const { lesson_id } = props.match.params
-    axios.get(`/api/lessons/${lesson_id}/videos`)
+    // if not adding videos, then render existing videos, if any
+    if (!showForm && props.match.params.lesson_id) {
+      const { lesson_id } = props.match.params
+      axios.get(`/api/lessons/${lesson_id}/videos`)
       .then( res => {
         setVideos()
         console.log({title})
         debugger
       })
+    } else {
+      // Adding videos axios call
+    }
 
   }, [])
 
   const handleSubmit = e => {
-
     e.preventDefault();
-    // if (props.match.params.lesson_id) {
-    //   axios
-    //     .put(`/api/lessons/${props.match.params.lesson_id}`, { name: name, description: description })
-    //     .then(res => {
-    //       // props.history.push(`/courses/${res.data.course_id}`)
-    //       // instead of pushing back to courses, it will push to the next form component
-    //       continueStep(); 
-    //     })
-    // }
-    // else {
-    //   axios
-    //     .post("/api/courses/${course_id}/lessons", { name: name, description: description })
-    //     .then(res => {
-    //       console.log(res.data)
-    //       // add(res.data);
-
-    //     });
-    // };
+    // SEND VIDEO FILE TO DATABASE
+    // updateVideos(videos.id, {file})
+  
   }
 
 
-    // styled component functionality 
-   const StyledDropzone = (props) => {
-      // taken from docs 
+    // DROPZONE FUNCTIONALITY 
+   const StyledDropzone = (props) => { 
       const onDrop = useCallback(acceptedFiles => {
-        // Do something with the files
         setFile(acceptedFiles[0]); 
       }, [])
 
@@ -99,6 +74,7 @@ const FormVideoDetails = (props) => {
     );
   }
 
+// ADD VIDEO FORM 
   const renderAddForm = () => {
     return (
       <>
@@ -160,13 +136,11 @@ const FormVideoDetails = (props) => {
     <Fragment>
     <Button onClick={() => toggleForm()}>Add Videos</Button>
     {showForm ? renderAddForm() : renderEditForm()} 
-
   </Fragment>
   )
 }
 
-
-// styles for StyledDropZone
+// STYLES FOR DROPZONE 
 const getColor = (props) => {
   if (props.isDragAccept) {
       return '#00e676';
