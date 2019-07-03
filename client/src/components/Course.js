@@ -54,7 +54,7 @@ const Course = (props) => {
 
   const renderLessons = () => {
 
-    if (role == 'teacher') {
+    // if (role == 'teacher') {
       return lessons.map(l => (
         
          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
@@ -77,20 +77,20 @@ const Course = (props) => {
        {showVieos? <Videos l.id/> : null*/}
          </Segment>
        
-      ))}
+      ))//}
   
-    else {
-      return lessons.map(l => (
+    // else {
+    //   return lessons.map(l => (
         
-        <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
-          <List.Header as="h3">{l.name}</List.Header>
-          <List.Description>
-            {l.description}
-          </List.Description>
-        </div>
-      </Segment>
-      ))}
+    //     <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+    //     <div>
+    //       <List.Header as="h3">{l.name}</List.Header>
+    //       <List.Description>
+    //         {l.description}
+    //       </List.Description>
+    //     </div>
+    //   </Segment>
+    //   ))}
   }
 
   const courseEdit = (data) => {
@@ -111,7 +111,7 @@ const Course = (props) => {
     <>
       
       <Header as="h1">{course.title}</Header>
-      {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
+      {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button
       {(!enrolled && role =='teacher') && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
       <br />
       {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
@@ -119,7 +119,7 @@ const Course = (props) => {
      { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}
       </Button>}
-      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>}
+      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>} */}
       <br />
       <List>
         {renderLessons()}

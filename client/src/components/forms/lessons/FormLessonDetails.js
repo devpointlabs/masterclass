@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect }from 'react'; 
-import {Form} from 'semantic-ui-react'
+import {Form, Header} from 'semantic-ui-react'
 import axios from 'axios'
 
 
@@ -57,6 +57,7 @@ const FormLessonDetails = (props) => {
 
   return (
     <Fragment>
+      <Header as="h1" textAlign="center">Edit Your Lesson</Header>
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
         <Form.Input
