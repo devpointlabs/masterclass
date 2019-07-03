@@ -10,7 +10,7 @@ const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [enrolled, setEnrolled] = useState(true)
+  const [enrolled, setEnrolled] = useState(false)
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
   const [role, setRole] = useState("")
 
@@ -26,6 +26,7 @@ const Course = (props) => {
     
     axios.get(`/api/courses/${course_id}`)
     .then(res => {
+      debugger
       setCourse(res.data.course);
       setEnrolled(res.data.registered)
       setRole(res.data.role)
@@ -109,10 +110,11 @@ const Course = (props) => {
 
   return (
     <>
+    {console.log(role)}
       
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
-      {(!enrolled && role =='teacher') && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
+      {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
       <br />
       {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
 
