@@ -7,7 +7,7 @@ import Logo from '../Images/Logo.png';
 
 
 const Home = () => {
-  const [heading, setHeading] = useState("Browse Courses")
+  const [heading, ] = useState("Browse Courses")
 
 
   return (

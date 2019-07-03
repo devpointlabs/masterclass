@@ -7,7 +7,7 @@ class Api::LessonsController < ApplicationController
   end
 
   def show
-    render json: @lesson
+    render json: Lesson.find(params[:id])
   end
 
   def create

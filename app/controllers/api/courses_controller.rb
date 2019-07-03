@@ -7,17 +7,19 @@ class Api::CoursesController < ApplicationController
 
   def show
     if current_user
+      role = Enrollment.find_by(course_id: @course.id, user_id: current_user.id).role
     e = Enrollment.find_by(course_id: @course.id, user_id: current_user.id)
     else
       e = nil
     end
-    render json: {course: @course, registered: e ? true : false }
+    render json: {course: @course, registered: e ? true : false, role: role }
   end
   # 
 
   def create
     course = Course.new(course_params)
     if course.save
+      Enrollment.create(role: "teacher", course_id: course.id, user_id: current_user.id)
       render json: course
     else
       render json: course.errors, status: 422
@@ -43,5 +45,8 @@ class Api::CoursesController < ApplicationController
 
   def course_params
     params.require(:course).permit(:title, :category, :overview, :image)
+  end
+  def find_role
+    @role = Enrollment.find_by(course_id: @course.id, user_id: current_user.id).role
   end
 end

@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from "react";
+import React, {useEffect, useContext} from "react";
 import { Header, Card, Container, Button, Icon, Divider} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from "axios";
@@ -6,7 +6,6 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const Enrollment = (props) => {
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
-  // const [enrollments, setEnrollments] = useState([])
    
   // axios call to get enrollments
   useEffect(()=>{

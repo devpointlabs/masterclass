@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import {Link} from 'react-router-dom'; 
 import { Form, } from "semantic-ui-react";
-import { useFormInput, } from "../hooks/useFormInput";
+import {AuthContext} from "../providers/AuthProvider"
 
 const CourseForm = (props) => {
   const [title, setTitle] = useState()
   const [category, setCategory] = useState()
   const [overview, setOverview] = useState()
   const [image, setImage] = useState()
+  const {user, enrollments, setEnrollments } = useContext(AuthContext)
+
 
   useEffect(() => {
     if (props.course) {
@@ -37,7 +38,9 @@ const CourseForm = (props) => {
         .then(res => {
           props.add(res.data);
           props.toggleForm();
+
         });
+       
     };
   }
 
