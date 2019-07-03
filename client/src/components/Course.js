@@ -61,7 +61,7 @@ const Course = (props) => {
           <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
             <Icon name="trash alternate outline" />
           </Button>
-          <Link to={`/edit_lesson/${l.id}`}> <Button size="tiny" color="blue">
+          <Link to={`/lessons/${l.id}/edit`}> <Button size="tiny" color="blue">
             <Icon name="edit" />
           </Button>
           </Link>

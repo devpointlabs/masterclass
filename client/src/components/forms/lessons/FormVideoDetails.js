@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect, useCallback }from 'react'; 
-import {Form, Button} from 'semantic-ui-react'
+import {Form, Button, Card} from 'semantic-ui-react'
 import axios from 'axios'
 import styled from 'styled-components';
 import { useDropzone } from 'react-dropzone';
@@ -9,16 +9,21 @@ import { useDropzone } from 'react-dropzone';
 const FormVideoDetails = (props) => {
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
+  const [showForm, setShowForm] = useState(false)
+  // const [addVideos, setAddVideos] = useState(false); 
+  const [videos, setVideos] = useState(); 
   const [file, setFile] = useState();
 
 
  const continueStep = (e) => {
-    // e.preventDefault(); 
     props.nextStep(); 
   }
  const backStep = (e) => {
-    // e.preventDefault(); 
     props.previousStep(); 
+  }
+
+  const toggleForm = () => {
+    setShowForm(!showForm)
   }
 
   // populate video title and video url. 
@@ -33,6 +38,14 @@ const FormVideoDetails = (props) => {
 
     //     })
     // }
+    // RENDER EXISTING VIDEOS 
+     const { lesson_id } = props.match.params
+    axios.get(`/api/lessons/${lesson_id}/videos`)
+      .then( res => {
+        setVideos()
+        console.log({title})
+        debugger
+      })
 
   }, [])
 
@@ -86,18 +99,16 @@ const FormVideoDetails = (props) => {
     );
   }
 
-
-
-
-  return (
-    <Fragment>
-    <Form onSubmit={handleSubmit}>
+  const renderAddForm = () => {
+    return (
+      <>
+      <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
         <Form.Input
           label='Title'
           placeholder='What best describes the content of the video?'
           name='title'
-          required
+          // required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
 
@@ -107,18 +118,48 @@ const FormVideoDetails = (props) => {
           label='Description'
           placeholder='Give a short summary of the content of the video...'
           name='description'
-          required
+          // required
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
       <br />
-      {/* render all existing videos */}
       <StyledDropzone />
       <br />
       <Form.Button>Continue</Form.Button>
       <Button onClick={() => backStep()}>Back</Button>
     </Form>
+    </>
+    )
+  }
+
+  // RENDER EXISTING VIDEOS 
+  const renderEditForm = () => {
+    return (
+      <>
+          <Card fluid>
+            <Card.Header textAlign="center">Render Existing Videos Here</Card.Header>
+            <br/>
+            <br/>
+            <Button.Group>
+              <Button onClick={() => backStep()}>Back</Button>
+              <Button onClick={() => continueStep()}>Continue</Button>
+            </Button.Group>
+          </Card>
+          
+
+      </>
+    )
+
+  }
+
+
+
+
+  return (
+    <Fragment>
+    <Button onClick={() => toggleForm()}>Add Videos</Button>
+    {showForm ? renderAddForm() : renderEditForm()} 
 
   </Fragment>
   )
