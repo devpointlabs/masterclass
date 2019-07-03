@@ -3,10 +3,11 @@ import {Form, Button, Card} from 'semantic-ui-react'
 import axios from 'axios'
 import styled from 'styled-components';
 import { useDropzone } from 'react-dropzone';
-
+import {AuthContext } from '../providers/AuthProvider'; 
 
 
 const FormVideoDetails = (props) => {
+  const { updateVideos,  } = useContext(AuthContext);
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [showForm, setShowForm] = useState(false)
