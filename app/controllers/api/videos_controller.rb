@@ -20,11 +20,30 @@ class Api::VideosController < ApplicationController
   end
 
   def update
-    if @video.update(video_params)
-      render json: @video
-    else
-      render json: video.errors, status: 422
-    end
+    @video #Video.find(params[:id])
+
+    file = params[:file]
+    if file
+      begin
+        ext = File.extname(file.tempfile)
+        cloud_video = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+        @video.video = cloud_image['secure_url']
+      rescue => exception
+        render json: {errors: exception}, status: 422 
+        
+      end
+    end 
+    
+    if @video.save 
+      render json: @video 
+    else 
+      render json: {errors: @video.errors.full_messages}, status: 422
+    end 
+    # if @video.update(video_params)
+    #   render json: @video
+    # else
+    #   render json: video.errors, status: 422
+    # end
   end
 
   def destroy
