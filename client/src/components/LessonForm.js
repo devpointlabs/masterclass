@@ -1,15 +1,15 @@
-import React, { Fragment, useState, useEffect, useCallback } from 'react';
+import React, { Fragment, useState, useEffect, } from 'react';
 import axios from 'axios';
 import { Form, } from 'semantic-ui-react';
-import { useDropzone } from 'react-dropzone';
-import styled from 'styled-components';
+// import { useDropzone } from 'react-dropzone';
+// import styled from 'styled-components';
 
 
 const LessonForm = (props) => {
-  const [lesson, setLesson] = useState({})
+  // const [lesson, setLesson] = useState({})
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  const [file, setFile] = useState();
+  // const [file, setFile] = useState();
 
 
   // check if form is editing and render different title and all existing lesson videos with options to delete each video. 

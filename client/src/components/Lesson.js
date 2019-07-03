@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
-import { Header, Image,Icon,  Card, Button, Container} from "semantic-ui-react";
+import {  Image,Icon,  Card, Button, Container} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
-import Comments from './Comments'
 import axios from 'axios'
 
 const Lesson = (props) =>{

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
 import CommentForm from "./CommentForm"
-import { Card, Rating, Icon, Segment, List, Button, } from "semantic-ui-react";
+import { Card, Rating, Icon, Button, } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 
 const Comments = (props)=>{
@@ -32,8 +32,7 @@ const Comments = (props)=>{
         toggle={toggle}
         />
       )
-      return null
-    }
+    }return null
   }
   
   const deleteComment = (c_id) =>{
