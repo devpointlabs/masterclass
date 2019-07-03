@@ -3,7 +3,7 @@ import Courses from '../Courses';
 import { Header, Segment, Card, } from "semantic-ui-react";
 
 const Home = () => {
-  const [heading, setHeading] = useState("Browse Courses")
+  const [heading, ] = useState("Browse Courses")
 
 
 

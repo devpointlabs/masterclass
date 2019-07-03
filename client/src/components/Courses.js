@@ -1,35 +1,36 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
-import { Card, Container, Button, Icon } from "semantic-ui-react";
+import { Card, Container, Button, } from "semantic-ui-react";
 import CourseForm from './CourseForm';
-import Course from "./Course";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
 
 
-
-
-
-
 const Courses = (props) => {
   const [showForm, setShowForm] = useState(false);
   const [courses, setCourses] = useState([]);
-  const {user } = useContext(AuthContext)
+  const {user, enrollments, setEnrollments } = useContext(AuthContext)
 
 
 
   useEffect((e) => {
-    // if ()
     axios.get("/api/courses")
       .then(res => {
         setCourses(res.data)
       })
+      axios.get("/api/my-courses")
+      .then(res => {
+        setEnrollments(res.data)})
 
   }, [])
 
+  
+
   return (
-    <Fragment>
-      <Container>
+    <Fragment >
+      <Container style={{backgroundColor:"black"}}>
+
+      <Container  >
         {showForm &&
           <CourseForm toggleForm={setShowForm}
             add={course => setCourses([...courses, course])}
@@ -41,8 +42,10 @@ const Courses = (props) => {
       </Container>
 
       <br />
+      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-around"}}>
+
       {courses.map((item) => (
-        <Card key={item.id}>
+        <Card  key={item.id}>
           <Card.Content textAlign="center">
             {item.image}
             Image Goes Here
@@ -58,7 +61,9 @@ const Courses = (props) => {
           </Card.Meta>
         </Card>
 
-      ))}
+))}
+</div>
+</Container>
     </Fragment>
 
   );

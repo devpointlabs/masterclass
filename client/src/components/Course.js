@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useReducer } from "react";
+import React, { useState, useEffect, useContext, } from "react";
 import axios from "axios";
 import CourseForm from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
@@ -12,6 +12,7 @@ const Course = (props) => {
   const [showForm, setShowForm] = useState(false);
   const [enrolled, setEnrolled] = useState(true)
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
+  const [role, setRole] = useState("")
 
   useEffect(() => {
 
@@ -27,7 +28,9 @@ const Course = (props) => {
     .then(res => {
       setCourse(res.data.course);
       setEnrolled(res.data.registered)
+      setRole(res.data.role)
     })
+   
   }, [])
     
     const enroll = (id) =>{
@@ -46,40 +49,47 @@ const Course = (props) => {
 
   }
 
+  
+
 
   const renderLessons = () => {
-    if (user) {
-    return lessons.map(l => (
-      <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <Link to = {`/lessons/${l.id}`}> 
+
+    if (role == 'teacher') {
+      return lessons.map(l => (
+        
+         <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+         <div>
+           <Link to = {`/lessons/${l.id}`}> 
+         <List.Header as="h3">{l.name}</List.Header>
+         <List.Description>
+           {l.description}
+         </List.Description>
+           </Link>
+         <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
+           <Icon name="trash alternate outline" />
+         </Button>
+         <Link to={`/edit_lesson/${l.id}`}> <Button size="tiny" color="blue">
+           <Icon name="edit" />
+         </Button>
+         </Link>
+       </div>
+       {/* <button icon="carrot"/>
+       {showVieos? <Videos l.id/> : null*/}
+         </Segment>
+       
+      ))}
+  
+    else {
+      return lessons.map(l => (
+        
+        <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
           <List.Header as="h3">{l.name}</List.Header>
           <List.Description>
             {l.description}
           </List.Description>
-            </Link>
-          <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
-            <Icon name="trash alternate outline" />
-          </Button>
-          <Link to={`/lessons/${l.id}/edit`}> <Button size="tiny" color="blue">
-            <Icon name="edit" />
-          </Button>
-          </Link>
         </div>
-        {/* <button icon="carrot"/>
-        {showVieos? <Videos l.id/> : null*/}
-          </Segment>
-    ))}
-    else {
-      return lessons.map(l => (
-        <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-            <List.Header as="h3">{l.name}</List.Header>
-            <List.Description>
-              {l.description}
-            </List.Description>
-          </div>
-        </Segment>
+      </Segment>
       ))}
   }
 
@@ -102,15 +112,14 @@ const Course = (props) => {
       
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
-      {console.log(enrollments)}
-      {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green inverted"><Icon name="add circle"/></Button>}
+      {(!enrolled && role =='teacher') && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
       <br />
-      {(showForm && user)&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
+      {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
 
-     { user && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
+     { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}
       </Button>}
-      {user && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>}
+      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>}
       <br />
       <List>
         {renderLessons()}

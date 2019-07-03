@@ -1,15 +1,11 @@
 import React, { useState, useEffect, } from "react";
 import axios from 'axios'
 import { Form, } from "semantic-ui-react";
-import { Link, } from "react-router-dom";
-import { useFormInput, } from "../hooks/useFormInput";
 
 const CommentForm = (props) => {
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
 
-  const video_id = props.video_id
-  const lesson_id = props.lesson_id
 
   useEffect( () => {
     if(props.comment_id){
