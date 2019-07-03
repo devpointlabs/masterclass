@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
 import Comments from "./Comments";
 import {Link } from "react-router-dom"
@@ -6,7 +6,6 @@ import { Container,Button,  Icon, Header, Image, } from 'semantic-ui-react';
 
 const Video = (props) => {
   const [video, setVideo] = useState([])
-  const video_id = props.match.params.video_id
 
   useEffect( () => {
     const lesson_id = props.match.params.lesson_id
