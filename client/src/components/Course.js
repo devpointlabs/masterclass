@@ -10,7 +10,7 @@ const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [enrolled, setEnrolled] = useState(true)
+  const [enrolled, setEnrolled] = useState(false)
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
   const [role, setRole] = useState("")
 
@@ -31,7 +31,7 @@ const Course = (props) => {
       setRole(res.data.role)
     })
    
-  }, [])
+  }, [enrolled])
     
     const enroll = (id) =>{
       axios.post(`/api/my-courses/${id}`, {user_id: user.id, role: "student"})
@@ -78,7 +78,21 @@ const Course = (props) => {
          </Segment>
        
       ))}
-  
+       else if (role == 'student'){
+         return lessons.map(l => (
+        
+          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+          <div>
+          <Link to = {`/lessons/${l.id}`}> 
+         <List.Header as="h3">{l.name}</List.Header>
+         <List.Description>
+           {l.description}
+         </List.Description>
+           </Link>
+          </div>
+        </Segment>
+         ))
+       }
     else {
       return lessons.map(l => (
         
@@ -109,10 +123,11 @@ const Course = (props) => {
 
   return (
     <>
+    {console.log(role)}
       
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
-      {(!enrolled && role =='teacher') && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
+      {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
       <br />
       {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
 
