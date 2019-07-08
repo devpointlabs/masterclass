@@ -7,12 +7,12 @@ class Api::CoursesController < ApplicationController
 
   def show
     if current_user
-      role = Enrollment.find_by(course_id: @course.id, user_id: current_user.id).role
-    e = Enrollment.find_by(course_id: @course.id, user_id: current_user.id)
+      # role = Enrollment.find_by(course_id: @course.id, user_id: current_user.id).role
+      e = Enrollment.find_by(course_id: @course.id, user_id: current_user.id)
     else
       e = nil
     end
-    render json: {course: @course, registered: e ? true : false, role: role }
+    render json: {course: @course, registered: e ? true : false, role: e ?  e.role : "default"}
   end
   # 
 

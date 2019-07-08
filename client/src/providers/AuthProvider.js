@@ -5,8 +5,10 @@ export const AuthContext = React.createContext();
 export const AuthConsumer = AuthContext.Consumer;
 
 export const AuthProvider = (props) =>  {
-  const [user, setUser] = useState(null); 
+  const [user, setUser] = useState(null);
   const [enrollments, setEnrollments ] = useState([])
+  const [videos, setVideos] = useState([]); 
+
 
   // update user(id, user) - optional 
    
@@ -50,6 +52,17 @@ export const AuthProvider = (props) =>  {
   })
 }
 
+// Update videos 
+const updateVideos = (id, videos) => {
+  let data = new FormData(); 
+  data.append("file", videos.file); 
+  axios.put(`/api/videos/${id}`, data)
+  .then( res => {
+    setVideos(res.data)
+  })
+
+}
+
     return (
       <AuthContext.Provider
         value={{
@@ -60,7 +73,10 @@ export const AuthProvider = (props) =>  {
           handleLogout: handleLogout,
           enrollments: enrollments, 
           setUser: (user) => setUser(user),
-          setEnrollments: (enrollment) => setEnrollments(enrollment)
+          setEnrollments: (enrollment) => setEnrollments(enrollment),
+          videos, 
+          setVideos: (videos) => setVideos(videos), 
+          updateVideos: updateVideos, 
         }}
       >
         {props.children}

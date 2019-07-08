@@ -12,6 +12,7 @@ gem 'cloudinary'
 
 group :development, :test do
   gem "pry-rails"
+  gem 'dotenv-rails'
   gem "faker", :git => "https://github.com/stympy/faker.git", :branch => "master"
   gem 'dotenv-rails'
 end

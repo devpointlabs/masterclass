@@ -28,7 +28,7 @@ const CourseForm = (props) => {
         .put(`/api/courses/${props.id}`, { title: title, category: category, overview: overview, image: image })
         .then(res => {
           props.edit(res.data);
-          props.toggleForm();
+          props.toggleEdit();
         })
     }
 
@@ -40,7 +40,6 @@ const CourseForm = (props) => {
           props.toggleForm();
 
         });
-       
     };
   }
 
