@@ -4,6 +4,7 @@ import { Button, Form, Segment, Header, } from 'semantic-ui-react';
 
 const Register = (props) => {
   const emptyForm = {
+    name: "",
     email: "",
     password: "",
     passwordConfirmation: "",
@@ -14,11 +15,12 @@ const Register = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    const name = form.name
     const email = form.email
     const password = form.password
     const passwordConfirmation = form.passwordConfirmation
     if (password === passwordConfirmation) {
-      handleRegister({ email, password, passwordConfirmation }, props.history)
+      handleRegister({ name, email, password, passwordConfirmation }, props.history)
     }
     else alert('Passwords Do Not Match!')
   }

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useCallback, } from "react";
 import { useDropzone, } from 'react-dropzone';
-import { AuthContext, } from "../providers/AuthProvider";
+import { AuthContext, AuthConsumer, } from "../providers/AuthProvider";
 import { Container, Form, Grid, Image, Divider, Header, Button, } from "semantic-ui-react";
 
 const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
