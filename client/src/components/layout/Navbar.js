@@ -9,17 +9,25 @@ const Navbar = (props) => {
     if (user) {
       return (
         <Menu.Menu position="right">
-          <Link to ="/my-courses">
+          <Link to="/my-courses">
 
-          <Menu.Item
-            name="My Courses"
-            active={props.location.pathname === "/my-courses"}
-            
+            <Menu.Item
+              name="My Courses"
+              active={props.location.pathname === "/my-courses"}
+
             />
-            </Link>
+          </Link>
+          <Link to="/profile">
+            <Menu.Item
+              name="My Profile"
+              active={props.location.pathname === "/profile"}
+
+            />
+
+          </Link>
           <Menu.Item
             name="Logout"
-            onClick={ () => handleLogout(props.history) }
+            onClick={() => handleLogout(props.history)}
           />
         </Menu.Menu>
       );
@@ -27,13 +35,13 @@ const Navbar = (props) => {
       return (
         <Menu.Menu position="right">
           <Link to="/login">
-            <Menu.Item 
+            <Menu.Item
               name="Login"
               active={props.location.pathname === "/login"}
             />
           </Link>
           <Link to="/register">
-            <Menu.Item 
+            <Menu.Item
               name="Register"
               active={props.location.pathname === "/register"}
             />
@@ -45,15 +53,15 @@ const Navbar = (props) => {
 
   return (
     <AuthConsumer>
-      { authProviderValueObject => 
+      {authProviderValueObject =>
         <Menu pointing secondary>
           <Link to="/">
-            <Menu.Item 
+            <Menu.Item
               name="Home"
               active={props.location.pathname === "/"}
             />
           </Link>
-          { rightNavItems(authProviderValueObject) }
+          {rightNavItems(authProviderValueObject)}
         </Menu>
       }
     </AuthConsumer>
