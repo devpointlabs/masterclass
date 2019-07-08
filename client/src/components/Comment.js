@@ -3,6 +3,7 @@ import axios from 'axios'
 import CommentForm from "./CommentForm";
 import QAndAs from "./Comments"
 import { Button, Rating, Icon, Comment } from "semantic-ui-react";
+import {AuthContext} from '../providers/AuthProvider'
 
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
