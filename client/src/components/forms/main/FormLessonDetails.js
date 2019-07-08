@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect }from 'react'; 
-import {Form, Header} from 'semantic-ui-react'
+import {Form, Header, Button} from 'semantic-ui-react'
 import axios from 'axios'
 
 
@@ -12,6 +12,11 @@ const FormLessonDetails = (props) => {
     // e.preventDefault(); 
     props.nextStep(); 
   }
+
+   // go back to previous step in the form 
+ const backStep = (e) => {
+  props.previousStep(); 
+}
 
   // populate video title and video url. 
   useEffect((e) => {
@@ -79,6 +84,7 @@ const FormLessonDetails = (props) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
+      <Button onClick={() => backStep()}>Back</Button>
       <Form.Button fluid>Continue</Form.Button>
     </Form>
 

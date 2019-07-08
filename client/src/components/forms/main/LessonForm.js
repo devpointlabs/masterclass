@@ -1,4 +1,5 @@
 import React, { useState,} from 'react';
+import FormCourseDetails from './FormCourseDetails'; 
 import FormLessonDetails from './FormLessonDetails'; 
 import FormVideoDetails from './FormVideoDetails'; 
 import Success from './Success'; 
@@ -24,13 +25,17 @@ const previousStep = () => {
   switch(step) {
     case 1: 
     return (
-      <FormLessonDetails {...props} nextStep={nextStep} previousStep={previousStep} />
+      <FormCourseDetails {...props} nextStep={nextStep}/>
     )
     case 2: 
     return (
-      <FormVideoDetails {...props} nextStep={nextStep} previousStep={previousStep} />
+      <FormLessonDetails {...props} nextStep={nextStep} previousStep={previousStep} />
     )
     case 3: 
+    return (
+      <FormVideoDetails {...props} nextStep={nextStep} previousStep={previousStep} />
+    )
+    case 4: 
     return(
       // TODO: CONFIRM FORM COMPONENT
       <Success />
