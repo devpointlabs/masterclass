@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useContext} from "react";
 import {  Image,Icon,  Card, Button, Container} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from 'axios'
-// import {AuthContext} from 
+import {AuthContext} from '../providers/AuthProvider'
 
 const Lesson = (props) =>{
   const [videos, setVideos] = useState([])
   const [lesson, setLesson] = useState({})
-  // const {user } = useContext(AuthContext)
-
+  const [role, setRole] = useState("")
+  const {user } = useContext(AuthContext)
+  const course_id = lesson.course_id
   useEffect(()=>{
     const {id } = props.match.params
     
@@ -18,6 +19,11 @@ const Lesson = (props) =>{
     axios.get(`/api/lessons/${id}/videos`)
     .then(res =>setVideos(res.data))
   },[])
+
+  useEffect(()=>{
+    axios.get(`/api/course/${course_id}`)
+    .then(res=> setRole(res.data.role))
+  },[lesson])
 
   const listVideos = () =>{
     const {id } = props.match.params
@@ -61,6 +67,9 @@ const Lesson = (props) =>{
         </Link>
         <h1 style={{ marginTop: '30px' }}>{name}</h1>
         <div>
+          {role ==='teacher' &&
+          <div>
+
           <Link to ={`/lessons/${lesson_id}/edit`}>
           <Button inverted color='blue'>
               <Icon name='pencil' />
@@ -77,6 +86,7 @@ const Lesson = (props) =>{
               Add Video
             </Button>
           </Link>
+          </div>}
           <Card.Group itemsPerRow = {3}>
             {listVideos()}
           </Card.Group>
