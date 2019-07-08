@@ -67,6 +67,7 @@ const QAndAs = (props)=>{
 
   return(
     <>
+
       <div style= {{marginTop: '30px'}}>
         <hr/>
         <h1>Q and A</h1>

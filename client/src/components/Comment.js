@@ -117,7 +117,7 @@ const QAndA = (props) => {
         </Comment.Content>
         <Comment.Content>
           <Comment.Action>
-            {renderButtons}
+            {renderButtons()}
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>

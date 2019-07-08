@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import {  Image,Icon,  Card, Button, Container} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from 'axios'
+// import {AuthContext} from 
 
 const Lesson = (props) =>{
   const [videos, setVideos] = useState([])
   const [lesson, setLesson] = useState({})
+  // const {user } = useContext(AuthContext)
 
   useEffect(()=>{
     const {id } = props.match.params
@@ -34,6 +36,9 @@ const Lesson = (props) =>{
       </>
     ))
   }
+  // const renderButtons= () =>{
+  //   if 
+  // }
 
   const handleDelete = () =>{
     const {id } = props.match.params
