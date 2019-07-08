@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
-import Comments from "./Comments";
+import QAndAs from "./Comments";
 import {Link } from "react-router-dom"
 import { Container,Button,  Icon, Header, Image, } from 'semantic-ui-react';
 
@@ -39,17 +39,17 @@ const Video = (props) => {
   
   return(
     <>
-     <Container style ={{marginBottom: '40px'}}>
-       <Link to = {`/lessons/${id}`}>
-       <Button color='black'>
-            <Icon name='arrow alternate circle left outline' />
-            Go Back
-            </Button>
-       </Link>
-       <div className='item_view'>
-        <div className='item_card'>
-          <Header as='h1'>{video.title}</Header>
-          <Image src = {video.url}/>
+      <Container style ={{marginBottom: '40px'}}>
+        <Link to = {`/lessons/${id}`}>
+        <Button color='black'>
+          <Icon name='arrow alternate circle left outline' />
+          Go Back
+          </Button>
+        </Link>
+        <div className='item_view'>
+          <div className='item_card'>
+            <Header as='h1'>{video.title}</Header>
+            <Image src = {video.url}/>
           </div>
           <div className='video_des'>
          {role === 'teacher' && <Link to={`/lessons/${id}/videos/${video.id}/edit`}>
@@ -62,11 +62,10 @@ const Video = (props) => {
           <Icon name='trash' />
           Delete Item
         </Button>}
-
           </div>
         </div>
-        <Comments video_id = {props.match.params.video_id}/>
-     </Container>
+        <QAndAs video_id = {props.match.params.video_id}/>
+      </Container>
     </>
   )
 };
