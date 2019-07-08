@@ -34,14 +34,14 @@ const QAndA = (props) => {
     if (user.id === user_id){
       return (
       <>
-          <Button.Group floated="right">
-        <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
-          <Icon name="edit"/>
-        </Button>
-        <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
-          <Icon name='trash'/>
-        </Button>
-      </Button.Group>
+        <Button.Group>
+              <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+                <Icon name="edit"/>
+              </Button>
+              <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
+                <Icon name='trash'/>
+              </Button>
+            </Button.Group>
       </>)
     }
   }
@@ -117,14 +117,7 @@ const QAndA = (props) => {
         </Comment.Content>
         <Comment.Content>
           <Comment.Action>
-            <Button.Group>
-              <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
-                <Icon name="edit"/>
-              </Button>
-              <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
-                <Icon name='trash'/>
-              </Button>
-            </Button.Group>
+            {renderButtons}
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
