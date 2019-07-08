@@ -1,12 +1,15 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import axios from "axios";
 import CommentForm from "./CommentForm"
 import Comment from './Comment'
 import { Card, Icon, Button, } from "semantic-ui-react";
+import {AuthContext} from '../providers/AuthProvider'
+
 
 const Comments = (props)=>{
   const [comments, setComments] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const {user, } = useContext(AuthContext)
 
   useEffect(()=>{
     const id = props.video_id
@@ -54,6 +57,8 @@ const Comments = (props)=>{
           comment_rating={c.rating}
           delete_comment={deleteComment}
           edit_comment={editComment}
+          user_id = {c.user_id}
+
         />
       </Card>
       )))
