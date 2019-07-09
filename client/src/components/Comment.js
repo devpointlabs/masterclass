@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import CommentForm from "./CommentForm";
-import QAndAs from "./Comments"
+import Replies from "./Replies"
 import { Button, Rating, Icon, Comment } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
 
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
   const [showForm, setShowForm] = useState(false);
-  const [replies, setReplies] = useState([])
   const [replyForm, setReplyForm] = useState(false);
   const video_id = props.video_id
   const comment_id = props.comment_id
@@ -34,26 +33,24 @@ const QAndA = (props) => {
   const renderButtons = () =>{
     if (user.id === user_id || role === 'teacher'){
       return (
-      <>
-        <Button.Group>
-              <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
-                <Icon name="edit"/>
-              </Button>
-              <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
-                <Icon name='trash'/>
-              </Button>
-            </Button.Group>
-      </>)
+        <>
+          <Button.Group>
+            <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+              <Icon name="edit"/>
+            </Button>
+            <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
+              <Icon name='trash'/>
+            </Button>
+          </Button.Group>
+        </>
+      )
     }
   }
+
   const toggleReplyForm = () => {
     setReplyForm(!replyForm)
   }
-
-  const addReplies = (reply) => {
-    setReplies([...replies, reply])
-  }
-
+  
   return (
     <>
       <hr/>
@@ -107,9 +104,6 @@ const QAndA = (props) => {
               showComments={props.showComments}
               comments={props.comments}
               setComments={props.setComments}
-              addReplies={addReplies}
-              replies={replies}
-              setReplies={setReplies}
               video_id={props.video_id}
               toggleReplyForm={toggleReplyForm}
               replyForm={replyForm}
@@ -122,7 +116,9 @@ const QAndA = (props) => {
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
-          {replies}
+          <Replies 
+            comment_id={comment_id}
+          />
         </Comment.Group>
       </Comment.Content>
     </>
