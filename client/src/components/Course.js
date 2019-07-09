@@ -10,7 +10,7 @@ const Course = (props) => {
   const [lessons, setLessons] = useState([]);
   const [course, setCourse] = useState([]);
   const [showForm, setShowForm] = useState(false);
-  const [enrolled, setEnrolled] = useState(false)
+  const [enrolled, setEnrolled] = useState(true)
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
   const [role, setRole] = useState("")
 
