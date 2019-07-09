@@ -59,7 +59,6 @@ const QAndAs = (props)=>{
           addComment={addComment}
           showComments={showComments}
           user_id = {c.user_id}
-
         />
       </Comment>
       ))
@@ -68,7 +67,6 @@ const QAndAs = (props)=>{
 
   return(
     <>
-
       <div style= {{marginTop: '30px'}}>
         <hr/>
         <h1>Q and A</h1>
@@ -77,15 +75,16 @@ const QAndAs = (props)=>{
           Write a Comment
         </Button>
         { showForm ? 
-            <CommentForm
-              showComments={showComments}
-              comments={comments}
-              setComments={setComments}
-              addComment={addComment}
-              video_id={props.video_id}
-              toggleForm={toggle}
-            /> : 
-            null}
+          <CommentForm
+            showComments={showComments}
+            comments={comments}
+            setComments={setComments}
+            addComment={addComment}
+            video_id={props.video_id}
+            toggleForm={toggle}
+          /> : 
+          null
+        }
         <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
           <Comment.Group>
             {showComments()}

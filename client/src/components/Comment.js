@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import CommentForm from "./CommentForm";
-import QAndAs from "./Comments"
+import Replies from "./Replies"
 import { Button, Rating, Icon, Comment } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
 
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
   const [showForm, setShowForm] = useState(false);
-  const [replies, setReplies] = useState([])
   const [replyForm, setReplyForm] = useState(false);
   const video_id = props.video_id
   const comment_id = props.comment_id
@@ -18,7 +17,7 @@ const QAndA = (props) => {
   const delete_comment = props.delete_comment
   const edit_comment = props.edit_comment
   const user_id = props.user_id
-  const {user, } = useContext(AuthContext)
+  const { user, } = useContext(AuthContext)
 
 
   useEffect( () => {
@@ -30,48 +29,27 @@ const QAndA = (props) => {
     setShowForm(!showForm)
   }
 
-  const renderButtons = () =>{
-    if (user.id === user_id){
+  const renderButtons = () => {
+    if (user.id === user_id) {
       return (
-      <>
-        <Button.Group>
-              <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
-                <Icon name="edit"/>
-              </Button>
-              <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
-                <Icon name='trash'/>
-              </Button>
-            </Button.Group>
-      </>)
+        <>
+          <Button.Group>
+            <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+              <Icon name="edit"/>
+            </Button>
+            <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
+              <Icon name='trash'/>
+            </Button>
+          </Button.Group>
+        </>
+      )
     }
   }
+
   const toggleReplyForm = () => {
     setReplyForm(!replyForm)
   }
-
-  const addReplies = (reply) => {
-    setReplies([...replies, reply])
-  }
-
-  const showReplies = () => {
-    return (
-      replies.map( r => (
-      <Comment key={r.id}>
-        <QAndA
-          video_id={props.video_id}
-          comment_id={r.id}
-          comment_title={r.title}
-          comment_body={r.body}
-          comment_rating={r.rating}
-          delete_comment={props.deleteComment}
-          edit_comment={props.editComment}
-          addComment={props.addComment}
-          showComments={props.showComments}
-        />
-      </Comment>
-      )))
-  };
-
+  
   return (
     <>
       <hr/>
@@ -125,9 +103,6 @@ const QAndA = (props) => {
               showComments={props.showComments}
               comments={props.comments}
               setComments={props.setComments}
-              addReplies={addReplies}
-              replies={replies}
-              setReplies={setReplies}
               video_id={props.video_id}
               toggleReplyForm={toggleReplyForm}
               replyForm={replyForm}
@@ -140,7 +115,9 @@ const QAndA = (props) => {
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
-          {showReplies()}
+          <Replies 
+            comment_id={comment_id}
+          />
         </Comment.Group>
       </Comment.Content>
     </>

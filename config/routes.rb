@@ -21,6 +21,9 @@ Rails.application.routes.draw do
     resources :videos do
       resources :comments
     end
+    resources :comments do
+      resources :replies
+    end
 
 end
 end
