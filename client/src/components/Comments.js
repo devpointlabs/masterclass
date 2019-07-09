@@ -58,7 +58,8 @@ const QAndAs = (props)=>{
           showComments={showComments}
         />
       </Comment>
-      )))
+      ))
+    )
   }
 
   return(

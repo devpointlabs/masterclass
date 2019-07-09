@@ -34,6 +34,25 @@ const QAndA = (props) => {
     setReplies([...replies, reply])
   }
 
+  const showReplies = () => {
+    return (
+      replies.map( r => (
+      <Comment key={r.id}>
+        <QAndA
+          video_id={props.video_id}
+          comment_id={r.id}
+          comment_title={r.title}
+          comment_body={r.body}
+          comment_rating={r.rating}
+          delete_comment={props.deleteComment}
+          edit_comment={props.editComment}
+          addComment={props.addComment}
+          showComments={props.showComments}
+        />
+      </Comment>
+      )))
+  };
+
   return (
     <>
       <hr/>
@@ -109,7 +128,7 @@ const QAndA = (props) => {
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
-          {replies}
+          {showReplies()}
         </Comment.Group>
       </Comment.Content>
     </>
