@@ -7,12 +7,12 @@ import { AuthContext } from "../../providers/AuthProvider";
 const TeachersCourses = (props) => {
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
   // axios call to get enrollments
-  useEffect(()=>{
-    axios.get("/api/my-courses")
-      .then(res => {
-        setEnrollments(res.data)
-      })
-  },[])
+  // useEffect(()=>{
+  //   axios.get("/api/my-courses")
+  //     .then(res => {
+  //       setEnrollments(res.data)
+  //     })
+  // },[])
 
   const removeCourse = (id) => {
     axios.delete(`/api/my-courses/${id}`)
