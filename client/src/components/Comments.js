@@ -1,12 +1,14 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import axios from "axios";
 import CommentForm from "./CommentForm"
+import {AuthContext} from '../providers/AuthProvider'
 import QAndA from './Comment'
 import { Icon, Button, Comment, } from "semantic-ui-react";
 
 const QAndAs = (props)=>{
   const [comments, setComments] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const {user, } = useContext(AuthContext)
 
   useEffect(()=>{
     const id = props.video_id
@@ -56,6 +58,8 @@ const QAndAs = (props)=>{
           edit_comment={editComment}
           addComment={addComment}
           showComments={showComments}
+          user_id = {c.user_id}
+
         />
       </Comment>
       ))
@@ -64,6 +68,7 @@ const QAndAs = (props)=>{
 
   return(
     <>
+
       <div style= {{marginTop: '30px'}}>
         <hr/>
         <h1>Q and A</h1>

@@ -1,8 +1,9 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import CommentForm from "./CommentForm";
 import QAndAs from "./Comments"
 import { Button, Rating, Icon, Comment } from "semantic-ui-react";
+import {AuthContext} from '../providers/AuthProvider'
 
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
@@ -16,6 +17,9 @@ const QAndA = (props) => {
   const comment_rating = props.comment_rating
   const delete_comment = props.delete_comment
   const edit_comment = props.edit_comment
+  const user_id = props.user_id
+  const {user, } = useContext(AuthContext)
+
 
   useEffect( () => {
     axios.get(`/api/videos/${video_id}/comments/${comment_id}`)
@@ -26,6 +30,21 @@ const QAndA = (props) => {
     setShowForm(!showForm)
   }
 
+  const renderButtons = () =>{
+    if (user.id === user_id){
+      return (
+      <>
+        <Button.Group>
+              <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+                <Icon name="edit"/>
+              </Button>
+              <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
+                <Icon name='trash'/>
+              </Button>
+            </Button.Group>
+      </>)
+    }
+  }
   const toggleReplyForm = () => {
     setReplyForm(!replyForm)
   }
@@ -117,14 +136,7 @@ const QAndA = (props) => {
         </Comment.Content>
         <Comment.Content>
           <Comment.Action>
-            <Button.Group>
-              <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
-                <Icon name="edit"/>
-              </Button>
-              <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
-                <Icon name='trash'/>
-              </Button>
-            </Button.Group>
+            {renderButtons()}
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
