@@ -1,12 +1,14 @@
-import React, { useState, useEffect, } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import axios from "axios";
 import CommentForm from "./CommentForm"
-import Comment from './Comment'
-import { Card, Icon, Button, } from "semantic-ui-react";
+import {AuthContext} from '../providers/AuthProvider'
+import QAndA from './Comment'
+import { Icon, Button, Comment, } from "semantic-ui-react";
 
-const Comments = (props)=>{
+const QAndAs = (props)=>{
   const [comments, setComments] = useState([])
   const [showForm, setShowForm] = useState(false)
+  const {user, } = useContext(AuthContext)
 
   useEffect(()=>{
     const id = props.video_id
@@ -45,8 +47,8 @@ const Comments = (props)=>{
   const showComments = () => {
     return (
       comments.map( c => (
-      <Card key={c.id}>
-        <Comment
+      <Comment key={c.id}>
+        <QAndA
           video_id={props.video_id}
           comment_id={c.id}
           comment_title={c.title}
@@ -54,16 +56,21 @@ const Comments = (props)=>{
           comment_rating={c.rating}
           delete_comment={deleteComment}
           edit_comment={editComment}
+          addComment={addComment}
+          showComments={showComments}
+          user_id = {c.user_id}
+
         />
-      </Card>
+      </Comment>
       )))
   }
 
   return(
     <>
+
       <div style= {{marginTop: '30px'}}>
         <hr/>
-        <h1>Comments</h1>
+        <h1>Q and A</h1>
         <Button color='teal' onClick={toggle}>
           <Icon name='comment alternate outline'/>
           Write a Comment
@@ -79,14 +86,13 @@ const Comments = (props)=>{
             /> : 
             null}
         <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
-          <Card.Group itemsPerRow={1}>
+          <Comment.Group>
             {showComments()}
-          </Card.Group>
+          </Comment.Group>
         </div>
       </div>
     </>
   )
-  
 }
 
-export default Comments;
+export default QAndAs;
