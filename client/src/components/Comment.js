@@ -123,11 +123,10 @@ const QAndA = (props) => {
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
-            {replies.map(r=>{
-              return(
-                <Header key = {r.id}>{r.body}</Header>
-              )
-            })}
+          <Replies 
+            role={role}
+            comment_id={comment_id}
+          />
         </Comment.Group>
       </Comment.Content>
     </>

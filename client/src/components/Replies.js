@@ -7,6 +7,8 @@ import { Icon, Button, Comment, } from "semantic-ui-react";
 
 const Replies = (props) => {
   const [replies, setReplies] = useState([])
+  const {user, } = useContext(AuthContext) 
+  const role = props.role
 
 
   useEffect(()=>{
@@ -52,19 +54,16 @@ const Replies = (props) => {
           addReply={addReply}
           showReplies={showReplies}
           user_id={r.user_id}
+          role={role}
         />
       </Comment>
       ))
     )
   };
 
-              // addReplies={addReplies}
-              // replies={replies}
-              // setReplies={setReplies}
-
   return (
     <>
-      {showReplies}
+      {showReplies()}
     </>
   )
 }

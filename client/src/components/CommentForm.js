@@ -31,13 +31,6 @@ const CommentForm = (props) => {
           props.toggleEdit()
         })
     } 
-    else if (props.replies) {
-      axios.post(`/api/videos/${video_id}/comments`, {title: title, body:body, video_id: video_id})
-      .then(res => {
-        props.addReplies(res.data)
-        props.toggleReplyForm()
-      })
-    } 
     else {
       axios.post(`/api/videos/${video_id}/comments`, {title: title, body: body, video_id:video_id})
       .then(res => {
