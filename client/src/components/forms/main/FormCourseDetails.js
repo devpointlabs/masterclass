@@ -33,22 +33,23 @@ const FormCourseDetails = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (props.match.params.id) {
-      axios
-        .put(`/api/courses/${props.match.params.id}`, { title: title, category: category, overview: overview, image: image })
-        .then(res => {
-          setCourse(res.data);
-        })
-    }
+    // if (props.match.params.id) {
+    //   axios
+    //     .put(`/api/courses/${props.match.params.id}`, { title: title, category: category, overview: overview, image: image })
+    //     .then(res => {
+    //       setCourse(res.data);
+    //     })
+    // }
 
-    else {
+    // else {
       axios
         .post("/api/courses", { title: title, category: category, overview: overview, image: image })
         .then(res => {
           setCourse(res.data);
+          props.getCourseId(res.data.id); 
           continueStep(); 
         });
-    };
+    // };
   }
 
 

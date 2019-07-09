@@ -6,6 +6,7 @@ import axios from 'axios'
 const FormLessonDetails = (props) => {
   const [name, setName] = useState();
   const [description, setDescription] = useState();
+  const [lesson, setLesson] = useState(); 
 
 
  const continueStep = (e) => {
@@ -13,48 +14,48 @@ const FormLessonDetails = (props) => {
     props.nextStep(); 
   }
 
-   // go back to previous step in the form 
- const backStep = (e) => {
-  props.previousStep(); 
-}
+//    // go back to previous step in the form 
+//  const backStep = (e) => {
+//   props.previousStep(); 
+// }
 
   // populate video title and video url. 
-  useEffect((e) => {
-    if (props.match.params.lesson_id) {
-      const { lesson_id } = props.match.params
-      axios
-        .get(`/api/lessons/${lesson_id}`)
-        .then(res => {
-          setName(res.data.name)
-          setDescription(res.data.description)
+  // useEffect((e) => {
+  //   if (props.match.params.lesson_id) {
+  //     const { lesson_id } = props.match.params
+  //     axios
+  //       .get(`/api/lessons/${lesson_id}`)
+  //       .then(res => {
+  //         setName(res.data.name)
+  //         setDescription(res.data.description)
 
-        })
-    }
+  //       })
+  //   }
 
-  }, [])
+  // }, [])
 
   const handleSubmit = e => {
 
     e.preventDefault();
-    if (props.match.params.lesson_id) {
-      axios
-        .put(`/api/lessons/${props.match.params.lesson_id}`, { name: name, description: description })
-        .then(res => {
-          // props.history.push(`/courses/${res.data.course_id}`)
-          // instead of pushing back to courses, it will push to the next form component
-          continueStep(); 
-        })
-    }
+    // if (props.match.params.lesson_id) {
+    //   axios
+    //     .put(`/api/lessons/${props.match.params.lesson_id}`, { name: name, description: description })
+    //     .then(res => {
+    //       // props.history.push(`/courses/${res.data.course_id}`)
+    //       // instead of pushing back to courses, it will push to the next form component
+    //       continueStep(); 
+    //     })
+    // }
 
-    else {
+    // else {
       axios
-        .post("/api/courses/${course_id}/lessons", { name: name, description: description })
+        .post(`/api/courses/${props.courseId}/lessons`, { name: name, description: description })
         .then(res => {
-          console.log(res.data)
-          // add(res.data);
-
+          setLesson(res.data);
+          props.getLessonId(res.data.id); 
+          continueStep();
         });
-    };
+    // };
   }
 
 
@@ -84,7 +85,7 @@ const FormLessonDetails = (props) => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
-      <Button onClick={() => backStep()}>Back</Button>
+      {/* <Button onClick={() => backStep()}>Back</Button> */}
       <Form.Button fluid>Continue</Form.Button>
     </Form>
 
