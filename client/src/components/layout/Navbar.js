@@ -3,6 +3,7 @@ import { AuthConsumer, } from "../../providers/AuthProvider";
 import { Menu, } from "semantic-ui-react";
 import { Link, withRouter, } from "react-router-dom";
 
+
 const Navbar = (props) => {
 
   const rightNavItems = ({ user, handleLogout }) => {
@@ -10,20 +11,16 @@ const Navbar = (props) => {
       return (
         <Menu.Menu position="right">
           <Link to="/my-courses">
-
             <Menu.Item
               name="My Courses"
               active={props.location.pathname === "/my-courses"}
-
             />
           </Link>
           <Link to="/profile">
             <Menu.Item
               name="My Profile"
               active={props.location.pathname === "/profile"}
-
             />
-
           </Link>
           <Menu.Item
             name="Logout"
@@ -54,17 +51,23 @@ const Navbar = (props) => {
   return (
     <AuthConsumer>
       {authProviderValueObject =>
-        <Menu pointing secondary>
+        <Menu inverted pointing>
           <Link to="/">
-            <Menu.Item
+            <img
+              src={require('../Images/LogoBlack.png')}
+              alternate="Home"
+              style={{ height: "65px", width: "79px" }}
+            />
+
+            {/* <Menu.Item
               name="Home"
               active={props.location.pathname === "/"}
-            />
+            /> */}
           </Link>
           {rightNavItems(authProviderValueObject)}
         </Menu>
       }
-    </AuthConsumer>
+    </AuthConsumer >
   );
 };
 

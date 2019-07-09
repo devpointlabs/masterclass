@@ -13,8 +13,8 @@ import { ThemeProvider, } from 'styled-components';
 initMiddleware()
 
 const theme = {
-  fg: 'white',
   bg: 'black',
+  fg: 'white',
 }
 
 
@@ -32,3 +32,6 @@ ReactDOM.render(
 
 
 serviceWorker.unregister();
+
+
+

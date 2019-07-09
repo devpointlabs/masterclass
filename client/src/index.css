@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(53, 68, 62)
 }
 
 code {
@@ -24,3 +25,12 @@ transition: box-shadow 0.5s;
 will-change: transform;
 border: 15px solid white;
 }
+
+/* Color Palate:
+
+Black = "Black"
+White = "White"
+Dark Charcoal Grey = RGB rgb(53, 68, 63) 
+
+*/
+
