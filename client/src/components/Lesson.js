@@ -42,9 +42,6 @@ const Lesson = (props) =>{
       </>
     ))
   }
-  // const renderButtons= () =>{
-  //   if 
-  // }
 
   const handleDelete = () =>{
     const {id } = props.match.params
