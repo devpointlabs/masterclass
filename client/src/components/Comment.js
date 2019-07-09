@@ -17,7 +17,8 @@ const QAndA = (props) => {
   const delete_comment = props.delete_comment
   const edit_comment = props.edit_comment
   const user_id = props.user_id
-  const { user, } = useContext(AuthContext)
+  const role = props.role
+  const {user, } = useContext(AuthContext)
 
 
   useEffect( () => {
@@ -29,8 +30,8 @@ const QAndA = (props) => {
     setShowForm(!showForm)
   }
 
-  const renderButtons = () => {
-    if (user.id === user_id) {
+  const renderButtons = () =>{
+    if (user.id === user_id || role === 'teacher'){
       return (
         <>
           <Button.Group>
@@ -111,7 +112,7 @@ const QAndA = (props) => {
         </Comment.Content>
         <Comment.Content>
           <Comment.Action>
-            {renderButtons()}
+            {user && renderButtons()}
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>

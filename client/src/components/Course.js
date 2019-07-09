@@ -73,8 +73,6 @@ const Course = (props) => {
          </Button>
          </Link>
        </div>
-       {/* <button icon="carrot"/>
-       {showVieos? <Videos l.id/> : null*/}
          </Segment>
        
       ))}
@@ -122,10 +120,16 @@ const Course = (props) => {
   }
 
   return (
-    <>
-    {console.log(role)}
-      
+    <>   
+      <div style = {{display: "flex", justifyContent: "space-between"}}>
       <Header as="h1">{course.title}</Header>
+      <Link to = {"/"}>
+        <Button color='black'>
+          <Icon name='arrow alternate circle left outline' />
+          Go Back
+          </Button>
+        </Link>
+        </div>   
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
       <br />

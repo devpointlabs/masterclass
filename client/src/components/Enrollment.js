@@ -58,7 +58,6 @@ const Enrollment = (props) => {
   
   return (
     <Container>
-      {console.log(enrollments)}
   <Header as="h3" textAlign="center">
     {user ? `Welcome, ${user.name || defaultRole() }, here are your current enrollments` : <Link to = "/">Home</Link> }
    
