@@ -121,9 +121,9 @@ const Course = (props) => {
 
   return (
     <>   
-      <div style ={{display: "flex", justifyContent: "space-between"}}>
+      <div style = {{display: "flex", justifyContent: "space-between"}}>
       <Header as="h1">{course.title}</Header>
-      <Link to = {`/`}>
+      <Link to = {"/"}>
         <Button color='black'>
           <Icon name='arrow alternate circle left outline' />
           Go Back
