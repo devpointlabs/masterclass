@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do 
 
-    resources :users 
+    resources :users, only: :update 
     get "my-courses", to: "enrollments#my_courses"
     post "my-courses/:course_id", to: "enrollments#create"
     delete "my-courses/:course_id", to: "enrollments#destroy"

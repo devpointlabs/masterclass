@@ -30,14 +30,24 @@ const CommentForm = (props) => {
           props.editComment(comment_id, res.data)
           props.toggleEdit()
         })
-      } else {
-        axios.post(`/api/videos/${video_id}/comments`, {title: title, body: body, video_id: video_id})
-        .then(res => {
-          props.addComment(res.data)
-          props.toggleForm()
-        })
-      };
-    }
+    } 
+    else if (props.replies) {
+      axios.post(`/api/videos/${video_id}/comments`, {title: title, body:body, video_id: video_id})
+      .then(res => {
+        props.addReplies(res.data)
+        props.toggleReplyForm()
+      })
+    } 
+    else {
+      axios.post(`/api/videos/${video_id}/comments`, {title: title, body: body, video_id:video_id})
+      .then(res => {
+        props.addComment(res.data)
+        props.toggleForm()
+      })
+    };
+  };
+
+    
 
   return ( 
   <Form onSubmit = {handleSubmit}>

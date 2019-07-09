@@ -6,7 +6,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 const Enrollment = (props) => {
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
-   
+   console.log(user)
   // axios call to get enrollments
   useEffect(()=>{
     axios.get("/api/my-courses")

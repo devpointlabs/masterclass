@@ -13,7 +13,8 @@ import Navbar from "./components/layout/Navbar";
 import Enrollment from './components/Enrollment'
 import FetchUser from "./components/auth/FetchUser"
 import MainForm from './components/forms/main/LessonForm';
-// import ProtectedRoute from "./components/ProtectedRoute";
+import Profile from './components/Profile'
+import ProtectedRoute from "./components/auth/ProtectedRoute";
 
 
 const App = () => (
@@ -22,7 +23,8 @@ const App = () => (
     <FetchUser>
       <Container>
         <Switch>
-          {/* <ProtectedRoute exact path="/" component={Home} /> */}
+          <Route exact path="/" component={Home} />
+          <ProtectedRoute exact path='/profile' component={Profile} />
           <Route exact path="/courses/:id" component={Course} />
           <Route exact path="/" component={Home} />
           <Route exact path="/my-courses" component={Enrollment} />
