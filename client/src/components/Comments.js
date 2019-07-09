@@ -59,7 +59,7 @@ const QAndAs = (props)=>{
           addComment={addComment}
           showComments={showComments}
           user_id = {c.user_id}
-
+          role = {props.role}
         />
       </Comment>
       )))

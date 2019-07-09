@@ -64,7 +64,7 @@ const Video = (props) => {
         </Button>}
           </div>
         </div>
-        <QAndAs video_id = {props.match.params.video_id}/>
+        <QAndAs video_id = {props.match.params.video_id} role = {role}/>
       </Container>
     </>
   )
