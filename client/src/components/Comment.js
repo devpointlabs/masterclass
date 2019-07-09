@@ -117,6 +117,7 @@ const QAndA = (props) => {
         </Comment.Content>
         <Comment.Group>
           <Replies 
+            role={role}
             comment_id={comment_id}
           />
         </Comment.Group>
