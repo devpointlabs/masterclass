@@ -27,9 +27,9 @@ const Reply = (props) => {
       return (
         <>
           <Button.Group>
-            <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+            {/* <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
               <Icon name="edit"/>
-            </Button>
+            </Button> */}
             <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
               <Icon name='trash'/>
             </Button>

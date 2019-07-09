@@ -2,13 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import CommentForm from "./CommentForm";
 import Replies from "./Replies"
-import { Button, Rating, Icon, Comment } from "semantic-ui-react";
+import ReplyForm from "./ReplyForm"
+import { Button, Rating, Icon, Comment, Header } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
 
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
   const [showForm, setShowForm] = useState(false);
   const [replyForm, setReplyForm] = useState(false);
+  const [replies, setReplies] = useState([])
   const video_id = props.video_id
   const comment_id = props.comment_id
   const comment_title = props.comment_title
@@ -24,10 +26,16 @@ const QAndA = (props) => {
   useEffect( () => {
     axios.get(`/api/videos/${video_id}/comments/${comment_id}`)
       .then( res => setComment(res.data))
+    axios.get(`/api/comments/${comment_id}/replies`)
+      .then(res=> setReplies(res.data))
+
   }, [])
 
   const toggleForm = () => {
     setShowForm(!showForm)
+  }
+  const addReplies = (reply) =>{
+    setReplies([...replies, reply])
   }
 
   const renderButtons = () =>{
@@ -61,7 +69,7 @@ const QAndA = (props) => {
           maxRating= {5}
           disabled
           icon='star'
-          size= "massive"
+          size= "small"
         />
       </Comment.Content>
       <Comment.Content>
@@ -100,13 +108,12 @@ const QAndA = (props) => {
         </Comment.Action>
         <Comment.Content>
           { replyForm ? 
-            <CommentForm
-              showComments={props.showComments}
-              comments={props.comments}
-              setComments={props.setComments}
+            <ReplyForm
               video_id={props.video_id}
               toggleReplyForm={toggleReplyForm}
-              replyForm={replyForm}
+              comment_id={comment_id}
+              addReplies = {addReplies}
+              
             /> : 
             null}
         </Comment.Content>
@@ -116,9 +123,11 @@ const QAndA = (props) => {
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
-          <Replies 
-            comment_id={comment_id}
-          />
+            {replies.map(r=>{
+              return(
+                <Header key = {r.id}>{r.body}</Header>
+              )
+            })}
         </Comment.Group>
       </Comment.Content>
     </>
