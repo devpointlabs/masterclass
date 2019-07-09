@@ -146,12 +146,15 @@ const renderAddForm = () => {
     } = useDropzone({onDrop});
 
     return (
+      <>
+      
       <div className="container">
         <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
           <input {...getInputProps()} />
           <p>Drag 'n' drop some files here, or click to select files</p>
         </Container>
       </div>
+      </>
     );
   }
 

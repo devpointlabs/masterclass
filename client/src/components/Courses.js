@@ -7,7 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 
 
 const Courses = (props) => {
-  const [showForm, setShowForm] = useState(false);
+  // const [showForm, setShowForm] = useState(false);
   const [courses, setCourses] = useState([]);
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
 
@@ -31,14 +31,19 @@ const Courses = (props) => {
       <Container style={{backgroundColor:"black"}}>
 
       <Container  >
-        {showForm &&
+        {/* {showForm &&
           <CourseForm toggleForm={setShowForm}
             add={course => setCourses([...courses, course])}
           />
+        } */}
+        {user && <Link to= "/forms/create" > 
+        <Button inverted color='green'>
+          {/* {showForm ? "Cancel" : "Add Course"} */}
+        </Button>
+        
+        </Link>
         }
-        {user && <Button inverted color='green' onClick={() => setShowForm(!showForm)}>
-          {showForm ? "Cancel" : "Add Course"}
-        </Button>}
+        
       </Container>
 
       <br />

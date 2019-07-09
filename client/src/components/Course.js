@@ -122,9 +122,7 @@ const Course = (props) => {
   }
 
   return (
-    <>
-    {console.log(role)}
-      
+    <>      
       <Header as="h1">{course.title}</Header>
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
