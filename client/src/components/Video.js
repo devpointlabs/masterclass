@@ -20,7 +20,6 @@ const Video = (props) => {
 
     }, [])
     useEffect( ()=>{
-      
       axios.get(`/api/courses/${course_id}`)
       .then(res => {
         setRole(res.data.role)
@@ -40,7 +39,7 @@ const Video = (props) => {
   return(
     <>
       <Container style ={{marginBottom: '40px'}}>
-        <Link to = {`/lessons/${id}`}>
+        <Link to = {`/lessons/${lesson.id}`}>
         <Button color='black'>
           <Icon name='arrow alternate circle left outline' />
           Go Back
