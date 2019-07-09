@@ -34,6 +34,7 @@ const QAndA = (props) => {
     if (user.id === user_id){
       return (
       <>
+      {console.log(user.id, user_id)}
         <Button.Group>
               <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
                 <Icon name="edit"/>
@@ -117,7 +118,7 @@ const QAndA = (props) => {
         </Comment.Content>
         <Comment.Content>
           <Comment.Action>
-            {renderButtons()}
+            {user && renderButtons()}
           </Comment.Action>
         </Comment.Content>
         <Comment.Group>
