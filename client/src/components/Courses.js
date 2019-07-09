@@ -9,7 +9,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const Courses = (props) => {
   // const [showForm, setShowForm] = useState(false);
   const [courses, setCourses] = useState([]);
-  const {user, enrollments, setEnrollments } = useContext(AuthContext)
+  const { user, enrollments, setEnrollments } = useContext(AuthContext)
 
 
 
@@ -18,57 +18,58 @@ const Courses = (props) => {
       .then(res => {
         setCourses(res.data)
       })
-      axios.get("/api/my-courses")
+    axios.get("/api/my-courses")
       .then(res => {
-        setEnrollments(res.data)})
+        setEnrollments(res.data)
+      })
 
   }, [])
 
-  
+
 
   return (
     <Fragment >
-      <Container style={{backgroundColor:"black"}}>
+      <Container style={{ backgroundColor: "black" }}>
 
-      <Container  >
-        {/* {showForm &&
+        <Container  >
+          {/* {showForm &&
           <CourseForm toggleForm={setShowForm}
             add={course => setCourses([...courses, course])}
           />
         } */}
-        {user && <Link to= "/forms/create" > 
-        <Button inverted color='green'>
-          {/* {showForm ? "Cancel" : "Add Course"} */}
-        </Button>
-        
-        </Link>
-        }
-        
-      </Container>
+          {user && <Link to="/forms/create" >
+            <Button inverted color='green'>
+              {/* {showForm ? "Cancel" : "Add Course"} */}
+            </Button>
 
-      <br />
-      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-around"}}>
+          </Link>
+          }
 
-      {courses.map((item) => (
-        <Card  key={item.id}>
-          <Card.Content textAlign="center">
-            {item.image}
-            Image Goes Here
+        </Container>
+
+        <br />
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
+
+          {courses.map((item) => (
+            <Card key={item.id}>
+              <Card.Content textAlign="center">
+                {item.image}
+                Image Goes Here
           </Card.Content>
-          <Card.Header as="h3">
-            <Link to={{ pathname: `/courses/${item.id}` }}>
-              {item.title}
-            </Link>
-          </Card.Header>
-          <Card.Meta>
-            Overview goes here
+              <Card.Header as="h3">
+                <Link to={{ pathname: `/courses/${item.id}` }}>
+                  {item.title}
+                </Link>
+              </Card.Header>
+              <Card.Meta>
+                Overview goes here
             {item.overview}
-          </Card.Meta>
-        </Card>
+              </Card.Meta>
+            </Card>
 
-))}
-</div>
-</Container>
+          ))}
+        </div>
+      </Container>
     </Fragment>
 
   );

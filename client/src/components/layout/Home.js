@@ -2,24 +2,30 @@ import React, { Fragment, useState, } from "react";
 import Courses from '../Courses';
 import { Header, Segment, Card, } from "semantic-ui-react";
 import styled from 'styled-components';
-import HeaderText from '../HeaderText'
-import Logo from '../Images/Logo.png';
+import HeaderText from '../../Styles/HeaderText'
 // import { useSpring, animated } from 'react-spring'
 
 
 const Home = () => {
-  const [heading, ] = useState("Browse Courses")
+  const [heading,] = useState("Courses")
   // const props = useSpring({opacity:1, from:{opacity: 0}, config:{delay: 1000, duration: 5000},})
 
   return (
     <Fragment>
-      <AppContainer>
-      {/* <animated.div style={props}> */}
-        <Header textAlign="center" as={HeaderText} fSize="large">
-          Dev Point Labs MasterClass
-          <img src={Logo}></img>
+      <AppContainer fluid>
+        {/* <animated.div style={props}> */}
+        <Header textAlign="left" as={HeaderText} fSize="large">
+          DevPoint <br />
+          University
+
         </Header>
-    {/* </animated.div> */}
+        <Header textAlign="left" as={HeaderText} fSize="small">
+          Learn It, Code It, Build It
+        </Header>
+        <Header textAlign="left" as={HeaderText} fSize="medium">
+          Let your SKILLS do the talking.
+        </Header>
+        {/* </animated.div> */}
         <Segment>
           Course Showcase/Preview will render here
           </Segment>
@@ -35,7 +41,7 @@ const Home = () => {
 }
 
 const AppContainer = styled.div`
-  background: linear-gradient(to bottom right, aliceblue, black);
+  background-color: rgb(53, 68, 62)
 `;
 
 
