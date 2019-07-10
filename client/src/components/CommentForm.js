@@ -47,7 +47,7 @@ const CommentForm = (props) => {
     <Form.Group>
     <Form.Input 
       label = "Title"
-      placeholder = "Title"
+      placeholder = "Question Title"
       name = "title"
       required 
       value = {title}
@@ -55,14 +55,14 @@ const CommentForm = (props) => {
     /> 
     <Form.TextArea 
       label = "Body"
-      placeholder = "Body"
+      placeholder = "Question"
       name = "body"
       required 
       value = {body}
       onChange = {(e) => setBody(e.target.value)}
     /> 
     </Form.Group> 
-    <Form.Button>Submit</Form.Button> 
+    <Form.Button>Submit Question</Form.Button> 
     </Form>
   );
 };

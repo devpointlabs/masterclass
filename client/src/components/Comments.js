@@ -56,7 +56,6 @@ const QAndAs = (props)=>{
           comment_rating={c.rating}
           delete_comment={deleteComment}
           edit_comment={editComment}
-          addComment={addComment}
           showComments={showComments}
           user_id = {c.user_id}
           role = {props.role}
@@ -73,7 +72,7 @@ const QAndAs = (props)=>{
         <h1>Q and A</h1>
         <Button color='teal' onClick={toggle}>
           <Icon name='comment alternate outline'/>
-          Write a Comment
+          Ask A Question
         </Button>
         { showForm ? 
           <CommentForm
