@@ -44,11 +44,6 @@ const AppContainer = styled.div`
   padding-left: 5em;
 `
 
-// const GlobalPadding = styled.div`
-// padding-left: 5em;
-// `
-
-
 export default Home;
 
 const styles = [
