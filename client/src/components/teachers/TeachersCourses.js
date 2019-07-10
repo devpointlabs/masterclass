@@ -8,12 +8,12 @@ const TeachersCourses = (props) => {
   const {user, enrollments, setEnrollments } = useContext(AuthContext); 
   const [courses, setCourses] = useState(); 
   // axios call to get enrollments
-  // useEffect(()=>{
-  //   axios.get("/api/my-courses")
-  //     .then(res => {
-  //       setEnrollments(res.data)
-  //     })
-  // },[])
+  useEffect(()=>{
+    axios.get("/api/my-courses")
+      .then(res => {
+        setEnrollments(res.data)
+      })
+  },[])
 
   const removeCourse = (id) => {
     axios.delete(`/api/my-courses/${id}`)
