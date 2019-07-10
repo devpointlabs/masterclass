@@ -14,37 +14,34 @@ const Navbar = (props) => {
           {toggleButton ?
             <>
               <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={
-                <Link to="/teachers/courses">
                   <Menu.Item
                     name="Teachers"
                     active={props.location.pathname === "/teachers/courses"}
                     onClick={() => setToggleButton(!toggleButton)}
-                  />
-                </Link>} />
-              <Link to="/my-courses">
+                    link href = "/teachers/courses"
+                  />} />
                 <Menu.Item
                   name="My Courses"
                   active={props.location.pathname === "/my-courses"}
+                  link href = '/my-courses'
                 />
-              </Link>
             </>
             :
             <Popup content="Switch to the student view here - get back to the courses available." trigger={
-              <Link to="/">
                 <Menu.Item
                   name="Students"
                   active={props.location.pathname === "/"}
                   onClick={() => setToggleButton(!toggleButton)}
+                  link href = "/"
                 />
-              </Link>} />
+              } />
 
           }
-          <Link to="/profile">
             <Menu.Item
               name="My Profile"
               active={props.location.pathname === "/profile"}
+              link href = "/profile"
             />
-          </Link>
           <Menu.Item
             name="Logout"
             onClick={() => handleLogout(props.history)}
@@ -54,18 +51,16 @@ const Navbar = (props) => {
     } else {
       return (
         <Menu.Menu position="right">
-          <Link to="/login">
             <Menu.Item
               name="Login"
               active={props.location.pathname === "/login"}
+              link href = "/login"
             />
-          </Link>
-          <Link to="/register">
             <Menu.Item
               name="Register"
               active={props.location.pathname === "/register"}
+              link href = "/register"
             />
-          </Link>
         </Menu.Menu>
       );
     };
