@@ -12,7 +12,7 @@ const Home = () => {
 
   return (
     <Fragment>
-      <AppContainer fluid>
+      <AppContainer >
         {/* <animated.div style={props}> */}
         <Header textAlign="left" as={HeaderText} fSize="large">
           DevPoint <br />
@@ -41,8 +41,12 @@ const Home = () => {
 }
 
 const AppContainer = styled.div`
-  background-color: rgb(53, 68, 62)
-`;
+  background-color: rgb(53, 68, 62);
+`
+
+const GlobalPadding = styled.div`
+padding: 5 em;
+`
 
 
 export default Home;
