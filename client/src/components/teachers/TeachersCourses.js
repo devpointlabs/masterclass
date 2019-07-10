@@ -1,11 +1,12 @@
-import React, {useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { Header, Card, Container, Button, Icon, Divider, Segment} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const TeachersCourses = (props) => {
-  const {user, enrollments, setEnrollments } = useContext(AuthContext)
+  const {user, enrollments, setEnrollments } = useContext(AuthContext); 
+  const [courses, setCourses] = useState(); 
   // axios call to get enrollments
   // useEffect(()=>{
   //   axios.get("/api/my-courses")
@@ -19,8 +20,8 @@ const TeachersCourses = (props) => {
     .then(res => {
         setEnrollments(enrollments.filter(e => e.course_id !== id))
     })
-
   }
+
   
   const renderEnrollments = () =>{
     let roles = []
@@ -41,7 +42,16 @@ const TeachersCourses = (props) => {
           <Divider />
           <Card.Meta>
             {/* TODO - Delete Button & Edit Button */}
-         { (e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+         { (e.role ==='teacher') && 
+         <Link to={`/teachers/courses/${e.course_id}/manage`}>
+         <Button size="tiny" color="blue" icon animated>
+            <Button.Content visible>Edit</Button.Content>
+              <Button.Content hidden>
+                <Icon name="pencil" />
+              </Button.Content>
+            </Button>
+            </Link>}
+         {(e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
             <Button.Content visible>Unenroll</Button.Content>
               <Button.Content hidden>
                 <Icon name="minus" />
@@ -57,7 +67,7 @@ const TeachersCourses = (props) => {
   
   return (
     <Container>
-    <Card.Group itemsPerRow={1}>
+    <Card.Group itemsPerRow={3}>
     {enrollments ? 
     renderEnrollments() : 
     <>
