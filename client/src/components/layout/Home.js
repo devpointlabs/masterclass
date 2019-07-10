@@ -12,19 +12,18 @@ const Home = () => {
 
   return (
     <Fragment>
-      <AppContainer fluid>
+      <AppContainer >
         {/* <animated.div style={props}> */}
         <Header textAlign="left" as={HeaderText} fSize="large">
           DevPoint <br />
           University
-
-        </Header>
+          </Header>
         <Header textAlign="left" as={HeaderText} fSize="small">
           Learn It, Code It, Build It
-        </Header>
+          </Header>
         <Header textAlign="left" as={HeaderText} fSize="medium">
           Let your SKILLS do the talking.
-        </Header>
+          </Header>
         {/* </animated.div> */}
         <Segment>
           Course Showcase/Preview will render here
@@ -36,13 +35,18 @@ const Home = () => {
           </Card.Group>
         </Segment>
       </AppContainer>
-    </Fragment>
+    </Fragment >
   );
 }
 
 const AppContainer = styled.div`
-  background-color: rgb(53, 68, 62)
-`;
+  background-color: rgb(53, 68, 62);
+  padding-left: 5em;
+`
+
+// const GlobalPadding = styled.div`
+// padding-left: 5em;
+// `
 
 
 export default Home;
