@@ -93,6 +93,7 @@ const QAndA = (props) => {
             {user && renderButtons()}
           </Comment.Action>
         </Comment.Content>
+        
         <Comment.Group>
           <Replies 
             role={role}
