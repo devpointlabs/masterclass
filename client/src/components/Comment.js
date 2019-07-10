@@ -9,6 +9,7 @@ import {AuthContext} from '../providers/AuthProvider'
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
   const [showForm, setShowForm] = useState(false);
+  const [showReplies, setShowReplies] = useState(false);
   const video_id = props.video_id
   const comment_id = props.comment_id
   const comment_title = props.comment_title
@@ -28,6 +29,10 @@ const QAndA = (props) => {
 
   const toggleForm = () => {
     setShowForm(!showForm)
+  }
+
+  const toggleReplies = () => {
+    setShowReplies(!showReplies)
   }
 
   const renderButtons = () =>{
@@ -93,16 +98,34 @@ const QAndA = (props) => {
             {user && renderButtons()}
           </Comment.Action>
         </Comment.Content>
-        
+        <div style={clickDiv}>
+          { showReplies ?
+            <p style={repliesClick} onClick={() => toggleReplies()}>Hide Replies <Icon name='angle up' /></p>
+            :
+            <p style={repliesClick} onClick={() => toggleReplies()}>Show Replies <Icon name='angle down' /></p>
+          }
+        </div>
         <Comment.Group>
-          <Replies 
-            role={role}
-            comment_id={comment_id}
-          />
+          { showReplies ?
+            <Replies 
+              role={role}
+              comment_id={comment_id}
+            /> :
+            null
+          }
         </Comment.Group>
       </Comment.Content>
     </>
   )
 }
+
+const clickDiv = {
+  display: "flex",
+  justifyContent: "flex-end",
+};
+
+const repliesClick = {
+  color: "blue", 
+};
 
 export default QAndA;
