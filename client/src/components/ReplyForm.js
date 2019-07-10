@@ -40,7 +40,7 @@ const ReplyForm = (props) =>{
     <Form onSubmit = {handleSubmit}>
       <Form.TextArea
       label = "Body"
-      placeholder = "Body"
+      placeholder = "Reply"
       name = "body"
       required
       value = {body}
