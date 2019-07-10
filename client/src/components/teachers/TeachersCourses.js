@@ -33,7 +33,8 @@ const TeachersCourses = (props) => {
     
     return ( roles.map(e =>(
       <div key = {e.course_id}>
-        <Header as = 'h1'>{e.role}</Header>
+        {/* <Header as = 'h1'>{e.role}</Header> */}
+        <br />
         <Card fluid>
           <Link to={{pathname: `/courses/${e.course_id}`}}>
         <Card.Header as ='h2'>{e.title}</Card.Header>
@@ -42,6 +43,8 @@ const TeachersCourses = (props) => {
           <Divider />
           <Card.Meta>
             {/* TODO - Delete Button & Edit Button */}
+            <div style={{display:"flex", justifyContent: "space-evenly", justifyContent:"flex-end" }}>
+
          { (e.role ==='teacher') && 
          <Link to={`/teachers/courses/${e.course_id}/manage`}>
          <Button size="tiny" color="blue" icon animated>
@@ -52,11 +55,12 @@ const TeachersCourses = (props) => {
             </Button>
             </Link>}
          {(e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
-            <Button.Content visible>Unenroll</Button.Content>
+            <Button.Content visible>Delete</Button.Content>
               <Button.Content hidden>
-                <Icon name="minus" />
+                <Icon name="trash" />
               </Button.Content>
             </Button>}
+         </div>
           </Card.Meta>
         </Card>
       </div>
@@ -67,7 +71,7 @@ const TeachersCourses = (props) => {
   
   return (
     <Container>
-      <div style = {{display: "flex", flexDirection:"column" }}>
+      <div style = {{display: "flex", flexDirection:"column",}}>
 
     {enrollments ? 
     renderEnrollments() : 
