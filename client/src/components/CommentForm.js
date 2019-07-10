@@ -62,7 +62,7 @@ const CommentForm = (props) => {
       onChange = {(e) => setBody(e.target.value)}
     /> 
     </Form.Group> 
-    <Form.Button>Submit</Form.Button> 
+    <Form.Button>Submit Question</Form.Button> 
     </Form>
   );
 };

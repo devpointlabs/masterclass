@@ -9,8 +9,6 @@ import {AuthContext} from '../providers/AuthProvider'
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
   const [showForm, setShowForm] = useState(false);
-  const [replyForm, setReplyForm] = useState(false);
-  const [replies, setReplies] = useState([])
   const video_id = props.video_id
   const comment_id = props.comment_id
   const comment_title = props.comment_title
@@ -25,17 +23,11 @@ const QAndA = (props) => {
 
   useEffect( () => {
     axios.get(`/api/videos/${video_id}/comments/${comment_id}`)
-      .then( res => setComment(res.data))
-    axios.get(`/api/comments/${comment_id}/replies`)
-      .then(res=> setReplies(res.data))
-
+    .then( res => setComment(res.data))
   }, [])
 
   const toggleForm = () => {
     setShowForm(!showForm)
-  }
-  const addReplies = (reply) =>{
-    setReplies([...replies, reply])
   }
 
   const renderButtons = () =>{
@@ -55,10 +47,6 @@ const QAndA = (props) => {
     }
   }
 
-  const toggleReplyForm = () => {
-    setReplyForm(!replyForm)
-  }
-  
   return (
     <>
       <hr/>
@@ -100,23 +88,6 @@ const QAndA = (props) => {
         </div> 
       </Comment.Content>
       <Comment.Content>
-        <Comment.Action>
-          <Button color='teal' onClick={() => toggleReplyForm()}>
-            <Icon name='comment alternate outline'/>
-            Reply
-          </Button>
-        </Comment.Action>
-        <Comment.Content>
-          { replyForm ? 
-            <ReplyForm
-              video_id={props.video_id}
-              toggleReplyForm={toggleReplyForm}
-              comment_id={comment_id}
-              addReplies = {addReplies}
-              
-            /> : 
-            null}
-        </Comment.Content>
         <Comment.Content>
           <Comment.Action>
             {user && renderButtons()}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
+import ReplyForm from "./ReplyForm";
 import { Button, Icon, Comment } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
 
@@ -9,8 +10,8 @@ const Reply = (props) => {
   const comment_id = props.comment_id
   const reply_id = props.reply_id
   const reply_body = props.reply_body
-  const delete_comment = props.deleteReply
-  const edit_comment = props.editReply
+  const delete_reply = props.delete_reply
+  const editReply = props.editReply
   const addReply = props.addReply
   const showReplies = props.showReplies
   const user_id = props.user_id
@@ -32,10 +33,10 @@ const Reply = (props) => {
       return (
         <>
           <Button.Group>
-            {/* <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+            <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
               <Icon name="edit"/>
-            </Button> */}
-            <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
+            </Button>
+            <Button size="tiny" icon color='red' onClick={()=> delete_reply(reply_id)}>
               <Icon name='trash'/>
             </Button>
           </Button.Group>
@@ -49,6 +50,18 @@ const Reply = (props) => {
       <hr />
       <Comment.Content>
         {reply_body}
+      </Comment.Content>
+      <Comment.Content>
+      { showForm ? 
+          <ReplyForm
+            comment_id={comment_id}
+            editReply={editReply}
+            reply_id={reply_id}
+            reply_body={reply_body}
+            toggleEdit={toggleForm}
+            addReply={addReply}
+          /> : 
+          null}
       </Comment.Content>
       <Comment.Content>
         <Comment.Action>

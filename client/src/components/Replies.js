@@ -2,11 +2,12 @@ import React, { useState, useEffect, useContext} from "react";
 import axios from "axios";
 import {AuthContext} from '../providers/AuthProvider'
 import Reply from './Reply'
-import QAndA from './Comment'
+import ReplyForm from "./ReplyForm"
 import { Icon, Button, Comment, } from "semantic-ui-react";
 
 const Replies = (props) => {
   const [replies, setReplies] = useState([])
+  const [replyForm, setReplyForm] = useState(false);
   const {user, } = useContext(AuthContext) 
   const role = props.role
 
@@ -41,6 +42,10 @@ const Replies = (props) => {
       })
   }
 
+  const toggleReplyForm = () => {
+    setReplyForm(!replyForm)
+  }
+
   const showReplies = () => {
     return (
       replies.map( r => (
@@ -49,8 +54,8 @@ const Replies = (props) => {
           comment_id={props.comment_id}
           reply_id={r.id}
           reply_body={r.body}
-          delete_comment={deleteReply}
-          edit_comment={editReply}
+          delete_reply={deleteReply}
+          editReply={editReply}
           addReply={addReply}
           showReplies={showReplies}
           user_id={r.user_id}
@@ -63,6 +68,25 @@ const Replies = (props) => {
 
   return (
     <>
+      <Comment.Content>
+        <Comment.Action>
+            <Button color='teal' onClick={() => toggleReplyForm()}>
+              <Icon name='comment alternate outline'/>
+              Reply
+            </Button>
+        </Comment.Action>
+      </Comment.Content>
+      <Comment.Content>
+        { replyForm ? 
+          <ReplyForm
+            video_id={props.video_id}
+            toggleReplyForm={toggleReplyForm}
+            comment_id={props.comment_id}
+            addReply = {addReply}
+          /> : 
+          null
+        }
+      </Comment.Content>
       {showReplies()}
     </>
   )
