@@ -23,7 +23,7 @@ const App = () => (
   <>
     <Navbar />
     <FetchUser>
-
+      <Container>
       <Switch>
         <Route exact path="/" component={Home} />
         <ProtectedRoute exact path='/profile' component={Profile} />
@@ -41,6 +41,7 @@ const App = () => (
         <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
         <Route component={NoMatch} />
       </Switch>
+      </Container>
     </FetchUser>
   </>
 );
