@@ -63,7 +63,7 @@ const FormLessonDetails = (props) => {
 
   return (
     <Fragment>
-      <Header as="h1" textAlign="center">Edit Your Lesson</Header>
+      <Header as="h1" textAlign="center">Create Your Lesson</Header>
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
         <Form.Input

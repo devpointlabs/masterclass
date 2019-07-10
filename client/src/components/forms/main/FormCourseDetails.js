@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, } from "semantic-ui-react";
+import { Form, Header } from "semantic-ui-react";
 import {AuthContext} from "../../../providers/AuthProvider"; 
 
 const FormCourseDetails = (props) => {
@@ -54,11 +54,13 @@ const FormCourseDetails = (props) => {
 
 
   return (
+    <>
+    <Header as="h1" textAlign="center">Create Your Course</Header>
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
         <Form.Input
           label='Title'
-          placeholder='Title'
+          placeholder='Please enter a title...'
           name='title'
           required
           value={title}
@@ -67,7 +69,7 @@ const FormCourseDetails = (props) => {
         />
         <Form.Input
           label='Category'
-          placeholder='Category'
+          placeholder='What field of study?'
           name='category'
           required
           value={category}
@@ -75,7 +77,7 @@ const FormCourseDetails = (props) => {
         />
         <Form.Input
           label='Overview'
-          placeholder='Overview'
+          placeholder='What will be covered?'
           name='overview'
           required
           value={overview}
@@ -83,7 +85,7 @@ const FormCourseDetails = (props) => {
         />
         <Form.Input
           label='Image'
-          placeholder='Image'
+          placeholder='Put a thumbnail!'
           name='image'
           required
           value={image}
@@ -93,6 +95,7 @@ const FormCourseDetails = (props) => {
       
       <Form.Button color="green" inverted>Continue</Form.Button>
     </Form >
+    </>
   );
 };
 

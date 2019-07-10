@@ -1,26 +1,27 @@
-import React, {useEffect, useContext} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import { Header, Card, Container, Button, Icon, Divider, Segment} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const TeachersCourses = (props) => {
-  const {user, enrollments, setEnrollments } = useContext(AuthContext)
+  const {user, enrollments, setEnrollments } = useContext(AuthContext); 
+  const [courses, setCourses] = useState(); 
   // axios call to get enrollments
-  useEffect(()=>{
-    axios.get("/api/my-courses")
-      .then(res => {
-        setEnrollments(res.data)
-      })
-  },[])
+  // useEffect(()=>{
+  //   axios.get("/api/my-courses")
+  //     .then(res => {
+  //       setEnrollments(res.data)
+  //     })
+  // },[])
 
   const removeCourse = (id) => {
     axios.delete(`/api/my-courses/${id}`)
     .then(res => {
         setEnrollments(enrollments.filter(e => e.course_id !== id))
     })
-
   }
+
   
   const renderEnrollments = () =>{
     let roles = []
@@ -29,17 +30,28 @@ const TeachersCourses = (props) => {
         roles.push(e)
       }
     })
-    return roles.map(e =>(
+    
+    return ( roles.map(e =>(
       <div key = {e.course_id}>
         <Header as = 'h1'>{e.role}</Header>
-        <Card>
+        <Card fluid>
           <Link to={{pathname: `/courses/${e.course_id}`}}>
         <Card.Header as ='h2'>{e.title}</Card.Header>
           <Card.Description>{e.overview || "This will have an overview"}</Card.Description>
           </Link>
           <Divider />
           <Card.Meta>
-         { (e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+            {/* TODO - Delete Button & Edit Button */}
+         { (e.role ==='teacher') && 
+         <Link to={`/teachers/courses/${e.course_id}/manage`}>
+         <Button size="tiny" color="blue" icon animated>
+            <Button.Content visible>Edit</Button.Content>
+              <Button.Content hidden>
+                <Icon name="pencil" />
+              </Button.Content>
+            </Button>
+            </Link>}
+         {(e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
             <Button.Content visible>Unenroll</Button.Content>
               <Button.Content hidden>
                 <Icon name="minus" />
@@ -49,6 +61,7 @@ const TeachersCourses = (props) => {
         </Card>
       </div>
     ))
+    )
   }
 
   

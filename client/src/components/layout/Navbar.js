@@ -5,7 +5,7 @@ import { Link, withRouter, } from "react-router-dom";
 
 
 const Navbar = (props) => {
-  const [toggleButton, setToggleButton] = useState(false);
+  const [toggleButton, setToggleButton] = useState(true); 
 
   const rightNavItems = ({ user, handleLogout }) => {
     if (user) {

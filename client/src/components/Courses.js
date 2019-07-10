@@ -29,32 +29,14 @@ const Courses = (props) => {
 
   return (
     <Fragment >
-      <Container style={{ backgroundColor: "black" }}>
-
-        <Container  >
-          {/* {showForm &&
-          <CourseForm toggleForm={setShowForm}
-            add={course => setCourses([...courses, course])}
-          />
-        } */}
-          {user && <Link to="/forms/create" >
-            <Button inverted color='green'>
-              {/* {showForm ? "Cancel" : "Add Course"} */}
-            </Button>
-
-          </Link>
-          }
-
-        </Container>
-
-        <br />
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-around" }}>
-
-          {courses.map((item) => (
-            <Card key={item.id}>
-              <Card.Content textAlign="center">
-                {item.image}
-                Image Goes Here
+      <Container style={{backgroundColor:"black"}}>
+        <br/>
+      <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-around"}}>
+      {courses.map((item) => (
+        <Card  key={item.id}>
+          <Card.Content textAlign="center">
+            {item.image}
+            Image Goes Here
           </Card.Content>
               <Card.Header as="h3">
                 <Link to={{ pathname: `/courses/${item.id}` }}>
