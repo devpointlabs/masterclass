@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const fontSize = (size) => {
   switch (size) {
     case 'large':
-      return '6rem';
+      return '10rem';
     case 'small':
       return '1rem';
     default:

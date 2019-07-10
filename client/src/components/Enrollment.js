@@ -23,7 +23,13 @@ const Enrollment = (props) => {
   }
   
   const renderEnrollments = () =>{
-    return enrollments.map(e =>(
+    let roles = []
+    enrollments.map(e=>{
+      if (e.role === 'student'){
+        roles.push(e)
+      }
+    })
+    return roles.map(e =>(
       <div key = {e.course_id}>
         <Header as = 'h1'>{e.role}</Header>
         <Card>
