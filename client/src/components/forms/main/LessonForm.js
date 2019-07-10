@@ -48,7 +48,7 @@ const getLessonId = (id) => {
     )
     case 4: 
     return(
-      <Success />
+      <Success {...props} />
     )
     
   }
