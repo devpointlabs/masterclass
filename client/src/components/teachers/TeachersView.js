@@ -1,9 +1,12 @@
-import React, {useState} from 'react'; 
+import React, {useState, useContext} from 'react'; 
 import { Header, Icon, Image, Menu, Segment, Sidebar, Button} from 'semantic-ui-react'
 import TeachersCourses from './TeachersCourses';
 import {Link} from 'react-router-dom'; 
+import { AuthContext } from "../../providers/AuthProvider";
+
 
 const TeachersView = () => {
+  const {user } = useContext(AuthContext)
   const [visible, setVisible] = useState(false);
   
   
@@ -51,6 +54,15 @@ const TeachersView = () => {
           <Sidebar.Pusher>
             <Segment basic>
               <Header as='h2'>Courses</Header>
+              {user && 
+                <Link to="/forms/create">
+                    <Button floated="right">
+                      Add Courses
+                    </Button>
+                </Link>
+              }
+              <br/>
+              <br/>
               {/* RENDER TEACHERS COURSES */}
               <TeachersCourses/>
             </Segment>

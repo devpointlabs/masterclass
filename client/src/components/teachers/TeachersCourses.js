@@ -29,16 +29,18 @@ const TeachersCourses = (props) => {
         roles.push(e)
       }
     })
-    return roles.map(e =>(
+    
+    return ( roles.map(e =>(
       <div key = {e.course_id}>
         <Header as = 'h1'>{e.role}</Header>
-        <Card>
+        <Card fluid>
           <Link to={{pathname: `/courses/${e.course_id}`}}>
         <Card.Header as ='h2'>{e.title}</Card.Header>
           <Card.Description>{e.overview || "This will have an overview"}</Card.Description>
           </Link>
           <Divider />
           <Card.Meta>
+            {/* TODO - Delete Button & Edit Button */}
          { (e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
             <Button.Content visible>Unenroll</Button.Content>
               <Button.Content hidden>
@@ -49,12 +51,13 @@ const TeachersCourses = (props) => {
         </Card>
       </div>
     ))
+    )
   }
 
   
   return (
     <Container>
-    <Card.Group itemsPerRow={3}>
+    <Card.Group itemsPerRow={1}>
     {enrollments ? 
     renderEnrollments() : 
     <>
