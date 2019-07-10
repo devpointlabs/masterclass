@@ -1,12 +1,12 @@
-import React, {useState, useEffect, useContext} from "react";
-import { Header, Card, Container, Button, Icon, Divider, Segment} from "semantic-ui-react";
+import React, { useState, useEffect, useContext } from "react";
+import { Header, Card, Container, Button, Icon, Divider, Segment } from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const TeachersCourses = (props) => {
-  const {user, enrollments, setEnrollments } = useContext(AuthContext); 
-  const [courses, setCourses] = useState(); 
+  const { user, enrollments, setEnrollments } = useContext(AuthContext);
+  const [courses, setCourses] = useState();
   // axios call to get enrollments
   useEffect(()=>{
     axios.get("/api/my-courses")
@@ -17,16 +17,16 @@ const TeachersCourses = (props) => {
 
   const removeCourse = (id) => {
     axios.delete(`/api/my-courses/${id}`)
-    .then(res => {
+      .then(res => {
         setEnrollments(enrollments.filter(e => e.course_id !== id))
-    })
+      })
   }
 
-  
-  const renderEnrollments = () =>{
+
+  const renderEnrollments = () => {
     let roles = []
-    enrollments.map(e=>{
-      if (e.role === 'teacher'){
+    enrollments.map(e => {
+      if (e.role === 'teacher') {
         roles.push(e)
       }
     })
@@ -36,28 +36,27 @@ const TeachersCourses = (props) => {
         {/* <Header as = 'h1'>{e.role}</Header> */}
         <br />
         <Card fluid>
-          <Link to={{pathname: `/courses/${e.course_id}`}}>
-        <Card.Header as ='h2'>{e.title}</Card.Header>
-          <Card.Description>{e.overview || "This will have an overview"}</Card.Description>
+          <Link to={{ pathname: `/courses/${e.course_id}` }}>
+            <Card.Header as='h2'>{e.title}</Card.Header>
+            <Card.Description>{e.overview || "This will have an overview"}</Card.Description>
           </Link>
           <Divider />
           <Card.Meta>
             {/* TODO - Delete Button & Edit Button */}
             <div style={{display:"flex", justifyContent: "space-evenly", justifyContent:"flex-end" }}>
-
-         { (e.role ==='teacher') && 
-         <Link to={`/teachers/courses/${e.course_id}/manage`}>
-         <Button size="tiny" color="blue" icon animated>
-            <Button.Content visible>Edit</Button.Content>
+            {(e.role === 'teacher') &&
+              <Link to={`/teachers/courses/${e.course_id}/manage`}>
+                <Button size="tiny" color="blue" icon animated>
+                  <Button.Content visible>Edit</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="pencil" />
+                  </Button.Content>
+                </Button>
+              </Link>}
+            {(e.role === 'teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+              <Button.Content visible>Delete</Button.Content>
               <Button.Content hidden>
-                <Icon name="pencil" />
-              </Button.Content>
-            </Button>
-            </Link>}
-         {(e.role ==='teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
-            <Button.Content visible>Delete</Button.Content>
-              <Button.Content hidden>
-                <Icon name="trash" />
+                <Icon name="minus" />
               </Button.Content>
             </Button>}
          </div>
@@ -68,7 +67,7 @@ const TeachersCourses = (props) => {
     )
   }
 
-  
+
   return (
     <Container>
       <div style = {{display: "flex", flexDirection:"column",}}>
@@ -83,7 +82,7 @@ const TeachersCourses = (props) => {
   }
   </div>
     </Container>
-  
+
   )
 
 };
