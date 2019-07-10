@@ -67,7 +67,8 @@ const TeachersCourses = (props) => {
   
   return (
     <Container>
-    <Card.Group itemsPerRow={3}>
+      <div style = {{display: "flex", flexDirection:"column" }}>
+
     {enrollments ? 
     renderEnrollments() : 
     <>
@@ -76,7 +77,7 @@ const TeachersCourses = (props) => {
     </Segment>
     </>
   }
-    </Card.Group>
+  </div>
     </Container>
   
   )
