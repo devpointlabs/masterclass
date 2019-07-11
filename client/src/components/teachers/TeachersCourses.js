@@ -45,7 +45,7 @@ const TeachersCourses = (props) => {
             {/* TODO - Delete Button & Edit Button */}
             <div style={{display:"flex", justifyContent: "space-evenly", justifyContent:"flex-end" }}>
             {(e.role === 'teacher') &&
-              <Link to={`/teachers/courses/${e.course_id}/manage`}>
+              <Link to={`/courses/${e.course_id}/manage`}>
                 <Button size="tiny" color="blue" icon animated>
                   <Button.Content visible>Edit</Button.Content>
                   <Button.Content hidden>

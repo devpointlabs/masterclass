@@ -42,6 +42,7 @@ const Home = () => {
 const AppContainer = styled.div`
   background-color: rgb(53, 68, 62);
   padding-left: 5em;
+  padding-top: 5em;
 `
 
 export default Home;
