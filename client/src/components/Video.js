@@ -1,6 +1,7 @@
 import React, { useState, useEffect, } from 'react';
 import axios from 'axios';
 import QAndAs from "./Comments";
+import styled from 'styled-components';
 import {Link } from "react-router-dom"
 import { Container,Button,  Icon, Header, Image, } from 'semantic-ui-react';
 
@@ -71,13 +72,13 @@ const Video = (props) => {
         </div>
         <hr/>
         </div>
-        <div style={clickDiv}>
+        <ClickDiv>
           { showQA ?
-            <p style={QAClick} onClick={() => toggleQA()}>Hide QA's <Icon name='angle up' /></p>
+            <QAClick onClick={() => toggleQA()}>Hide QA's <Icon name='angle up' /></QAClick>
             :
-            <p style={QAClick} onClick={() => toggleQA()}>Show QA's <Icon name='angle down' /></p>
+            <QAClick onClick={() => toggleQA()}>Show QA's <Icon name='angle down' /></QAClick>
           }
-        </div>
+        </ClickDiv>
         <div>
           { showQA ?
             <QAndAs 
@@ -92,13 +93,21 @@ const Video = (props) => {
   )
 };
 
-const clickDiv = {
-  display: "flex",
-  justifyContent: "flex-end",
-};
+const ClickDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
 
-const QAClick = {
-  color: "blue", 
-};
+const QAClick = styled.p`
+  color: blue;
+  border-radius: 5px;
+  padding-left: 7px;
+
+  &:hover {
+    cursor: pointer;
+    background: grey ;
+    transition: background 0.7s ease;
+  } 
+`
 
 export default Video;

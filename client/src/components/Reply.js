@@ -33,10 +33,10 @@ const Reply = (props) => {
       return (
         <>
           <Button.Group>
-            <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+            <Button size="mini" icon color='teal' onClick={() => toggleForm()}>
               <Icon name="edit"/>
             </Button>
-            <Button size="tiny" icon color='red' onClick={()=> delete_reply(reply_id)}>
+            <Button size="mini" icon color='red' onClick={()=> delete_reply(reply_id)}>
               <Icon name='trash'/>
             </Button>
           </Button.Group>

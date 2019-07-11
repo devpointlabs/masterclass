@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import CommentForm from "./CommentForm";
 import Replies from "./Replies"
+import styled from 'styled-components';
 import ReplyForm from "./ReplyForm"
 import { Button, Rating, Icon, Comment, Header } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
@@ -98,13 +99,13 @@ const QAndA = (props) => {
             {user && renderButtons()}
           </Comment.Action>
         </Comment.Content>
-        <div style={clickDiv}>
+        <ClickDiv>
           { showReplies ?
-            <p style={repliesClick} onClick={() => toggleReplies()}>Hide Replies <Icon name='angle up' /></p>
+            <RepliesClick onClick={() => toggleReplies()}>Hide Replies <Icon name='angle up' /></RepliesClick>
             :
-            <p style={repliesClick} onClick={() => toggleReplies()}>Show Replies <Icon name='angle down' /></p>
+            <RepliesClick onClick={() => toggleReplies()}>Show Replies <Icon name='angle down' /></RepliesClick>
           }
-        </div>
+        </ClickDiv>
         <Comment.Group>
           { showReplies ?
             <Replies 
@@ -119,13 +120,21 @@ const QAndA = (props) => {
   )
 }
 
-const clickDiv = {
-  display: "flex",
-  justifyContent: "flex-end",
-};
+const ClickDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
 
-const repliesClick = {
-  color: "blue", 
-};
+const RepliesClick = styled.p`
+  color: blue;
+  border-radius: 5px;
+  padding-left: 7px;
+
+  &:hover {
+    cursor: pointer;
+    background: grey ;
+    transition: background 0.7s ease;
+  } 
+`
 
 export default QAndA;
