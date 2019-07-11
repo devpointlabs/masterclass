@@ -31,8 +31,9 @@ const Enrollment = (props) => {
     })
     return roles.map(e =>(
       <div key = {e.course_id}>
-        <Header as = 'h1'>{e.role}</Header>
-        <Card>
+        {/* <Header as = 'h1'>{e.role}</Header> */}
+        <br/>
+        <Card style={{margin: "10px"}} >
           <Link to={{pathname: `/courses/${e.course_id}`}}>
         <Card.Header as ='h2'>{e.title}</Card.Header>
           <Card.Description>{e.overview || "This will have an overview"}</Card.Description>
@@ -68,9 +69,10 @@ const Enrollment = (props) => {
     {user ? `Welcome, ${user.name || defaultRole() }, here are your current enrollments` : <Link to = "/">Home</Link> }
    
   </Header>
-    <Card.Group itemsPerRow={3}>
+  <div style = {{display: "flex", justifyContent:"space-around",}}>
+
     {renderEnrollments()}
-    </Card.Group>
+  </div>
     </Container>
   
   )
