@@ -25,7 +25,7 @@ const getLessonId = (id) => {
     switch(step) {
       case 1: 
       return (
-        <EditCourseForm {...props} getCourseId={getCourseId}/>
+        <EditCourseForm {...props} getCourseId={getCourseId} />
       )
       case 2: 
       return (
@@ -63,7 +63,7 @@ const getLessonId = (id) => {
     </Sidebar>
 
     <Sidebar.Pusher>
-      <Segment >
+      <Segment style={{height: "500px"}} >
         {/* Renders forms */}
         {renderForms(step)}
       </Segment>
