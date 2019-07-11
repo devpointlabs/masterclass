@@ -1,7 +1,7 @@
 import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { Menu, Popup } from "semantic-ui-react";
-import { Link, withRouter, } from "react-router-dom";
+import { NavLink, Link, withRouter, } from "react-router-dom";
 
 
 const Navbar = (props) => {
@@ -14,34 +14,59 @@ const Navbar = (props) => {
           {toggleButton ?
             <>
               <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={
-                  <Menu.Item
-                    name="Teachers"
-                    active={props.location.pathname === "/teachers/courses"}
-                    onClick={() => setToggleButton(!toggleButton)}
-                    link href = "/teachers/courses"
-                  />} />
+                
                 <Menu.Item
-                  name="My Courses"
+                    name="Teachers"
+                    // active={props.location.pathname === "/teachers/courses"}
+                    onClick={() => setToggleButton(!toggleButton)}
+                    >
+                <NavLink to="/teachers/courses"
+                exact
+                activeStyle={styles.active}
+                >
+                      Teachers
+                      </NavLink>
+                    </Menu.Item>
+                } />
+
+                <Menu.Item
                   active={props.location.pathname === "/my-courses"}
-                  link href = '/my-courses'
-                />
+                  >
+                    <NavLink to="/my-courses"
+                    exact
+                    activeStyle={styles.active}
+                    >
+                      My Courses
+                    </NavLink>
+                  </Menu.Item>
             </>
             :
             <Popup content="Switch to the student view here - get back to the courses available." trigger={
-                <Menu.Item
-                  name="Students"
+              <Menu.Item
                   active={props.location.pathname === "/"}
                   onClick={() => setToggleButton(!toggleButton)}
-                  link href = "/"
-                />
-              } />
+                  >
+                    <NavLink to="/"
+                    exact
+                    activeStyle={styles.active}
+                    >
+                    Students
+                    </NavLink>
+              </Menu.Item>
+             } />
 
           }
             <Menu.Item
               name="My Profile"
               active={props.location.pathname === "/profile"}
-              link href = "/profile"
-            />
+            >
+            <NavLink to="/profile"
+            exact
+            activeStyle={styles.active}
+            >
+              My Profile
+            </NavLink>
+            </Menu.Item>
           <Menu.Item
             name="Logout"
             onClick={() => handleLogout(props.history)}
@@ -52,15 +77,19 @@ const Navbar = (props) => {
       return (
         <Menu.Menu position="right">
             <Menu.Item
-              name="Login"
               active={props.location.pathname === "/login"}
-              link href = "/login"
-            />
+            >
+              <Link to="/login">
+                Login
+              </Link>
+            </Menu.Item>
             <Menu.Item
-              name="Register"
               active={props.location.pathname === "/register"}
-              link href = "/register"
-            />
+            >
+              <NavLink to="/register">
+            Register
+          </NavLink>
+            </Menu.Item>
         </Menu.Menu>
       );
     };
@@ -88,5 +117,10 @@ const Navbar = (props) => {
     </AuthConsumer >
   );
 };
-
+const styles = {
+  active: {
+    color: 'rgb(147,7,240',
+    fontWeight: 'bold',
+  }
+}
 export default withRouter(Navbar);
