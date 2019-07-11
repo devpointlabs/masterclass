@@ -8,11 +8,11 @@ const EditCourseForm = (props) => {
   const [overview, setOverview] = useState()
   const [image, setImage] = useState()
   const [course, setCourse] = useState(); 
+  const {course_id} = props.match.params
 
 
   useEffect(() => {
     if (props.match.params.course_id) {
-      const {course_id} = props.match.params
       axios.get(`/api/courses/${course_id}`)
       .then(res => {
         setTitle(res.data.course.title)
@@ -32,9 +32,9 @@ const EditCourseForm = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (props.match.params.course_id) {
+    if (course_id) {
       axios
-        .put(`/api/courses/${props.match.params.id}`, { title: title, category: category, overview: overview, image: image })
+        .put(`/api/courses/${course_id}`, { title: title, category: category, overview: overview, image: image })
         .then(res => {
           setCourse(res.data);
         })
