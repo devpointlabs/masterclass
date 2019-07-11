@@ -35,7 +35,7 @@ const App = () => (
         <Route exact path="/register" component={Register} />
         {/* <Route exact path="/:course_id/lesson_form/:lesson_id/edit" component={LessonForm}/> */}
         <Route exact path="/" />
-        <Route exact path="/teachers/courses/:course_id/manage" component={EditForm}/>
+        <Route exact path="/courses/:course_id/manage" component={EditForm}/>
         <Route exact path="/forms/create" component={MainForm} />
         <Route exact path="/lessons/:id" component={Lesson} />
         <Route exact path="/lessons/:lesson_id/edit" component={MainForm} />
