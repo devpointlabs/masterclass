@@ -86,10 +86,12 @@ const FormLessonDetails = (props) => {
             onChange={(e) => setDescription(e.target.value)}
           />
         </Form.Group>
-        <Form.Button fluid>Continue</Form.Button>
+        <Form.Button inverted color="green" >
+          Continue
+          </Form.Button>
         <Link to={`/courses/${props.courseId}/manage`}>
           <Button color="red" inverted>
-            Cancel</Button>
+            Edit Course</Button>
         </Link>
       </Form >
 
