@@ -63,7 +63,6 @@ const EditCourseForm = (props) => {
           required
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-
         />
         <Form.Input
           label='Category'
