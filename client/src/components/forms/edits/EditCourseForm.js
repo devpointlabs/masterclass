@@ -13,13 +13,12 @@ const EditCourseForm = (props) => {
   useEffect(() => {
     if (props.match.params.course_id) {
       const {course_id} = props.match.params
-      axios.get(`api/courses/${course_id}`)
+      axios.get(`/api/courses/${course_id}`)
       .then(res => {
-       
-        setTitle(res.data.title)
-        setOverview(res.data.overview)
-        setImage(res.data.image)
-        setCategory(res.data.category)
+        setTitle(res.data.course.title)
+        setOverview(res.data.course.overview)
+        setImage(res.data.course.image)
+        setCategory(res.data.course.category)
       })
     }
   }, []
