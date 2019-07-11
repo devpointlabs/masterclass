@@ -24,7 +24,10 @@ const Navbar = (props) => {
                 exact
                 activeStyle={styles.active}
                 >
+                  <h3>
+
                       Teachers
+                  </h3>
                       </NavLink>
                     </Menu.Item>
                 } />
@@ -36,7 +39,9 @@ const Navbar = (props) => {
                     exact
                     activeStyle={styles.active}
                     >
+                      <h3>
                       My Courses
+                      </h3>
                     </NavLink>
                   </Menu.Item>
             </>
@@ -50,7 +55,10 @@ const Navbar = (props) => {
                     exact
                     activeStyle={styles.active}
                     >
+                      <h3>
+                    
                     Students
+                    </h3>
                     </NavLink>
               </Menu.Item>
              } />
@@ -64,10 +72,14 @@ const Navbar = (props) => {
             exact
             activeStyle={styles.active}
             >
+              <h3>
+                    
               My Profile
+                    </h3>
             </NavLink>
             </Menu.Item>
           <Menu.Item
+            header as = "h3"
             name="Logout"
             onClick={() => handleLogout(props.history)}
           />
@@ -80,14 +92,20 @@ const Navbar = (props) => {
               active={props.location.pathname === "/login"}
             >
               <Link to="/login">
+              <h3>
+                    
                 Login
+                    </h3>
               </Link>
             </Menu.Item>
             <Menu.Item
               active={props.location.pathname === "/register"}
             >
               <NavLink to="/register">
+              <h3>
+                    
             Register
+                    </h3>
           </NavLink>
             </Menu.Item>
         </Menu.Menu>

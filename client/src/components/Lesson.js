@@ -56,6 +56,7 @@ const Lesson = (props) =>{
     
     <>
       <Container>
+        {console.log(lesson)}
       <Link to={'/'}>
           <Button color="black">
             <Icon name='arrow alternate circle left outline' />
