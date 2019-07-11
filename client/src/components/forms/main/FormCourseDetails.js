@@ -106,9 +106,3 @@ const FormCourseDetails = (props) => {
 export default FormCourseDetails;
 
 
-{/* <Link to={'/'}>
-  <Button color="black">
-    <Icon name='arrow alternate circle left outline' />
-    Go Back
-          </Button>
-</Link> */}
