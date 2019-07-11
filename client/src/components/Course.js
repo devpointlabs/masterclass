@@ -37,7 +37,6 @@ const Course = (props) => {
       axios.post(`/api/my-courses/${id}`, {user_id: user.id, role: "student"})
         .then(res =>{
           setEnrolled(true)
-          // props.history.push("/")
         })
     }
   
@@ -58,21 +57,24 @@ const Course = (props) => {
       return lessons.map(l => (
         
          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-         <div>
+         {/* <div style = {{display:"flex",}}> */}
            <Link to = {`/lessons/${l.id}`}> 
          <List.Header as="h3">{l.name}</List.Header>
          <List.Description>
            {l.description}
          </List.Description>
            </Link>
-         <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
-           <Icon name="trash alternate outline" />
-         </Button>
-         <Link to={`/edit_lesson/${l.id}`}> <Button size="tiny" color="blue">
-           <Icon name="edit" />
-         </Button>
-         </Link>
-       </div>
+           <div>
+
+            <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
+              <Icon name="trash alternate outline" />
+            </Button>
+            <Link to={`/edit_lesson/${l.id}`}> <Button size="tiny" color="blue">
+              <Icon name="edit" />
+            </Button>
+            </Link>
+           </div>
+       {/* </div> */}
          </Segment>
        
       ))}
@@ -121,7 +123,7 @@ const Course = (props) => {
 
   return (
     <>   
-      <div style = {{display: "flex", justifyContent: "space-between"}}>
+      <div style = {{display: "flex", justifyContent: "space-between", padding: "15px"}}>
       <Header as="h1">{course.title}</Header>
       <Link to = {"/"}>
         <Button color='black'>
@@ -131,6 +133,8 @@ const Course = (props) => {
         </Link>
         </div>   
       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
+      <div style={{padding: "15px"}}>
+
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
       <br />
       {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
@@ -139,10 +143,15 @@ const Course = (props) => {
         {showForm ? "Close Form" : "Edit Course"}
       </Button>}
       {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>}
+      </div>
       <br />
+      <br/>
+      <div style={{padding: "15px"}}>
+
       <List>
         {renderLessons()}
       </List>
+      </div>
     </>
   )
 }
