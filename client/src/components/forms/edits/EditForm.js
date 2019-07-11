@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
-import { Header, Icon, Image, Menu, Container, Segment, Sidebar } from 'semantic-ui-react'
+import { Header, Icon, Image, Menu, Container, Segment, Sidebar, SidebarPushable } from 'semantic-ui-react'
 import EditCourseForm from './EditCourseForm'; 
+import styled from 'styled-components';
 import EditLessonForm from './EditLessonForm'; 
 import EditVideoForm from './EditVideoForm'; 
 // TODO - get rid of menu? Use breadcrumb 
@@ -63,7 +64,7 @@ const getLessonId = (id) => {
     </Sidebar>
 
     <Sidebar.Pusher>
-      <Segment style={{height: "500px"}} >
+      <Segment compact={true} style={{height: "500px"}} >
         {/* Renders forms */}
         {renderForms(step)}
       </Segment>
