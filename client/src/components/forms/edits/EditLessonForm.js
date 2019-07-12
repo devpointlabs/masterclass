@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'; 
 import axios from 'axios'; 
 import {Link} from 'react-router-dom';
-import {Segment, List} from 'semantic-ui-react'; 
+import {Segment, List, Button} from 'semantic-ui-react'; 
 import Course from '../../Course'; 
 
 const EditLessonForm = (props) => {
@@ -16,7 +16,6 @@ const EditLessonForm = (props) => {
     .then(res => {
       setLessons(res.data);
       // setLoader(true)
-      
     })
   }, [])
 
@@ -48,6 +47,7 @@ const EditLessonForm = (props) => {
 
   return (
     <div>
+      {/* <Button>Create Lesson</Button> */}
       {renderLessons()}
     </div>
   )
