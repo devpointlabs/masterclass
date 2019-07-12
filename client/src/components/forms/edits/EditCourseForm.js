@@ -8,7 +8,7 @@ const EditCourseForm = (props) => {
   const [overview, setOverview] = useState()
   const [image, setImage] = useState()
   const [course, setCourse] = useState(); 
-  const {course_id} = props.match.params
+  const {course_id} = props.match.params; 
 
 
   useEffect(() => {
@@ -37,6 +37,7 @@ const EditCourseForm = (props) => {
         .put(`/api/courses/${course_id}`, { title: title, category: category, overview: overview, image: image })
         .then(res => {
           setCourse(res.data);
+          props.getCourseId(res.data.id); 
         })
     }
 

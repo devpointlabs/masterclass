@@ -1,50 +1,51 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, } from "semantic-ui-react";
+import { Form, Header} from "semantic-ui-react";
 import {AuthContext} from "../providers/AuthProvider"
 
 const CourseForm = (props) => {
-  const [title, setTitle] = useState()
-  const [category, setCategory] = useState()
-  const [overview, setOverview] = useState()
-  const [image, setImage] = useState()
-  const {user, enrollments, setEnrollments } = useContext(AuthContext)
+  const [title, setTitle] = useState();
+  const [category, setCategory] = useState();
+  const [overview, setOverview] = useState(); 
+  const [image, setImage] = useState(); 
+  const [course, setCourse] = useState(); 
 
 
-  useEffect(() => {
-    if (props.course) {
-      setTitle(props.course.title)
-      setCategory(props.course.category)
-      setOverview(props.course.overview)
-      setImage(props.course.image)
-    }
-  }, []
-  )
+  // useEffect(() => {
+  //   if (props.course) {
+  //     setTitle(props.course.title)
+  //     setCategory(props.course.category)
+  //     setOverview(props.course.overview)
+  //     setImage(props.course.image)
+  //   }
+  // }, []
+  // )
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (props.course) {
-      axios
-        .put(`/api/courses/${props.id}`, { title: title, category: category, overview: overview, image: image })
-        .then(res => {
-          props.edit(res.data);
-          props.toggleEdit();
-        })
-    }
+    // if (props.course) {
+    //   axios
+    //     .put(`/api/courses/${props.id}`, { title: title, category: category, overview: overview, image: image })
+    //     .then(res => {
+    //       props.edit(res.data);
+    //       props.toggleEdit();
+    //     })
+    // }
 
-    else {
+    // else {
       axios
-        .post("/api/courses", { title: title, category: category, overview: overview, image: image })
-        .then(res => {
-          props.add(res.data);
-          props.toggleForm();
-
-        });
-    };
+      .post("/api/courses", { title: title, category: category, overview: overview, image: image })
+      .then(res => {
+        setCourse(res.data);
+        props.history.goBack("/teachers/courses"); 
+      });
+    // };
   }
 
 
   return (
+    <>
+    <Header as="h1" textAlign="center">Create A Course</Header>
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
         <Form.Input
@@ -84,6 +85,7 @@ const CourseForm = (props) => {
       
       <Form.Button color="green" inverted>Submit</Form.Button>
     </Form >
+    </>
   );
 };
 

@@ -17,6 +17,7 @@ import Profile from './components/Profile';
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import TeachersView from "./components/teachers/TeachersView";
 import EditForm from "./components/forms/edits/EditForm";
+import CourseForm from "./components/CourseForm"; 
 import TeachersQAndA from "./components/teachers/TeachersQAndA";
 
 
@@ -38,7 +39,8 @@ const App = () => (
         <Route exact path="/" />
         <Route exact path="/teachers/QandA" component={TeachersQAndA} />
         <Route exact path="/courses/:course_id/manage" component={EditForm}/>
-        <Route exact path="/forms/create" component={MainForm} />
+        {/* <Route exact path="/forms/create" component={MainForm} /> */}
+        <Route exact path="/forms/create" component={CourseForm} />
         <Route exact path="/lessons/:id" component={Lesson} />
         <Route exact path="/lessons/:lesson_id/edit" component={MainForm} />
         <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
