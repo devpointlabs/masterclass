@@ -18,13 +18,14 @@ import ProtectedRoute from "./components/auth/ProtectedRoute";
 import TeachersView from "./components/teachers/TeachersView";
 import EditForm from "./components/forms/edits/EditForm";
 import CourseForm from "./components/CourseForm"; 
+import TeachersQAndA from "./components/teachers/TeachersQAndA";
 
 
 const App = () => (
   <>
     <Navbar />
     <FetchUser>
-      <Container>
+      {/* <Container> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <ProtectedRoute exact path='/profile' component={Profile} />
@@ -36,6 +37,7 @@ const App = () => (
         <Route exact path="/register" component={Register} />
         {/* <Route exact path="/:course_id/lesson_form/:lesson_id/edit" component={LessonForm}/> */}
         <Route exact path="/" />
+        <Route exact path="/teachers/QandA" component={TeachersQAndA} />
         <Route exact path="/courses/:course_id/manage" component={EditForm}/>
         {/* <Route exact path="/forms/create" component={MainForm} /> */}
         <Route exact path="/forms/create" component={CourseForm} />
@@ -44,7 +46,7 @@ const App = () => (
         <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
         <Route component={NoMatch} />
       </Switch>
-      </Container>
+      {/* </Container> */}
     </FetchUser>
   </>
 );

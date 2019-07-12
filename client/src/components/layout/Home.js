@@ -24,17 +24,18 @@ const Home = () => {
         <Header textAlign="left" as={HeaderText} fSize="medium">
           Let your SKILLS do the talking.
           </Header>
+          <br/>
         {/* </animated.div> */}
-        <Segment>
+        {/* <Segment>
           Course Showcase/Preview will render here
-          </Segment>
+          </Segment> */}
+      </AppContainer>
         <Segment>
-          <Header as="h3" textAlign="center">{heading}</Header>
+          <Header as="h1" textAlign="center">{heading}</Header>
           <Card.Group itemsPerRow="2">
             <Courses />
           </Card.Group>
         </Segment>
-      </AppContainer>
     </Fragment >
   );
 }
@@ -47,22 +48,7 @@ const AppContainer = styled.div`
 
 export default Home;
 
-const styles = [
-
-
-]
 
 
 
 
-{/* <Container style={
-  { display: 'flex', 
-borderColor: "black", 
-justifyContent: "space-between", 
-width: '100%', 
-alignItems: "center", 
-paddingTop: "14px", 
-borderWidth: ".9px" }
-}>
-</Container> 
-*/ }

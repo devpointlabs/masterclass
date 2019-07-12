@@ -1,9 +1,11 @@
 import React, { Fragment, useState, useEffect, useContext } from "react";
-import { Card, Container, Button, } from "semantic-ui-react";
+import {  Button, } from "semantic-ui-react";
 import CourseForm from './CourseForm';
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../providers/AuthProvider";
+import styled from 'styled-components';
+
 
 
 const Courses = (props) => {
@@ -31,23 +33,26 @@ const Courses = (props) => {
     <Fragment >
       <Container style={{backgroundColor:"black"}}>
         <br/>
+
       <div style={{display:"flex", flexWrap:"wrap", justifyContent:"space-around"}}>
       {courses.map((item) => (
+            <Link to={{pathname: `/courses/${item.id}`}}>
         <Card  key={item.id}>
-          <Card.Content textAlign="center">
+          <div textAlign="center">
             {item.image}
             Image Goes Here
-          </Card.Content>
-              <Card.Header as="h3">
+          </div>
+              <h3>
                 <Link to={{ pathname: `/courses/${item.id}` }}>
                   {item.title}
                 </Link>
-              </Card.Header>
-              <Card.Meta>
+              </h3>
+              <div>
                 Overview goes here
             {item.overview}
-              </Card.Meta>
+              </div>
             </Card>
+              </Link>
 
           ))}
         </div>
@@ -58,3 +63,16 @@ const Courses = (props) => {
 };
 
 export default Courses;
+
+const Container = styled.div`
+background: linear-gradient(350deg, rgba(2,0,36,1) 0%, rgba(89,9,121,0.67) 73%);
+
+`
+const Card = styled.div`
+  margin: 15px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 5px;
+  height: 250px;
+  width: 450px;
+`

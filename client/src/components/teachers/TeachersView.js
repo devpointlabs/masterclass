@@ -12,7 +12,7 @@ const TeachersView = () => {
   
   const handleHideClick = () => setVisible(false); 
   const handleShowClick = () => setVisible(true); 
-   const handleSidebarHide = () => setVisible(false); 
+  const handleSidebarHide = () => setVisible(false); 
   return (
     <>
     <Button.Group>
@@ -41,10 +41,12 @@ const TeachersView = () => {
               Courses
             </Menu.Item>
             </Link>
+            <Link to="/teachers/QandA">
             <Menu.Item as='a'>
               <Icon name='comments outline' />
-              Communication
+              Q&A
             </Menu.Item>
+            </Link>
             <Menu.Item as='a'>
               <Icon name='settings' />
               Settings
