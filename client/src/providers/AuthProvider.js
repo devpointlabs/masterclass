@@ -18,7 +18,6 @@ export const AuthProvider = (props) => {
     data.append('file', user.file);
     axios.put(`/api/users/${id}?name=${user.name}&email=${user.email}`,data)
       .then( res =>{
-        debugger
         setUser(res.data)
       })
   };
