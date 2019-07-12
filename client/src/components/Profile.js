@@ -17,6 +17,10 @@ const Profile = () => {
     setEmail(user.email);
   }, []);
 
+  useEffect(() => {
+    console.log(file)
+  }, [file]);
+
   const onDrop = useCallback(acceptedFiles => {
     setFile(acceptedFiles[0]);
   }, []);

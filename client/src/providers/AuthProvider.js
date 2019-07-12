@@ -15,7 +15,7 @@ export const AuthProvider = (props) => {
   const updateUser = (id, user) => {
     let data = new FormData();
     data.append("file", user.file);
-    axios.put(`/api/users/${id}?name=${user.name}&email=${user.email}`)
+    axios.put(`/api/users/${id}?name=${user.name}&email=${user.email}`, data)
       .then(res => {
         setUser(res.data)
       })
