@@ -11,9 +11,9 @@ const Navbar = (props) => {
     if (user) {
       return (
         <Menu.Menu position="right">
-          {toggleButton ?
+          {/* {toggleButton ? */}
             <>
-              <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={
+              {/* <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={ */}
                 
                 <Menu.Item
                     name="Teachers"
@@ -24,13 +24,13 @@ const Navbar = (props) => {
                 exact
                 activeStyle={styles.active}
                 >
-                  <h3>
+                  <h2>
 
                       Teachers
-                  </h3>
+                  </h2>
                       </NavLink>
                     </Menu.Item>
-                } />
+                {/* } /> */}
 
                 <Menu.Item
                   active={props.location.pathname === "/my-courses"}
@@ -39,9 +39,9 @@ const Navbar = (props) => {
                     exact
                     activeStyle={styles.active}
                     >
-                      <h3>
+                      <h2>
                       My Courses
-                      </h3>
+                      </h2>
                     </NavLink>
                   </Menu.Item>
             </>
@@ -55,10 +55,10 @@ const Navbar = (props) => {
                     exact
                     activeStyle={styles.active}
                     >
-                      <h3>
+                      <h2>
                     
                     Students
-                    </h3>
+                    </h2>
                     </NavLink>
               </Menu.Item>
              } />
@@ -72,14 +72,14 @@ const Navbar = (props) => {
             exact
             activeStyle={styles.active}
             >
-              <h3>
+              <h2>
                     
               My Profile
-                    </h3>
+                    </h2>
             </NavLink>
             </Menu.Item>
           <Menu.Item
-            header as = "h3"
+            header as = "h2"
             name="Logout"
             onClick={() => handleLogout(props.history)}
           />
@@ -92,20 +92,20 @@ const Navbar = (props) => {
               active={props.location.pathname === "/login"}
             >
               <Link to="/login">
-              <h3>
+              <h2>
                     
                 Login
-                    </h3>
+                    </h2>
               </Link>
             </Menu.Item>
             <Menu.Item
               active={props.location.pathname === "/register"}
             >
               <NavLink to="/register">
-              <h3>
+              <h2>
                     
             Register
-                    </h3>
+                    </h2>
           </NavLink>
             </Menu.Item>
         </Menu.Menu>
@@ -134,10 +134,11 @@ const Navbar = (props) => {
       }
     </AuthConsumer >
   );
-};
+    };
+
 const styles = {
   active: {
-    color: 'rgb(147,7,240',
+    color: 'rgb(189, 122, 235)',
     fontWeight: 'bold',
   }
 }
