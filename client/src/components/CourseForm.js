@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, Header} from "semantic-ui-react";
-import {AuthContext} from "../providers/AuthProvider"
+import { Form, Header } from "semantic-ui-react";
+import { AuthContext } from "../providers/AuthProvider"
 
 const CourseForm = (props) => {
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
-  const [overview, setOverview] = useState(); 
-  const [image, setImage] = useState(); 
-  const [course, setCourse] = useState(); 
+  const [overview, setOverview] = useState();
+  const [image, setImage] = useState();
+  const [course, setCourse] = useState();
 
 
   // useEffect(() => {
@@ -33,11 +33,11 @@ const CourseForm = (props) => {
     // }
 
     // else {
-      axios
+    axios
       .post("/api/courses", { title: title, category: category, overview: overview, image: image })
       .then(res => {
         setCourse(res.data);
-        props.history.goBack("/teachers/courses"); 
+        props.history.goBack("/teachers/courses");
       });
     // };
   }
@@ -45,46 +45,46 @@ const CourseForm = (props) => {
 
   return (
     <>
-    <Header as="h1" textAlign="center">Create A Course</Header>
-    <Form onSubmit={handleSubmit}>
-      <Form.Group widths='equal'>
-        <Form.Input
-          label='Title'
-          placeholder='Title'
-          name='title'
-          required
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+      <Header as="h1" textAlign="center">Create A Course</Header>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group widths='equal'>
+          <Form.Input
+            label='Course Title'
+            placeholder='e.g. Add Photos Using Cloudinary'
+            name='title'
+            required
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
 
-        />
-        <Form.Input
-          label='Category'
-          placeholder='Category'
-          name='category'
-          required
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
-        />
-        <Form.Input
-          label='Overview'
-          placeholder='Overview'
-          name='overview'
-          required
-          value={overview}
-          onChange={(e) => setOverview(e.target.value)}
-        />
-        <Form.Input
-          label='Image'
-          placeholder='Image'
-          name='image'
-          required
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
-        />
-      </Form.Group>
-      
-      <Form.Button color="green" inverted>Submit</Form.Button>
-    </Form >
+          />
+          <Form.Input
+            label='Category'
+            placeholder='e.g. Javascript'
+            name='category'
+            required
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+          <Form.Input
+            label='Overview'
+            placeholder='e.g. Cloudinary Start to Finish Implementation'
+            name='overview'
+            required
+            value={overview}
+            onChange={(e) => setOverview(e.target.value)}
+          />
+          <Form.Input
+            label='Image'
+            placeholder='e.g. Photo to Represent Course'
+            name='image'
+            required
+            value={image}
+            onChange={(e) => setImage(e.target.value)}
+          />
+        </Form.Group>
+
+        <Form.Button color="green" inverted>Submit</Form.Button>
+      </Form >
     </>
   );
 };
