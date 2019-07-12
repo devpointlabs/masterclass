@@ -14,7 +14,6 @@ const EditLessonForm = (props) => {
   useEffect(() => {
     axios.get(`/api/courses/${course_id}/lessons`)
     .then(res => {
-      debugger 
       setLessons(res.data);
       // setLoader(true)
       
