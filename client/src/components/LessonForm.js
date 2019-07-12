@@ -1,15 +1,15 @@
 import React, { Fragment, useState, useEffect, } from 'react';
 import axios from 'axios';
 import { Form, } from 'semantic-ui-react';
-// import { useDropzone } from 'react-dropzone';
-// import styled from 'styled-components';
+import { useDropzone } from 'react-dropzone';
+import styled from 'styled-components';
 
 
 const LessonForm = (props) => {
-  // const [lesson, setLesson] = useState({})
+  const [lesson, setLesson] = useState({})
   const [name, setName] = useState();
   const [description, setDescription] = useState();
-  // const [file, setFile] = useState();
+  const [file, setFile] = useState();
 
 
   // check if form is editing and render different title and all existing lesson videos with options to delete each video. 
@@ -26,13 +26,13 @@ const LessonForm = (props) => {
         })
     }
 
-    //  if(lesson) {
-    //    setName(lesson.name)
-    //    setDescription(lesson.description)
-    //  } else {
-    //    setName(""); 
-    //    setDescription(""); 
-    //  }
+     if(lesson) {
+       setName(lesson.name)
+       setDescription(lesson.description)
+     } else {
+       setName(""); 
+       setDescription(""); 
+     }
   }, [])
 
   const handleSubmit = e => {
@@ -43,7 +43,7 @@ const LessonForm = (props) => {
         .put(`/api/lessons/${props.match.params.lesson_id}`, { name: name, description: description })
         .then(res => {
           props.history.push(`/courses/${res.data.course_id}`)
-          // props.edit(res.data);
+          props.edit(res.data);
         })
     }
 
@@ -60,30 +60,30 @@ const LessonForm = (props) => {
 
 
   // styled component functionality 
-  //  const StyledDropzone = (props) => {
-  //     // taken from docs 
-  //     const onDrop = useCallback(acceptedFiles => {
-  //       // Do something with the files
-  //       setFile(acceptedFiles[0]); 
-  //     }, [])
+   const StyledDropzone = (props) => {
+      // taken from docs 
+      const onDrop = useCallback(acceptedFiles => {
+        // Do something with the files
+        setFile(acceptedFiles[0]); 
+      }, [])
 
-  //   const {
-  //     getRootProps,
-  //     getInputProps,
-  //     isDragActive,
-  //     isDragAccept,
-  //     isDragReject
-  //   } = useDropzone({onDrop});
+    const {
+      getRootProps,
+      getInputProps,
+      isDragActive,
+      isDragAccept,
+      isDragReject
+    } = useDropzone({onDrop});
 
-  //   return (
-  //     <div className="container">
-  //       <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
-  //         <input {...getInputProps()} />
-  //         <p>Drag 'n' drop some files here, or click to select files</p>
-  //       </Container>
-  //     </div>
-  //   );
-  // }
+    return (
+      <div className="container">
+        <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
+          <input {...getInputProps()} />
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        </Container>
+      </div>
+    );
+  }
 
   return (
     <Fragment>
@@ -110,7 +110,7 @@ const LessonForm = (props) => {
         </Form.Group>
         <br />
         {/* render all existing videos */}
-        {/* <StyledDropzone /> */}
+        <StyledDropzone />
         <br />
         <Form.Button fluid>Submit</Form.Button>
       </Form>
@@ -120,36 +120,36 @@ const LessonForm = (props) => {
 }
 
 
-// // styles for StyledDropZone
-// const getColor = (props) => {
-//   if (props.isDragAccept) {
-//       return '#00e676';
-//   }
-//   if (props.isDragReject) {
-//       return '#ff1744';
-//   }
-//   if (props.isDragActive) {
-//       return '#2196f3';
-//   }
-//   return '#bdbdbd';
-// }
+// styles for StyledDropZone
+const getColor = (props) => {
+  if (props.isDragAccept) {
+      return '#00e676';
+  }
+  if (props.isDragReject) {
+      return '#ff1744';
+  }
+  if (props.isDragActive) {
+      return '#2196f3';
+  }
+  return '#bdbdbd';
+}
 
-// const Container = styled.div`
-//   flex: 1;
-//   text-align: center; 
-//   height: 250px; 
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 20px;
-//   border-width: 3px;
-//   border-radius: 2px;
-//   border-color: ${props => getColor(props)};
-//   border-style: dashed;
-//   background-color: #eeee;
-//   color: #bdbdbd;
-//   outline: none;
-//   transition: border .24s ease-in-out;
-// `;
+const Container = styled.div`
+  flex: 1;
+  text-align: center; 
+  height: 250px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  border-width: 3px;
+  border-radius: 2px;
+  border-color: ${props => getColor(props)};
+  border-style: dashed;
+  background-color: #eeee;
+  color: #bdbdbd;
+  outline: none;
+  transition: border .24s ease-in-out;
+`;
 
 export default LessonForm; 
