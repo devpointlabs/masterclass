@@ -73,7 +73,7 @@ const EditLessonForm = (props) => {
 
   return (
     <div>
-      <Button onClick={() => toggleCreateForm()}>Create Lesson</Button>
+      <Button onClick={() => toggleCreateForm()}>{ showCreateForm ? "Cancel" : "Create Lesson"}</Button>
       {showCreateForm ? renderAddForm() : renderLessons ()}
       {renderLessons()}
     </div>
