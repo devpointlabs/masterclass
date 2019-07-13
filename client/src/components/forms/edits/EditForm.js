@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Header, Icon, Image, Button, Menu, Container, Segment, Sidebar, SidebarPushable } from 'semantic-ui-react'
+import { Header, Icon, Image, Button, Menu, Container, Segment, Sidebar, SidebarPushable, Breadcrumb } from 'semantic-ui-react'
 import EditCourseForm from './EditCourseForm'; 
 import styled from 'styled-components';
 import EditLessonForm from './EditLessonForm'; 
@@ -46,6 +46,12 @@ const getLessonId = (id) => {
 
   
   return (
+    <>
+     <Breadcrumb size="large">
+        <Breadcrumb.Section link onClick={() => props.history.goBack("/teachers/courses")}>Courses</Breadcrumb.Section>
+        <Breadcrumb.Divider icon='right chevron' />
+        <Breadcrumb.Section active>Manage Courses</Breadcrumb.Section>
+      </Breadcrumb>
     <Sidebar.Pushable as={Container}>
     <Sidebar as={Menu} borderless icon='labeled' vertical visible width='thin'>
       <br/>
@@ -64,6 +70,7 @@ const getLessonId = (id) => {
     </Sidebar>
 
     <Sidebar.Pusher>
+     
       <Segment compact={true} style={{height: "500px"}} >
         {/* GOback button */}
         <Button onClick={() => props.history.goBack("/teachers/courses")}> Go Back</Button>
@@ -72,6 +79,7 @@ const getLessonId = (id) => {
       </Segment>
     </Sidebar.Pusher>
   </Sidebar.Pushable>
+  </>
   )
 }
 
