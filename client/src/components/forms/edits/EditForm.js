@@ -47,6 +47,7 @@ const getLessonId = (id) => {
   
   return (
     <>
+    {/* GO BACK BUTTON - BREADCRUMB */}
      <Breadcrumb size="large">
         <Breadcrumb.Section link onClick={() => props.history.goBack("/teachers/courses")}>Courses</Breadcrumb.Section>
         <Breadcrumb.Divider icon='right chevron' />
@@ -72,8 +73,6 @@ const getLessonId = (id) => {
     <Sidebar.Pusher>
      
       <Segment compact={true} style={{height: "500px"}} >
-        {/* GOback button */}
-        <Button onClick={() => props.history.goBack("/teachers/courses")}> Go Back</Button>
         {/* Renders forms */}
         {renderForms(step)}
       </Segment>
