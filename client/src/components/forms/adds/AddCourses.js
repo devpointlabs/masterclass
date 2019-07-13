@@ -83,6 +83,7 @@ const CourseForm = (props) => {
       </Form.Group>
       
       <Form.Button color="green" inverted>Submit</Form.Button>
+      <Form.Button color="red" inverted onClick={() => props.history.goBack("/teachers/courses")}>Cancel</Form.Button>
     </Form >
     </>
   );
