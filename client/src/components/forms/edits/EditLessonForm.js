@@ -30,7 +30,7 @@ const EditLessonForm = (props) => {
       setLessons(res.data);
       // setLoader(true)
     })
-  }, [showCreateForm, showEditForm])
+  }, [showCreateForm])
 
  
   // will render the add form for the lessons and passes in the course id
@@ -41,6 +41,15 @@ const EditLessonForm = (props) => {
   //  will render the edit form for the lessons 
   const renderEditForm = () => {
   return <h1>Worked! </h1>
+  }
+
+  // remove lessons 
+  const removeLesson = (id) => {
+    axios.delete(`/api/courses/${course_id}/lessons/${id}`)
+      .then(res => {
+        setLessons(lessons.filter(l => l.id !== id))
+      })
+
   }
 
 
@@ -55,15 +64,13 @@ const EditLessonForm = (props) => {
            {l.description}
          </List.Description>
            </Link>
-         {/* <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
-           <Icon name="trash alternate outline" />
-         </Button> */}
-         {/* <Link to={`/edit_lesson/${l.id}`}>  */}
          <Button size="tiny" color="blue" onClick={() => toggleEditForm()}>
            <Icon name="edit" />
          </Button>
          {/* { showEditForm ? renderEditForm() : renderLessons()} */}
-         {/* </Link> */}
+         <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
+           <Icon name="trash alternate outline" />
+         </Button>
        </div>
          </Segment>
        
