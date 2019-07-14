@@ -29,21 +29,21 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <ProtectedRoute exact path='/profile' component={Profile} />
-        <Route exact path="/courses/:id" component={Course} />
+        <ProtectedRoute exact path="/courses/:id" component={Course} />
         <Route exact path="/" component={Home} />
-        <Route exact path="/teachers/courses" component={TeachersView} />
-        <Route exact path="/my-courses" component={Enrollment} />
+        <ProtectedRoute exact path="/teachers/courses" component={TeachersView} />
+        <ProtectedRoute exact path="/my-courses" component={Enrollment} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         {/* <Route exact path="/:course_id/lesson_form/:lesson_id/edit" component={LessonForm}/> */}
         <Route exact path="/" />
-        <Route exact path="/teachers/QandA" component={TeachersQAndA} />
-        <Route exact path="/courses/:course_id/manage" component={EditForm}/>
-        {/* <Route exact path="/forms/create" component={MainForm} /> */}
-        <Route exact path="/forms/create" component={CourseForm} />
-        <Route exact path="/lessons/:id" component={Lesson} />
-        <Route exact path="/lessons/:lesson_id/edit" component={MainForm} />
-        <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
+        <ProtectedRoute exact path="/teachers/QandA" component={TeachersQAndA} />
+        <ProtectedRoute exact path="/courses/:course_id/manage" component={EditForm}/>
+        <ProtectedRoute exact path="/forms/create" component={MainForm} />
+        {/* <Route exact path="/forms/create" component={CourseForm} /> */}
+        <ProtectedRoute exact path="/lessons/:id" component={Lesson} />
+        <ProtectedRoute exact path="/lessons/:lesson_id/edit" component={MainForm} />
+        <ProtectedRoute exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
         <Route component={NoMatch} />
       </Switch>
       {/* </Container> */}

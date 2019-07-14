@@ -24,10 +24,10 @@ const Navbar = (props) => {
                 exact
                 activeStyle={styles.active}
                 >
-                  <h2>
+                  <h3>
 
                       Teachers
-                  </h2>
+                  </h3>
                       </NavLink>
                     </Menu.Item>
                 {/* } /> */}
@@ -39,9 +39,9 @@ const Navbar = (props) => {
                     exact
                     activeStyle={styles.active}
                     >
-                      <h2>
-                      My Courses
-                      </h2>
+                      <h3>
+                      My Enrolled Courses
+                      </h3>
                     </NavLink>
                   </Menu.Item>
             </>
@@ -55,10 +55,10 @@ const Navbar = (props) => {
                     exact
                     activeStyle={styles.active}
                     >
-                      <h2>
+                      <h3>
                     
                     Students
-                    </h2>
+                    </h3>
                     </NavLink>
               </Menu.Item>
              } />
@@ -72,14 +72,14 @@ const Navbar = (props) => {
             exact
             activeStyle={styles.active}
             >
-              <h2>
+              <h3>
                     
               My Profile
-                    </h2>
+                    </h3>
             </NavLink>
             </Menu.Item>
           <Menu.Item
-            header as = "h2"
+            header as = "h3"
             name="Logout"
             onClick={() => handleLogout(props.history)}
           />
@@ -92,20 +92,20 @@ const Navbar = (props) => {
               active={props.location.pathname === "/login"}
             >
               <Link to="/login">
-              <h2>
+              <h3>
                     
                 Login
-                    </h2>
+                    </h3>
               </Link>
             </Menu.Item>
             <Menu.Item
               active={props.location.pathname === "/register"}
             >
               <NavLink to="/register">
-              <h2>
+              <h3>
                     
             Register
-                    </h2>
+                    </h3>
           </NavLink>
             </Menu.Item>
         </Menu.Menu>

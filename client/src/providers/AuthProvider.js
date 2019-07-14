@@ -63,15 +63,18 @@ export const AuthProvider = (props) => {
   }
 
   // Update videos 
-  const updateVideos = (id, videos) => {
-    let data = new FormData();
-    data.append("file", videos.file);
-    axios.put(`/api/videos/${id}`, data)
-      .then(res => {
-        setVideos(res.data)
-      })
+  // const updateVideos = (videos) => {
+  //   debugger
+  //   let data = new FormData();
+  //   data.append("file", videos.file);
+  //   axios.post(`/api/videos/?title=${videos.title}&description=${videos.description}`, data)
+  //     .then(res => {
+  //       debugger
+  //       setVideos(res.data)
 
-  }
+  //     })
+
+  // }
 
   return (
     <AuthContext.Provider
@@ -87,7 +90,7 @@ export const AuthProvider = (props) => {
         setEnrollments: (enrollment) => setEnrollments(enrollment),
         videos,
         setVideos: (videos) => setVideos(videos),
-        updateVideos: updateVideos,
+        // updateVideos: updateVideos,
       }}
     >
       {props.children}

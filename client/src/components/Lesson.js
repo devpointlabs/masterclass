@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext} from "react";
-import {  Image, Icon,  Card, Button, Container} from "semantic-ui-react";
+import {  Image,Icon,  Card, Button, Container} from "semantic-ui-react";
 import { Link, } from "react-router-dom";
 import axios from 'axios'
 import {AuthContext} from '../providers/AuthProvider'
@@ -35,11 +35,7 @@ const Lesson = (props) =>{
               
             <Card.Header as = "h1">{v.title}</Card.Header>
             <Card.Description as = "h3">{v.description}</Card.Description>
-            {/* <Image src = {v.url}/> */}
-            <div>
-              <Link to ={v.url}>Video</Link>
-            </div>
-
+            <Image src = {v.url}/>
             </Card>
           </Link>
         </div>
