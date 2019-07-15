@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Form, Header} from "semantic-ui-react";
-import {AuthContext} from "../providers/AuthProvider"
 
-const CourseForm = (props) => {
+const AddCourses = (props) => {
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
   const [overview, setOverview] = useState(); 
@@ -84,9 +83,10 @@ const CourseForm = (props) => {
       </Form.Group>
       
       <Form.Button color="green" inverted>Submit</Form.Button>
+      <Form.Button color="red" inverted onClick={() => props.history.goBack("/teachers/courses")}>Cancel</Form.Button>
     </Form >
     </>
   );
 };
 
-export default CourseForm;
+export default AddCourses;

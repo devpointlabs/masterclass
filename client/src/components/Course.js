@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, } from "react";
 import axios from "axios";
-import CourseForm from './CourseForm';
+// import CourseForm from './CourseForm';
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../providers/AuthProvider"
@@ -137,7 +137,7 @@ const Course = (props) => {
 
       {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
       <br />
-      {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />}
+      {/* {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />} */}
 
      { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}

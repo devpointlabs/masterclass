@@ -54,7 +54,7 @@ const EditCourseForm = (props) => {
 
   return (
     <>
-    <Header as="h1" textAlign="center">Edit Your Course</Header>
+    <Header as="h1" textAlign="center">Manage Your Course</Header>
     <Form onSubmit={handleSubmit}>
       <Form.Group widths='equal'>
         <Form.Input
