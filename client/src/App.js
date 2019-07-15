@@ -42,7 +42,7 @@ const App = () => (
         {/* <Route exact path="/forms/create" component={MainForm} /> */}
         <Route exact path="/forms/create" component={AddCourses} />
         <Route exact path="/lessons/:id" component={Lesson} />
-        <Route exact path="/lessons/:lesson_id/edit" component={MainForm} />
+        {/* <Route exact path="/lessons/:lesson_id/edit" component={MainForm} /> */}
         <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
         <Route component={NoMatch} />
       </Switch>

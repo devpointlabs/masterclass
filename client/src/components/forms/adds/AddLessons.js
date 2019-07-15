@@ -18,9 +18,9 @@ const AddLessons = (props) => {
         setLesson(res.data);
         setName(""); 
         setDescription(""); 
-        props.setShowCreateForm(!props.setShowCreateForm)
+        props.setShowCreateForm(!props.showCreateForm)
         // props.getLessonId(res.data.id);
-        
+
         
       });
   }

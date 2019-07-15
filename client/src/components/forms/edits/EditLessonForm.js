@@ -4,6 +4,9 @@ import {Link} from 'react-router-dom';
 import {Segment, List, Button, Icon } from 'semantic-ui-react'; 
 import Course from '../../Course';
 import AddLessons from '../adds/AddLessons'; 
+import EditLessonDetails from './EditLessonDetails';
+import styled from 'styled-components';
+
 
 const EditLessonForm = (props) => {
   const [lessons, setLessons] = useState([]); 
@@ -11,6 +14,8 @@ const EditLessonForm = (props) => {
   const {course_id} = props.match.params; 
   const [showEditForm, setShowEditForm] = useState(false); 
   const [showCreateForm, setShowCreateForm] = useState(false); 
+  const [showVideos, setShowVideos] = useState(false); 
+
 
 
   
@@ -22,6 +27,11 @@ const EditLessonForm = (props) => {
   const toggleEditForm = () => {
     setShowEditForm(!showEditForm); 
   }
+
+  // toggle the show existing videos comp 
+  const toggleExistingVideos = () => {
+    setShowVideos(!showVideos); 
+  }
   
   // axios to get lessons from course and will update whenever the toggle goes on and off in order to render the new courses. 
   useEffect(() => {
@@ -30,7 +40,7 @@ const EditLessonForm = (props) => {
       setLessons(res.data);
       // setLoader(true)
     })
-  }, [showCreateForm])
+  }, [showCreateForm, showEditForm])
 
  
   // will render the add form for the lessons and passes in the course id
@@ -39,13 +49,13 @@ const EditLessonForm = (props) => {
   }
 
   //  will render the edit form for the lessons 
-  const renderEditForm = () => {
-  return <h1>Worked! </h1>
+  const renderEditForm = (id) => {
+  return <EditLessonDetails lesson_id={id} showEditForm={showEditForm} setShowEditForm={setShowEditForm}/>
   }
 
   // remove lessons 
   const removeLesson = (id) => {
-    axios.delete(`/api/courses/${course_id}/lessons/${id}`)
+    axios.delete(`/api/courses/${course_id }/lessons/${id}`)
       .then(res => {
         setLessons(lessons.filter(l => l.id !== id))
       })
@@ -64,13 +74,29 @@ const EditLessonForm = (props) => {
            {l.description}
          </List.Description>
            </Link>
+         { showEditForm ? renderEditForm(l.id) : null}
          <Button size="tiny" color="blue" onClick={() => toggleEditForm()}>
-           <Icon name="edit" />
+           <Icon name={showEditForm ? "cancel" :"edit"} />
          </Button>
-         {/* { showEditForm ? renderEditForm() : renderLessons()} */}
          <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
            <Icon name="trash alternate outline" />
          </Button>
+     
+        <ClickDiv>
+          { showVideos ?
+            <VideoClick onClick={() => toggleExistingVideos()}>Hide Videos <Icon name='angle up' /></VideoClick>
+            :
+            <VideoClick onClick={() => toggleExistingVideos()}>Show Videos <Icon name='angle down' /></VideoClick>
+          }
+        </ClickDiv>
+        <div>
+          { showVideos ?
+            <h1>hi</h1>
+            :
+            null
+          }
+        </div>
+      
        </div>
          </Segment>
        
@@ -86,5 +112,23 @@ const EditLessonForm = (props) => {
     </div>
   )
 }
+
+
+const ClickDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`
+
+const VideoClick = styled.p`
+  color: blue;
+  border-radius: 5px;
+  padding-left: 7px;
+
+  &:hover {
+    cursor: pointer;
+    background: grey ;
+    transition: background 0.7s ease;
+  } 
+`
 
 export default EditLessonForm; 
