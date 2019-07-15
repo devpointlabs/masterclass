@@ -4,11 +4,11 @@ import { Form, Header, Dropdown } from "semantic-ui-react";
 import { AuthContext } from "../providers/AuthProvider"
 
 const CourseForm = (props) => {
-  const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState();
-  const [overview, setOverview] = useState();
-  const [image, setImage] = useState();
-  const [course, setCourse] = useState();
+  const [overview, setOverview] = useState("");
+  const [image, setImage] = useState("");
+  const [course, setCourse] = useState("");
 
 
   // useEffect(() => {
@@ -20,6 +20,12 @@ const CourseForm = (props) => {
   //   }
   // }, []
   // )
+
+  const handleCategory = (e) => {
+    debugger
+    let catChoice = e.target.textContent
+    setCategory(catChoice)
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -43,14 +49,27 @@ const CourseForm = (props) => {
     // };
   }
 
-  const categoryOptions = [
-    { key: 'r', text: 'Ruby', value: 'ruby' },
+  const categoryOptions = () => {
+    const cats = [{ key: 'r', text: 'Ruby', value: 'ruby' },
     { key: 'js', text: 'Javascript', value: 'javascript' },
-    { key: 're', text: 'React', value: 'react' },
-  ]
+    { key: 're', text: 'React', value: 'react' }]
+
+    return (
+      <Dropdown
+        label="Category"
+        placeholder='e.g. Ruby on Rails'
+        name='category'
+        required
+        options={cats}
+        value={category}
+        onChange={handleCategory}
+      />
+    )
+  }
 
 
   return (
+
     <>
       <Header as="h1" textAlign="center">Create A Course</Header>
       <Form onSubmit={handleSubmit}>
@@ -63,14 +82,10 @@ const CourseForm = (props) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Form.Select
-            label="Category"
-            placeholder='e.g. Ruby on Rails'
-            name='category'
-            required
+          <Form.Input
+
             value={category}
-            options={categoryOptions}
-            onChange={(e) => setCategory(e.target.value)}
+            control={categoryOptions}
           />
           <Form.Input
             label='Overview'
