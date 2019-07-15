@@ -9,6 +9,7 @@ import styled from 'styled-components';
 
 
 const EditLessonForm = (props) => {
+  const [formLessons, setFormLessons] = useState([])
   const [lessons, setLessons] = useState([]); 
   const [loader, setLoader] = useState(true); 
   const {course_id} = props.match.params; 
@@ -24,9 +25,7 @@ const EditLessonForm = (props) => {
   const toggleCreateForm = () => {
     setShowCreateForm(!showCreateForm); 
   }
-  const toggleEditForm = () => {
-    setShowEditForm(!showEditForm); 
-  }
+ 
 
   // toggle the show existing videos comp 
   const toggleExistingVideos = () => {
@@ -42,6 +41,39 @@ const EditLessonForm = (props) => {
     })
   }, [showCreateForm, showEditForm])
 
+  useEffect(()=>{
+    setFormLessons(lessonWithShowForm)
+
+  },[lessons])
+  const lessonWithShowForm = lessons.map(l=>{
+    return {
+      id: l.id,
+      name: l.name,
+      description: l.description,
+      course_id: l.course_id,
+      showForm: false
+    }
+  })
+  const toggleEditForm = (id, showForm) => {
+    lessonWithShowForm.filter(l =>{
+      if(id == l.id)
+      {l.showForm = !showForm
+        return l
+        } 
+    }); 
+    setFormLessons(lessonWithShowForm)
+ }
+ const closeEdit = (id) =>{
+   setShowEditForm(!showEditForm)
+  lessonWithShowForm.filter(l =>{
+    if(id == l.id)
+    {l.showForm = false
+      return l
+      } 
+  }); 
+  setFormLessons(lessonWithShowForm)
+ }
+
  
   // will render the add form for the lessons and passes in the course id
   const renderAddForm = () => {
@@ -49,8 +81,8 @@ const EditLessonForm = (props) => {
   }
 
   //  will render the edit form for the lessons 
-  const renderEditForm = (id) => {
-  return <EditLessonDetails lesson_id={id} showEditForm={showEditForm} setShowEditForm={setShowEditForm}/>
+  const renderEditForm = (id, showForm) => {
+  return <EditLessonDetails lesson_id={id} showForm = {showForm} closeEdit = {closeEdit}/>
   }
 
   // remove lessons 
@@ -65,7 +97,7 @@ const EditLessonForm = (props) => {
 
   const renderLessons = () => {
     if (loader === true) {
-      return lessons.map(l => (
+      return formLessons.map(l => (
          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
          <div>
         <Link to = {`/lessons/${l.id}`}> 
@@ -74,9 +106,12 @@ const EditLessonForm = (props) => {
            {l.description}
          </List.Description>
            </Link>
-         { showEditForm ? renderEditForm(l.id) : null}
-         <Button size="tiny" color="blue" onClick={() => toggleEditForm()}>
-           <Icon name={showEditForm ? "cancel" :"edit"} />
+         { l.showForm ? renderEditForm(l.id, l.showForm) : null}
+         {/* <h1>
+         {/* {l.showForm ? "True": "False"}
+         </h1> */}
+         <Button size="tiny" color="blue" onClick={() => toggleEditForm(l.id, l.showForm)}>
+           <Icon name={l.showForm ? "cancel" :"edit"} />
          </Button>
          <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
            <Icon name="trash alternate outline" />

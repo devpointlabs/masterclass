@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const EditLessonDetails = (props) => {
   const [name, setName] = useState();
+  const [showForm, setShowForm] = useState(false)
   const [description, setDescription] = useState();
   const [lesson, setLesson] = useState();
 
@@ -16,6 +17,7 @@ const EditLessonDetails = (props) => {
         .then(res => {
           setName(res.data.name)
           setDescription(res.data.description)
+          
 
         })
     }
@@ -29,7 +31,9 @@ const EditLessonDetails = (props) => {
         .put(`/api/lessons/${props.lesson_id}`, { name: name, description: description })
         .then(res => {
          setLesson(res.data); 
-         props.setShowEditForm(!props.showEditForm)
+         console.log(res.data)
+         props.closeEdit(props.lesson_id)
+        //  props.setShowEditForm(!props.showEditForm)
         })
     }
 
