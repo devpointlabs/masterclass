@@ -5,11 +5,11 @@ import styled from "styled-components";
 import RegisterForm from "./Register";
 // import logo from '../../assets/logo.png';
 
-const MainRegister = () => {
+const MainRegister = (props) => {
   return (
     <Container>
       <RegistrationContainer>
-        <RegisterForm />
+        <RegisterForm {...props} />
         <p>
           Already have an account? <Link to="/login">Login!</Link>
         </p>

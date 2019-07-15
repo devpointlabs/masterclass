@@ -17,6 +17,7 @@ const Login = (props) =>{
   const handleSubmit = (e) => {
     e.preventDefault()
     handleLogin({...form}, props.history,)
+    props.history.goBack("/")
   }
 
   const handleChange = (name) => (e) => {

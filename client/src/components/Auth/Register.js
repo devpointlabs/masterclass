@@ -21,6 +21,7 @@ const Register = (props) => {
     const passwordConfirmation = form.passwordConfirmation
     if (password === passwordConfirmation) {
       handleRegister({ name, email, password, passwordConfirmation }, props.history)
+      props.history.goBack("/")
     }
     else alert('Passwords Do Not Match!')
   }
