@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { Form, Header} from "semantic-ui-react";
 
-const CourseForm = (props) => {
+const AddCourses = (props) => {
   const [title, setTitle] = useState();
   const [category, setCategory] = useState();
   const [overview, setOverview] = useState(); 
@@ -89,4 +89,4 @@ const CourseForm = (props) => {
   );
 };
 
-export default CourseForm;
+export default AddCourses;
