@@ -8,12 +8,12 @@ const TeachersCourses = (props) => {
   const { user, enrollments, setEnrollments } = useContext(AuthContext);
   const [courses, setCourses] = useState();
   // axios call to get enrollments
-  useEffect(()=>{
+  useEffect(() => {
     axios.get("/api/my-courses")
       .then(res => {
         setEnrollments(res.data)
       })
-  },[])
+  }, [])
 
   const removeCourse = (id) => {
     axios.delete(`/api/my-courses/${id}`)
@@ -30,11 +30,13 @@ const TeachersCourses = (props) => {
         roles.push(e)
       }
     })
-    
-    return ( roles.map(e =>(
-      <div key = {e.course_id}>
+
+    return (roles.map(e => (
+      <div key={e.course_id}>
         {/* <Header as = 'h1'>{e.role}</Header> */}
         <br />
+        <h1>{e.category}</h1>
+        {console.log(e)}
         <Card fluid>
           <Link to={{ pathname: `/courses/${e.course_id}` }}>
             <Card.Header as='h2'>{e.title}</Card.Header>
@@ -43,23 +45,23 @@ const TeachersCourses = (props) => {
           <Divider />
           <Card.Meta>
             {/* TODO - Delete Button & Edit Button */}
-            <div style={{display:"flex", justifyContent: "space-evenly", justifyContent:"flex-end" }}>
-            {(e.role === 'teacher') &&
-              <Link to={`/courses/${e.course_id}/manage`}>
-                <Button size="tiny" color="blue" icon animated>
-                  <Button.Content visible>Edit</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="pencil" />
-                  </Button.Content>
-                </Button>
-              </Link>}
-            {(e.role === 'teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
-              <Button.Content visible>Delete</Button.Content>
-              <Button.Content hidden>
-                <Icon name="minus" />
-              </Button.Content>
-            </Button>}
-         </div>
+            <div style={{ display: "flex", justifyContent: "space-evenly", justifyContent: "flex-end" }}>
+              {(e.role === 'teacher') &&
+                <Link to={`/courses/${e.course_id}/manage`}>
+                  <Button size="tiny" color="blue" icon animated>
+                    <Button.Content visible>Edit</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="pencil" />
+                    </Button.Content>
+                  </Button>
+                </Link>}
+              {(e.role === 'teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+                <Button.Content visible>Delete</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="minus" />
+                </Button.Content>
+              </Button>}
+            </div>
           </Card.Meta>
         </Card>
       </div>
@@ -70,17 +72,17 @@ const TeachersCourses = (props) => {
 
   return (
     <Container>
-      <div style = {{display: "flex", flexDirection:"column",}}>
+      <div style={{ display: "flex", flexDirection: "column", }}>
 
-    {enrollments ? 
-    renderEnrollments() : 
-    <>
-    <Segment> 
-    <h1>You have no courses</h1>
-    </Segment>
-    </>
-  }
-  </div>
+        {enrollments ?
+          renderEnrollments() :
+          <>
+            <Segment>
+              <h1>You have no courses</h1>
+            </Segment>
+          </>
+        }
+      </div>
     </Container>
 
   )

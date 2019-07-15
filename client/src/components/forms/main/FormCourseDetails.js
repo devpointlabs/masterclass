@@ -5,11 +5,11 @@ import { Form, Header, Button } from "semantic-ui-react";
 import { AuthContext } from "../../../providers/AuthProvider";
 
 const FormCourseDetails = (props) => {
-  const [title, setTitle] = useState()
-  const [category, setCategory] = useState()
-  const [overview, setOverview] = useState()
-  const [image, setImage] = useState()
-  const [course, setCourse] = useState();
+  const [title, setTitle] = useState("")
+  const [category, setCategory] = useState("")
+  const [overview, setOverview] = useState("")
+  const [image, setImage] = useState("")
+  const [course, setCourse] = useState("");
 
 
   // useEffect(() => {

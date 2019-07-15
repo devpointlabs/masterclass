@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, Header } from "semantic-ui-react";
+import { Form, Header, Dropdown } from "semantic-ui-react";
 import { AuthContext } from "../providers/AuthProvider"
 
 const CourseForm = (props) => {
@@ -33,6 +33,7 @@ const CourseForm = (props) => {
     // }
 
     // else {
+
     axios
       .post("/api/courses", { title: title, category: category, overview: overview, image: image })
       .then(res => {
@@ -41,6 +42,12 @@ const CourseForm = (props) => {
       });
     // };
   }
+
+  const categoryOptions = [
+    { key: 'r', text: 'Ruby', value: 'ruby' },
+    { key: 'js', text: 'Javascript', value: 'javascript' },
+    { key: 're', text: 'React', value: 'react' },
+  ]
 
 
   return (
@@ -55,14 +62,14 @@ const CourseForm = (props) => {
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-
           />
-          <Form.Input
-            label='Category'
-            placeholder='e.g. Javascript'
+          <Form.Select
+            label="Category"
+            placeholder='e.g. Ruby on Rails'
             name='category'
             required
             value={category}
+            options={categoryOptions}
             onChange={(e) => setCategory(e.target.value)}
           />
           <Form.Input
