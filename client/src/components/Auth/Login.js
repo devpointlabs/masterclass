@@ -1,6 +1,8 @@
 import React, {useState, useContext} from 'react';
 import {  AuthContext } from "../../providers/AuthProvider"; 
 import { Button, Form, Segment, Header, } from 'semantic-ui-react';
+import styled from 'styled-components'; 
+
 
 
 const Login = (props) =>{
