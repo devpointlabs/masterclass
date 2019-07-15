@@ -11,9 +11,9 @@ const Navbar = (props) => {
     if (user) {
       return (
         <Menu.Menu position="right">
-          {toggleButton ?
+          {/* {toggleButton ? */}
             <>
-              <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={
+              {/* <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={ */}
                 
                 <Menu.Item
                     name="Teachers"
@@ -30,7 +30,7 @@ const Navbar = (props) => {
                   </h3>
                       </NavLink>
                     </Menu.Item>
-                } />
+                {/* } /> */}
 
                 <Menu.Item
                   active={props.location.pathname === "/my-courses"}
@@ -40,7 +40,7 @@ const Navbar = (props) => {
                     activeStyle={styles.active}
                     >
                       <h3>
-                      My Courses
+                      My Enrolled Courses
                       </h3>
                     </NavLink>
                   </Menu.Item>
@@ -134,10 +134,11 @@ const Navbar = (props) => {
       }
     </AuthConsumer >
   );
-};
+    };
+
 const styles = {
   active: {
-    color: 'rgb(147,7,240',
+    color: 'rgb(189, 122, 235)',
     fontWeight: 'bold',
   }
 }

@@ -1,34 +1,44 @@
-import React, {Fragment, useState, useEffect, useCallback, useContext}from 'react'; 
+import React, {Fragment, useState, useEffect, useCallback,}from 'react'; 
 import {Form, Button, Card, Image} from 'semantic-ui-react'
 import axios from 'axios'
 import styled from 'styled-components';
 import { useDropzone } from 'react-dropzone';
+import ImageUploader from "react-images-upload";
 import {AuthContext } from '../../../providers/AuthProvider'; 
 
 
 const FormVideoDetails = (props) => {
-  const { updateVideos,  } = useContext(AuthContext);
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
+  // const { updateVideos,  } = useContext(AuthContext);
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [showForm, setShowForm] = useState(false)
   const [videos, setVideos] = useState([]); 
+  const [image, setImage] = useState("")
+  const [video, setVideo] = useState([])
   const [file, setFile] = useState();
+  const [fireVideo, setFireVideo]=useState(false)
 
-// proceed to the next step the form 
+
+
+
+  const onDrop=(image)=> {
+    setImage(image[0])
+  }
+// proceed to the next step the form --------------------------------------
  const continueStep = (e) => {
     props.nextStep(); 
   }
 
-  // go back to previous step in the form 
+  // go back to previous step in the form -----------------------------------
  const backStep = (e) => {
     props.previousStep(); 
   }
 
-  // toggle form if adding or editing 
+  // toggle form if adding or editing -------------------------------------
   const toggleForm = () => {
     setShowForm(!showForm)
   }
-
+  
  
 
   // populate video title and video url. 
@@ -47,12 +57,53 @@ const FormVideoDetails = (props) => {
     }
 
   }, [])
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    // SEND VIDEO FILE TO DATABASE
-    // updateVideos(videos.id, {file})
+  // const updateVideos = () => {
+  //   let data = new FormData();
+  //   data.append("file", video.file);
+  //   axios.put(`/api/lessons/${video.lesson_id}/${video.id}`,data)
+  //     .then(res=>{
+  //       setVideo(res.data)
+  //     })
+  // }
   
+  
+  
+  // const handleSubmit = e => {
+  //   e.preventDefault();
+  //   axios.post(`/api/lessons/${props.lessonId}/videos`, {title: title, description: description,})
+  //   .then(res=>{
+  //     setVideo(res.data)
+  //   })
+  // }
+ const  handleSubmit = (e) => {
+   debugger
+    e.preventDefault();
+    let data = new FormData()
+    data.append('file', image)
+    data.append("title", title);
+    data.append("description", description);
+    data.append("lesson_id", props.lessonId)
+
+    if(video.id){
+      axios.put(`/api/videos/${video.id}`, data)
+      .then( res => {
+        debugger
+      })
+      .catch(err => {
+        console.log("error in handleSubmit")
+      })
+    }else{
+    axios.post(`/api/videos?title=${title}&description=${description}`, data)
+      .then( res => {
+        debugger
+      })
+      .catch(err => {
+        console.log("error")
+      })
+      setTitle("")
+      setDescription("")
+      setImage("")
+    }
   }
 
 
@@ -121,7 +172,16 @@ const renderAddForm = () => {
       />
     </Form.Group>
     <br />
-    <StyledDropzone />
+    {/* <StyledDropzone /> */}
+    <ImageUploader
+          withPreview={true}
+          withIcon={true}
+          buttonText="Choose image"
+          onChange={onDrop}
+          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          maxFileSize={5242880}
+          singleImage={true}
+          />
     <br />
     <Form.Button>Continue</Form.Button>
     <Button onClick={() => backStep()}>Back</Button>

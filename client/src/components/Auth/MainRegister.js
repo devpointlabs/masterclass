@@ -10,6 +10,9 @@ const MainRegister = () => {
     <Container>
       <RegistrationContainer>
         <RegisterForm />
+        <p>
+          Already have an account? <Link to="/login">Login!</Link>
+        </p>
       </RegistrationContainer>
       <LogoContainer>
         <h1>DevPoint University</h1>
