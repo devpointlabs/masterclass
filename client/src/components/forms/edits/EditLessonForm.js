@@ -27,10 +27,7 @@ const EditLessonForm = (props) => {
   }
  
 
-  // toggle the show existing videos comp 
-  const toggleExistingVideos = () => {
-    setShowVideos(!showVideos); 
-  }
+ 
   
   // axios to get lessons from course and will update whenever the toggle goes on and off in order to render the new courses. 
   useEffect(() => {
@@ -51,9 +48,11 @@ const EditLessonForm = (props) => {
       name: l.name,
       description: l.description,
       course_id: l.course_id,
-      showForm: false
+      showForm: false,
+      showVideos: false
     }
   })
+
   const toggleEditForm = (id, showForm) => {
     lessonWithShowForm.filter(l =>{
       if(id == l.id)
@@ -63,6 +62,19 @@ const EditLessonForm = (props) => {
     }); 
     setFormLessons(lessonWithShowForm)
  }
+
+  // toggle the show existing videos comp 
+  const toggleExistingVideos = (id, showVideos) => {
+    lessonWithShowForm.filter(l =>{
+      if(id == l.id)
+      {l.showVideos = !showVideos
+        console.log(l.showVideos)
+        return l
+        } 
+    }); 
+    setFormLessons(lessonWithShowForm)
+  }
+
  const closeEdit = (id) =>{
    setShowEditForm(!showEditForm)
   lessonWithShowForm.filter(l =>{
@@ -98,8 +110,9 @@ const EditLessonForm = (props) => {
   const renderLessons = () => {
     if (loader === true) {
       return formLessons.map(l => (
-         <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-         <div>
+         <Segment key={l.id} style={{ display: "flex", flexDirection:"column" }}>
+         <div style={{ display:"flex", justifyContent:"space-between"}}>
+
         <Link to = {`/lessons/${l.id}`}> 
          <List.Header as="h3">{l.name}</List.Header>
          <List.Description>
@@ -110,29 +123,32 @@ const EditLessonForm = (props) => {
          {/* <h1>
          {/* {l.showForm ? "True": "False"}
          </h1> */}
+         <div className="buttonDiv">
+
          <Button size="tiny" color="blue" onClick={() => toggleEditForm(l.id, l.showForm)}>
            <Icon name={l.showForm ? "cancel" :"edit"} />
          </Button>
          <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
            <Icon name="trash alternate outline" />
          </Button>
+         </div>
+          </div>
      
         <ClickDiv>
-          { showVideos ?
+          { l.showVideos ?
             <VideoClick onClick={() => toggleExistingVideos()}>Hide Videos <Icon name='angle up' /></VideoClick>
             :
-            <VideoClick onClick={() => toggleExistingVideos()}>Show Videos <Icon name='angle down' /></VideoClick>
+            <VideoClick onClick={() => toggleExistingVideos(l.id, l.showVideos)}>Show Videos <Icon name='angle down' /></VideoClick>
           }
         </ClickDiv>
         <div>
-          { showVideos ?
+          { l.showVideos ?
             <h1>hi</h1>
             :
             null
           }
         </div>
       
-       </div>
          </Segment>
        
       ))
