@@ -43,7 +43,7 @@ const TeachersCourses = (props) => {
           <Divider />
           <Card.Meta>
             {/* TODO - Delete Button & Edit Button */}
-            <div style={{display:"flex", justifyContent: "space-evenly", justifyContent:"flex-end" }}>
+            <div style={{display:"flex", justifyContent:"flex-end" }}>
             {(e.role === 'teacher') &&
               <Link to={`/courses/${e.course_id}/manage`}>
                 <Button size="tiny" color="blue" icon animated>

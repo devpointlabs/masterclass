@@ -65,12 +65,14 @@ const Enrollment = (props) => {
   
   return (
     <Container>
-  <Header as="h3" textAlign="center">
-    {user ? `Welcome, ${user.name || defaultRole() }, here are your current enrollments` : <Link to = "/">Home</Link> }
-   
+  <Header as="h1" textAlign="center">
+    {user ? `Welcome ${user.name || defaultRole() }, here are your current enrollments` : <Link to = "/">Home</Link> }
   </Header>
   <div style = {{display: "flex", justifyContent:"space-around",}}>
-
+    {/* {user.image &&
+  <img style={{height: "250px"}}
+  src = {user.image}
+  />} */}
     {renderEnrollments()}
   </div>
     </Container>
