@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, } from 'react';
 import axios from 'axios';
 import { AuthContext, } from '../../providers/AuthProvider';
-import { Accordion, } from 'semantic-ui-react';
+import { Accordion, Container, } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
 
@@ -23,28 +23,16 @@ const TeachersQAAccordion = (props) => {
       })
     }, [enrollments])
 
-  const videoLinks = (id) => {
-    myQAs.map(v => {
-      if (id === v.video_id) {
-        return (
-          <div>
-            <Link to = {`/lessons/${v.lesson_id}/videos/${v.video_id}`}>
-              {v.video_title}
-            </Link>
-          </div>
-        )
-      }
-    })
-  }
-
   const videoPanels = (id) => {
     let videoArray = []
     let videoArray2 = []
     myQAs.map(v => {
-      let videoObject = { key: v.video_id, title: v.video_title, content: 
-        <Link to = {`/lessons/${v.lesson_id}/videos/${v.video_id}`}>
-          {v.video_title}
-        </Link>
+      let videoObject = { key: v.video_id, title: 
+        <Accordion.Title as={Container}>
+          <Link to = {`/lessons/${v.lesson_id}/videos/${v.video_id}`}>
+            {v.video_title}
+          </Link>
+        </Accordion.Title>
       }
       if (id === v.v_lesson_id) {
         if (videoArray.includes(videoObject.key)===false) {
