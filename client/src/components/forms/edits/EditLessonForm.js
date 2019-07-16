@@ -157,7 +157,7 @@ const toggleCreateVideoForm = (id, createVideos) => {
          </Button>
          </div>
           </div>
-     
+          
         <ClickDiv>
           { (l.showVideos || l.createVideos) ?
             <VideoClick onClick={() => toggleExistingVideos()}>Hide Videos <Icon name='angle up' /></VideoClick>
