@@ -6,7 +6,6 @@ const EditVideoForm = (props) => {
   const [formVideos, setFormVideos] = useState([])
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [showEditForm, setShowEditForm] = useState(false); 
   const [videos, setVideos] = useState([]); 
 
   // return existing videos 
@@ -14,10 +13,27 @@ const EditVideoForm = (props) => {
     // if not adding videos, then render existing videos, if any
       axios.get(`/api/lessons/${props.lesson_id}/videos`)
       .then( res => {
-        // console.log(res.data)
         setVideos(res.data)
       })
   }, [])
+
+  useEffect(()=>{
+
+    setFormVideos(videosWithShowForm)
+
+  },[videos])
+
+  const videosWithShowForm = videos.map(l=>{
+    return {
+      id: l.id,
+      title: l.title,
+      description: l.description,
+      lesson_id: l.lesson_id,
+      url: l.url, 
+      showEditForm: false,
+      createVideos: false,
+    }
+  })
 
 
 // // be able to toggle one video edit at a time 
@@ -46,9 +62,14 @@ const EditVideoForm = (props) => {
 //     setFormVideos(videosWithShowForm)
 //  }
 
-const toggleEditForm = () => {
-  setShowEditForm(!showEditForm)
-  console.log(showEditForm)
+const toggleEditForm = (id, showEditForm) => {
+  videosWithShowForm.filter(v =>{
+    if(id === v.id)
+    {v.showEditForm = !showEditForm
+      return v
+    }
+  })
+  setFormVideos(videosWithShowForm)
 }
 
 
@@ -86,10 +107,11 @@ const toggleEditForm = () => {
   return (
     <>
           <Card.Group itemsPerRow={2} textAlign="center">
-            {videos.map((video) =>
+            {formVideos.map((video) =>
               <Card>
+                {console.log(video)}
               <Button.Group size="tiny">
-              <Button size="tiny" color="blue" onClick={() => toggleEditForm()}>
+              <Button size="tiny" color="blue" onClick={() => toggleEditForm(video.id, video.showEditForm)}>
               <Icon name={video.showEditForm ? "cancel" :"edit"} />
              </Button>
               <Button onClick={() => removeVideos(video.id)}>Remove</Button>
@@ -100,8 +122,6 @@ const toggleEditForm = () => {
               <Card.Content>
                 <Image size="small" src={video.url}/>
               </Card.Content>
-              {/* <Card.Content extra>
-              </Card.Content> */}
               </Card>
     )}
           </Card.Group>

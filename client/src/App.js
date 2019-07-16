@@ -15,8 +15,8 @@ import Profile from './components/Profile';
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import TeachersView from "./components/teachers/TeachersView";
 import EditForm from "./components/forms/edits/EditForm";
+import TeachersQAAccordion from "./components/teachers/TeachersQAAccordion"
 import AddCourses from "./components/forms/adds/AddCourses"; 
-import TeachersQAndA from "./components/teachers/TeachersQAndA";
 
 
 const App = () => (
@@ -34,11 +34,11 @@ const App = () => (
         <ProtectedRoute exact path="/teachers/courses" component={TeachersView} />
         <ProtectedRoute exact path="/my-courses" component={Enrollment} />
         <Route exact path="/" />
-        <Route exact path="/teachers/QandA" component={TeachersQAndA} />
-        <Route exact path="/courses/:course_id/manage" component={EditForm}/>
-        <Route exact path="/forms/create" component={AddCourses} />
-        <Route exact path="/lessons/:id" component={Lesson} />
-        <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
+        <ProtectedRoute exact path="/teachers/QandA" component={TeachersQAAccordion} />
+        <ProtectedRoute exact path="/courses/:course_id/manage" component={EditForm}/>
+        <ProtectedRoute exact path="/forms/create" component={AddCourses} />
+        <ProtectedRoute exact path="/lessons/:id" component={Lesson} />
+        <ProtectedRoute exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
         <Route component={NoMatch} />
       </Switch>
       {/* </Container> */}

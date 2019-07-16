@@ -14,7 +14,6 @@ class Api::CoursesController < ApplicationController
     end
     render json: {course: @course, registered: e ? true : false, role: e ?  e.role : "default"}
   end
-  # 
 
   def create
     course = Course.new(course_params)

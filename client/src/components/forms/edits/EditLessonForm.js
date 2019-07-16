@@ -43,6 +43,7 @@ const EditLessonForm = (props) => {
     setFormLessons(lessonWithShowForm)
 
   },[lessons])
+
   const lessonWithShowForm = lessons.map(l=>{
     return {
       id: l.id,
@@ -70,7 +71,6 @@ const EditLessonForm = (props) => {
     lessonWithShowForm.filter(l =>{
       if(id === l.id)
       {l.showVideos = !showVideos
-        console.log(l.showVideos)
         return l
         } 
     }); 
@@ -93,7 +93,6 @@ const toggleCreateVideoForm = (id, createVideos) => {
   lessonWithShowForm.filter(l =>{
     if(id === l.id)
     {l.createVideos = !createVideos
-      console.log(l.createVideos)
       return l
       } 
   }); 
@@ -133,9 +132,10 @@ const toggleCreateVideoForm = (id, createVideos) => {
   const renderLessons = () => {
     if (loader === true) {
       return formLessons.map(l => (
-         <Segment key={l.id} style={{ display: "flex", flexDirection:"column" }}>
+        <Segment key={l.id} style={{ display: "flex", flexDirection:"column" }}>
          <div style={{ display:"flex", justifyContent:"space-between"}}>
 
+        {console.log(formLessons)}
         <Link to = {`/lessons/${l.id}`}> 
          <List.Header as="h3">{l.name}</List.Header>
          <List.Description>
@@ -186,8 +186,8 @@ const toggleCreateVideoForm = (id, createVideos) => {
   return (
     <div>
       <Button onClick={() => toggleCreateForm()}>{ showCreateForm ? "Cancel" : "Create Lesson"}</Button>
-      {showCreateForm ? renderAddForm() : renderLessons ()}
-      {renderLessons()}
+      {showCreateForm ? renderAddForm() : renderLessons()}
+      {/* {!showCreateForm ? renderLessons(): null} */}
     </div>
   )
 }
