@@ -7,6 +7,7 @@ import AddLessons from '../adds/AddLessons';
 import EditLessonDetails from './EditLessonDetails';
 import EditVideoForm from './EditVideoForm'; 
 import styled from 'styled-components';
+import AddVideos from '../adds/AddVideos';
 
 
 const EditLessonForm = (props) => {
@@ -50,7 +51,8 @@ const EditLessonForm = (props) => {
       description: l.description,
       course_id: l.course_id,
       showForm: false,
-      showVideos: false
+      showVideos: false, 
+      createVideos: false,
     }
   })
 
@@ -87,6 +89,19 @@ const EditLessonForm = (props) => {
   setFormLessons(lessonWithShowForm)
  }
 
+//  toggle create video form 
+const toggleCreateVideoForm = (id, createVideos) => {
+  lessonWithShowForm.filter(l =>{
+    if(id === l.id)
+    {l.createVideos = !createVideos
+      console.log(l.createVideos)
+      return l
+      } 
+  }); 
+  setFormLessons(lessonWithShowForm)
+
+}
+
  
   // will render the add form for the lessons and passes in the course id
   const renderAddForm = () => {
@@ -103,13 +118,16 @@ const EditLessonForm = (props) => {
     return <EditVideoForm lesson_id={id} showVideos={showVideos} />
   }
 
+  const renderCreateVideosForm = (id, createVideos) => {
+    return <AddVideos lesson_id={id} createVideos={createVideos}/>
+  }
+
   // remove lessons 
   const removeLesson = (id) => {
     axios.delete(`/api/courses/${course_id }/lessons/${id}`)
       .then(res => {
         setLessons(lessons.filter(l => l.id !== id))
       })
-
   }
 
 
@@ -131,6 +149,9 @@ const EditLessonForm = (props) => {
          <Button size="tiny" color="blue" onClick={() => toggleEditForm(l.id, l.showForm)}>
            <Icon name={l.showForm ? "cancel" :"edit"} />
          </Button>
+         <Button size="tiny" color="green" onClick={() => toggleCreateVideoForm(l.id, l.createVideos)}>
+           <Icon name={l.createVideos ? "cancel": "video"} />
+         </Button>
          <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
            <Icon name="trash alternate outline" />
          </Button>
@@ -138,7 +159,7 @@ const EditLessonForm = (props) => {
           </div>
      
         <ClickDiv>
-          { l.showVideos ?
+          { (l.showVideos || l.createVideos) ?
             <VideoClick onClick={() => toggleExistingVideos()}>Hide Videos <Icon name='angle up' /></VideoClick>
             :
             <VideoClick onClick={() => toggleExistingVideos(l.id, l.showVideos)}>Show Videos <Icon name='angle down' /></VideoClick>
@@ -147,6 +168,11 @@ const EditLessonForm = (props) => {
         <div>
           { l.showVideos ?
             renderVideosEditForm(l.id, l.showVideos)
+            :
+            null
+          }
+          { l.createVideos ?
+            renderCreateVideosForm(l.id, l.createVideos) 
             :
             null
           }

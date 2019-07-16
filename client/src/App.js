@@ -9,7 +9,6 @@ import NoMatch from "./components/layout/NoMatch";
 import Video from "./components/Video";
 import Lesson from "./components/Lesson";
 import Navbar from "./components/layout/Navbar";
-// import Courses from "./components/Courses";
 import Enrollment from './components/Enrollment'
 import FetchUser from "./components/auth/FetchUser"
 import MainForm from './components/forms/main/LessonForm';
@@ -35,14 +34,11 @@ const App = () => (
         <Route exact path="/" component={Home} />
         <ProtectedRoute exact path="/teachers/courses" component={TeachersView} />
         <ProtectedRoute exact path="/my-courses" component={Enrollment} />
-        {/* <Route exact path="/:course_id/lesson_form/:lesson_id/edit" component={LessonForm}/> */}
         <Route exact path="/" />
         <Route exact path="/teachers/QandA" component={TeachersQAndA} />
         <Route exact path="/courses/:course_id/manage" component={EditForm}/>
-        {/* <Route exact path="/forms/create" component={MainForm} /> */}
         <Route exact path="/forms/create" component={AddCourses} />
         <Route exact path="/lessons/:id" component={Lesson} />
-        {/* <Route exact path="/lessons/:lesson_id/edit" component={MainForm} /> */}
         <Route exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
         <Route component={NoMatch} />
       </Switch>
