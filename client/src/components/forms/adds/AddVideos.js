@@ -29,21 +29,18 @@ const AddVideos = (props) => {
   }
 
  const  handleSubmit = (e) => {
-  //  {console.log(props)}
     e.preventDefault();
-    // let data = new FormData()
-    // data.append('file', image)
-    // data.append("title", title);
-    // data.append("description", description);
-    // data.append("lesson_id", props.lesson_id)
+    const {title, description, image} = video
+    let data = new FormData()
+    data.append('file', image)
+    data.append("title", title);
+    data.append("description", description);
 
    
-    axios.post(`/api/lessons/${props.lesson_id}/videos`,{video: title, description: description})
+    axios.post(`/api/lessons/${props.lesson_id}/videos?title=${title}&description=${description}`, data)
       .then( res => {
-        setVideo(res.data)
         setTitle("")
         setDescription("")
-        console.log(video)
       })
       .catch(err => {
         console.log("You're an idiot")
@@ -53,8 +50,14 @@ const AddVideos = (props) => {
       setImage("")
     
   }
+  const handleChange = (name) => (e) => {
+    // const { value, } = e.target;
+    setVideo({...video, [name]: e.target.value})
+  }
 
-
+  const onDrop =(image) =>{
+    setVideos({...video, image: image[0]})
+  }
 
 // ADD VIDEO FORM 
 const renderAddForm = () => {
@@ -68,7 +71,7 @@ const renderAddForm = () => {
         name='title'
         // required
         value={video.title}
-        onChange={(e) => setVideo(e.target.value)}
+        onChange={handleChange("title")}
 
       />
       {/* TODO: Turn to textarea - keeps saying that value is not a valid prop */}
@@ -78,7 +81,7 @@ const renderAddForm = () => {
         name='description'
         // required
         value={video.description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={handleChange("description")}
       />
     </Form.Group>
     <br />
