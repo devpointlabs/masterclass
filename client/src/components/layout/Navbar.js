@@ -30,8 +30,6 @@ const Navbar = (props) => {
                   </h3>
                       </NavLink>
                     </Menu.Item>
-                {/* } /> */}
-
                 <Menu.Item
                   active={props.location.pathname === "/my-courses"}
                   >
@@ -45,8 +43,7 @@ const Navbar = (props) => {
                     </NavLink>
                   </Menu.Item>
             </>
-            :
-            <Popup content="Switch to the student view here - get back to the courses available." trigger={
+            {/* <Popup content="Switch to the student view here - get back to the courses available." trigger={ */}
               <Menu.Item
                   active={props.location.pathname === "/"}
                   onClick={() => setToggleButton(!toggleButton)}
@@ -61,9 +58,9 @@ const Navbar = (props) => {
                     </h3>
                     </NavLink>
               </Menu.Item>
-             } />
+            {/* //  } /> */}
 
-          }
+          {/* } */}
             <Menu.Item
               name="My Profile"
               active={props.location.pathname === "/profile"}

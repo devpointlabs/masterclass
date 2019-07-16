@@ -4,16 +4,22 @@ import axios from 'axios'
 import styled from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import ImageUploader from "react-images-upload";
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 import {AuthContext } from '../../../providers/AuthProvider'; 
 
 
 const AddVideos = (props) => {
-  // const { updateVideos,  } = useContext(AuthContext);
+  const videoState = {
+    title: "",
+    description: "",
+    image: "", 
+  }
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [videos, setVideos] = useState([]); 
   const [image, setImage] = useState("")
-  const [video, setVideo] = useState([])
+  const [video, setVideo] = useState(videoState)
   const [file, setFile] = useState();
 
 
