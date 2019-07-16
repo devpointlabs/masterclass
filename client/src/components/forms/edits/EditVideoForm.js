@@ -17,6 +17,14 @@ const EditVideoForm = (props) => {
       })
   }, [])
 
+  const removeVideos = (id) => {
+    axios.delete(`/api/lessons/${props.lesson_id}/videos/${id}`)
+    .then(res => {
+      setVideos(videos.filter( v => v.id !== id))
+    })
+
+  }
+
 
  
 
@@ -27,13 +35,17 @@ const EditVideoForm = (props) => {
           <Card.Group itemsPerRow={2} textAlign="center">
             {videos.map((video) =>
               <Card>
+              <Button.Group size="tiny">
+              <Button>Edit</Button>
+              <Button onClick={() => removeVideos(video.id)}>Remove</Button>
+              </Button.Group>
               <Card.Header as="h3">{video.title}</Card.Header>
+              <p>{video.description}</p>
               <Card.Content>
                 <Image size="small" src={video.url}/>
               </Card.Content>
-              <Card.Content extra>
-              <p>{video.description}</p>
-              </Card.Content>
+              {/* <Card.Content extra>
+              </Card.Content> */}
               </Card>
     )}
           </Card.Group>
