@@ -10,8 +10,12 @@ class Enrollment < ApplicationRecord
       left join courses 
       on courses.id = enrollments.course_id
       where user_id = ?
+<<<<<<< HEAD
       order by course_id desc
       ", id 
+=======
+      order by course_id desc", id 
+>>>>>>> c378cdf9b7c031921c49fb1a929c48567c5fbc26
     ])
   end
 

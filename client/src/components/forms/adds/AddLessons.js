@@ -4,9 +4,9 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 const AddLessons = (props) => {
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [lesson, setLesson] = useState();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [lesson, setLesson] = useState({});
 
 
 

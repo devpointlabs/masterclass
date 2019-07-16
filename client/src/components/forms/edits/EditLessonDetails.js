@@ -29,7 +29,6 @@ const EditLessonDetails = (props) => {
          setLesson(res.data); 
          console.log(res.data)
          props.closeEdit(props.lesson_id)
-        //  props.setShowEditForm(!props.showEditForm)
         })
     }
 

@@ -27,6 +27,7 @@ const EditLessonForm = (props) => {
   const toggleCreateForm = () => {
     setShowCreateForm(!showCreateForm); 
   }
+  
  
 
  
@@ -135,7 +136,6 @@ const toggleCreateVideoForm = (id, createVideos) => {
         <Segment key={l.id} style={{ display: "flex", flexDirection:"column" }}>
          <div style={{ display:"flex", justifyContent:"space-between"}}>
 
-        {console.log(formLessons)}
         <Link to = {`/lessons/${l.id}`}> 
          <List.Header as="h3">{l.name}</List.Header>
          <List.Description>

@@ -4,18 +4,23 @@ import axios from 'axios'
 import styled from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import ImageUploader from "react-images-upload";
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 import {AuthContext } from '../../../providers/AuthProvider'; 
 
 
 const AddVideos = (props) => {
-  // const { updateVideos,  } = useContext(AuthContext);
+  const videoState = {
+    title: "",
+    description: "",
+    image: "", 
+  }
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [videos, setVideos] = useState([]); 
   const [image, setImage] = useState("")
-  const [video, setVideo] = useState([])
+  const [video, setVideo] = useState(videoState)
   const [file, setFile] = useState();
-
 
 
 
@@ -24,33 +29,29 @@ const AddVideos = (props) => {
   }
 
  const  handleSubmit = (e) => {
+  //  {console.log(props)}
     e.preventDefault();
-    let data = new FormData()
-    data.append('file', image)
-    data.append("title", title);
-    data.append("description", description);
-    data.append("lesson_id", props.lessonId)
+    // let data = new FormData()
+    // data.append('file', image)
+    // data.append("title", title);
+    // data.append("description", description);
+    // data.append("lesson_id", props.lesson_id)
 
-    if(video.id){
-      axios.put(`/api/videos/${video.id}`, data)
+   
+    axios.post(`/api/lessons/${props.lesson_id}/videos`,{video: title, description: description})
       .then( res => {
-        debugger
+        setVideo(res.data)
+        setTitle("")
+        setDescription("")
+        console.log(video)
       })
       .catch(err => {
-        console.log("error in handleSubmit")
-      })
-    }else{
-    axios.post(`/api/videos?title=${title}&description=${description}`, data)
-      .then( res => {
-        debugger
-      })
-      .catch(err => {
-        console.log("error")
+        console.log("You're an idiot")
       })
       setTitle("")
       setDescription("")
       setImage("")
-    }
+    
   }
 
 
@@ -66,8 +67,8 @@ const renderAddForm = () => {
         placeholder='What best describes the content of the video?'
         name='title'
         // required
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={video.title}
+        onChange={(e) => setVideo(e.target.value)}
 
       />
       {/* TODO: Turn to textarea - keeps saying that value is not a valid prop */}
@@ -76,7 +77,7 @@ const renderAddForm = () => {
         placeholder='Give a short summary of the content of the video...'
         name='description'
         // required
-        value={description}
+        value={video.description}
         onChange={(e) => setDescription(e.target.value)}
       />
     </Form.Group>
