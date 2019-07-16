@@ -12,6 +12,10 @@ class Api::EnrollmentsController < ApplicationController
   def my_courses
     render json: Enrollment.my_courses(current_user.id)
   end
+
+  def teacher_courses
+    render json: Enrollment.teacher_courses(current_user.id)
+  end
   
   def create
     @enrollment = @course.enrollments.new(enrollment_params)
