@@ -5,6 +5,7 @@ import {Segment, List, Button, Icon } from 'semantic-ui-react';
 import Course from '../../Course';
 import AddLessons from '../adds/AddLessons'; 
 import EditLessonDetails from './EditLessonDetails';
+import EditVideoForm from './EditVideoForm'; 
 import styled from 'styled-components';
 
 
@@ -55,7 +56,7 @@ const EditLessonForm = (props) => {
 
   const toggleEditForm = (id, showForm) => {
     lessonWithShowForm.filter(l =>{
-      if(id == l.id)
+      if(id === l.id)
       {l.showForm = !showForm
         return l
         } 
@@ -66,7 +67,7 @@ const EditLessonForm = (props) => {
   // toggle the show existing videos comp 
   const toggleExistingVideos = (id, showVideos) => {
     lessonWithShowForm.filter(l =>{
-      if(id == l.id)
+      if(id === l.id)
       {l.showVideos = !showVideos
         console.log(l.showVideos)
         return l
@@ -78,7 +79,7 @@ const EditLessonForm = (props) => {
  const closeEdit = (id) =>{
    setShowEditForm(!showEditForm)
   lessonWithShowForm.filter(l =>{
-    if(id == l.id)
+    if(id === l.id)
     {l.showForm = false
       return l
       } 
@@ -95,6 +96,11 @@ const EditLessonForm = (props) => {
   //  will render the edit form for the lessons 
   const renderEditForm = (id, showForm) => {
   return <EditLessonDetails lesson_id={id} showForm = {showForm} closeEdit = {closeEdit}/>
+  }
+
+  // will render the edit form for the VIDEOS 
+  const renderVideosEditForm = (id, showVideos) => {
+    return <EditVideoForm lesson_id={id} showVideos={showVideos} />
   }
 
   // remove lessons 
@@ -120,9 +126,6 @@ const EditLessonForm = (props) => {
          </List.Description>
            </Link>
          { l.showForm ? renderEditForm(l.id, l.showForm) : null}
-         {/* <h1>
-         {/* {l.showForm ? "True": "False"}
-         </h1> */}
          <div className="buttonDiv">
 
          <Button size="tiny" color="blue" onClick={() => toggleEditForm(l.id, l.showForm)}>
@@ -143,7 +146,7 @@ const EditLessonForm = (props) => {
         </ClickDiv>
         <div>
           { l.showVideos ?
-            <h1>hi</h1>
+            renderVideosEditForm(l.id, l.showVideos)
             :
             null
           }

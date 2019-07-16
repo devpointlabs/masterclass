@@ -32,10 +32,10 @@ const getLessonId = (id) => {
       return (
         <EditLessonForm {...props} courseId={courseId} getLessonId={getLessonId}/>
       )
-      case 3: 
-      return (
-        <EditVideoForm {...props} lessonId={lessonId} />
-      )
+      // case 3: 
+      // return (
+      //   <EditVideoForm {...props} lessonId={lessonId} />
+      // )
       // case 4: 
       // return(
       //   <Success />
@@ -58,16 +58,16 @@ const getLessonId = (id) => {
       <br/>
       <Header as="h4" textAlign="left">Plan your course</Header>
       <Menu.Item as='a' fitted="vertically" onClick={() => setStep(1)}>
-        Target audience 
+        Manage Course 
       </Menu.Item>
       <br/>
       <Header as="h4" textAlign="left">Manage your content</Header>
       <Menu.Item  as='a' fitted="vertically" onClick={() => setStep(2)}>
         Manage lessons
       </Menu.Item>
-      <Menu.Item as='a' fitted="vertically" style={{marginTop: "10px"}} onClick={() => setStep(3)}>
+      {/* <Menu.Item as='a' fitted="vertically" style={{marginTop: "10px"}} onClick={() => setStep(3)}>
         Manage videos
-      </Menu.Item>
+      </Menu.Item> */}
     </Sidebar>
 
     <Sidebar.Pusher>
