@@ -5,7 +5,9 @@ import {Segment, List, Button, Icon } from 'semantic-ui-react';
 import Course from '../../Course';
 import AddLessons from '../adds/AddLessons'; 
 import EditLessonDetails from './EditLessonDetails';
+import EditVideoForm from './EditVideoForm'; 
 import styled from 'styled-components';
+import AddVideos from '../adds/AddVideos';
 
 
 const EditLessonForm = (props) => {
@@ -49,13 +51,14 @@ const EditLessonForm = (props) => {
       description: l.description,
       course_id: l.course_id,
       showForm: false,
-      showVideos: false
+      showVideos: false, 
+      createVideos: false,
     }
   })
 
   const toggleEditForm = (id, showForm) => {
     lessonWithShowForm.filter(l =>{
-      if(id == l.id)
+      if(id === l.id)
       {l.showForm = !showForm
         return l
         } 
@@ -66,9 +69,8 @@ const EditLessonForm = (props) => {
   // toggle the show existing videos comp 
   const toggleExistingVideos = (id, showVideos) => {
     lessonWithShowForm.filter(l =>{
-      if(id == l.id)
+      if(id === l.id)
       {l.showVideos = !showVideos
-        console.log(l.showVideos)
         return l
         } 
     }); 
@@ -78,13 +80,26 @@ const EditLessonForm = (props) => {
  const closeEdit = (id) =>{
    setShowEditForm(!showEditForm)
   lessonWithShowForm.filter(l =>{
-    if(id == l.id)
+    if(id === l.id)
     {l.showForm = false
       return l
       } 
   }); 
   setFormLessons(lessonWithShowForm)
  }
+
+//  toggle create video form 
+const toggleCreateVideoForm = (id, createVideos) => {
+  lessonWithShowForm.filter(l =>{
+    if(id === l.id)
+    {l.createVideos = !createVideos
+      console.log(l.createVideos)
+      return l
+      } 
+  }); 
+  setFormLessons(lessonWithShowForm)
+
+}
 
  
   // will render the add form for the lessons and passes in the course id
@@ -97,13 +112,22 @@ const EditLessonForm = (props) => {
   return <EditLessonDetails lesson_id={id} showForm = {showForm} closeEdit = {closeEdit}/>
   }
 
+  // will render the edit form for the VIDEOS 
+  const renderVideosEditForm = (id, showVideos) => {
+    return <EditVideoForm lesson_id={id} showVideos={showVideos} />
+  }
+
+  const renderCreateVideosForm = (id, createVideos) => {
+    // return <AddVideos lesson_id={id} createVideos={createVideos}/>
+    return <h1>Hello</h1>
+  }
+
   // remove lessons 
   const removeLesson = (id) => {
     axios.delete(`/api/courses/${course_id }/lessons/${id}`)
       .then(res => {
         setLessons(lessons.filter(l => l.id !== id))
       })
-
   }
 
 
@@ -120,22 +144,22 @@ const EditLessonForm = (props) => {
          </List.Description>
            </Link>
          { l.showForm ? renderEditForm(l.id, l.showForm) : null}
-         {/* <h1>
-         {/* {l.showForm ? "True": "False"}
-         </h1> */}
          <div className="buttonDiv">
 
          <Button size="tiny" color="blue" onClick={() => toggleEditForm(l.id, l.showForm)}>
            <Icon name={l.showForm ? "cancel" :"edit"} />
+         </Button>
+         <Button size="tiny" color="green" onClick={() => toggleCreateVideoForm(l.id, l.createVideos)}>
+           <Icon name={l.createVideos ? "cancel": "video"} />
          </Button>
          <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
            <Icon name="trash alternate outline" />
          </Button>
          </div>
           </div>
-     
+          
         <ClickDiv>
-          { l.showVideos ?
+          { (l.showVideos || l.createVideos) ?
             <VideoClick onClick={() => toggleExistingVideos()}>Hide Videos <Icon name='angle up' /></VideoClick>
             :
             <VideoClick onClick={() => toggleExistingVideos(l.id, l.showVideos)}>Show Videos <Icon name='angle down' /></VideoClick>
@@ -143,7 +167,12 @@ const EditLessonForm = (props) => {
         </ClickDiv>
         <div>
           { l.showVideos ?
-            <h1>hi</h1>
+            renderVideosEditForm(l.id, l.showVideos)
+            :
+            null
+          }
+          { l.createVideos ?
+            renderCreateVideosForm(l.id, l.createVideos) 
             :
             null
           }
