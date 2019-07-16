@@ -49,17 +49,16 @@ const CourseForm = (props) => {
   }
 
   const categoryOptions = () => {
-    const cats = [{ key: 'r', text: 'Ruby', value: 'ruby' },
-    { key: 'js', text: 'Javascript', value: 'javascript' },
-    { key: 're', text: 'React', value: 'react' }]
-
+    const cats = [
+      { key: 'r', text: 'Ruby', value: 'ruby' },
+      { key: 'js', text: 'Javascript', value: 'javascript' },
+      { key: 're', text: 'React', value: 'react' }
+    ]
     return (
       <Dropdown
-        label="Category"
         placeholder='e.g. Ruby on Rails'
         name='category'
         selection
-        required
         options={cats}
         value={category}
         onChange={handleCategory}
@@ -83,7 +82,8 @@ const CourseForm = (props) => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <Form.Input
-
+            label="Category"
+            required
             value={category}
             control={categoryOptions}
           />
