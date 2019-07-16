@@ -1,5 +1,6 @@
 roles = ['teacher', 'student']
 # videos = ["https://www.youtube.com/watch?v=NYkcTXNnFSo","https://www.youtube.com/watch?v=cqzZqLl6uYg&t=16s", "https://www.youtube.com/watch?v=czCxTcb8xzk", "https://www.youtube.com/watch?v=0lodYJOKPaw" ]
+categories = ['Ruby', 'Javascript', 'React', 'SQL', 'JQuery']
 
 5.times do 
   name = Faker::Movies::HarryPotter.character
@@ -10,7 +11,8 @@ roles = ['teacher', 'student']
   u = User.create(name: name, email: email, nickname: nickname, password: password, password_confirmation: password)
   5.times do 
     course = Course.create(
-      title: Faker::Educator.course_name
+      title: Faker::Educator.course_name,
+      category: categories.sample
       )
     Enrollment.create(
       role: roles.sample,

@@ -9,7 +9,8 @@ class Enrollment < ApplicationRecord
       "select user_id, course_id, courses.title, courses.category, courses.overview, enrollments.id, enrollments.role from enrollments
       left join courses 
       on courses.id = enrollments.course_id
-      where user_id = ?", id 
+      where user_id = ?
+      order by course_id desc", id 
     ])
   end
 

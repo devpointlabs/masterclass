@@ -18,39 +18,32 @@ const AddVideos = (props) => {
 
 
 
-
   const onDrop=(image)=> {
     setImage(image[0])
   }
 
  const  handleSubmit = (e) => {
+  //  {console.log(props)}
     e.preventDefault();
-    let data = new FormData()
-    data.append('file', image)
-    data.append("title", title);
-    data.append("description", description);
-    data.append("lesson_id", props.lessonId)
+    // let data = new FormData()
+    // data.append('file', image)
+    // data.append("title", title);
+    // data.append("description", description);
+    // data.append("lesson_id", props.lesson_id)
 
-    if(video.id){
-      axios.put(`/api/videos/${video.id}`, data)
+   
+    axios.post(`/api/lessons/${props.lesson_id}/videos`,{title: title, description: description})
       .then( res => {
-        debugger
+        setTitle("")
+        setDescription("")
       })
       .catch(err => {
-        console.log("error in handleSubmit")
-      })
-    }else{
-    axios.post(`/api/videos?title=${title}&description=${description}`, data)
-      .then( res => {
-        debugger
-      })
-      .catch(err => {
-        console.log("error")
+        console.log("You're an idiot")
       })
       setTitle("")
       setDescription("")
       setImage("")
-    }
+    
   }
 
 
