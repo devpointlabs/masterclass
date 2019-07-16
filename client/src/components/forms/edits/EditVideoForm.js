@@ -6,7 +6,6 @@ const EditVideoForm = (props) => {
   const [formVideos, setFormVideos] = useState([])
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [showEditForm, setShowEditForm] = useState(false); 
   const [videos, setVideos] = useState([]); 
 
   // return existing videos 
@@ -18,6 +17,19 @@ const EditVideoForm = (props) => {
         setVideos(res.data)
       })
   }, [])
+
+  const videosWithShowForm = videos.map(l=>{
+    return {
+      id: l.id,
+      title: l.title,
+      description: l.description,
+      lesson_id: l.lesson_id,
+      url: l.url, 
+      showEditForm: false,
+      showVideos: false, 
+      createVideos: false,
+    }
+  })
 
 
 // // be able to toggle one video edit at a time 
@@ -47,8 +59,8 @@ const EditVideoForm = (props) => {
 //  }
 
 const toggleEditForm = () => {
-  setShowEditForm(!showEditForm)
-  console.log(showEditForm)
+  // setShowEditForm(!showEditForm)
+  // console.log(showEditForm)
 }
 
 
@@ -85,9 +97,11 @@ const toggleEditForm = () => {
  const renderVideos = () => {
   return (
     <>
+    {console.log(videosWithShowForm)}
           <Card.Group itemsPerRow={2} textAlign="center">
-            {videos.map((video) =>
+            {videosWithShowForm.map((video) =>
               <Card>
+                {console.log(video)}
               <Button.Group size="tiny">
               <Button size="tiny" color="blue" onClick={() => toggleEditForm()}>
               <Icon name={video.showEditForm ? "cancel" :"edit"} />
@@ -100,8 +114,6 @@ const toggleEditForm = () => {
               <Card.Content>
                 <Image size="small" src={video.url}/>
               </Card.Content>
-              {/* <Card.Content extra>
-              </Card.Content> */}
               </Card>
     )}
           </Card.Group>

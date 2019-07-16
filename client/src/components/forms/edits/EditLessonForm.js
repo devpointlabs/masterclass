@@ -71,7 +71,6 @@ const EditLessonForm = (props) => {
     lessonWithShowForm.filter(l =>{
       if(id === l.id)
       {l.showVideos = !showVideos
-        console.log(l.showVideos)
         return l
         } 
     }); 
@@ -119,7 +118,8 @@ const toggleCreateVideoForm = (id, createVideos) => {
   }
 
   const renderCreateVideosForm = (id, createVideos) => {
-    return <AddVideos lesson_id={id} createVideos={createVideos}/>
+    // return <AddVideos lesson_id={id} createVideos={createVideos}/>
+    return <h1>Hello</h1>
   }
 
   // remove lessons 
