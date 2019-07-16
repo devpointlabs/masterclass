@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Header, Icon, Image, Menu, Container, Segment, Sidebar, SidebarPushable } from 'semantic-ui-react'
+import { Header, Icon, Image, Button, Menu, Container, Segment, Sidebar, SidebarPushable, Breadcrumb } from 'semantic-ui-react'
 import EditCourseForm from './EditCourseForm'; 
 import styled from 'styled-components';
 import EditLessonForm from './EditLessonForm'; 
@@ -32,10 +32,10 @@ const getLessonId = (id) => {
       return (
         <EditLessonForm {...props} courseId={courseId} getLessonId={getLessonId}/>
       )
-      case 3: 
-      return (
-        <EditVideoForm {...props} lessonId={lessonId} />
-      )
+      // case 3: 
+      // return (
+      //   <EditVideoForm {...props} lessonId={lessonId} />
+      // )
       // case 4: 
       // return(
       //   <Success />
@@ -46,30 +46,39 @@ const getLessonId = (id) => {
 
   
   return (
+    <>
+    {/* GO BACK BUTTON - BREADCRUMB */}
+     <Breadcrumb size="large">
+        <Breadcrumb.Section link onClick={() => props.history.goBack("/teachers/courses")}>Courses</Breadcrumb.Section>
+        <Breadcrumb.Divider icon='right chevron' />
+        <Breadcrumb.Section active>Manage Courses</Breadcrumb.Section>
+      </Breadcrumb>
     <Sidebar.Pushable as={Container}>
     <Sidebar as={Menu} borderless icon='labeled' vertical visible width='thin'>
       <br/>
       <Header as="h4" textAlign="left">Plan your course</Header>
       <Menu.Item as='a' fitted="vertically" onClick={() => setStep(1)}>
-        Target audience 
+        Manage Course 
       </Menu.Item>
       <br/>
       <Header as="h4" textAlign="left">Manage your content</Header>
       <Menu.Item  as='a' fitted="vertically" onClick={() => setStep(2)}>
         Manage lessons
       </Menu.Item>
-      <Menu.Item as='a' fitted="vertically" style={{marginTop: "10px"}} onClick={() => setStep(3)}>
+      {/* <Menu.Item as='a' fitted="vertically" style={{marginTop: "10px"}} onClick={() => setStep(3)}>
         Manage videos
-      </Menu.Item>
+      </Menu.Item> */}
     </Sidebar>
 
     <Sidebar.Pusher>
+     
       <Segment compact={true} style={{height: "500px"}} >
         {/* Renders forms */}
         {renderForms(step)}
       </Segment>
     </Sidebar.Pusher>
   </Sidebar.Pushable>
+  </>
   )
 }
 

@@ -40,7 +40,7 @@ const LessonForm = (props) => {
     e.preventDefault();
     if (props.match.params.lesson_id) {
       axios
-        .put(`/api/lessons/${props.match.params.lesson_id}`, { name: name, description: description })
+        .put(`/api/lessons/${props.match.params.lesson_id}`, { name: name, description: description, data })
         .then(res => {
           props.history.push(`/courses/${res.data.course_id}`)
           props.edit(res.data);
@@ -49,7 +49,7 @@ const LessonForm = (props) => {
 
     else {
       axios
-        .post("/api/courses/${course_id}/lessons", { name: name, description: description })
+        .post("/api/courses/${course_id}/lessons", { name: name, description: description, data })
         .then(res => {
           console.log(res.data)
           // add(res.data);

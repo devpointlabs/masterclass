@@ -12,22 +12,40 @@ class Api::VideosController < ApplicationController
 
   def create
     video = @lesson.videos.new(video_params)
-    if video.save
-      render json: video
-    else
-      render json: video.errors, status: 422
-    end
-  end
-
-  def update
-    @video #Video.find(params[:id])
+    video.title = params[:title] ? params[:title] : video.title
+    video.body = params[:body] ? params[:body] : video.body
 
     file = params[:file]
     if file
       begin
         ext = File.extname(file.tempfile)
         cloud_video = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
-        @video.video = cloud_image['secure_url']
+        video.url = cloud_image['secure_url']
+      rescue => exception
+        render json: {errors: exception}, status: 422 
+        
+      end
+    end 
+
+    if video.save
+      render json: video
+    else
+      render json: video.errors, status: 422
+    end
+
+  end
+
+  def update
+    # @video #Video.find(params[:id])
+    @video.title = params[:title] ? params[:title] : @video.title
+    @video.description = params[:description] ? params[:description] : @video.description
+
+    file = params[:file]
+    if file
+      begin
+        ext = File.extname(file.tempfile)
+        cloud_video = Cloudinary::Uploader.upload(file, public_id: file.original_filename, secure: true)
+        @video.url = cloud_image['secure_url']
       rescue => exception
         render json: {errors: exception}, status: 422 
         
