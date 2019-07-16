@@ -38,10 +38,12 @@ const AddVideos = (props) => {
     // data.append("lesson_id", props.lesson_id)
 
    
-    axios.post(`/api/lessons/${props.lesson_id}/videos`,{title: title, description: description})
+    axios.post(`/api/lessons/${props.lesson_id}/videos`,{video: title, description: description})
       .then( res => {
+        setVideo(res.data)
         setTitle("")
         setDescription("")
+        console.log(video)
       })
       .catch(err => {
         console.log("You're an idiot")
@@ -65,8 +67,8 @@ const renderAddForm = () => {
         placeholder='What best describes the content of the video?'
         name='title'
         // required
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={video.title}
+        onChange={(e) => setVideo(e.target.value)}
 
       />
       {/* TODO: Turn to textarea - keeps saying that value is not a valid prop */}
@@ -75,7 +77,7 @@ const renderAddForm = () => {
         placeholder='Give a short summary of the content of the video...'
         name='description'
         // required
-        value={description}
+        value={video.description}
         onChange={(e) => setDescription(e.target.value)}
       />
     </Form.Group>
