@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, Header, Dropdown } from "semantic-ui-react";
+import { Form, Header, Select, Dropdown } from "semantic-ui-react";
 import { AuthContext } from "../providers/AuthProvider"
 
 const CourseForm = (props) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState();
   const [category, setCategory] = useState();
-  const [overview, setOverview] = useState("");
-  const [image, setImage] = useState("");
-  const [course, setCourse] = useState("");
+  const [overview, setOverview] = useState();
+  const [image, setImage] = useState();
+  const [course, setCourse] = useState();
 
 
   // useEffect(() => {
@@ -20,11 +20,6 @@ const CourseForm = (props) => {
   //   }
   // }, []
   // )
-
-  const handleCategory = (e) => {
-    let catChoice = e.target.textContent
-    setCategory(catChoice)
-  }
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -38,37 +33,24 @@ const CourseForm = (props) => {
     // }
 
     // else {
-
+    console.log(category)
     axios
       .post("/api/courses", { title: title, category: category, overview: overview, image: image })
       .then(res => {
         setCourse(res.data);
-        props.history.goBack("/teachers/courses");
+        props.history.push("/teachers/courses");
       });
     // };
   }
 
-  const categoryOptions = () => {
-    const cats = [
-      { key: 'r', text: 'Ruby', value: 'ruby' },
-      { key: 'js', text: 'Javascript', value: 'javascript' },
-      { key: 're', text: 'React', value: 'react' }
-    ]
-    return (
-      <Dropdown
-        placeholder='e.g. Ruby on Rails'
-        name='category'
-        selection
-        options={cats}
-        value={category}
-        onChange={handleCategory}
-      />
-    )
-  }
+  const categoryOptions = [
+    { key: 'r', text: 'Ruby', value: 'Ruby' },
+    { key: 'js', text: 'JavaScript', value: 'JavaScript' },
+    { key: 're', text: 'React', value: 'React' },
+  ]
 
 
   return (
-
     <>
       <Header as="h1" textAlign="center">Create A Course</Header>
       <Form onSubmit={handleSubmit}>
@@ -81,11 +63,15 @@ const CourseForm = (props) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Form.Input
+          <Form.Select
             label="Category"
+            placeholder='e.g. Ruby on Rails'
+            name='category'
             required
+            Select
             value={category}
-            control={categoryOptions}
+            options={categoryOptions}
+            onChange={(e) => setCategory(e.target.innerText)}
           />
           <Form.Input
             label='Overview'
