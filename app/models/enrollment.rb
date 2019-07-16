@@ -12,6 +12,26 @@ class Enrollment < ApplicationRecord
       where user_id = ?", id 
     ])
   end
- 
+
+  def self.teacher_courses(id)
+    find_by_sql([
+      "SELECT 
+      e.course_id AS e_course_id, 
+      c.title AS c_title,
+      c.id AS c_id,
+      l.course_id AS l_course_id,
+      l.name AS lesson_name,
+      l.id AS lesson_id, 
+      v.lesson_id As v_lesson_id,
+      v.title AS video_title,
+      v.id AS video_id
+      FROM enrollments AS e
+      JOIN courses AS c ON c.id = e.course_id
+      JOIN lessons AS l ON c.id = l.course_id
+      JOIN videos AS v ON l.id = v.lesson_id
+      WHERE user_id = ?
+      ORDER BY video_id", id
+    ])
+  end
   
 end
