@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import ParticlesContainer from "./ParticlesContainer";
+import ParticlesContainer from "../../Styles/ParticlesContainer";
 import RegisterForm from "./Register";
 // import logo from '../../assets/logo.png';
 
@@ -16,7 +16,7 @@ const MainRegister = (props) => {
       </RegistrationContainer>
       <LogoContainer>
         <h1>DevPoint University</h1>
-        {/* <ParticlesContainer /> */}
+        <ParticlesContainer />
         {/* <img src={logo} className="logo" alt="site-logo"/> */}
       </LogoContainer>
     </Container>
