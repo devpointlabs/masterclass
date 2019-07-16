@@ -13,10 +13,15 @@ const EditVideoForm = (props) => {
     // if not adding videos, then render existing videos, if any
       axios.get(`/api/lessons/${props.lesson_id}/videos`)
       .then( res => {
-        // console.log(res.data)
         setVideos(res.data)
       })
   }, [])
+
+  useEffect(()=>{
+
+    setFormVideos(videosWithShowForm)
+
+  },[videos])
 
   const videosWithShowForm = videos.map(l=>{
     return {
@@ -26,7 +31,6 @@ const EditVideoForm = (props) => {
       lesson_id: l.lesson_id,
       url: l.url, 
       showEditForm: false,
-      showVideos: false, 
       createVideos: false,
     }
   })
@@ -58,9 +62,14 @@ const EditVideoForm = (props) => {
 //     setFormVideos(videosWithShowForm)
 //  }
 
-const toggleEditForm = () => {
-  // setShowEditForm(!showEditForm)
-  // console.log(showEditForm)
+const toggleEditForm = (id, showEditForm) => {
+  videosWithShowForm.filter(v =>{
+    if(id === v.id)
+    {v.showEditForm = !showEditForm
+      return v
+    }
+  })
+  setFormVideos(videosWithShowForm)
 }
 
 
@@ -97,13 +106,12 @@ const toggleEditForm = () => {
  const renderVideos = () => {
   return (
     <>
-    {console.log(videosWithShowForm)}
           <Card.Group itemsPerRow={2} textAlign="center">
-            {videosWithShowForm.map((video) =>
+            {formVideos.map((video) =>
               <Card>
                 {console.log(video)}
               <Button.Group size="tiny">
-              <Button size="tiny" color="blue" onClick={() => toggleEditForm()}>
+              <Button size="tiny" color="blue" onClick={() => toggleEditForm(video.id, video.showEditForm)}>
               <Icon name={video.showEditForm ? "cancel" :"edit"} />
              </Button>
               <Button onClick={() => removeVideos(video.id)}>Remove</Button>
