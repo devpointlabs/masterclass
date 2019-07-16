@@ -1,12 +1,15 @@
 import React, {Fragment, useState, useEffect,}from 'react'; 
 import {Form, Button, Card, Image, Icon} from 'semantic-ui-react'
 import axios from 'axios'
+import EditVideoDetails from './EditVideoDetails'; 
 
 const EditVideoForm = (props) => {
   const [formVideos, setFormVideos] = useState([])
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [videos, setVideos] = useState([]); 
+  const [showEditForm, setShowEditForm] = useState(false); 
+
 
   // return existing videos 
   useEffect((e) => {
@@ -15,7 +18,7 @@ const EditVideoForm = (props) => {
       .then( res => {
         setVideos(res.data)
       })
-  }, [])
+  }, [showEditForm])
 
   useEffect(()=>{
 
@@ -74,20 +77,20 @@ const toggleEditForm = (id, showEditForm) => {
 
 
   // cancel edit form 
-  // const closeEdit = (id) =>{
-  //   setShowEditForm(!showEditForm)
-  //  videosWithShowForm.filter(v =>{
-  //    if(id === v.id)
-  //    {v.showForm = false
-  //      return v
-  //      } 
-  //  }); 
-  //  setFormVideos(videosWithShowForm)
-  // }
+  const closeEdit = (id) =>{
+    setShowEditForm(!showEditForm)
+   videosWithShowForm.filter(v =>{
+     if(id === v.id)
+     {v.showForm = false
+       return v
+       } 
+   }); 
+   setFormVideos(videosWithShowForm)
+  }
 
    //  will render the edit form for the videos 
    const renderEditForm = (id, showForm) => {
-    return <h1>Works!</h1>
+    return <EditVideoDetails video_id={id} lesson_id={props.lesson_id} showEditForm={showEditForm} setShowEditForm={setShowEditForm} closeEdit={closeEdit}/>
     
     }
 
@@ -109,7 +112,7 @@ const toggleEditForm = (id, showEditForm) => {
           <Card.Group itemsPerRow={2} textAlign="center">
             {formVideos.map((video) =>
               <Card>
-                {console.log(video)}
+                {/* {console.log(video)} */}
               <Button.Group size="tiny">
               <Button size="tiny" color="blue" onClick={() => toggleEditForm(video.id, video.showEditForm)}>
               <Icon name={video.showEditForm ? "cancel" :"edit"} />
