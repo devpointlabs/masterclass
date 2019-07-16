@@ -15,7 +15,6 @@ const AddVideos = (props) => {
   const [image, setImage] = useState("")
   const [video, setVideo] = useState([])
   const [file, setFile] = useState();
-  const [fireVideo, setFireVideo]=useState(false)
 
 
 
@@ -24,34 +23,7 @@ const AddVideos = (props) => {
     setImage(image[0])
   }
 
-  
- 
-
-  // populate video title and video url. 
-  useEffect((e) => {
-  //  add videos axios call 
-
-  }, [])
-  // const updateVideos = () => {
-  //   let data = new FormData();
-  //   data.append("file", video.file);
-  //   axios.put(`/api/lessons/${video.lesson_id}/${video.id}`,data)
-  //     .then(res=>{
-  //       setVideo(res.data)
-  //     })
-  // }
-  
-  
-  
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   axios.post(`/api/lessons/${props.lessonId}/videos`, {title: title, description: description,})
-  //   .then(res=>{
-  //     setVideo(res.data)
-  //   })
-  // }
  const  handleSubmit = (e) => {
-   debugger
     e.preventDefault();
     let data = new FormData()
     data.append('file', image)
