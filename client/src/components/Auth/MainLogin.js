@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-// import ParticlesContainer from "./ParticlesContainer";
+import ParticlesContainer from "../../Styles/ParticlesContainer";
 import LoginForm from "./Login";
-// import logo from '../../assets/logo.png';
+import logo from '../Images/logo-white.svg';
 
 const MainLogin = (props) => {
   return (
@@ -16,8 +16,8 @@ const MainLogin = (props) => {
       </LoginContainer>
       <LogoContainer>
         <h1>DevPoint University</h1>
-        {/* <ParticlesContainer /> */}
-        {/* <img src={logo} className="logo" alt="site-logo"/> */}
+        <ParticlesContainer />
+        <img src={logo} className="logo" alt="site-logo"/>
       </LogoContainer>
     </Container>
   );

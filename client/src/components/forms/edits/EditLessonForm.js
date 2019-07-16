@@ -36,7 +36,6 @@ const EditLessonForm = (props) => {
     axios.get(`/api/courses/${course_id}/lessons`)
     .then(res => {
       setLessons(res.data);
-      // setLoader(true)
     })
   }, [showCreateForm, showEditForm])
 
