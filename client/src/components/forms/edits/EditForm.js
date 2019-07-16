@@ -32,14 +32,6 @@ const getLessonId = (id) => {
       return (
         <EditLessonForm {...props} courseId={courseId} getLessonId={getLessonId}/>
       )
-      // case 3: 
-      // return (
-      //   <EditVideoForm {...props} lessonId={lessonId} />
-      // )
-      // case 4: 
-      // return(
-      //   <Success />
-      // )
     }
   }
 

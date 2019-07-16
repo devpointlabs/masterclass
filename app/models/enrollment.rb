@@ -24,12 +24,13 @@ class Enrollment < ApplicationRecord
       l.id AS lesson_id, 
       v.lesson_id As v_lesson_id,
       v.title AS video_title,
-      v.id AS video_id
+      v.id AS video_id,
+      e.role as role
       FROM enrollments AS e
       JOIN courses AS c ON c.id = e.course_id
       JOIN lessons AS l ON c.id = l.course_id
       JOIN videos AS v ON l.id = v.lesson_id
-      WHERE user_id = ?
+      WHERE (user_id = ? and role = 'teacher') 
       ORDER BY video_id", id
     ])
   end
