@@ -11,7 +11,6 @@ import Lesson from "./components/Lesson";
 import Navbar from "./components/layout/Navbar";
 import Enrollment from './components/Enrollment'
 import FetchUser from "./components/auth/FetchUser"
-import MainForm from './components/forms/main/LessonForm';
 import Profile from './components/Profile';
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import TeachersView from "./components/teachers/TeachersView";

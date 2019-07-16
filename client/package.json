@@ -10,6 +10,7 @@
     "react-dropzone": "^10.1.5",
     "react-images-upload": "^1.2.7",
     "react-multistep": "^3.6.6",
+    "react-particles-js": "^2.6.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-spring": "^8.0.27",
