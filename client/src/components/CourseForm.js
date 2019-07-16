@@ -22,7 +22,6 @@ const CourseForm = (props) => {
   // )
 
   const handleCategory = (e) => {
-    debugger
     let catChoice = e.target.textContent
     setCategory(catChoice)
   }
@@ -59,6 +58,7 @@ const CourseForm = (props) => {
         label="Category"
         placeholder='e.g. Ruby on Rails'
         name='category'
+        selection
         required
         options={cats}
         value={category}
