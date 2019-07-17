@@ -2,12 +2,28 @@
   "name": "masterclass",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/devpointlabs/masterclass.git",
+  "engines": {
+    "node": "10.15.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devpointlabs/masterclass.git"
+  },
   "author": "Patrick Lamoureux <patrick@blackcedar.com>",
   "license": "MIT",
   "scripts": {
     "build": "cd client && npm install --only=dev && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
     "heroku-postbuild": "npm run build && npm run deploy && echo 'Client Built'"
-  }
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "bugs": {
+    "url": "https://github.com/devpointlabs/masterclass/issues"
+  },
+  "homepage": "https://github.com/devpointlabs/masterclass#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "keywords": []
 }
