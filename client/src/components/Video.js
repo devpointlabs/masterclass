@@ -3,6 +3,7 @@ import axios from 'axios';
 import QAndAs from "./Comments";
 import styled from 'styled-components';
 import {Link } from "react-router-dom"
+import { Player } from 'video-react';
 import { Container,Button,  Icon, Header, Image, } from 'semantic-ui-react';
 
 const Video = (props) => {

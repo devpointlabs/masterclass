@@ -13,37 +13,34 @@ const AddVideos = (props) => {
   const videoState = {
     title: "",
     description: "",
-    image: "", 
+    url: "", 
   }
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [videos, setVideos] = useState([]); 
   const [image, setImage] = useState("")
   const [video, setVideo] = useState(videoState)
-  const [file, setFile] = useState();
+  const [file, setFile] = useState("");
+  // const [drop, setDrop] = useState({})
 
 
 
-  const onDrop=(image)=> {
-    setImage(image[0])
-  }
+  
 
  const  handleSubmit = (e) => {
-  //  {console.log(props)}
     e.preventDefault();
-    // let data = new FormData()
-    // data.append('file', image)
-    // data.append("title", title);
-    // data.append("description", description);
-    // data.append("lesson_id", props.lesson_id)
+    const {title, description, url} = video
+    console.log(title, description, url)
+    let data = new FormData()
+    data.append('file', image)
+    data.append("title", title);
+    data.append("description", description);
 
    
-    axios.post(`/api/lessons/${props.lesson_id}/videos`,{video: title, description: description})
+    axios.post(`/api/lessons/${props.lesson_id}/videos?title=${title}&description=${description}`, data)
       .then( res => {
-        setVideo(res.data)
         setTitle("")
         setDescription("")
-        console.log(video)
       })
       .catch(err => {
         console.log("You're an idiot")
@@ -53,8 +50,23 @@ const AddVideos = (props) => {
       setImage("")
     
   }
+  const handleChange = (name) => (e) => {
+    // const { value, } = e.target;
+    setVideo({...video, [name]: e.target.value})
+  }
 
-
+  const onDrop = (image) =>{
+    setImage(image[0])
+  }
+  // constructor(props) {
+  //   super(props);
+  //   this.onDrop = this.onDrop.bind(this);
+  // }
+  // onDrop(image) {
+  //   this.setState({
+  //     image: image[0]
+  //   });
+  // }
 
 // ADD VIDEO FORM 
 const renderAddForm = () => {
@@ -68,7 +80,7 @@ const renderAddForm = () => {
         name='title'
         // required
         value={video.title}
-        onChange={(e) => setVideo(e.target.value)}
+        onChange={handleChange("title")}
 
       />
       {/* TODO: Turn to textarea - keeps saying that value is not a valid prop */}
@@ -78,7 +90,7 @@ const renderAddForm = () => {
         name='description'
         // required
         value={video.description}
-        onChange={(e) => setDescription(e.target.value)}
+        onChange={handleChange("description")}
       />
     </Form.Group>
     <br />
@@ -101,31 +113,31 @@ const renderAddForm = () => {
 
 
     // DROPZONE FUNCTIONALITY 
-   const StyledDropzone = (props) => { 
-      const onDrop = useCallback(acceptedFiles => {
-        setFile(acceptedFiles[0]); 
-      }, [])
+  //  const StyledDropzone = (props) => { 
+  //     const onDrop = useCallback(acceptedFiles => {
+  //       setFile(acceptedFiles[0]); 
+  //     }, [])
 
-    const {
-      getRootProps,
-      getInputProps,
-      isDragActive,
-      isDragAccept,
-      isDragReject
-    } = useDropzone({onDrop});
+  //   const {
+  //     getRootProps,
+  //     getInputProps,
+  //     isDragActive,
+  //     isDragAccept,
+  //     isDragReject
+  //   } = useDropzone({onDrop});
 
-    return (
-      <>
+  //   return (
+  //     <>
       
-      <div className="container">
-        <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
-          <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        </Container>
-      </div>
-      </>
-    );
-  }
+  //     <div className="container">
+  //       <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
+  //         <input {...getInputProps()} />
+  //         <p>Drag 'n' drop some files here, or click to select files</p>
+  //       </Container>
+  //     </div>
+  //     </>
+  //   );
+  // }
 
 
  
