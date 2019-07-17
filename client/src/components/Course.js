@@ -64,7 +64,7 @@ const Course = (props) => {
            {l.description}
          </List.Description>
            </Link>
-           <div>
+           {/* <div>
 
             <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
               <Icon name="trash alternate outline" />
@@ -73,7 +73,7 @@ const Course = (props) => {
               <Icon name="edit" />
             </Button>
             </Link>
-           </div>
+           </div> */}
        {/* </div> */}
          </Segment>
        
@@ -139,10 +139,10 @@ const Course = (props) => {
       <br />
       {/* {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />} */}
 
-     { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
+     {/* { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
         {showForm ? "Close Form" : "Edit Course"}
       </Button>}
-      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>}
+      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>} */}
       </div>
       <br />
       <br/>

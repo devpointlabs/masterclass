@@ -62,7 +62,7 @@ const Video = (props) => {
               src={video.url}
             />
           </div>
-        <div className='video_des'>
+        {/* <div className='video_des'>
           {role === 'teacher' && 
           <Link to={`/lessons/${id}/videos/${video.id}/edit`}>
             <Button inverted color="blue">
@@ -75,7 +75,7 @@ const Video = (props) => {
             <Icon name='trash' />
             Delete Item
           </Button>}
-        </div>
+        </div> */}
         <hr/>
         </div>
         <ClickDiv>
