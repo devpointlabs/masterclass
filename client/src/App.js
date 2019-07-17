@@ -2,17 +2,17 @@ import React from 'react';
 import Home from './components/layout/Home'
 import { Container, } from "semantic-ui-react";
 import { Switch, Route, } from "react-router-dom";
-// import MainLogin from "./components/auth/MainLogin";
-import MainRegister from "./components/auth/MainRegister";
+import MainLogin from "./components/Auth/MainLogin";
+import MainRegister from "./components/Auth/MainRegister";
 import Course from "./components/Course";
 import NoMatch from "./components/layout/NoMatch";
 import Video from "./components/Video";
 import Lesson from "./components/Lesson";
 import Navbar from "./components/layout/Navbar";
 import Enrollment from './components/Enrollment'
-import FetchUser from "./components/auth/FetchUser"
+import FetchUser from "./components/Auth/FetchUser"
 import Profile from './components/Profile';
-import ProtectedRoute from "./components/auth/ProtectedRoute";
+import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import TeachersView from "./components/teachers/TeachersView";
 import EditForm from "./components/forms/edits/EditForm";
 import TeachersQAAccordion from "./components/teachers/TeachersQAAccordion"
@@ -26,7 +26,7 @@ const App = () => (
       {/* <Container> */}
       <Switch>
         <Route exact path="/" component={Home} />
-        {/* <Route exact path="/login" component={MainLogin} /> */}
+        <Route exact path="/login" component={MainLogin} />
         <Route exact path="/register" component={MainRegister} />
         <ProtectedRoute exact path='/profile' component={Profile} />
         <ProtectedRoute exact path="/courses/:id" component={Course} />
