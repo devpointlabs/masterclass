@@ -10,8 +10,7 @@ class Enrollment < ApplicationRecord
       left join courses 
       on courses.id = enrollments.course_id
       where user_id = ?
-      order by course_id desc
-      ", id 
+      order by course_id desc", id 
     ])
   end
 
