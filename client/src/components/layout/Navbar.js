@@ -139,7 +139,7 @@ const Navbar = (props) => {
             /> */}
           </Link>
           <Menu.Item>
-            <Search />
+            <Search {...props} />
           </Menu.Item>
           {rightNavItems(authProviderValueObject)}
         </Menu>

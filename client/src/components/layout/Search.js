@@ -1,11 +1,24 @@
 import React, { useState, useContext } from "react"
 import { Form, Input, Button, Icon, } from "semantic-ui-react"
 import {AuthContext} from '../../providers/AuthProvider';
+import {Link} from 'react-router-dom'; 
+import axios from 'axios'; 
 
 
 const Search = (props) => {
   const [search, setSearch] = useState('')
-  const {searchCourses } = useContext(AuthContext)
+  const { setSearchResults } = useContext(AuthContext)
+
+    // Search by title, overview, and category 
+    const searchCourses =(e, search,) => {
+      e.preventDefault()
+      axios.get(`/api/search_courses?search=${search}`)
+        .then(res => {
+          debugger
+          setSearchResults(res.data)
+          props.history.push("/search")
+        })
+    }
 
   
   return (

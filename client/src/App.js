@@ -17,6 +17,7 @@ import TeachersView from "./components/teachers/TeachersView";
 import EditForm from "./components/forms/edits/EditForm";
 import TeachersQAAccordion from "./components/teachers/TeachersQAAccordion"
 import AddCourses from "./components/forms/adds/AddCourses"; 
+import SearchPage from "./components/SearchPage"; 
 
 
 const App = () => (
@@ -29,11 +30,10 @@ const App = () => (
         <Route exact path="/login" component={MainLogin} />
         <Route exact path="/register" component={MainRegister} />
         <ProtectedRoute exact path='/profile' component={Profile} />
-        <ProtectedRoute exact path="/courses/:id" component={Course} />
-        <Route exact path="/" component={Home} />
+        <Route exact path="/courses/:id" component={Course} />
+        <Route exact path="/search" component={SearchPage}/>
         <ProtectedRoute exact path="/teachers/courses" component={TeachersView} />
         <ProtectedRoute exact path="/my-courses" component={Enrollment} />
-        <Route exact path="/" />
         <ProtectedRoute exact path="/teachers/QandA" component={TeachersQAAccordion} />
         <ProtectedRoute exact path="/courses/:course_id/manage" component={EditForm}/>
         <ProtectedRoute exact path="/forms/create" component={AddCourses} />
