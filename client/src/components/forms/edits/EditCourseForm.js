@@ -80,7 +80,7 @@ const EditCourseForm = (props) => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <Form.Select
-            label="Field of Study?"
+            label="Course Category"
             placeholder='e.g. Ruby on Rails'
             name='category'
             required
