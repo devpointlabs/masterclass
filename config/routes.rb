@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     # post "create-comment", to: "comments#create"
 
     get "categories", to: "courses#get_categories"
+    get "search_courses", to: "courses#search_courses"
+
 
     resources :courses do 
       resources :enrollment, only: [:index, :new, :create, :destroy]

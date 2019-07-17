@@ -8,6 +8,18 @@ export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
   const [enrollments, setEnrollments] = useState([])
   const [videos, setVideos] = useState([]);
+  const [searchResults, setSearchResults] = useState([])
+
+
+  // Search by title, overview, and category 
+  const searchCourses =(e, search) => {
+    e.preventDefault()
+    axios.get(`/api/search_courses?search=${search}`)
+      .then(res => {
+        debugger
+        setSearchResults(res.data)
+      })
+  }
 
 
   // update user(id, user) - optional 
@@ -90,6 +102,9 @@ export const AuthProvider = (props) => {
         setEnrollments: (enrollment) => setEnrollments(enrollment),
         videos,
         setVideos: (videos) => setVideos(videos),
+        searchResults, 
+        setSearchResults: (search) => setSearchResults(search),
+        searchCourses: searchCourses, 
         // updateVideos: updateVideos,
       }}
     >

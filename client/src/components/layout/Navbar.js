@@ -2,10 +2,22 @@ import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
 import { Menu, Popup } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
+import axios from 'axios'; 
+import Search from './Search'; 
 
 
 const Navbar = (props) => {
-  const [toggleButton, setToggleButton] = useState(true); 
+  const [toggleButton, setToggleButton] = useState(true);
+  // const [searchResults, setSearchResults] = useState([])
+  
+  // const searchCourses =(e, search) => {
+  //   e.preventDefault()
+  //   axios.get(`/api/search_courses?search=${search}`)
+  //     .then(res => {
+  //       debugger
+  //       setSearchResults(res.data)
+  //     })
+  // }
 
   const rightNavItems = ({ user, handleLogout }) => {
     if (user) {
@@ -127,7 +139,7 @@ const Navbar = (props) => {
             /> */}
           </Link>
           <Menu.Item>
-            <Search  />
+            <Search />
           </Menu.Item>
           {rightNavItems(authProviderValueObject)}
         </Menu>
