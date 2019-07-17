@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, Header, Select, Dropdown } from "semantic-ui-react";
+import { Form, Header, Button, Segment, Select, Dropdown } from "semantic-ui-react";
 
 const AddCourses = (props) => {
   const [title, setTitle] = useState();
@@ -8,30 +8,18 @@ const AddCourses = (props) => {
   const [overview, setOverview] = useState();
   const [image, setImage] = useState();
   const [course, setCourse] = useState();
+  const [categories, setCategories] = useState([]);
 
-
-  // useEffect(() => {
-  //   if (props.course) {
-  //     setTitle(props.course.title)
-  //     setCategory(props.course.category)
-  //     setOverview(props.course.overview)
-  //     setImage(props.course.image)
-  //   }
-  // }, []
-  // )
+  useEffect(() => {
+    axios.get("/api/categories")
+      .then(res => {
+        setCategories(res.data)
+      })
+  }, []
+  )
 
   const handleSubmit = e => {
     e.preventDefault();
-    // if (props.course) {
-    //   axios
-    //     .put(`/api/courses/${props.id}`, { title: title, category: category, overview: overview, image: image })
-    //     .then(res => {
-    //       props.edit(res.data);
-    //       props.toggleEdit();
-    //     })
-    // }
-
-    // else {
     console.log(category)
     axios
       .post("/api/courses", { title: title, category: category, overview: overview, image: image })
@@ -42,11 +30,14 @@ const AddCourses = (props) => {
     // };
   }
 
-  const categoryOptions = [
-    { key: 'r', text: 'Ruby', value: 'Ruby' },
-    { key: 'js', text: 'JavaScript', value: 'JavaScript' },
-    { key: 're', text: 'React', value: 'React' },
-  ]
+  const categoryOptions = () => {
+    let catArray = []
+    categories.map(cat => {
+      let object = { key: cat.category, text: cat.category, value: cat.category }
+      catArray.push(object)
+    })
+    return (catArray)
+  }
 
 
   return (
@@ -62,16 +53,24 @@ const AddCourses = (props) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Form.Select
-            label="Category"
-            placeholder='e.g. Ruby on Rails'
-            name='category'
-            required
-            Select
-            value={category}
-            options={categoryOptions}
-            onChange={(e) => setCategory(e.target.innerText)}
-          />
+          <Segment>
+            <Form.Select
+              label="Course Category"
+              placeholder='e.g. Ruby on Rails'
+              name='category'
+              Select
+              value={category}
+              options={categoryOptions()}
+              onChange={(e) => setCategory(e.target.innerText)}
+            />
+            <Form.Input
+              label=" "
+              placeholder="Add New Category"
+              name='category'
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </Segment>
           <Form.Input
             label='Overview'
             placeholder='e.g. Cloudinary Start to Finish Implementation'
@@ -89,12 +88,27 @@ const AddCourses = (props) => {
             onChange={(e) => setImage(e.target.value)}
           />
         </Form.Group>
-      
-      <Form.Button color="green" inverted>Submit</Form.Button>
-      <Form.Button color="red" inverted onClick={() => props.history.goBack("/teachers/courses")}>Cancel</Form.Button>
-    </Form >
+        <Button.Group>
+          <Form.Button onClick={() => props.history.goBack("/teachers/courses")}>Cancel</Form.Button>
+          <Button.Or />
+          <Form.Button positive>Submit</Form.Button>
+        </Button.Group>
+      </Form >
+
     </>
   );
 };
 
 export default AddCourses;
+
+
+{/* <Segment>
+  <br />
+  <Form.Input
+    label="+ Category"
+    placeholder="New Category"
+    name='category'
+    value={category}
+    onChange={(e) => setCategory(e.target.innerText)}
+  />
+</Segment> */}

@@ -54,6 +54,7 @@ const QAndAs = (props)=>{
           comment_title={c.title}
           comment_body={c.body}
           comment_rating={c.rating}
+          comment_read={c.read}
           delete_comment={deleteComment}
           edit_comment={editComment}
           showComments={showComments}
