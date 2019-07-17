@@ -126,6 +126,9 @@ const Navbar = (props) => {
               active={props.location.pathname === "/"}
             /> */}
           </Link>
+          <Menu.Item>
+            <Search  />
+          </Menu.Item>
           {rightNavItems(authProviderValueObject)}
         </Menu>
       }
