@@ -55,7 +55,7 @@ const TeachersQAAccordion = (props) => {
         complete = true
         return (
           <div>
-            Here Are Your Videos
+            Here Are Your Videos With Unread Questions
             <Accordion.Accordion panels={videoPanels(v.v_lesson_id)} />
           </div>
         )
@@ -89,7 +89,7 @@ const TeachersQAAccordion = (props) => {
         complete = true
         return (
           <div>
-            Here Are Your Lessons
+            Here Are Your Lessons With Unread Questions
             <Accordion.Accordion panels={lessonPanels(l.l_course_id)} />
           </div>
         )
@@ -116,7 +116,7 @@ const TeachersQAAccordion = (props) => {
 
   const CourseContent = (
     <div>
-      Here Are Your Courses
+      Here Are Your Courses With Unread Questions
       <Accordion.Accordion panels={coursePanels()} />
     </div>
   )
