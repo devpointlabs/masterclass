@@ -8,6 +8,7 @@ const EditCourseForm = (props) => {
   const [overview, setOverview] = useState()
   const [image, setImage] = useState()
   const [course, setCourse] = useState();
+  const [categories, setCategories] = useState([]);
   const { course_id } = props.match.params;
 
 
@@ -21,6 +22,10 @@ const EditCourseForm = (props) => {
           setCategory(res.data.course.category)
         })
     }
+    axios.get("/api/categories")
+      .then(res => {
+        setCategories(res.data)
+      })
   }, []
   )
 
@@ -51,11 +56,14 @@ const EditCourseForm = (props) => {
     };
   }
 
-  const categoryOptions = [
-    { key: 'r', text: 'Ruby', value: 'Ruby' },
-    { key: 'js', text: 'JavaScript', value: 'JavaScript' },
-    { key: 're', text: 'React', value: 'React' },
-  ]
+  const categoryOptions = () => {
+    let catArray = []
+    categories.map(cat => {
+      let object = { key: cat.category, text: cat.category, value: cat.category }
+      catArray.push(object)
+    })
+    return (catArray)
+  }
 
 
   return (
@@ -78,7 +86,7 @@ const EditCourseForm = (props) => {
             required
             Select
             value={category}
-            options={categoryOptions}
+            options={categoryOptions()}
             onChange={(e) => setCategory(e.target.innerText)}
           />
           <Form.Input

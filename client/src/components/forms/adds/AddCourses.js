@@ -11,31 +11,15 @@ const AddCourses = (props) => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get(
-      "/api/categories")
+    axios.get("/api/categories")
       .then(res => {
         setCategories(res.data)
       })
-    // if (props.course) {
-    //   // setTitle(props.course.title)
-    // setCategory(props.course.category)
-    // setOverview(props.course.overview)
-    // setImage(props.course.image)
   }, []
   )
 
   const handleSubmit = e => {
     e.preventDefault();
-    // if (props.course) {
-    //   axios
-    //     .put(`/api/courses/${props.id}`, { title: title, category: category, overview: overview, image: image })
-    //     .then(res => {
-    //       props.edit(res.data);
-    //       props.toggleEdit();
-    //     })
-    // }
-
-    // else {
     console.log(category)
     axios
       .post("/api/courses", { title: title, category: category, overview: overview, image: image })
@@ -70,7 +54,7 @@ const AddCourses = (props) => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <Form.Select
-            label="Category"
+            label="Field of Study?"
             placeholder='e.g. Ruby on Rails'
             name='category'
             required
