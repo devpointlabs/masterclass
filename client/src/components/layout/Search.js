@@ -11,7 +11,7 @@ const Search = (props) => {
   return (
     <Form onSubmit={props.searchCourses}>
       <Input
-        placeholder="Search for..."
+        placeholder="Search for anything..."
         onChange={ (e) => setSearch(e.target.value) }
       />
       <Button 
