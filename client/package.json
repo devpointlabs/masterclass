@@ -16,9 +16,11 @@
     "react-scripts": "3.0.1",
     "react-spring": "^8.0.27",
     "react-x-editable": "0.0.10-beta",
+    "redux": "^4.0.4",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.87.2",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "video-react": "^0.14.0"
   },
   "proxy": "http://localhost:3001",
   "scripts": {
