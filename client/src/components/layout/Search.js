@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react"
 import { Form, Input, Button, Icon, } from "semantic-ui-react"
 import {AuthContext} from '../../providers/AuthProvider';
-import {Link} from 'react-router-dom'; 
 import axios from 'axios'; 
 
 
