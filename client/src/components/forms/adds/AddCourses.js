@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, Header, Select, Dropdown } from "semantic-ui-react";
+import { Form, Header, Button, Select, Dropdown } from "semantic-ui-react";
 
 const AddCourses = (props) => {
   const [title, setTitle] = useState();
@@ -54,7 +54,7 @@ const AddCourses = (props) => {
             onChange={(e) => setTitle(e.target.value)}
           />
           <Form.Select
-            label="Field of Study?"
+            label="Course Category"
             placeholder='e.g. Ruby on Rails'
             name='category'
             required
@@ -63,6 +63,7 @@ const AddCourses = (props) => {
             options={categoryOptions()}
             onChange={(e) => setCategory(e.target.innerText)}
           />
+          <Form.Button color="green" inverted>Add Category</Form.Button>
           <Form.Input
             label='Overview'
             placeholder='e.g. Cloudinary Start to Finish Implementation'
@@ -80,10 +81,13 @@ const AddCourses = (props) => {
             onChange={(e) => setImage(e.target.value)}
           />
         </Form.Group>
-
-        <Form.Button color="green" inverted>Submit</Form.Button>
-        <Form.Button color="red" inverted onClick={() => props.history.goBack("/teachers/courses")}>Cancel</Form.Button>
+        <Button.Group>
+          <Form.Button onClick={() => props.history.goBack("/teachers/courses")}>Cancel</Form.Button>
+          <Button.Or />
+          <Form.Button positive>Submit</Form.Button>
+        </Button.Group>
       </Form >
+
     </>
   );
 };
