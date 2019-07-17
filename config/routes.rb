@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     delete "my-courses/:course_id", to: "enrollments#destroy"
     # post "create-comment", to: "comments#create"
 
-    resources :courses do
+    get "categories", to: "courses#get_categories"
+
+    resources :courses do 
       resources :enrollment, only: [:index, :new, :create, :destroy]
     end
     resources :courses do

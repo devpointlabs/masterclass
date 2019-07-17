@@ -37,6 +37,11 @@ class Api::CoursesController < ApplicationController
     @course.destroy
   end
 
+  def get_categories
+    render json: Course.get_categories
+  end
+
+
   private
   def set_course
     @course = Course.find(params[:id])

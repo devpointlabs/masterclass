@@ -36,7 +36,6 @@ const TeachersCourses = (props) => {
         {/* <Header as = 'h1'>{e.role}</Header> */}
         <br />
         <h1>{e.category}</h1>
-        {console.log(e)}
         <Card fluid>
           <Link to={{ pathname: `/courses/${e.course_id}` }}>
             <Card.Header as='h2'>{e.title}</Card.Header>

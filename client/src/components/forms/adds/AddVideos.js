@@ -4,84 +4,69 @@ import axios from 'axios'
 import styled from 'styled-components';
 import { useDropzone } from 'react-dropzone';
 import ImageUploader from "react-images-upload";
+import ReactQuill from 'react-quill'
+import 'react-quill/dist/quill.snow.css'
 import {AuthContext } from '../../../providers/AuthProvider'; 
 
 
 const AddVideos = (props) => {
-  // const { updateVideos,  } = useContext(AuthContext);
+  const videoState = {
+    title: "",
+    description: "",
+    url: "", 
+  }
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [videos, setVideos] = useState([]); 
   const [image, setImage] = useState("")
-  const [video, setVideo] = useState([])
-  const [file, setFile] = useState();
-  const [fireVideo, setFireVideo]=useState(false)
+  const [video, setVideo] = useState(videoState)
+  const [file, setFile] = useState("");
+  // const [drop, setDrop] = useState({})
 
 
-
-
-  const onDrop=(image)=> {
-    setImage(image[0])
-  }
 
   
- 
 
-  // populate video title and video url. 
-  useEffect((e) => {
-  //  add videos axios call 
-
-  }, [])
-  // const updateVideos = () => {
-  //   let data = new FormData();
-  //   data.append("file", video.file);
-  //   axios.put(`/api/lessons/${video.lesson_id}/${video.id}`,data)
-  //     .then(res=>{
-  //       setVideo(res.data)
-  //     })
-  // }
-  
-  
-  
-  // const handleSubmit = e => {
-  //   e.preventDefault();
-  //   axios.post(`/api/lessons/${props.lessonId}/videos`, {title: title, description: description,})
-  //   .then(res=>{
-  //     setVideo(res.data)
-  //   })
-  // }
  const  handleSubmit = (e) => {
-   debugger
     e.preventDefault();
+    const {title, description, url} = video
+    console.log(title, description, url)
     let data = new FormData()
     data.append('file', image)
     data.append("title", title);
     data.append("description", description);
-    data.append("lesson_id", props.lessonId)
 
-    if(video.id){
-      axios.put(`/api/videos/${video.id}`, data)
+   
+    axios.post(`/api/lessons/${props.lesson_id}/videos?title=${title}&description=${description}`, data)
       .then( res => {
-        debugger
+        setTitle("")
+        setDescription("")
       })
       .catch(err => {
-        console.log("error in handleSubmit")
-      })
-    }else{
-    axios.post(`/api/videos?title=${title}&description=${description}`, data)
-      .then( res => {
-        debugger
-      })
-      .catch(err => {
-        console.log("error")
+        console.log("You're an idiot")
       })
       setTitle("")
       setDescription("")
       setImage("")
-    }
+    
+  }
+  const handleChange = (name) => (e) => {
+    // const { value, } = e.target;
+    setVideo({...video, [name]: e.target.value})
   }
 
-
+  const onDrop = (image) =>{
+    setImage(image[0])
+  }
+  // constructor(props) {
+  //   super(props);
+  //   this.onDrop = this.onDrop.bind(this);
+  // }
+  // onDrop(image) {
+  //   this.setState({
+  //     image: image[0]
+  //   });
+  // }
 
 // ADD VIDEO FORM 
 const renderAddForm = () => {
@@ -94,8 +79,8 @@ const renderAddForm = () => {
         placeholder='What best describes the content of the video?'
         name='title'
         // required
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
+        value={video.title}
+        onChange={handleChange("title")}
 
       />
       {/* TODO: Turn to textarea - keeps saying that value is not a valid prop */}
@@ -104,8 +89,8 @@ const renderAddForm = () => {
         placeholder='Give a short summary of the content of the video...'
         name='description'
         // required
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
+        value={video.description}
+        onChange={handleChange("description")}
       />
     </Form.Group>
     <br />
@@ -128,31 +113,31 @@ const renderAddForm = () => {
 
 
     // DROPZONE FUNCTIONALITY 
-   const StyledDropzone = (props) => { 
-      const onDrop = useCallback(acceptedFiles => {
-        setFile(acceptedFiles[0]); 
-      }, [])
+  //  const StyledDropzone = (props) => { 
+  //     const onDrop = useCallback(acceptedFiles => {
+  //       setFile(acceptedFiles[0]); 
+  //     }, [])
 
-    const {
-      getRootProps,
-      getInputProps,
-      isDragActive,
-      isDragAccept,
-      isDragReject
-    } = useDropzone({onDrop});
+  //   const {
+  //     getRootProps,
+  //     getInputProps,
+  //     isDragActive,
+  //     isDragAccept,
+  //     isDragReject
+  //   } = useDropzone({onDrop});
 
-    return (
-      <>
+  //   return (
+  //     <>
       
-      <div className="container">
-        <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
-          <input {...getInputProps()} />
-          <p>Drag 'n' drop some files here, or click to select files</p>
-        </Container>
-      </div>
-      </>
-    );
-  }
+  //     <div className="container">
+  //       <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
+  //         <input {...getInputProps()} />
+  //         <p>Drag 'n' drop some files here, or click to select files</p>
+  //       </Container>
+  //     </div>
+  //     </>
+  //   );
+  // }
 
 
  

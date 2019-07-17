@@ -4,9 +4,9 @@ import axios from 'axios'
 import { Link } from 'react-router-dom';
 
 const AddLessons = (props) => {
-  const [name, setName] = useState();
-  const [description, setDescription] = useState();
-  const [lesson, setLesson] = useState();
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [lesson, setLesson] = useState({});
 
 
 
@@ -15,13 +15,10 @@ const AddLessons = (props) => {
     axios
       .post(`/api/courses/${props.course_id}/lessons`, { name: name, description: description })
       .then(res => {
-        setLesson(res.data);
+        // setLesson(res.data);
         setName(""); 
         setDescription(""); 
         props.setShowCreateForm(!props.showCreateForm)
-        // props.getLessonId(res.data.id);
-
-        
       });
   }
 

@@ -17,15 +17,11 @@ const EditLessonDetails = (props) => {
         .then(res => {
           setName(res.data.name)
           setDescription(res.data.description)
-          
-
         })
     }
-
   }, [])
 
   const handleSubmit = e => {
-
     e.preventDefault();
       axios
         .put(`/api/lessons/${props.lesson_id}`, { name: name, description: description })
@@ -33,7 +29,6 @@ const EditLessonDetails = (props) => {
          setLesson(res.data); 
          console.log(res.data)
          props.closeEdit(props.lesson_id)
-        //  props.setShowEditForm(!props.showEditForm)
         })
     }
 

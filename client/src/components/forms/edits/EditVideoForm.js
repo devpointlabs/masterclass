@@ -1,6 +1,7 @@
 import React, {Fragment, useState, useEffect,}from 'react'; 
 import {Form, Button, Card, Image, Icon} from 'semantic-ui-react'
 import axios from 'axios'
+import EditVideoDetails from './EditVideoDetails'; 
 
 const EditVideoForm = (props) => {
   const [formVideos, setFormVideos] = useState([])
@@ -87,7 +88,7 @@ const toggleEditForm = (id, showEditForm) => {
 
    //  will render the edit form for the videos 
    const renderEditForm = (id, showForm) => {
-    return <h1>Works!</h1>
+    return <EditVideoDetails />
     
     }
 
