@@ -55,7 +55,12 @@ const Video = (props) => {
         <div className='item_view'>
           <div className='item_card'>
             <Header as='h1'>{video.title}</Header>
-            <Image src = {video.url}/>
+            {/* <Image src = {video.url}/> */}
+            <Player
+          playsInline
+      // poster="/assets/poster.png"
+              src={video.url}
+            />
           </div>
         <div className='video_des'>
           {role === 'teacher' && 
