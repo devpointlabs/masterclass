@@ -1,6 +1,6 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
-import { Form, Header, Select } from "semantic-ui-react";
+import { Form, Header, Segment, Select } from "semantic-ui-react";
 
 const EditCourseForm = (props) => {
   const [title, setTitle] = useState()
@@ -79,16 +79,25 @@ const EditCourseForm = (props) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Form.Select
-            label="Course Category"
-            placeholder='e.g. Ruby on Rails'
-            name='category'
-            required
-            Select
-            value={category}
-            options={categoryOptions()}
-            onChange={(e) => setCategory(e.target.innerText)}
-          />
+          <Segment>
+            <Form.Select
+              label="Course Category"
+              placeholder='e.g. Ruby on Rails'
+              name='category'
+              required
+              Select
+              value={category}
+              options={categoryOptions()}
+              onChange={(e) => setCategory(e.target.innerText)}
+            />
+            <Form.Input
+              label=" "
+              placeholder="Add New Category"
+              name='category'
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </Segment>
           <Form.Input
             label='Overview'
             placeholder='What will be covered?'

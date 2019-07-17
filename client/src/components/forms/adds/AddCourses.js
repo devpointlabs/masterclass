@@ -63,13 +63,13 @@ const AddCourses = (props) => {
               options={categoryOptions()}
               onChange={(e) => setCategory(e.target.innerText)}
             />
-            {/* <Form.Input
+            <Form.Input
               label=" "
               placeholder="Add New Category"
               name='category'
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-            /> */}
+            />
           </Segment>
           <Form.Input
             label='Overview'
