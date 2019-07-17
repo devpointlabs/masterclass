@@ -19,7 +19,6 @@ class Api::VideosController < ApplicationController
     if file
       begin
         ext = File.extname(file.tempfile)
-        binding.pry
         cloud_video = Cloudinary::Uploader.upload(file, public_id: file.original_filename, :resource_type => :video, secure: true)
         video.url = cloud_video['secure_url']
       rescue => exception
