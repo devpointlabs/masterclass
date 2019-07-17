@@ -33,4 +33,5 @@ Rails.application.routes.draw do
       resources :replies
     end
   end
+  get '*other', to: 'static#index'
 end
