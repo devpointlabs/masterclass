@@ -1,0 +1,8 @@
+{
+  "name": "masterclass",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/devpointlabs/masterclass.git",
+  "author": "Patrick Lamoureux <patrick@blackcedar.com>",
+  "license": "MIT"
+}

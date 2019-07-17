@@ -20,7 +20,7 @@ const AddVideos = (props) => {
   const [videos, setVideos] = useState([]); 
   const [image, setImage] = useState("")
   const [video, setVideo] = useState(videoState)
-  const [file, setFile] = useState("");
+  const [boob, setBoob] = useState();
   // const [drop, setDrop] = useState({})
 
 
@@ -30,9 +30,8 @@ const AddVideos = (props) => {
  const  handleSubmit = (e) => {
     e.preventDefault();
     const {title, description, url} = video
-    console.log(title, description, url)
     let data = new FormData()
-    data.append('file', image)
+    data.append('file', boob)
     data.append("title", title);
     data.append("description", description);
 
@@ -55,9 +54,9 @@ const AddVideos = (props) => {
     setVideo({...video, [name]: e.target.value})
   }
 
-  const onDrop = (image) =>{
-    setImage(image[0])
-  }
+  // const onDrop = (image) =>{
+  //   setImage(image[0])
+  // }
   // constructor(props) {
   //   super(props);
   //   this.onDrop = this.onDrop.bind(this);
@@ -94,16 +93,16 @@ const renderAddForm = () => {
       />
     </Form.Group>
     <br />
-    {/* <StyledDropzone /> */}
-    <ImageUploader
+    <StyledDropzone />
+    {/* <ImageUploader
           withPreview={true}
           withIcon={true}
           buttonText="Choose image"
           onChange={onDrop}
-          imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+          imgExtension={[".jpg", ".gif", ".png", ".gif", ".mov"]}
           maxFileSize={5242880}
           singleImage={true}
-          />
+          /> */}
     <br />
     <Form.Button>Submit</Form.Button>
   </Form>
@@ -113,31 +112,31 @@ const renderAddForm = () => {
 
 
     // DROPZONE FUNCTIONALITY 
-  //  const StyledDropzone = (props) => { 
-  //     const onDrop = useCallback(acceptedFiles => {
-  //       setFile(acceptedFiles[0]); 
-  //     }, [])
+   const StyledDropzone = (props) => { 
+      const onDrop = useCallback(acceptedFiles => {
+        setBoob(acceptedFiles[0]); 
+      }, [])
 
-  //   const {
-  //     getRootProps,
-  //     getInputProps,
-  //     isDragActive,
-  //     isDragAccept,
-  //     isDragReject
-  //   } = useDropzone({onDrop});
+    const {
+      getRootProps,
+      getInputProps,
+      isDragActive,
+      isDragAccept,
+      isDragReject
+    } = useDropzone({onDrop});
 
-  //   return (
-  //     <>
+    return (
+      <>
       
-  //     <div className="container">
-  //       <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
-  //         <input {...getInputProps()} />
-  //         <p>Drag 'n' drop some files here, or click to select files</p>
-  //       </Container>
-  //     </div>
-  //     </>
-  //   );
-  // }
+      <div className="container">
+        <Container {...getRootProps({isDragActive, isDragAccept, isDragReject})}>
+          <input {...getInputProps()} />
+          <p>Drag 'n' drop some files here, or click to select files</p>
+        </Container>
+      </div>
+      </>
+    );
+  }
 
 
  
