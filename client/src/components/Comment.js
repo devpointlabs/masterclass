@@ -4,11 +4,12 @@ import CommentForm from "./CommentForm";
 import Replies from "./Replies"
 import styled from 'styled-components';
 import ReplyForm from "./ReplyForm"
-import { Button, Rating, Icon, Comment, Header } from "semantic-ui-react";
+import { Button, Rating, Icon, Comment, Checkbox } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
 
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
+  const [readComment, setReadComment] = useState(false)
   const [showForm, setShowForm] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
   const video_id = props.video_id
@@ -28,15 +29,32 @@ const QAndA = (props) => {
     .then( res => setComment(res.data))
   }, [])
 
+  // useEffect(()=>{
+  //   if(comment.read === true){
+  //     console.log("it's changed")
+  //   }
+
+  // },[comment])
+
   const toggleForm = () => {
     setShowForm(!showForm)
+  }
+  const commentRead = () => {
+    let id = comment_id
+    axios.put(`/api/toggle-read/${id}`)
+    setReadComment(true)
   }
 
   const toggleReplies = () => {
     setShowReplies(!showReplies)
   }
+  const renderButtons = () => {
+      if (role === 'teacher' && props.comment_read === false && readComment === false) {
+        return (
+          <Checkbox label="Comment has been read" onClick={() => commentRead()} />
+          )
+      }
 
-  const renderButtons = () =>{
     if (user.id === user_id || role === 'teacher'){
       return (
         <>
@@ -116,6 +134,7 @@ const QAndA = (props) => {
           }
         </Comment.Group>
       </Comment.Content>
+      {console.log(comment.read)}
     </>
   )
 }
