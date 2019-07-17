@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { Form, Header, Button, Select, Dropdown } from "semantic-ui-react";
+import { Form, Header, Button, Segment, Select, Dropdown } from "semantic-ui-react";
 
 const AddCourses = (props) => {
   const [title, setTitle] = useState();
@@ -53,17 +53,24 @@ const AddCourses = (props) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Form.Select
-            label="Course Category"
-            placeholder='e.g. Ruby on Rails'
-            name='category'
-            required
-            Select
-            value={category}
-            options={categoryOptions()}
-            onChange={(e) => setCategory(e.target.innerText)}
-          />
-          <Form.Button color="green" inverted>Add Category</Form.Button>
+          <Segment>
+            <Form.Select
+              label="Course Category"
+              placeholder='e.g. Ruby on Rails'
+              name='category'
+              Select
+              value={category}
+              options={categoryOptions()}
+              onChange={(e) => setCategory(e.target.innerText)}
+            />
+            <Form.Input
+              label="+Category"
+              placeholder="Add New Category"
+              name='category'
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+            />
+          </Segment>
           <Form.Input
             label='Overview'
             placeholder='e.g. Cloudinary Start to Finish Implementation'
@@ -93,3 +100,15 @@ const AddCourses = (props) => {
 };
 
 export default AddCourses;
+
+
+{/* <Segment>
+  <br />
+  <Form.Input
+    label="+ Category"
+    placeholder="New Category"
+    name='category'
+    value={category}
+    onChange={(e) => setCategory(e.target.innerText)}
+  />
+</Segment> */}
