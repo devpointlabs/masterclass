@@ -43,7 +43,7 @@ const Search = (props) => {
   useEffect(()=>{
     const interval = setInterval(()=>{
       setAlert(!alert)
-    },5000)
+    },3000)
     return () => clearInterval(interval)
   },[timer])
 
