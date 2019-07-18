@@ -10,22 +10,14 @@ import Video from "./components/Video";
 import Lesson from "./components/Lesson";
 import Navbar from "./components/layout/Navbar";
 import Enrollment from './components/Enrollment'
-<<<<<<< HEAD
-import FetchUser from './components/auth/FetchUser';
-=======
 import FetchUser from "./components/Auth/FetchUser"
->>>>>>> 552e51c3edcf70ffdc4aef672277ffd8a017c43a
 import Profile from './components/Profile';
 import ProtectedRoute from "./components/Auth/ProtectedRoute";
 import TeachersView from "./components/teachers/TeachersView";
 import EditForm from "./components/forms/edits/EditForm";
 import TeachersQAAccordion from "./components/teachers/TeachersQAAccordion"
-<<<<<<< HEAD
 import AddCourses from "./components/forms/adds/AddCourses";
-=======
-import AddCourses from "./components/forms/adds/AddCourses"; 
-import SearchPage from "./components/SearchPage"; 
->>>>>>> 552e51c3edcf70ffdc4aef672277ffd8a017c43a
+import SearchPage from "./components/SearchPage";
 
 
 const App = () => (
@@ -39,7 +31,7 @@ const App = () => (
         <Route exact path="/register" component={MainRegister} />
         <ProtectedRoute exact path='/profile' component={Profile} />
         <Route exact path="/courses/:id" component={Course} />
-        <Route exact path="/search" component={SearchPage}/>
+        <Route exact path="/search" component={SearchPage} />
         <ProtectedRoute exact path="/teachers/courses" component={TeachersView} />
         <ProtectedRoute exact path="/my-courses" component={Enrollment} />
         <ProtectedRoute exact path="/teachers/QandA" component={TeachersQAAccordion} />
