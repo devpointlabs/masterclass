@@ -1,5 +1,5 @@
 class Api::RepliesController < ApplicationController
-  before_action :set_comment
+  before_action :set_comment, except: [:userinfo]
   before_action :set_reply, only: [:show, :update, :destroy]
 
   def index
@@ -8,6 +8,10 @@ class Api::RepliesController < ApplicationController
 
   def show
     render json: @reply
+  end
+
+  def userinfo
+    render json: Reply.user_info(params[:user_id], params[:id])
   end
 
   def create
