@@ -86,7 +86,6 @@ const QAndA = (props) => {
         />
       </Comment.Content>
       <Comment.Content>
-        {console.log(userInfo)}
         {userInfo.map(u => (
           <Label as='a' image>
             <img src={u.user_image || defaultImage} />
