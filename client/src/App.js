@@ -10,13 +10,13 @@ import Video from "./components/Video";
 import Lesson from "./components/Lesson";
 import Navbar from "./components/layout/Navbar";
 import Enrollment from './components/Enrollment'
-import FetchUser from "./components/auth/FetchUser"
+import FetchUser from './components/auth/FetchUser';
 import Profile from './components/Profile';
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import TeachersView from "./components/teachers/TeachersView";
 import EditForm from "./components/forms/edits/EditForm";
 import TeachersQAAccordion from "./components/teachers/TeachersQAAccordion"
-import AddCourses from "./components/forms/adds/AddCourses"; 
+import AddCourses from "./components/forms/adds/AddCourses";
 
 
 const App = () => (
@@ -35,7 +35,7 @@ const App = () => (
         <ProtectedRoute exact path="/my-courses" component={Enrollment} />
         <Route exact path="/" />
         <ProtectedRoute exact path="/teachers/QandA" component={TeachersQAAccordion} />
-        <ProtectedRoute exact path="/courses/:course_id/manage" component={EditForm}/>
+        <ProtectedRoute exact path="/courses/:course_id/manage" component={EditForm} />
         <ProtectedRoute exact path="/forms/create" component={AddCourses} />
         <ProtectedRoute exact path="/lessons/:id" component={Lesson} />
         <ProtectedRoute exact path="/lessons/:lesson_id/videos/:video_id" component={Video} />
