@@ -28,10 +28,15 @@ Rails.application.routes.draw do
 
     resources :comments
     put "toggle-read/:id", to: "comments#toggleread"
+    get "user-info/:user_id/:id", to: "comments#userinfo"
 
     resources :comments do
       resources :replies
     end
+
+    resources :replies
+    get "reply-user-info/:user_id/:id", to: "replies#userinfo"
+
   end
   get '*other', to: 'static#index'
 end
