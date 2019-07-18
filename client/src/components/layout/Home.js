@@ -1,8 +1,9 @@
 import React, { Fragment, useState, } from "react";
 import Courses from '../Courses';
-import { Header, Segment, Card, } from "semantic-ui-react";
+import { Header, Segment, Card, Container } from "semantic-ui-react";
 import styled from 'styled-components';
 import HeaderText from '../../Styles/HeaderText'
+import CourseSlider from '../CourseSlider';
 // import { useSpring, animated } from 'react-spring'
 
 
@@ -24,18 +25,18 @@ const Home = () => {
         <Header textAlign="left" as={HeaderText} fSize="medium">
           Let your SKILLS do the talking.
           </Header>
-          <br/>
-        {/* </animated.div> */}
-        {/* <Segment>
-          Course Showcase/Preview will render here
-          </Segment> */}
+        <br />
       </AppContainer>
-        <Segment>
-          <Header as="h1" textAlign="center">{heading}</Header>
-          <Card.Group itemsPerRow="2">
-            <Courses />
-          </Card.Group>
-        </Segment>
+
+      <Container style={{ height: "200px", backgroundColor: "red" }}>
+        <CourseSlider />
+      </Container>
+      <Segment>
+        <Header as="h1" textAlign="center">{heading}</Header>
+        <Card.Group itemsPerRow="2">
+          <Courses />
+        </Card.Group>
+      </Segment>
     </Fragment >
   );
 }
