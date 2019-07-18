@@ -8,16 +8,6 @@ import Search from './Search';
 
 const Navbar = (props) => {
   const [toggleButton, setToggleButton] = useState(true);
-  // const [searchResults, setSearchResults] = useState([])
-  
-  // const searchCourses =(e, search) => {
-  //   e.preventDefault()
-  //   axios.get(`/api/search_courses?search=${search}`)
-  //     .then(res => {
-  //       debugger
-  //       setSearchResults(res.data)
-  //     })
-  // }
 
   const rightNavItems = ({ user, handleLogout }) => {
     if (user) {

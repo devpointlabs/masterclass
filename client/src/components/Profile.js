@@ -3,7 +3,8 @@ import {useDropzone} from 'react-dropzone'
 import { AuthContext, } from "../providers/AuthProvider"
 import { Container, Form, Grid, Image, Divider, Header, Button, } from "semantic-ui-react"
 
-const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
+// const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
+const defaultImage = 'https://png.pngtree.com/svg/20161212/f93e57629c.svg';
 
 const Profile = () => {
   const { user, updateUser} = useContext(AuthContext);
