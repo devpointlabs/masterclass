@@ -54,18 +54,6 @@ const AddVideos = (props) => {
     setVideo({...video, [name]: e.target.value})
   }
 
-  // const onDrop = (image) =>{
-  //   setImage(image[0])
-  // }
-  // constructor(props) {
-  //   super(props);
-  //   this.onDrop = this.onDrop.bind(this);
-  // }
-  // onDrop(image) {
-  //   this.setState({
-  //     image: image[0]
-  //   });
-  // }
 
 // ADD VIDEO FORM 
 const renderAddForm = () => {
