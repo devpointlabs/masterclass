@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
     resources :comments
     put "toggle-read/:id", to: "comments#toggleread"
+    get "user-info/:user_id/:id", to: "comments#userinfo"
 
     resources :comments do
       resources :replies

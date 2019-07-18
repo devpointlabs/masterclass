@@ -8,7 +8,7 @@ import { Icon, Button, Comment, } from "semantic-ui-react";
 const QAndAs = (props)=>{
   const [comments, setComments] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const {user, } = useContext(AuthContext)
+  const { user, } = useContext(AuthContext)
 
   useEffect(()=>{
     const id = props.video_id
