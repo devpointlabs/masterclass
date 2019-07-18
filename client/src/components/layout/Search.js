@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Form, Input, Button, Icon, Popup, Message } from "semantic-ui-react";
 import { SearchContext } from "../../providers/SearchProvider";
 import axios from "axios";
@@ -8,6 +8,7 @@ const Search = (props) => {
   const { searchResults, setSearchResults, search, setSearch} = useContext(SearchContext);
   const [showClearButton, setShowClearButton ] = useState(false); 
   const [alert, setAlert] = useState(false); 
+  const [timer, setTimer] = useState(false)
 
   // Search by title, overview, and category
   const searchCourses = (e, search) => {
@@ -15,6 +16,7 @@ const Search = (props) => {
     e.preventDefault();
     if(search.length === 0 ){
       setAlert(true); 
+      setTimer(true)
     } else {
     axios.get(`/api/search_courses?search=${search}`)
     .then((res) => {
@@ -38,6 +40,12 @@ const Search = (props) => {
   //   } else 
   //   setShowClearButton(false)
   // }
+  useEffect(()=>{
+    const interval = setInterval(()=>{
+      setAlert(!alert)
+    },5000)
+    return () => clearInterval(interval)
+  },[timer])
 
   const renderMessage = () => {
     return (
@@ -55,7 +63,6 @@ const Search = (props) => {
   return (
     <>
     {alert && renderMessage()
-    
     }
     <Form onSubmit={props.searchCourses}>
       <Input 

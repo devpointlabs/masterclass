@@ -37,6 +37,7 @@ const EditCourseForm = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    debugger
     if (course_id) {
       axios
         .put(`/api/courses/${course_id}`, { title: title, category: category, overview: overview, image: image })
@@ -44,6 +45,7 @@ const EditCourseForm = (props) => {
           setCourse(res.data);
           props.getCourseId(res.data.id);
         })
+      
     }
 
     else {
