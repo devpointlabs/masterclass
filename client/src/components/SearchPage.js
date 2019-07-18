@@ -19,7 +19,7 @@ const SearchPage = () => {
     <>
     {countResults()}
     <Container>
-      <h1>There are {counter} results matching your search!</h1>
+      {(counter === 0 ) ? <h1>Sorry! There are no results!</h1> :  <h1>There are {counter} results matching your search!</h1> }
       {searchResults.map(result => (
         <Card fluid key={result.id}>
           <Image src={result.image || defaultImage} size="tiny" floated="left"/>
