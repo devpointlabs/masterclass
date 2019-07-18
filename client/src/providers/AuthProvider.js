@@ -8,6 +8,10 @@ export const AuthProvider = (props) => {
   const [user, setUser] = useState(null);
   const [enrollments, setEnrollments] = useState([])
   const [videos, setVideos] = useState([]);
+  const [searchResults, setSearchResults] = useState([])
+
+
+
 
 
   // update user(id, user) - optional 
@@ -90,6 +94,9 @@ export const AuthProvider = (props) => {
         setEnrollments: (enrollment) => setEnrollments(enrollment),
         videos,
         setVideos: (videos) => setVideos(videos),
+        searchResults, 
+        setSearchResults: (search) => setSearchResults(search),
+        // searchCourses: searchCourses, 
         // updateVideos: updateVideos,
       }}
     >

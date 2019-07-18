@@ -35,34 +35,25 @@ const TeachersCourses = (props) => {
       <div key={e.course_id}>
         {/* <Header as = 'h1'>{e.role}</Header> */}
         <br />
-        <h1>{e.category}</h1>
-        <Card fluid>
-          <Link to={{ pathname: `/courses/${e.course_id}` }}>
-            <Card.Header as='h2'>{e.title}</Card.Header>
-            <Card.Description>{e.overview || "This will have an overview"}</Card.Description>
-          </Link>
-          <Divider />
-          <Card.Meta>
-            {/* TODO - Delete Button & Edit Button */}
-            <div style={{display:"flex", justifyContent:"flex-end" }}>
-            {(e.role === 'teacher') &&
-              <Link to={`/courses/${e.course_id}/manage`}>
-                <Button size="tiny" color="blue" icon animated>
-                  <Button.Content visible>Edit</Button.Content>
-                  <Button.Content hidden>
-                    <Icon name="pencil" />
-                  </Button.Content>
-                </Button>
-              </Link>}
-            {(e.role === 'teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
-              <Button.Content visible>Delete</Button.Content>
-              <Button.Content hidden>
-                <Icon name="minus" />
-              </Button.Content>
-            </Button>}
-         </div>
-          </Card.Meta>
-        </Card>
+        <div>
+          <h1>{e.category}</h1>
+            <Link to={{ pathname: `/courses/${e.course_id}/manage` }}>
+              <Card fluid>
+                <Card.Header as='h2'>{e.title}</Card.Header>
+                <Card.Description>{e.overview || "This will have an overview"}
+                </Card.Description>
+              </Card>
+            </Link>
+        </div>
+        <div style={{display:"flex", justifyContent:"space-between" }}>
+           {(e.role === 'teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+             <Button.Content visible>Delete</Button.Content>
+             <Button.Content hidden>
+               <Icon name="minus" />
+             </Button.Content>
+           </Button>}
+        </div>
+        
       </div>
     ))
     )

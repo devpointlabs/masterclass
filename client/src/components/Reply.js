@@ -29,7 +29,7 @@ const Reply = (props) => {
   }
 
   const renderButtons = () => {
-    if (user.id === user_id || role === 'teacher') {
+    if (user.id === user_id) {
       return (
         <>
           <Button.Group>

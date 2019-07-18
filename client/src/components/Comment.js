@@ -56,7 +56,7 @@ const QAndA = (props) => {
           )
       }
 
-    if (user.id === user_id || role === 'teacher'){
+    if (user.id === user_id){
       return (
         <>
           <Button.Group>
