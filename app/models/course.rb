@@ -10,4 +10,14 @@ class Course < ApplicationRecord
     )
   end
 
+  def self.search_courses(title, overview, category)
+    find_by_sql(["
+    SELECT *
+    FROM courses
+    WHERE LOWER(title) LIKE LOWER(?) 
+    OR LOWER(overview) LIKE LOWER(?) 
+    OR LOWER(category) LIKE LOWER(?)
+    ", "%#{title}%", "%#{overview}%", "%#{category}%"])
+  end
+
 end

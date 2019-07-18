@@ -56,7 +56,7 @@ const Lesson = (props) =>{
     
     <>
       <Container>
-      <Link to={'/'}>
+      <Link to={`/courses/${lesson.course_id}`}>
           <Button color="black">
             <Icon name='arrow alternate circle left outline' />
             Go Back

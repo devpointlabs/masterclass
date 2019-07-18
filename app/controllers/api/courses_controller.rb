@@ -41,6 +41,10 @@ class Api::CoursesController < ApplicationController
     render json: Course.get_categories
   end
 
+  def search_courses
+    render json: Course.search_courses(params[:search], params[:search], params[:search])
+  end
+
 
   private
   def set_course
