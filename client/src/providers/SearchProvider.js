@@ -10,10 +10,6 @@ export const SearchProvider = (props) => {
 
 
 
-
-
-
-
   return (
     <SearchContext.Provider
       value={{
