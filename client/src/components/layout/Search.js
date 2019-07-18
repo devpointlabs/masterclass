@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Form, Input, Button, Icon } from "semantic-ui-react";
-import { AuthContext } from "../../providers/AuthProvider";
+import { SearchContext } from "../../providers/SearchProvider";
 import axios from "axios";
 
 const Search = (props) => {
   const [search, setSearch] = useState("");
-  const { searchResults, setSearchResults } = useContext(AuthContext);
+  const { searchResults, setSearchResults } = useContext(SearchContext);
   const [showClearButton, setShowClearButton ] = useState(false)
 
   // Search by title, overview, and category

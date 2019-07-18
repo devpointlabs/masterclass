@@ -1,9 +1,9 @@
 import React, {useState, useContext} from 'react'; 
-import {AuthContext} from '../providers/AuthProvider';
+import {SearchContext} from '../providers/SearchProvider';
 import { Container, Card, Image, Icon } from 'semantic-ui-react';
 
 const SearchPage = () => {
-  const { searchResults } = useContext(AuthContext);
+  const { searchResults } = useContext(SearchContext);
   let counter = 0
   const defaultImage = 'https://icon-library.net//images/no-image-icon/no-image-icon-13.jpg'
 
