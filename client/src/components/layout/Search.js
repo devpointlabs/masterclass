@@ -20,10 +20,10 @@ const Search = (props) => {
     });
   };
 
-  const clearResults = () => {
-    // clear search results and set loader to false 
-    setSearchResults([]); 
-  }
+  // const clearResults = () => {
+  //   // clear search results and set loader to false 
+  //   setSearchResults([]); 
+  // }
 
   
 
@@ -46,7 +46,7 @@ const Search = (props) => {
         <Icon circular name="search" />
       </Button>
       {/* {showClearButton &&  */}
-      <Button floated="right" onClick={(e) => clearResults()}>Clear</Button> 
+      {/* <Button floated="right" onClick={(e) => clearResults()}>Clear</Button>  */}
     </Form>
   );
 };
