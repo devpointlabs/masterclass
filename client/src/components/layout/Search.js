@@ -39,17 +39,23 @@ const Search = (props) => {
   //   setShowClearButton(false)
   // }
 
+  const renderMessage = () => {
+    return (
+      <Message negative>
+        <Message.Header>Sorry!</Message.Header>
+        <p>Please enter an item to search</p>
+      </Message>
+    )
+  }
+
   const clearInput = () => {
     setSearch("")
   }
 
   return (
     <>
-    {alert && 
-       <Message negative>
-        <Message.Header>Sorry!</Message.Header>
-        <p>Please enter an item to search</p>
-      </Message>
+    {alert && renderMessage()
+    
     }
     <Form onSubmit={props.searchCourses}>
       <Input 
