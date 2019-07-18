@@ -41,8 +41,6 @@ const Search = (props) => {
       </Button>
       {/* {showClearButton &&  */}
       <Button floated="right" onClick={(e) => clearResults()}>Clear</Button> 
-    
-      
     </Form>
   );
 };

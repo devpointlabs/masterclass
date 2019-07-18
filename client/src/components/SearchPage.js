@@ -1,14 +1,25 @@
-import React, {useContext} from 'react'; 
+import React, {useState, useContext} from 'react'; 
 import {AuthContext} from '../providers/AuthProvider';
 import { Container, Card, Image, Icon } from 'semantic-ui-react';
 
 const SearchPage = () => {
-  const { searchResults } = useContext(AuthContext)
+  const { searchResults } = useContext(AuthContext);
+  let counter = 0
   const defaultImage = 'https://icon-library.net//images/no-image-icon/no-image-icon-13.jpg'
+
+  // count searchResults 
+  const countResults = () => {
+    for(var i = 0; i < searchResults.length; i++){
+      counter++
+    }
+  }
 
 
   return (
+    <>
+    {countResults()}
     <Container>
+      <h1>There are {counter} results matching your search!</h1>
       {searchResults.map(result => (
         <Card fluid key={result.id}>
           <Image src={result.image || defaultImage} size="tiny" floated="left"/>
@@ -18,6 +29,7 @@ const SearchPage = () => {
         </Card>
       ))}
     </Container>
+    </>
   )
 }
 
