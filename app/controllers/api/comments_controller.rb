@@ -1,5 +1,5 @@
 class Api::CommentsController < ApplicationController
-  before_action :set_video, except: [:toggleread]
+  before_action :set_video, except: [:toggleread, :userinfo]
   before_action :set_comment, only: [:show, :update, :destroy, :toggleread]
 
   def index
@@ -26,6 +26,10 @@ class Api::CommentsController < ApplicationController
     else
       render json: @comment.errors, status: 422
     end
+  end
+
+  def userinfo
+    render json: Comment.user_info(params[:user_id], params[:id])
   end
 
   def update

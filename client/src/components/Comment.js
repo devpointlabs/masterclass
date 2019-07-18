@@ -4,14 +4,17 @@ import CommentForm from "./CommentForm";
 import Replies from "./Replies"
 import styled from 'styled-components';
 import ReplyForm from "./ReplyForm"
-import { Button, Rating, Icon, Comment, Checkbox } from "semantic-ui-react";
+import { Button, Rating, Icon, Comment, Checkbox, Label } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
+
+const defaultImage = "https://png.pngtree.com/svg/20161212/f93e57629c.svg"
 
 const QAndA = (props) => {
   const [comment, setComment] = useState([])
   const [readComment, setReadComment] = useState(false)
   const [showForm, setShowForm] = useState(false);
   const [showReplies, setShowReplies] = useState(false);
+  const [userInfo, setUserInfo] = useState([])
   const video_id = props.video_id
   const comment_id = props.comment_id
   const comment_title = props.comment_title
@@ -23,12 +26,16 @@ const QAndA = (props) => {
   const role = props.role
   const {user, } = useContext(AuthContext)
 
-
   useEffect( () => {
     axios.get(`/api/videos/${video_id}/comments/${comment_id}`)
     .then( res => setComment(res.data))
   }, [])
 
+  useEffect( () => {
+    let id = comment_id
+    axios.get(`/api/user-info/${user_id}/${id}`)
+    .then( res => setUserInfo(res.data))
+  }, [])
 
   const toggleForm = () => {
     setShowForm(!showForm)
@@ -79,6 +86,13 @@ const QAndA = (props) => {
         />
       </Comment.Content>
       <Comment.Content>
+        {console.log(userInfo)}
+        {userInfo.map(u => (
+          <Label as='a' image>
+            <img src={u.user_image || defaultImage} />
+            {u.user_name}
+          </Label>
+        ))}
         <Comment.Content>
           {comment_title}
         </Comment.Content>
@@ -128,7 +142,6 @@ const QAndA = (props) => {
           }
         </Comment.Group>
       </Comment.Content>
-      {console.log(comment.read)}
     </>
   )
 }
