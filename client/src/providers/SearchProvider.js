@@ -5,7 +5,9 @@ export const SearchContext = React.createContext();
 export const SearchConsumer = SearchContext.Consumer;
 
 export const SearchProvider = (props) => {
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState([]);
+  const [search, setSearch] = useState("");
+
 
 
 
@@ -17,8 +19,8 @@ export const SearchProvider = (props) => {
       value={{
         searchResults, 
         setSearchResults: (search) => setSearchResults(search),
-        // searchCourses: searchCourses, 
-        // updateVideos: updateVideos,
+        search, 
+        setSearch: (result => setSearch(result)), 
       }}
     >
       {props.children}

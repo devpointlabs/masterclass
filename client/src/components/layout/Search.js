@@ -4,13 +4,13 @@ import { SearchContext } from "../../providers/SearchProvider";
 import axios from "axios";
 
 const Search = (props) => {
-  const [search, setSearch] = useState("");
-  const { searchResults, setSearchResults } = useContext(SearchContext);
+  // const [search, setSearch] = useState("");
+  const { searchResults, setSearchResults, search, setSearch} = useContext(SearchContext);
   const [showClearButton, setShowClearButton ] = useState(false)
 
   // Search by title, overview, and category
   const searchCourses = (e, search) => {
-    setSearch("")
+    // setSearch("")
     e.preventDefault();
     axios.get(`/api/search_courses?search=${search}`)
     .then((res) => {
