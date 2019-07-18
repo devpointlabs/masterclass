@@ -29,12 +29,6 @@ const QAndA = (props) => {
     .then( res => setComment(res.data))
   }, [])
 
-  // useEffect(()=>{
-  //   if(comment.read === true){
-  //     console.log("it's changed")
-  //   }
-
-  // },[comment])
 
   const toggleForm = () => {
     setShowForm(!showForm)
@@ -55,7 +49,7 @@ const QAndA = (props) => {
           )
       }
 
-    if (user.id === user_id || role === 'teacher'){
+    if (user.id === user_id){
       return (
         <>
           <Button.Group>
