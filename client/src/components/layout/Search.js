@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Search = (props) => {
   // const [search, setSearch] = useState("");
-  const { searchResults, setSearchResults, search, setSearch} = useContext(SearchContext);
+  const { searchResults, setSearchResults, search, setSearch,} = useContext(SearchContext);
   const [showClearButton, setShowClearButton ] = useState(false); 
   const [alert, setAlert] = useState(false); 
   const [timer, setTimer] = useState(false)
@@ -16,7 +16,6 @@ const Search = (props) => {
     e.preventDefault();
     if(search.length === 0 ){
       setAlert(true); 
-      setTimer(true)
     } else {
     axios.get(`/api/search_courses?search=${search}`)
     .then((res) => {
@@ -42,7 +41,7 @@ const Search = (props) => {
   // }
   useEffect(()=>{
     const interval = setInterval(()=>{
-      setAlert(!alert)
+      setAlert(false)
     },3000)
     return () => clearInterval(interval)
   },[timer])
