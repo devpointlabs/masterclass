@@ -8,7 +8,6 @@ import Course from "./components/Course";
 import NoMatch from "./components/layout/NoMatch";
 import Video from "./components/Video";
 import Lesson from "./components/Lesson";
-// import NavbarTwo from "./components/layout/NavbarTwo";
 import Navbar from "./components/layout/Navbar";
 import Enrollment from './components/Enrollment'
 import FetchUser from "./components/Auth/FetchUser"
