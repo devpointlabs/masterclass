@@ -41,6 +41,7 @@ const TeacherQA = (props) =>{
   const videos = Array.from(new Set(myQAs.map(v =>v.video_title))).map(title=>{
     return myQAs.find(v => v.video_title === title)
   })
+
 const fillComments = (id) =>{
   axios.get(`/api/videos/${id}/comments`)
   .then(res => setComments(res.data))
@@ -68,7 +69,7 @@ const videoPanels = (id) =>{
 const videoContent = (id) =>{
   let complete = false
   return videos.map(v=>{
-    if(id === v.video_id && complete=== false){
+    if(id === v.video_id){
       complete = true 
       return(
         <div>
@@ -91,10 +92,8 @@ const lessonPanels = (id) =>{
   )
 }
 const lessonContent=(id)=>{
-  let complete = false
   return lessons.map(l =>{
-    if(id === l.lesson_id && complete ===false){
-      complete = true
+    if(id === l.lesson_id){
       return(
   <div>
     <Accordion.Accordion panels = {lessonPanels(l.l_course_id)}/>
