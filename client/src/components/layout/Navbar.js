@@ -72,31 +72,34 @@ const Navbar = (props) => {
             header as = "h3"
             name="Logout"
             onClick={() => handleLogout(props.history)} >
+              <NavLink>
+
             <h3>
               Logout
             </h3>
+              </NavLink>
           </NavMenuItem>
         </NavRight>
       );
     } else {
       return (
         <NavRight>
-            <StyledLi
+            <NavMenuItem
               active={props.location.pathname === "/login"}>
-                <StyledLink to="/login">
+                <NavLink to="/login">
                   <h3>
                     Login
                   </h3>
-                </StyledLink>
-            </StyledLi>
-            <StyledLi
+                </NavLink>
+            </NavMenuItem>
+            <NavMenuItem
               active={props.location.pathname === "/register"}>
                 <NavLink to="/register">
                   <h3>
                     Register
                   </h3>
               </NavLink>
-            </StyledLi>
+            </NavMenuItem>
         </NavRight>
       );
     };
@@ -107,17 +110,17 @@ const Navbar = (props) => {
       {authProviderValueObject =>
         <StyledDiv>
           <ContainerDiv>
-            <div style={{display:"flex"}}>
+            <div style={{display:"flex", padding: '18px'}}>
 
           <Link to="/">
             <Image
               size="mini"
               src={require('../Images/logo-white.svg')}
               alternate="Home"
-              style={{display: "inline", paddingTop: "18px", marginLeft: ".8rem"}}
+              style={{display: "inline", marginLeft: ".8rem"}}
               />
           </Link>
-              <div style ={{marginTop:'10px'}}>
+              <div style ={{ marginLeft: '10px'}}>
 
              <Search {...props} /> 
               </div>
@@ -176,5 +179,7 @@ const StyledLink = styled(Link)`
 `
 const NavMenuItem = styled(Menu.Item)`
   padding: 15px;
+  color: #ffffff;
+  text-decoration: none;
 `
 export default withRouter(Navbar);

@@ -66,10 +66,9 @@ const Search = (props) => {
     {alert && renderMessage()
     }
    
-    <Menu.Item
-    onClick={(e)=>searchCourses(e, search)}
-    >
+    <Menu.Item>
       <Input 
+      size="mini"
       action ={{type: "submit", }} 
       placeholder='Search ...' 
       icon='search'
