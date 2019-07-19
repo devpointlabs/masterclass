@@ -84,22 +84,22 @@ const Navbar = (props) => {
     } else {
       return (
         <NavRight>
-            <Menu.Item
+            <StyledLi
               active={props.location.pathname === "/login"}>
-                <Link to="/login">
+                <StyledLink to="/login">
                   <h3>
                     Login
                   </h3>
-                </Link>
-            </Menu.Item>
-            <Menu.Item
+                </StyledLink>
+            </StyledLi>
+            <StyledLi
               active={props.location.pathname === "/register"}>
                 <NavLink to="/register">
                   <h3>
                     Register
                   </h3>
               </NavLink>
-            </Menu.Item>
+            </StyledLi>
         </NavRight>
       );
     };
@@ -155,11 +155,29 @@ const ContainerDiv = styled.div`
 
 const NavCenter = styled.div`
   float: center; 
+  width: "20%";
   text-align: center;
 `;
 
 const NavRight = styled.ul`
     list-style: none;
     float: right;
+`
+
+const StyledLi = styled.li`
+      float: left;
+
+`
+
+const StyledLink = styled(Link)`
+   display: block;
+    padding: 20px;
+    text-align: center;
+}
+
+ &hover,
+  &active {
+    background: #444;
+    color: #f7c08a;
 `
 export default withRouter(Navbar);
