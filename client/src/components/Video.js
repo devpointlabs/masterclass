@@ -12,10 +12,13 @@ const Video = (props) => {
   const [lesson, setLesson] = useState([])
   const [showQA, setShowQA] = useState(false)
   const course_id = lesson.course_id
+  // const video_id = props.video_id
+  // const lesson_id = props.lesson_id
 
   useEffect( () => {
-    const lesson_id = props.lesson_id
-    const video_id = props.video_id
+    debugger
+    const lesson_id = props.match.params.lesson_id
+    const video_id = props.match.params.video_id
     axios.get(`/api/lessons/${lesson_id}/videos/${video_id}`)
       .then( res => setVideo(res.data))
     axios.get(`/api/lessons/${lesson_id}`)
