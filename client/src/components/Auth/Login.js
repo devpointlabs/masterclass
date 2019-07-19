@@ -27,7 +27,7 @@ const Login = (props) =>{
 
   return(
     <Segment basic>
-      <Header as='h1' textAlign='center' style={{color: "white", fontFamily: "'Advent Pro', serif", letterSpacing: "2px", fontSize: "35px"}}>Login</Header>
+      <Header as='h1' textAlign='center' style={{color: "white", fontFamily: "'Halant', serif", letterSpacing: "2px", fontSize: "35px", fontWeight: "lighter"}}>Login</Header>
       <StyledForm onSubmit={handleSubmit}>
         <label>Email:</label>
         <input

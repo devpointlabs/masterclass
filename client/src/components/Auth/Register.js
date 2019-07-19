@@ -34,7 +34,7 @@ const Register = (props) => {
 
   return (
     <>
-      <Header as='h1' textAlign='center'style={{color: "white", fontFamily: "'Advent Pro', serif", letterSpacing: "2px", fontSize: "35px"}}>Register</Header>
+      <Header as='h1' textAlign='center'style={{color: "white", fontFamily: "'Halant', serif", letterSpacing: "2px", fontSize: "35px", fontWeight: "lighter"}}>Register</Header>
       <StyledForm onSubmit={handleSubmit}>
         <label>Name:</label>
         <input

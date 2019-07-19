@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ParticlesContainer from "../../Styles/ParticlesContainer";
 import RegisterForm from "./Register";
-// import logo from '../../assets/logo.png';
+import logo from '../Images/logo-login.svg';
+
 
 const MainRegister = (props) => {
   return (
@@ -16,9 +17,8 @@ const MainRegister = (props) => {
         </p>
       </RegistrationContainer>
       <LogoContainer>
-        <h1>DevPoint University</h1>
         <ParticlesContainer />
-        {/* <img src={logo} className="logo" alt="site-logo"/> */}
+        <img src={logo} className="logo" alt="site-logo"/>
       </LogoContainer>
     </Container>
   );

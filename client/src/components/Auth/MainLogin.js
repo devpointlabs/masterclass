@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ParticlesContainer from "../../Styles/ParticlesContainer";
 import LoginForm from "./Login";
-import logo from '../Images/logo-white.svg';
+import logo from '../Images/logo-login.svg';
 
 const MainLogin = (props) => {
   return (
@@ -15,7 +15,6 @@ const MainLogin = (props) => {
         </p>
       </LoginContainer>
       <LogoContainer>
-        <h1>DevPoint University</h1>
         <ParticlesContainer />
         <img src={logo} className="logo" alt="site-logo"/>
       </LogoContainer>
