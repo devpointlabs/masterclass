@@ -27,7 +27,7 @@ const Login = (props) =>{
 
   return(
     <Segment basic>
-      <Header as='h1' textAlign='center' style={{color: "white", fontFamily: "'Halant', serif", letterSpacing: "2px", fontSize: "35px"}}>Login</Header>
+      <Header as='h1' textAlign='center' style={{color: "white", fontFamily: "'Advent Pro', serif", letterSpacing: "2px", fontSize: "35px"}}>Login</Header>
       <StyledForm onSubmit={handleSubmit}>
         <label>Email:</label>
         <input
@@ -52,7 +52,7 @@ const Login = (props) =>{
           onChange={handleChange('password')}
         />
       
-        <input type="submit" value="LOGIN" className="submit" />
+        <input type="submit" value="submit" className="submit" />
         
       </StyledForm>
     </Segment>
@@ -90,8 +90,11 @@ const StyledForm = styled(Form)`
     outline: none;
     color: white;
     background: #8E2DE2;
+    .value{
     font-size: 14px;
+    font-weight: bold; 
     font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+    }
   }
   .field-input {
     width: 100%;
