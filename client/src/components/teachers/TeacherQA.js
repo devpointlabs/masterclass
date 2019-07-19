@@ -133,7 +133,7 @@ const coursePanels = () =>{
     <h1>Comments</h1>
       {comments.map(c=>{
         return (
-          <h4>{c.id}) {c.body}</h4>
+          <h4>{c.id}. {c.body}</h4>
         )
       })}
     </div>
