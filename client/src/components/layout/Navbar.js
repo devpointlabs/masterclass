@@ -1,6 +1,6 @@
 import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import { Menu, Popup, Image } from "semantic-ui-react";
+import { Menu, Popup, Image, Container } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
 import axios from 'axios'; 
 import Search from './Search'; 
@@ -13,7 +13,7 @@ const Navbar = (props) => {
   const rightNavItems = ({ user, handleLogout }) => {
     if (user) {
       return (
-        <Menu.Menu position="right">
+        <NavRight>
           {/* {toggleButton ? */}
             <>
               {/* <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={ */}
@@ -79,11 +79,11 @@ const Navbar = (props) => {
             name="Logout"
             onClick={() => handleLogout(props.history)}
           />
-        </Menu.Menu>
+        </NavRight>
       );
     } else {
       return (
-        <Menu.Menu position="right">
+        <NavRight>
             <Menu.Item
               active={props.location.pathname === "/login"}>
                 <Link to="/login">
@@ -100,7 +100,7 @@ const Navbar = (props) => {
                   </h3>
               </NavLink>
             </Menu.Item>
-        </Menu.Menu>
+        </NavRight>
       );
     };
   };
@@ -108,7 +108,8 @@ const Navbar = (props) => {
   return (
     <AuthConsumer>
       {authProviderValueObject =>
-        <Menu inverted pointing>
+        <StyledDiv>
+          <ContainerDiv>
           <Link to="/">
             <Image
               size="mini"
@@ -117,11 +118,12 @@ const Navbar = (props) => {
               style={{display: "inline", paddingTop: "18px", marginLeft: ".8rem"}}
             />
           </Link>
-          <Menu.Item>
+          <NavCenter>
             <Search {...props} />
-          </Menu.Item>
+          </NavCenter>
           {rightNavItems(authProviderValueObject)}
-        </Menu>
+          </ContainerDiv>
+        </StyledDiv>
       }
     </AuthConsumer >
   );
@@ -133,4 +135,31 @@ const styles = {
     fontWeight: 'bold',
   }
 }
+
+const StyledDiv = styled.div`
+  /* background-color: white; */
+  background: #333;
+  color: #fff;
+  overflow: auto;
+  /* margin: 0; */
+  /* padding: .6em 1em; */
+`
+
+const ContainerDiv = styled.div`
+  margin: auto;
+    max-width: 1100px;
+    overflow: auto;
+    padding: 0 20px;
+    font-size: 18px;
+`
+
+const NavCenter = styled.div`
+  float: center; 
+  text-align: center;
+`;
+
+const NavRight = styled.ul`
+    list-style: none;
+    float: right;
+`
 export default withRouter(Navbar);
