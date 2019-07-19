@@ -224,7 +224,6 @@ const coursePanels = () =>{
         <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
           <Comment.Group>
             {showComments()}
-            {console.log(comments)}
           </Comment.Group>
         </div>
       </div>
