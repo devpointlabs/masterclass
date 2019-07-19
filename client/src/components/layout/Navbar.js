@@ -1,9 +1,10 @@
 import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import { Menu, Popup } from "semantic-ui-react";
+import { Menu, Popup, Image } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
 import axios from 'axios'; 
 import Search from './Search'; 
+import styled from 'styled-components'; 
 
 
 const Navbar = (props) => {
@@ -109,16 +110,12 @@ const Navbar = (props) => {
       {authProviderValueObject =>
         <Menu inverted pointing>
           <Link to="/">
-            <img
-              src={require('../Images/LogoBlack.png')}
+            <Image
+              size="mini"
+              src={require('../Images/logo-white.svg')}
               alternate="Home"
-              style={{ height: "65px", width: "79px" }}
+              style={{display: "inline", paddingTop: "18px", marginLeft: ".8rem"}}
             />
-
-            {/* <Menu.Item
-              name="Home"
-              active={props.location.pathname === "/"}
-            /> */}
           </Link>
           <Menu.Item>
             <Search {...props} />

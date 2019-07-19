@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Form, Input, Button, Icon, Popup, Message } from "semantic-ui-react";
 import { SearchContext } from "../../providers/SearchProvider";
+import styled from 'styled-components'
 import axios from "axios";
 
 const Search = (props) => {
@@ -64,13 +65,13 @@ const Search = (props) => {
     {alert && renderMessage()
     }
     <Form onSubmit={props.searchCourses}>
-      <Input 
+      <StyledInput 
       placeholder="Search for anything..." 
       onChange={(e) => setSearch(e.target.value)} 
       value = {search}
       // name = 'search'
       />
-      <Button icon circular floated="right" onClick={(e) => searchCourses(e, search)}>
+      <Button size="mini" icon circular floated="right" onClick={(e) => searchCourses(e, search)}>
         <Icon circular name="search" />
       </Button>
       {/* {showClearButton &&  */}
@@ -80,5 +81,27 @@ const Search = (props) => {
     </>
   );
 };
+
+
+const StyledInput = styled(Input)`
+  font-size: 16px;
+  border: solid 1px #dbdbdb;
+  border-radius: 3px;
+  color: #262626;
+
+  padding: 7px 33px;
+  border-radius: 3px;
+  color: #ddd;
+  cursor: text;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+  background: #333;
+
+  &:active,
+  &:focus {
+    text-align: left;
+  }
+`
 
 export default Search;
