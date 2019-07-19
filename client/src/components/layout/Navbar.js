@@ -118,9 +118,7 @@ const Navbar = (props) => {
               style={{display: "inline", paddingTop: "18px", marginLeft: ".8rem"}}
             />
           </Link>
-          <NavCenter>
-            <Search {...props} />
-          </NavCenter>
+            {/* <Search {...props} /> */}
           {rightNavItems(authProviderValueObject)}
           </ContainerDiv>
         </StyledDiv>
@@ -153,11 +151,6 @@ const ContainerDiv = styled.div`
     font-size: 18px;
 `
 
-const NavCenter = styled.div`
-  float: center; 
-  width: "20%";
-  text-align: center;
-`;
 
 const NavRight = styled.ul`
     list-style: none;

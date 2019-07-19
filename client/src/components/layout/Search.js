@@ -64,7 +64,7 @@ const Search = (props) => {
     <>
     {alert && renderMessage()
     }
-    <Form onSubmit={props.searchCourses}>
+    <StyledForm onSubmit={props.searchCourses}>
       <StyledInput 
       placeholder="Search for anything..." 
       onChange={(e) => setSearch(e.target.value)} 
@@ -77,7 +77,7 @@ const Search = (props) => {
       {/* {showClearButton &&  */}
       {search.length >= 22 && <Button floated="right" onClick={(e) => clearInput()}>X</Button>}
       {/* <Button floated="right" onClick={(e) => clearResults()}>Clear</Button>  */}
-    </Form>
+    </StyledForm>
     </>
   );
 };
@@ -102,6 +102,12 @@ const StyledInput = styled(Input)`
   &:focus {
     text-align: left;
   }
+`
+
+const StyledForm = styled(Form)`
+  float: center; 
+  width: "20%";
+  text-align: center;
 `
 
 export default Search;
