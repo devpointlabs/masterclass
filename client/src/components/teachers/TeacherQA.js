@@ -4,22 +4,14 @@ import { AuthContext, } from '../../providers/AuthProvider';
 import styled from 'styled-components';
 import { Accordion, Container, Button, Icon, Comment, Checkbox,  } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Video from '../Video'
-import QAndA from '../Comment'
-import CommentForm from '../CommentForm'
 import Replies from '../Replies'
-// import { Accordion, AccordionItem, AccordionItemHeading,
-//   AccordionItemPanel,
-// } from 'react-accessible-accordion';
+
 
 const TeacherQA = (props) =>{
   const [showReplies, setShowReplies] = useState(false)
   const [enrollments, setEnrollments] = useState([])
   const [myQAs, setMyQAs]= useState([])
-  const [render, setRender]= useState(false)
-  const [userInfo, setUserInfo] = useState([])
   const [showForm, setShowForm] = useState(false)
-  const [readComment, setReadComment]= useState(false)
 
   const [comments, setComments] = useState([])
 
@@ -36,29 +28,32 @@ const TeacherQA = (props) =>{
         setMyQAs(res.data)
       })
     }, [enrollments])
-    const toggle = () =>{
-      setShowForm(!showForm)
-    }
-    const deleteComment = (c_id) =>{
-      axios.delete(`/api/videos/${props.video_id}/comments/${c_id}`)
-      .then(res =>{
-        setComments(comments.filter(c => c.id !== c_id))
-        })
-    }
-    const editComment = (id, comment) => {
-      const editedComment = comments.map(c => {
-        if (c.id === id) {
-          return comment
-        } 
-        else {
-          return c
-        }
-      })
-      return setComments(editedComment)
-    }
-    const addComment = (comment) =>{
-      setComments([...comments, comment])
-    }
+
+    // const toggle = () =>{
+    //   setShowForm(!showForm)
+    // }
+    // const deleteComment = (c_id) =>{
+    //   axios.delete(`/api/videos/${props.video_id}/comments/${c_id}`)
+    //   .then(res =>{
+    //     setComments(comments.filter(c => c.id !== c_id))
+    //     })
+    // }
+    // const editComment = (id, comment) => {
+    //   const editedComment = comments.map(c => {
+    //     if (c.id === id) {
+    //       return comment
+    //     } 
+    //     else {
+    //       return c
+    //     }
+    //   })
+    //   return setComments(editedComment)
+    // }
+    // const addComment = (comment) =>{
+    //   setComments([...comments, comment])
+    // }
+    // -----------------Sanitize variables from duplicates --------------------
+
   const courses = Array.from(new Set(myQAs.map(c =>c.c_title))).map(title=>{
     return myQAs.find(c => c.c_title === title)
   })
@@ -69,25 +64,19 @@ const TeacherQA = (props) =>{
     return myQAs.find(v => v.video_title === title)
   })
 
+
 const fillComments = (id) =>{
   axios.get(`/api/videos/${id}/comments`)
   .then(res => setComments(res.data))
-  const stuffRead = comments.map(c =>{
-    return {
-      title: c.title,
-      video_id: c.video_id,
-      readComment: false,
-      body: c.body
-    }
-  })
+  // 
 }
-
+// ---------------------Rendering the various panels---------------------
 const videoPanels = (id) =>{
   let array = []
   videos.map(v =>{
     let videoObject = {key: v.video_id, title: 
       <Accordion.Title as={Container}>
-        <Button onClick={()=>fillComments(v.video_id)}>
+        <Button onClick={() => fillComments(v.video_id)}>
         {v.video_title}
         </Button>
       </Accordion.Title>
@@ -159,6 +148,11 @@ const coursePanels = () =>{
   const rootPanels = [
     {key: 1, title: 'Courses', content: {content: CourseContent}}
   ]
+  // --------------------------------------------------------------
+  // ==============================================================
+
+  // Functions for the Rendered Comments ----------------------
+
   const commentRead = (id) =>{
     axios.put(`/api/toggle-read/${id}`)
 
@@ -212,6 +206,11 @@ const coursePanels = () =>{
       ))
     )
   }
+
+  // ----------------------------------------------------------
+  // ==========================================================
+
+  // -----------------Main Return in the QA component-------------------
   return (
     <>
     <div style={{display: 'flex', justifyContent:"space-evenly"}}>
