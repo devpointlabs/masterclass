@@ -18,7 +18,7 @@ categories = ['Ruby', 'Javascript', 'React', 'SQL', 'JQuery']
       course_id: course.id,
       user_id: u.id
     )
-      2.times do 
+      5.times do 
         lesson = Lesson.create(
           name: Faker::Educator.subject,
           description: Faker::Quote.most_interesting_man_in_the_world,
@@ -32,7 +32,7 @@ categories = ['Ruby', 'Javascript', 'React', 'SQL', 'JQuery']
             url: "https://avatars1.githubusercontent.com/u/42650486?s=400&    u=d8fabdbbd0a6697e8ab883c0b4d971c87b7ac65c&v=4"
             # url: videos.sample
         )
-          2.times do 
+          5.times do 
           c = Comment.create(
             title: Faker::Cannabis.health_benefit,
             body: Faker::Quote.famous_last_words,
