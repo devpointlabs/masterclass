@@ -16,6 +16,10 @@ Rails.application.routes.draw do
     resources :courses do 
       resources :enrollment, only: [:index, :new, :create, :destroy]
     end
+
+    resources :courses
+    get "course-video-view/:id", to: "courses#course_video_view"
+
     resources :courses do
       resources :lessons
     end

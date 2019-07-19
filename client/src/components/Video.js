@@ -60,12 +60,12 @@ const Video = (props) => {
             <Header as='h1'>{video.title}</Header>
             {/* <Image src = {video.url}/> */}
             <Player
-          playsInline
-      // poster="/assets/poster.png"
+              playsInline
+              // poster="/assets/poster.png"
               src={video.url}
             />
           </div>
-        {/* <div className='video_des'>
+          {/* <div className='video_des'>
           {role === 'teacher' && 
           <Link to={`/lessons/${id}/videos/${video.id}/edit`}>
             <Button inverted color="blue">
@@ -78,8 +78,8 @@ const Video = (props) => {
             <Icon name='trash' />
             Delete Item
           </Button>}
-        </div> */}
-        <hr/>
+          </div> */}
+          <hr/>
         </div>
         <ClickDiv>
           { showQA ?
