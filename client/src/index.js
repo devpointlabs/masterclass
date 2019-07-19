@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -10,6 +10,7 @@ import "semantic-ui-css/semantic.min.css"
 import "video-react/dist/video-react.css"
 import { initMiddleware, } from 'devise-axios'
 import { ThemeProvider, } from 'styled-components';
+import 'react-accessible-accordion/dist/fancy-example.css';
 
 
 initMiddleware()
