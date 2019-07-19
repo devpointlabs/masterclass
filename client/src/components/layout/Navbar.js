@@ -1,6 +1,6 @@
 import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import { Menu, Popup, Image, Container } from "semantic-ui-react";
+import { Menu, Popup, Image, Container, Responsive, Header } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
 import axios from 'axios'; 
 import Search from './Search'; 
@@ -118,7 +118,8 @@ const Navbar = (props) => {
               style={{display: "inline", paddingTop: "18px", marginLeft: ".8rem"}}
             />
           </Link>
-            {/* <Search {...props} /> */}
+        
+             <Search {...props} /> 
           {rightNavItems(authProviderValueObject)}
           </ContainerDiv>
         </StyledDiv>

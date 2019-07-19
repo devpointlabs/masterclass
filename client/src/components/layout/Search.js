@@ -71,9 +71,9 @@ const Search = (props) => {
       value = {search}
       // name = 'search'
       />
-      {/* <Button size="mini" icon circular floated="right" onClick={(e) => searchCourses(e, search)}>
+      <Button size="mini" icon circular floated="right" onClick={(e) => searchCourses(e, search)}>
         <Icon circular name="search" />
-      </Button> */}
+      </Button>
       {/* {showClearButton &&  */}
       {search.length >= 22 && <Button floated="right" onClick={(e) => clearInput()}>X</Button>}
       {/* <Button floated="right" onClick={(e) => clearResults()}>Clear</Button>  */}
@@ -89,14 +89,14 @@ const StyledInput = styled(Input)`
   border-radius: 3px;
   color: #262626;
 
-  padding: 7px 33px;
-  border-radius: 3px;
-  color: #ddd;
-  cursor: text;
+  /* padding: 7px 33px; */
+  /* border-radius: 3px;
+  color: #ddd; */
+  /* cursor: text;
   font-size: 14px;
   font-weight: 300;
   text-align: center;
-  background: #333;
+  background: #333; */
 
   &:active,
   &:focus {
@@ -106,7 +106,7 @@ const StyledInput = styled(Input)`
 
 const StyledForm = styled(Form)`
   float: center; 
-  width: "20%";
+  /* width: "20%"; */
   text-align: center;
 `
 
