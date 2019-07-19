@@ -10,8 +10,9 @@ const MainRegister = (props) => {
     <Container>
       <RegistrationContainer>
         <RegisterForm {...props} />
+        <br/>
         <p>
-          Already have an account? <Link to="/login">Login!</Link>
+          <span>Already have an account?</span> <Link to="/login" style={{color: "#8E2DE2", fontWeight: "bolder"}}>Login Here!</Link>
         </p>
       </RegistrationContainer>
       <LogoContainer>
@@ -35,15 +36,13 @@ const RegistrationContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  h1 {
-    font-weight: lighter;
-  }
-  p {
+ 
+  p > span {
     color: #ffff;
     font-size: 14px;
     margin-top: 25px;
     font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
-    text-decoration: underline;
+    text-decoration: underline; 
   }
 `;
 

@@ -84,7 +84,7 @@ const StyledForm = styled(Form)`
     padding: 10px 0;
     cursor: pointer;
     border-radius: 5px;
-    box-shadow: 2px 4px 8px rgba(0,0,255,0.2);
+    box-shadow: 2px 4px 4px rgba(0,0,255,0.2);
     -webkit-appearance: button;
     border: none;
     outline: none;
@@ -98,8 +98,8 @@ const StyledForm = styled(Form)`
   }
   .field-input {
     width: 100%;
-    border: none;
-    font-size: 18px;
+    border-radius: 5px; 
+    font-size: 13px;
     padding: 10px;
     outline: none;
   } 
