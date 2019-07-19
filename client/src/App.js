@@ -18,6 +18,7 @@ import EditForm from "./components/forms/edits/EditForm";
 import TeachersQAAccordion from "./components/teachers/TeachersQAAccordion"
 import AddCourses from "./components/forms/adds/AddCourses"; 
 import SearchPage from "./components/SearchPage"; 
+import VideoView from "./components/view_pages/VideoView";
 
 
 const App = () => (
@@ -32,6 +33,7 @@ const App = () => (
         <ProtectedRoute exact path='/profile' component={Profile} />
         <Route exact path="/courses/:id" component={Course} />
         <Route exact path="/search" component={SearchPage}/>
+        <ProtectedRoute exact path="/course-video-view/:id" component={VideoView} />
         <ProtectedRoute exact path="/teachers/courses" component={TeachersView} />
         <ProtectedRoute exact path="/my-courses" component={Enrollment} />
         <ProtectedRoute exact path="/teachers/QandA" component={TeachersQAAccordion} />

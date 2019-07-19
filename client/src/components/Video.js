@@ -14,8 +14,8 @@ const Video = (props) => {
   const course_id = lesson.course_id
 
   useEffect( () => {
-    const lesson_id = props.match.params.lesson_id
-    const video_id = props.match.params.video_id
+    const lesson_id = props.lesson_id
+    const video_id = props.video_id
     axios.get(`/api/lessons/${lesson_id}/videos/${video_id}`)
       .then( res => setVideo(res.data))
     axios.get(`/api/lessons/${lesson_id}`)
@@ -57,12 +57,12 @@ const Video = (props) => {
             <Header as='h1'>{video.title}</Header>
             {/* <Image src = {video.url}/> */}
             <Player
-          playsInline
-      // poster="/assets/poster.png"
+              playsInline
+              // poster="/assets/poster.png"
               src={video.url}
             />
           </div>
-        {/* <div className='video_des'>
+          {/* <div className='video_des'>
           {role === 'teacher' && 
           <Link to={`/lessons/${id}/videos/${video.id}/edit`}>
             <Button inverted color="blue">
@@ -75,8 +75,8 @@ const Video = (props) => {
             <Icon name='trash' />
             Delete Item
           </Button>}
-        </div> */}
-        <hr/>
+          </div> */}
+          <hr/>
         </div>
         <ClickDiv>
           { showQA ?
