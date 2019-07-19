@@ -6,17 +6,16 @@ import axios from 'axios';
 import Search from './Search'; 
 import styled from 'styled-components'; 
 
-
-const Navbar = (props) => {
+const NavbarTwo = (props) =>{
   const [toggleButton, setToggleButton] = useState(true);
 
-  const rightNavItems = ({ user, handleLogout }) => {
-    if (user) {
-      return (
+  const rightNavItems= ({user, handleLogout}) =>{
+    if(user){
+      return(
         <NavRight>
         
               <>
-              <NavMenuItem
+              <Menu.Item
                 name="Teachers"
                 onClick={() => setToggleButton(!toggleButton)}
                 >
@@ -28,8 +27,8 @@ const Navbar = (props) => {
                     Teachers
                   </h3>
                 </NavLink>
-              </NavMenuItem>
-              <NavMenuItem
+              </Menu.Item>
+              <Menu.Item
                 active={props.location.pathname === "/my-courses"}>
                 <NavLink to="/my-courses"
                 exact
@@ -39,10 +38,10 @@ const Navbar = (props) => {
                   My Enrolled Courses
                   </h3>
                 </NavLink>
-              </NavMenuItem>
+              </Menu.Item>
             </>
             
-              <NavMenuItem
+              <Menu.Item
                 active={props.location.pathname === "/"}
                 onClick={() => setToggleButton(!toggleButton)}
                 >
@@ -54,8 +53,8 @@ const Navbar = (props) => {
                   Students
                   </h3>
                 </NavLink>
-              </NavMenuItem>
-            <NavMenuItem
+              </Menu.Item>
+            <Menu.Item
               name="My Profile"
               active={props.location.pathname === "/profile"}
               >
@@ -67,68 +66,45 @@ const Navbar = (props) => {
                 My Profile
                 </h3>
               </NavLink>
-            </NavMenuItem>
-            <NavMenuItem
+            </Menu.Item>
+          <Menu.Item
             header as = "h3"
             name="Logout"
-            onClick={() => handleLogout(props.history)} >
+            onClick={() => handleLogout(props.history)}
+          >
             <h3>
               Logout
             </h3>
-          </NavMenuItem>
-        </NavRight>
-      );
-    } else {
-      return (
-        <NavRight>
-            <StyledLi
-              active={props.location.pathname === "/login"}>
-                <StyledLink to="/login">
-                  <h3>
-                    Login
-                  </h3>
-                </StyledLink>
-            </StyledLi>
-            <StyledLi
-              active={props.location.pathname === "/register"}>
-                <NavLink to="/register">
-                  <h3>
-                    Register
-                  </h3>
-              </NavLink>
-            </StyledLi>
-        </NavRight>
-      );
-    };
-  };
 
+          </Menu.Item>
+
+        </NavRight>
+      );
+    }
+  }
+  
   return (
     <AuthConsumer>
       {authProviderValueObject =>
         <StyledDiv>
           <ContainerDiv>
-            <div style={{display:"flex"}}>
-
           <Link to="/">
             <Image
               size="mini"
               src={require('../Images/logo-white.svg')}
               alternate="Home"
-              style={{display: "inline", paddingTop: "18px", marginLeft: ".8rem"}}
-              />
+              style={{display: "inline", float:"left", paddingTop: "18px",border:"solid 2px green"}}
+            />
           </Link>
-              <div style ={{marginTop:'10px'}}>
-
+        
              <Search {...props} /> 
-              </div>
-              </div>
           </ContainerDiv>
           {rightNavItems(authProviderValueObject)}
         </StyledDiv>
       }
     </AuthConsumer >
   );
-    };
+}
 
 const styles = {
   active: {
@@ -136,6 +112,16 @@ const styles = {
     fontWeight: 'bold',
   }
 }
+
+const ContainerDiv = styled.div`
+  margin: auto;
+    max-width: 1100px;
+    overflow: auto;
+    padding: 0 20px;
+    font-size: 18px;
+    float: left;
+`
+
 
 const StyledDiv = styled.div`
   /* background-color: white; */
@@ -145,36 +131,10 @@ const StyledDiv = styled.div`
   /* margin: 0; */
   /* padding: .6em 1em; */
 `
-
-const ContainerDiv = styled.div`
-  margin: auto;
-    max-width: 1100px;
-    overflow: auto;
-    padding: 0 20px;
-    font-size: 18px;
-    float: left;
-
-`
-
-
 const NavRight = styled.ul`
-    display:flex;
-    justify-content: space-between;
     list-style: none;
     float: right;
+    margin-right: 8rem;
 `
 
-const StyledLi = styled.li`
-      float: left;
-
-`
-
-const StyledLink = styled(Link)`
-   display: block;
-    padding: 20px;
-    text-align: center;
-`
-const NavMenuItem = styled(Menu.Item)`
-  padding: 15px;
-`
-export default withRouter(Navbar);
+export default NavbarTwo

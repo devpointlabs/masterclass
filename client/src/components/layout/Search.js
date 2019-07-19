@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Form, Input, Button, Icon, Popup, Message } from "semantic-ui-react";
+import { Form, Input, Menu, Button, Icon, Popup, Message } from "semantic-ui-react";
 import { SearchContext } from "../../providers/SearchProvider";
 import styled from 'styled-components'
 import axios from "axios";
@@ -13,6 +13,7 @@ const Search = (props) => {
 
   // Search by title, overview, and category
   const searchCourses = (e, search) => {
+    debugger
     // setSearch("")
     e.preventDefault();
     if(search.length === 0 ){
@@ -64,26 +65,26 @@ const Search = (props) => {
     <>
     {alert && renderMessage()
     }
-    <StyledForm onSubmit={props.searchCourses}>
-      <StyledInput 
-      placeholder="Search for anything..." 
-      onChange={(e) => setSearch(e.target.value)} 
-      value = {search}
-      // name = 'search'
+   
+    <Menu.Item
+    onClick={(e)=>searchCourses(e, search)}
+    >
+      <Input 
+      action ={{type: "submit", }} 
+      placeholder='Search ...' 
+      icon='search'
+      onChange={(e)=> setSearch(e.target.value)}
+      value={search}
+      
       />
-      <Button size="mini" icon circular floated="right" onClick={(e) => searchCourses(e, search)}>
-        <Icon circular name="search" />
-      </Button>
-      {/* {showClearButton &&  */}
-      {search.length >= 22 && <Button floated="right" onClick={(e) => clearInput()}>X</Button>}
-      {/* <Button floated="right" onClick={(e) => clearResults()}>Clear</Button>  */}
-    </StyledForm>
+    </Menu.Item>
     </>
   );
 };
 
 
 const StyledInput = styled(Input)`
+  display:flex;
   font-size: 16px;
   border: solid 1px #dbdbdb;
   border-radius: 3px;
