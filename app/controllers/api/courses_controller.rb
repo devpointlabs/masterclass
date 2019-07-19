@@ -15,6 +15,10 @@ class Api::CoursesController < ApplicationController
     render json: {course: @course, registered: e ? true : false, role: e ?  e.role : "default"}
   end
 
+  def course_video_view
+    render json: Course.course_video_view(params[:id])
+  end
+
   def create
     course = Course.new(course_params)
     if course.save

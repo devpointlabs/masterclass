@@ -1,5 +1,4 @@
 roles = ['teacher', 'student']
-# videos = ["https://www.youtube.com/watch?v=NYkcTXNnFSo","https://www.youtube.com/watch?v=cqzZqLl6uYg&t=16s", "https://www.youtube.com/watch?v=czCxTcb8xzk", "https://www.youtube.com/watch?v=0lodYJOKPaw" ]
 categories = ['Ruby', 'Javascript', 'React', 'SQL', 'JQuery']
 
 5.times do 
@@ -19,7 +18,7 @@ categories = ['Ruby', 'Javascript', 'React', 'SQL', 'JQuery']
       course_id: course.id,
       user_id: u.id
     )
-      10.times do 
+      5.times do 
         lesson = Lesson.create(
           name: Faker::Educator.subject,
           description: Faker::Quote.most_interesting_man_in_the_world,
@@ -40,7 +39,7 @@ categories = ['Ruby', 'Javascript', 'React', 'SQL', 'JQuery']
             user_id: u.id,
             video_id: v.id
           )
-            3.times do
+            2.times do
             Reply.create(
               body: Faker::Quote.famous_last_words,
               user_id: u.id,

@@ -4,6 +4,7 @@ import axios from "axios";
 import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../providers/AuthProvider"
+import VideoView from "./view_pages/VideoView"
 
 
 const Course = (props) => {
@@ -13,10 +14,10 @@ const Course = (props) => {
   const [enrolled, setEnrolled] = useState(true)
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
   const [role, setRole] = useState("")
+  const course_id = props.match.params.id
 
   useEffect(() => {
 
-    const course_id = props.match.params.id
     axios.get(`/api/courses/${course_id}/lessons`)
     .then(res => {
       setLessons(res.data);
@@ -52,7 +53,6 @@ const Course = (props) => {
 
 
   const renderLessons = () => {
-
     if (role == 'teacher') {
       return lessons.map(l => (
         
@@ -123,6 +123,9 @@ const Course = (props) => {
 
   return (
     <>   
+      <Link to={`/course-video-view/${course_id}`}>
+        Course Video View
+      </Link>
       <div style = {{display: "flex", justifyContent: "space-between", padding: "15px"}}>
       <Header as="h1">{course.title}</Header>
       <Link to = {"/"}>
