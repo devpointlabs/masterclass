@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ParticlesContainer from "../../Styles/ParticlesContainer";
 import LoginForm from "./Login";
-import logo from '../Images/logo-white.svg';
+import logo from '../Images/logo-login.svg';
 
 const MainLogin = (props) => {
   return (
@@ -11,11 +11,10 @@ const MainLogin = (props) => {
       <LoginContainer>
         <LoginForm {...props}/>
         <p>
-          Don't have an account? <Link to="/register">Register here!</Link>
+          <span>Don't have an account?</span> <Link to="/register" style={{color: "#8E2DE2", fontWeight: "bolder"}}>Register Here!</Link>
         </p>
       </LoginContainer>
       <LogoContainer>
-        <h1>DevPoint University</h1>
         <ParticlesContainer />
         <img src={logo} className="logo" alt="site-logo"/>
       </LogoContainer>
@@ -35,13 +34,13 @@ const LoginContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  h1 {
-    font-weight: lighter;
-  }
-  p {
+ 
+  p > span {
     color: #ffff;
     font-size: 14px;
     margin-top: 25px;
+    font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+    text-decoration: underline; 
   }
 `;
 
