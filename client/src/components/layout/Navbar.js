@@ -167,11 +167,5 @@ const StyledLink = styled(Link)`
    display: block;
     padding: 20px;
     text-align: center;
-}
-
- &hover,
-  &active {
-    background: #444;
-    color: #f7c08a;
 `
 export default withRouter(Navbar);
