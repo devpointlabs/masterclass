@@ -83,13 +83,14 @@ const VideoView = (props) => {
       let video = {
         key: v.video_id,
         content:
-          <VideoButton>
+          <>
             <AccordionContent>
-              <Button onClick={()=> renderVideo(v.lesson_id, v.video_id)}>
+              <Button fluid onClick={()=> renderVideo(v.lesson_id, v.video_id)}>
                 {v.video_title}
               </Button>
             </AccordionContent>
-          </VideoButton>
+            <hr/>
+          </>
       }
       if(id === v.video_lesson_id) {
         if (videosArray.includes(video.key)===false) {
@@ -136,6 +137,7 @@ const VideoView = (props) => {
             <Accordion.Title active={activeIndex === l.lesson_id} index={l.lesson_id} onClick={() => handleClick      (l.lesson_id)}>
               <Icon name="dropdown" />
               {l.lesson_name}
+              <hr/>
             </Accordion.Title>
             <Accordion.Content active={activeIndex === l.lesson_id}>
               {renderVideos(l.video_lesson_id)}
@@ -173,10 +175,10 @@ const VideoView = (props) => {
             <QAClick onClick={() => toggleQA()}>Show QA's <Icon name='angle down' /></QAClick>
           }
         </ClickDiv>
-        <div>
+        <div style={{width: '95%', border: 'solid 3px purple', borderRadius: '5px'}}>
           { showQA ?
             <>
-            <div style= {{marginTop: '30px'}}>
+            <div style={{marginTop: '30px'}}>
               <hr/>
               <h1>Q and A</h1>
               <Button color='teal' onClick={toggle}>
@@ -216,7 +218,6 @@ const VideoView = (props) => {
 
 const ClickDiv = styled.div`
   display: flex;
-
   justify-content: center;
 `
 
@@ -235,7 +236,7 @@ const QAClick = styled.p`
 const VideoViewDiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: top;
   justify-content: center;
   width: 100vw;
   height: 100%;
@@ -254,7 +255,7 @@ const VidAndQA = styled.div`
 const LessonsDrop = styled.div`
   width: 25%;
   display: flex;
-  height: 100%;
+  height: 100vh;
   flex-direction: column;
   align-content: top;
   min-height: 100vh;
@@ -265,16 +266,15 @@ const VideoButton = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  border: solid 1px blue;
-  border-radius: 3px;
   padding: 0px;
   margin: 5px;
-  box-shadow: 5px 5px grey;
+  
 `;
 
 const AccordionContent = styled(Accordion.Content)`
   display: flex;
   padding: 0px;
+  justify-content: center;
 `;
 
 export default VideoView
