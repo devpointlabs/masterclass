@@ -33,14 +33,14 @@ const Home = () => {
 			{/* <Container style={{ height: "200px", backgroundColor: "red" }}>
         <CourseSlider />
       </Container> */}
-			<Segment>
+			{/* <Segment>
 				<Header as='h1' textAlign='center'>
 					{heading}
 				</Header>
 				<Card.Group itemsPerRow='2'>
 					<Courses />
 				</Card.Group>
-			</Segment>
+			</Segment> */}
 		</Fragment>
 	);
 };

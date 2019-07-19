@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import { Container } from 'semantic-ui-react';
+// import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
@@ -50,7 +50,7 @@ const Courses = (props) => {
 
 	const Slide = ({ id, image, title, overview }) => (
 		<Link to={{ pathname: `/courses/${id}` }}>
-			<Card style={{ backgroundColor: 'blue' }} key={id}>
+			<Card style={{ backgroundColor: 'blue', marginLeft: '100px', marginTop: '50px' }} key={id}>
 				<div textAlign='center'>
 					{image}
 					Image Goes Here
@@ -68,21 +68,19 @@ const Courses = (props) => {
 
 	return (
 		<Fragment>
-			<CardContainer style={{ backgroundColor: 'black' }}>
+			<Container style={{ backgroundColor: 'black' }}>
 				<br />
 				<Container style={{ height: '200px' }}>
 					<CourseSlider />
 				</Container>
-			</CardContainer>
+			</Container>
 		</Fragment>
 	);
 };
 
 export default Courses;
 
-const CardContainer = styled.div`
-	background: linear-gradient(350deg, rgba(2, 0, 36, 1) 0%, rgba(89, 9, 121, 0.67) 73%);
-`;
+const Container = styled.div`background: linear-gradient(350deg, rgba(2, 0, 36, 1) 0%, rgba(89, 9, 121, 0.67) 73%);`;
 const Card = styled.div`
 	margin: 15px;
 	padding: 15px;
