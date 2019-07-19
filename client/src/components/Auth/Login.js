@@ -27,19 +27,23 @@ const Login = (props) =>{
 
   return(
     <Segment basic>
-      <Header as='h1' textAlign='center'>Login</Header>
-      <Form onSubmit={handleSubmit}>
-        <Form.Input
-          label="Email"
-          autoFocus
+      <Header as='h1' textAlign='center' style={{color: "white", fontFamily: "'Halant', serif", letterSpacing: "2px", fontSize: "35px"}}>Login</Header>
+      <StyledForm onSubmit={handleSubmit}>
+        <label>Email:</label>
+        <input
+          type="email"
+          className="field-input"
           name='email'
+          autoFocus
           required         
           value={form.email}
           placeholder='Email'
           onChange={handleChange('email')}
         />
-        <Form.Input
-          label="Password"
+        <label>Password:</label>
+        <input
+          type="password"
+          className="field-input"
           required
           name='password'
           value={form.password}
@@ -47,12 +51,54 @@ const Login = (props) =>{
           type='password'
           onChange={handleChange('password')}
         />
-        <Segment textAlign='center' basic>
-          <Button primary type='submit'>Submit</Button>
-        </Segment>
-      </Form>
+      
+        <input type="submit" value="LOGIN" className="submit" />
+        
+      </StyledForm>
     </Segment>
   )
 
 }
+
+
+
+
+const StyledForm = styled(Form)`
+  display: flex;  
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+  width: 400px; 
+  label {
+    font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+    color: #fff; 
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 25px;
+    border-bottom: 1px #fff solid; 
+  }
+   .submit {
+    margin-top: 25px;
+    width: 100%;
+    padding: 10px 0;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 2px 4px 8px rgba(0,0,255,0.2);
+    -webkit-appearance: button;
+    border: none;
+    outline: none;
+    color: white;
+    background: #8E2DE2;
+    font-size: 14px;
+    font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+  }
+  .field-input {
+    width: 100%;
+    border: none;
+    font-size: 18px;
+    padding: 10px;
+    outline: none;
+  } 
+`;
 export default Login; 

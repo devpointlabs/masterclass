@@ -42,6 +42,8 @@ const RegistrationContainer = styled.div`
     color: #ffff;
     font-size: 14px;
     margin-top: 25px;
+    font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+    text-decoration: underline;
   }
 `;
 

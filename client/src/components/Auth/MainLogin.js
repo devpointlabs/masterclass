@@ -11,7 +11,7 @@ const MainLogin = (props) => {
       <LoginContainer>
         <LoginForm {...props}/>
         <p>
-          Don't have an account? <Link to="/register">Register here!</Link>
+          <span>Don't have an account?</span> <Link to="/register" style={{color: "#8E2DE2", fontWeight: "bolder"}}>Register here!</Link>
         </p>
       </LoginContainer>
       <LogoContainer>
@@ -38,10 +38,12 @@ const LoginContainer = styled.div`
   h1 {
     font-weight: lighter;
   }
-  p {
+  p > span {
     color: #ffff;
     font-size: 14px;
     margin-top: 25px;
+    font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+    text-decoration: underline; 
   }
 `;
 
