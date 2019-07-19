@@ -3,7 +3,6 @@ import Courses from '../Courses';
 import { Header, Segment, Card, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import HeaderText from '../../Styles/HeaderText';
-import CourseSlider from '../CourseSlider';
 // import { useSpring, animated } from 'react-spring'
 
 const Home = () => {
@@ -26,21 +25,13 @@ const Home = () => {
 				</Header>
 				<br />
 			</AppContainer>
-			<div style={{ backgroundColor: 'red' }}>
+			<div>
 				<Courses />
 			</div>
 
 			{/* <Container style={{ height: "200px", backgroundColor: "red" }}>
         <CourseSlider />
       </Container> */}
-			{/* <Segment>
-				<Header as='h1' textAlign='center'>
-					{heading}
-				</Header>
-				<Card.Group itemsPerRow='2'>
-					<Courses />
-				</Card.Group>
-			</Segment> */}
 		</Fragment>
 	);
 };
@@ -52,3 +43,5 @@ const AppContainer = styled.div`
 `;
 
 export default Home;
+
+// style={{ backgroundColor: 'red' }}

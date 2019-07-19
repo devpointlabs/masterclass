@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-// import { Button } from 'semantic-ui-react';
+import { Button, Header, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
@@ -22,7 +22,7 @@ const Courses = (props) => {
 
 	const CourseSlider = () => {
 		var settings = {
-			dots: true,
+			dots: false,
 			infinite: true,
 			speed: 500,
 			slidesToShow: 4,
@@ -34,7 +34,7 @@ const Courses = (props) => {
 		};
 		return (
 			<Slider {...settings}>
-				{/* <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-around' }}> */}
+				{/* <div style={{ display: 'flex', flexwrap: 'nowrap' }}> */}
 				{courses.map((course) => (
 					<Slide
 						key={course.id}
@@ -44,13 +44,22 @@ const Courses = (props) => {
 						image={course.image}
 					/>
 				))}
+				{/* </div> */}
 			</Slider>
 		);
 	};
 
 	const Slide = ({ id, image, title, overview }) => (
 		<Link to={{ pathname: `/courses/${id}` }}>
-			<Card style={{ backgroundColor: 'blue', marginLeft: '100px', marginTop: '50px' }} key={id}>
+			<Card
+				style={{
+					backgroundColor: 'Blue',
+					marginLeft: '100px',
+					marginRight: '100px',
+					marginTop: '50px'
+				}}
+				key={id}
+			>
 				<div textAlign='center'>
 					{image}
 					Image Goes Here
@@ -68,11 +77,11 @@ const Courses = (props) => {
 
 	return (
 		<Fragment>
-			<Container style={{ backgroundColor: 'black' }}>
-				<br />
-				<Container style={{ height: '200px' }}>
-					<CourseSlider />
-				</Container>
+			<Header as='h1' textAlign='center'>
+				Courses
+			</Header>
+			<Container style={{ height: '100px' }}>
+				<CourseSlider />
 			</Container>
 		</Fragment>
 	);
@@ -80,7 +89,9 @@ const Courses = (props) => {
 
 export default Courses;
 
-const Container = styled.div`background: linear-gradient(350deg, rgba(2, 0, 36, 1) 0%, rgba(89, 9, 121, 0.67) 73%);`;
+const Container = styled.div`
+	/* background: linear-gradient(350deg, rgba(2, 0, 36, 1) 0%, rgba(89, 9, 121, 0.67) 73%); */
+`;
 const Card = styled.div`
 	margin: 15px;
 	padding: 15px;
@@ -89,3 +100,5 @@ const Card = styled.div`
 	height: 250px;
 	width: 450px;
 `;
+
+// style={{ backgroundColor: 'black' }}
