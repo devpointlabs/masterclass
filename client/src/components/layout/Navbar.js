@@ -1,9 +1,10 @@
 import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import { Menu, Popup } from "semantic-ui-react";
+import { Menu, Popup, Image, Container, Responsive, Header } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
 import axios from 'axios'; 
 import Search from './Search'; 
+import styled from 'styled-components'; 
 
 
 const Navbar = (props) => {
@@ -12,7 +13,7 @@ const Navbar = (props) => {
   const rightNavItems = ({ user, handleLogout }) => {
     if (user) {
       return (
-        <Menu.Menu position="right">
+        <NavRight>
           {/* {toggleButton ? */}
             <>
               {/* <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={ */}
@@ -78,28 +79,28 @@ const Navbar = (props) => {
             name="Logout"
             onClick={() => handleLogout(props.history)}
           />
-        </Menu.Menu>
+        </NavRight>
       );
     } else {
       return (
-        <Menu.Menu position="right">
-            <Menu.Item
+        <NavRight>
+            <StyledLi
               active={props.location.pathname === "/login"}>
-                <Link to="/login">
+                <StyledLink to="/login">
                   <h3>
                     Login
                   </h3>
-                </Link>
-            </Menu.Item>
-            <Menu.Item
+                </StyledLink>
+            </StyledLi>
+            <StyledLi
               active={props.location.pathname === "/register"}>
                 <NavLink to="/register">
                   <h3>
                     Register
                   </h3>
               </NavLink>
-            </Menu.Item>
-        </Menu.Menu>
+            </StyledLi>
+        </NavRight>
       );
     };
   };
@@ -107,24 +108,21 @@ const Navbar = (props) => {
   return (
     <AuthConsumer>
       {authProviderValueObject =>
-        <Menu inverted pointing>
+        <StyledDiv>
+          <ContainerDiv>
           <Link to="/">
-            <img
-              src={require('../Images/LogoBlack.png')}
+            <Image
+              size="mini"
+              src={require('../Images/logo-white.svg')}
               alternate="Home"
-              style={{ height: "65px", width: "79px" }}
+              style={{display: "inline", paddingTop: "18px", marginLeft: ".8rem"}}
             />
-
-            {/* <Menu.Item
-              name="Home"
-              active={props.location.pathname === "/"}
-            /> */}
           </Link>
-          <Menu.Item>
-            <Search {...props} />
-          </Menu.Item>
+        
+             <Search {...props} /> 
           {rightNavItems(authProviderValueObject)}
-        </Menu>
+          </ContainerDiv>
+        </StyledDiv>
       }
     </AuthConsumer >
   );
@@ -136,4 +134,38 @@ const styles = {
     fontWeight: 'bold',
   }
 }
+
+const StyledDiv = styled.div`
+  /* background-color: white; */
+  background: #333;
+  color: #fff;
+  overflow: auto;
+  /* margin: 0; */
+  /* padding: .6em 1em; */
+`
+
+const ContainerDiv = styled.div`
+  margin: auto;
+    max-width: 1100px;
+    overflow: auto;
+    padding: 0 20px;
+    font-size: 18px;
+`
+
+
+const NavRight = styled.ul`
+    list-style: none;
+    float: right;
+`
+
+const StyledLi = styled.li`
+      float: left;
+
+`
+
+const StyledLink = styled(Link)`
+   display: block;
+    padding: 20px;
+    text-align: center;
+`
 export default withRouter(Navbar);
