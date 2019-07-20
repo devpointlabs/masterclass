@@ -37,7 +37,7 @@ const Home = () => {
 };
 
 const AppContainer = styled.div`
-	background-color: rgb(53, 68, 62);
+	background-color: rgb(90,90,90);
 	padding-left: 5em;
 	padding-top: 5em;
 `;
