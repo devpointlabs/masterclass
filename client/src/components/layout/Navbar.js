@@ -1,9 +1,10 @@
 import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import { Menu, Popup } from "semantic-ui-react";
+import { Menu, Popup, Image, Container, Responsive, Header } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
 import axios from 'axios'; 
 import Search from './Search'; 
+import styled from 'styled-components'; 
 
 
 const Navbar = (props) => {
@@ -12,14 +13,11 @@ const Navbar = (props) => {
   const rightNavItems = ({ user, handleLogout }) => {
     if (user) {
       return (
-        <Menu.Menu position="right">
-          {/* {toggleButton ? */}
-            <>
-              {/* <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={ */}
-              
-              <Menu.Item
+        <NavRight>
+        
+              <>
+              <NavMenuItem
                 name="Teachers"
-                // active={props.location.pathname === "/teachers/courses"}
                 onClick={() => setToggleButton(!toggleButton)}
                 >
                 <NavLink to="/teachers/courses"
@@ -30,8 +28,8 @@ const Navbar = (props) => {
                     Teachers
                   </h3>
                 </NavLink>
-              </Menu.Item>
-              <Menu.Item
+              </NavMenuItem>
+              <NavMenuItem
                 active={props.location.pathname === "/my-courses"}>
                 <NavLink to="/my-courses"
                 exact
@@ -41,10 +39,10 @@ const Navbar = (props) => {
                   My Enrolled Courses
                   </h3>
                 </NavLink>
-              </Menu.Item>
+              </NavMenuItem>
             </>
-            {/* <Popup content="Switch to the student view here - get back to the courses available." trigger={ */}
-              <Menu.Item
+            
+              <NavMenuItem
                 active={props.location.pathname === "/"}
                 onClick={() => setToggleButton(!toggleButton)}
                 >
@@ -56,11 +54,8 @@ const Navbar = (props) => {
                   Students
                   </h3>
                 </NavLink>
-              </Menu.Item>
-            {/* //  } /> */}
-
-          {/* } */}
-            <Menu.Item
+              </NavMenuItem>
+            <NavMenuItem
               name="My Profile"
               active={props.location.pathname === "/profile"}
               >
@@ -72,34 +67,40 @@ const Navbar = (props) => {
                 My Profile
                 </h3>
               </NavLink>
-            </Menu.Item>
-          <Menu.Item
+            </NavMenuItem>
+            <NavMenuItem
             header as = "h3"
             name="Logout"
-            onClick={() => handleLogout(props.history)}
-          />
-        </Menu.Menu>
+            onClick={() => handleLogout(props.history)} >
+              <NavLink>
+
+            <h3>
+              Logout
+            </h3>
+              </NavLink>
+          </NavMenuItem>
+        </NavRight>
       );
     } else {
       return (
-        <Menu.Menu position="right">
-            <Menu.Item
+        <NavRight>
+            <NavMenuItem
               active={props.location.pathname === "/login"}>
-                <Link to="/login">
+                <NavLink to="/login">
                   <h3>
                     Login
                   </h3>
-                </Link>
-            </Menu.Item>
-            <Menu.Item
+                </NavLink>
+            </NavMenuItem>
+            <NavMenuItem
               active={props.location.pathname === "/register"}>
                 <NavLink to="/register">
                   <h3>
                     Register
                   </h3>
               </NavLink>
-            </Menu.Item>
-        </Menu.Menu>
+            </NavMenuItem>
+        </NavRight>
       );
     };
   };
@@ -107,24 +108,26 @@ const Navbar = (props) => {
   return (
     <AuthConsumer>
       {authProviderValueObject =>
-        <Menu inverted pointing>
-          <Link to="/">
-            <img
-              src={require('../Images/LogoBlack.png')}
-              alternate="Home"
-              style={{ height: "65px", width: "79px" }}
-            />
+        <StyledDiv>
+          <ContainerDiv>
+            <div style={{display:"flex", padding: '18px'}}>
 
-            {/* <Menu.Item
-              name="Home"
-              active={props.location.pathname === "/"}
-            /> */}
+          <Link to="/">
+            <Image
+              size="mini"
+              src={require('../Images/logo-white.svg')}
+              alternate="Home"
+              style={{display: "inline", marginLeft: ".8rem"}}
+              />
           </Link>
-          <Menu.Item>
-            <Search {...props} />
-          </Menu.Item>
+              <div style ={{ marginLeft: '10px'}}>
+
+             <Search {...props} /> 
+              </div>
+              </div>
+          </ContainerDiv>
           {rightNavItems(authProviderValueObject)}
-        </Menu>
+        </StyledDiv>
       }
     </AuthConsumer >
   );
@@ -136,4 +139,47 @@ const styles = {
     fontWeight: 'bold',
   }
 }
+
+const StyledDiv = styled.div`
+  /* background-color: white; */
+  background: #333;
+  color: #fff;
+  overflow: auto;
+  /* margin: 0; */
+  /* padding: .6em 1em; */
+`
+
+const ContainerDiv = styled.div`
+  margin: auto;
+    max-width: 1100px;
+    overflow: auto;
+    padding: 0 20px;
+    font-size: 18px;
+    float: left;
+
+`
+
+
+const NavRight = styled.ul`
+    display:flex;
+    justify-content: space-between;
+    list-style: none;
+    float: right;
+`
+
+const StyledLi = styled.li`
+      float: left;
+
+`
+
+const StyledLink = styled(Link)`
+   display: block;
+    padding: 20px;
+    text-align: center;
+`
+const NavMenuItem = styled(Menu.Item)`
+  padding: 15px;
+  color: #ffffff;
+  text-decoration: none;
+`
 export default withRouter(Navbar);
