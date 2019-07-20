@@ -30,7 +30,7 @@ const Home = () => {
 				style={{width: "100%", height: "100%"}}
 				/>
 			</AppContainer>
-			<div>
+			<div style={{backgroundColor: "#1C2225"}}>
 				<Courses />
 			</div>
 
