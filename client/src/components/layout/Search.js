@@ -74,6 +74,7 @@ const Search = (props) => {
       icon='search'
       onChange={(e)=> setSearch(e.target.value)}
       value={search}
+      onSubmit={ (e, search) => searchCourses}
       
       />
     </Menu.Item>
@@ -88,15 +89,6 @@ const StyledInput = styled(Input)`
   border: solid 1px #dbdbdb;
   border-radius: 3px;
   color: #262626;
-
-  /* padding: 7px 33px; */
-  /* border-radius: 3px;
-  color: #ddd; */
-  /* cursor: text;
-  font-size: 14px;
-  font-weight: 300;
-  text-align: center;
-  background: #333; */
 
   &:active,
   &:focus {
