@@ -20,25 +20,25 @@ const Navbar = (props) => {
                 name="Teachers"
                 onClick={() => setToggleButton(!toggleButton)}
                 >
-                <NavLink to="/teachers/courses"
+                <StyledNavLink to="/teachers/courses"
                 exact
                 activeStyle={styles.active}
                 >
                   <h3>
                     Teachers
                   </h3>
-                </NavLink>
+                </StyledNavLink>
               </NavMenuItem>
               <NavMenuItem
                 active={props.location.pathname === "/my-courses"}>
-                <NavLink to="/my-courses"
+                <StyledNavLink to="/my-courses"
                 exact
                 activeStyle={styles.active}
                 >
                   <h3>
                   My Enrolled Courses
                   </h3>
-                </NavLink>
+                </StyledNavLink>
               </NavMenuItem>
             </>
             
@@ -46,38 +46,40 @@ const Navbar = (props) => {
                 active={props.location.pathname === "/"}
                 onClick={() => setToggleButton(!toggleButton)}
                 >
-                <NavLink to="/"
+                <StyledNavLink to="/"
                 exact
                 activeStyle={styles.active}
                 >
                   <h3>
                   Students
                   </h3>
-                </NavLink>
+                </StyledNavLink>
               </NavMenuItem>
             <NavMenuItem
               name="My Profile"
               active={props.location.pathname === "/profile"}
               >
-              <NavLink to="/profile"
+              <StyledNavLink to="/profile"
               exact
               activeStyle={styles.active}
               >
                 <h3>
                 My Profile
                 </h3>
-              </NavLink>
+              </StyledNavLink>
             </NavMenuItem>
             <NavMenuItem
-            header as = "h3"
+            // header as = "h3"
             name="Logout"
             onClick={() => handleLogout(props.history)} >
-              <NavLink>
-
+              <StyledNavLink
+              exact
+              activeStyle={styles.active}
+              >
             <h3>
               Logout
             </h3>
-              </NavLink>
+              </StyledNavLink>
           </NavMenuItem>
         </NavRight>
       );
@@ -86,19 +88,26 @@ const Navbar = (props) => {
         <NavRight>
             <NavMenuItem
               active={props.location.pathname === "/login"}>
-                <NavLink to="/login">
+                
+                <StyledNavLink to="/login"
+                exact
+                activeStyle={styles.active}
+                >
                   <h3>
                     Login
                   </h3>
-                </NavLink>
+                </StyledNavLink>
             </NavMenuItem>
             <NavMenuItem
               active={props.location.pathname === "/register"}>
-                <NavLink to="/register">
+                <StyledNavLink to="/register"
+                exact
+                activeStyle={styles.active}
+                >
                   <h3>
                     Register
                   </h3>
-              </NavLink>
+              </StyledNavLink>
             </NavMenuItem>
         </NavRight>
       );
@@ -117,7 +126,7 @@ const Navbar = (props) => {
               size="mini"
               src={require('../Images/logo-white.svg')}
               alternate="Home"
-              style={{display: "inline", marginLeft: ".8rem"}}
+              style={{display: "inline", marginLeft: ".8rem", marginRight: ".8rem"}}
               />
           </Link>
               <div style ={{ marginLeft: '10px'}}>
@@ -135,14 +144,15 @@ const Navbar = (props) => {
 
 const styles = {
   active: {
-    color: 'rgb(189, 122, 235)',
+    color: '#8E2DE2',
+    // borderBottom: ' #8E2DE2 3px solid',
     fontWeight: 'bold',
   }
 }
 
 const StyledDiv = styled.div`
   /* background-color: white; */
-  background: #333;
+  background: #1C2225;
   color: #fff;
   overflow: auto;
   /* margin: 0; */
@@ -167,19 +177,32 @@ const NavRight = styled.ul`
     float: right;
 `
 
-const StyledLi = styled.li`
-      float: left;
+const StyledNavLink = styled(NavLink)`
+ text-decoration: none;
+  color: #fff;
+  font-size: 1.4em;
+  transition: background 0.6s ease;
 
-`
 
-const StyledLink = styled(Link)`
-   display: block;
-    padding: 20px;
-    text-align: center;
+  h3{
+  padding: .18em .2em;
+  font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+   
+  &:hover {
+    background-color:  #8E2DE2;
+    /* border-bottom:  #8E2DE2 3px solid;  */
+    color: white;
+    border-radius: 3px;
+    transition: background 0.6s ease;
+  }
+  }
+
+
 `
 const NavMenuItem = styled(Menu.Item)`
   padding: 15px;
   color: #ffffff;
   text-decoration: none;
+
 `
 export default withRouter(Navbar);
