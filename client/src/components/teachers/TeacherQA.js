@@ -29,29 +29,7 @@ const TeacherQA = (props) =>{
       })
     }, [enrollments])
 
-    // const toggle = () =>{
-    //   setShowForm(!showForm)
-    // }
-    // const deleteComment = (c_id) =>{
-    //   axios.delete(`/api/videos/${props.video_id}/comments/${c_id}`)
-    //   .then(res =>{
-    //     setComments(comments.filter(c => c.id !== c_id))
-    //     })
-    // }
-    // const editComment = (id, comment) => {
-    //   const editedComment = comments.map(c => {
-    //     if (c.id === id) {
-    //       return comment
-    //     } 
-    //     else {
-    //       return c
-    //     }
-    //   })
-    //   return setComments(editedComment)
-    // }
-    // const addComment = (comment) =>{
-    //   setComments([...comments, comment])
-    // }
+  
     // -----------------Sanitize variables from duplicates --------------------
 
   const courses = Array.from(new Set(myQAs.map(c =>c.c_title))).map(title=>{
@@ -91,10 +69,8 @@ const videoPanels = (id) =>{
   )
 }
 const videoContent = (id) =>{
-  let complete = false
   return videos.map(v=>{
     if(id === v.video_id){
-      complete = true 
       return(
         <div>
           <Accordion.Accordion panels = {videoPanels(v.v_lesson_id)}/>
@@ -214,22 +190,20 @@ const coursePanels = () =>{
   return (
     <>
     <div style={{display: 'flex', justifyContent:"space-evenly"}}>
-    <Accordion defaultActiveIndex={0} panels={rootPanels} styled />
-    <div>
-    <h1>Student Questions</h1>
-      <>
-      <div style= {{marginTop: '30px'}}>
-        <hr/>
-     
-        <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
-          <Comment.Group>
-            {showComments()}
-          </Comment.Group>
-        </div>
+      <Accordion defaultActiveIndex={0} panels={rootPanels} styled />
+      <div>
+        <h1>Student Questions</h1>
+          <>
+            <div style= {{marginTop: '30px'}}>
+              <hr/>
+                <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
+                  <Comment.Group>
+                  {showComments()}
+                  </Comment.Group>
+              </div>
+            </div>
+          </>
       </div>
-    </>
-    </div>
-  
     </div>
   </>
   )
@@ -251,6 +225,9 @@ const RepliesClick = styled.p`
     background: grey ;
     transition: background 0.7s ease;
   } 
+`
+const QAdiv = styled.div`
+  height
 `
 
 export default TeacherQA

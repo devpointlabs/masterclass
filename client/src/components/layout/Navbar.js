@@ -1,9 +1,10 @@
 import React, { useState, } from "react";
 import { AuthConsumer, } from "../../providers/AuthProvider";
-import { Menu, Popup } from "semantic-ui-react";
+import { Menu, Image, } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
 import axios from 'axios'; 
 import Search from './Search'; 
+import styled from 'styled-components'; 
 
 
 const Navbar = (props) => {
@@ -12,94 +13,103 @@ const Navbar = (props) => {
   const rightNavItems = ({ user, handleLogout }) => {
     if (user) {
       return (
-        <Menu.Menu position="right">
-          {/* {toggleButton ? */}
-            <>
-              {/* <Popup content="Switch to the teacher view here - get back to the courses you're teaching." trigger={ */}
-              
-              <Menu.Item
+        <NavRight>
+        
+              <>
+              <NavMenuItem
                 name="Teachers"
-                // active={props.location.pathname === "/teachers/courses"}
                 onClick={() => setToggleButton(!toggleButton)}
                 >
-                <NavLink to="/teachers/courses"
+                <StyledNavLink to="/teachers/courses"
                 exact
                 activeStyle={styles.active}
                 >
                   <h3>
                     Teachers
                   </h3>
-                </NavLink>
-              </Menu.Item>
-              <Menu.Item
+                </StyledNavLink>
+              </NavMenuItem>
+              <NavMenuItem
                 active={props.location.pathname === "/my-courses"}>
-                <NavLink to="/my-courses"
+                <StyledNavLink to="/my-courses"
                 exact
                 activeStyle={styles.active}
                 >
                   <h3>
                   My Enrolled Courses
                   </h3>
-                </NavLink>
-              </Menu.Item>
+                </StyledNavLink>
+              </NavMenuItem>
             </>
-            {/* <Popup content="Switch to the student view here - get back to the courses available." trigger={ */}
-              <Menu.Item
+            
+              <NavMenuItem
                 active={props.location.pathname === "/"}
                 onClick={() => setToggleButton(!toggleButton)}
                 >
-                <NavLink to="/"
+                <StyledNavLink to="/"
                 exact
                 activeStyle={styles.active}
                 >
                   <h3>
                   Students
                   </h3>
-                </NavLink>
-              </Menu.Item>
-            {/* //  } /> */}
-
-          {/* } */}
-            <Menu.Item
+                </StyledNavLink>
+              </NavMenuItem>
+            <NavMenuItem
               name="My Profile"
               active={props.location.pathname === "/profile"}
               >
-              <NavLink to="/profile"
+              <StyledNavLink to="/profile"
               exact
               activeStyle={styles.active}
               >
                 <h3>
                 My Profile
                 </h3>
-              </NavLink>
-            </Menu.Item>
-          <Menu.Item
-            header as = "h3"
+              </StyledNavLink>
+            </NavMenuItem>
+            <NavMenuItem
+            // header as = "h3"
             name="Logout"
-            onClick={() => handleLogout(props.history)}
-          />
-        </Menu.Menu>
+            onClick={() => handleLogout(props.history)} >
+              <StyledNavLink
+              exact
+              activeStyle={styles.active}
+              >
+            <h3>
+              Logout
+            </h3>
+              </StyledNavLink>
+          </NavMenuItem>
+        </NavRight>
       );
     } else {
       return (
-        <Menu.Menu position="right">
-            <Menu.Item
+        <NavRight>
+            <NavMenuItem
               active={props.location.pathname === "/login"}>
-                <Link to="/login">
+                
+                <StyledNavLink to="/login"
+                exact
+                activeStyle={styles.active}
+                >
                   <h3>
                     Login
                   </h3>
-                </Link>
-            </Menu.Item>
-            <Menu.Item
+                </StyledNavLink>
+            </NavMenuItem>
+            <NavMenuItem
               active={props.location.pathname === "/register"}>
-                <NavLink to="/register">
+                <StyledNavLink to="/register"
+                exact
+                activeStyle={styles.active}
+                >
                   <h3>
                     Register
                   </h3>
-              </NavLink>
-            </Menu.Item>
-        </Menu.Menu>
+              </StyledNavLink>
+            </NavMenuItem>
+        </NavRight>
       );
     };
   };
@@ -107,24 +117,26 @@ const Navbar = (props) => {
   return (
     <AuthConsumer>
       {authProviderValueObject =>
-        <Menu inverted pointing>
-          <Link to="/">
-            <img
-              src={require('../Images/LogoBlack.png')}
-              alternate="Home"
-              style={{ height: "65px", width: "79px" }}
-            />
+        <StyledDiv>
+          <ContainerDiv>
+            <div style={{display:"flex", padding: '18px'}}>
 
-            {/* <Menu.Item
-              name="Home"
-              active={props.location.pathname === "/"}
-            /> */}
+          <Link to="/">
+            <Image
+              size="mini"
+              src={require('../Images/logo-white.svg')}
+              alternate="Home"
+              style={{display: "inline", marginLeft: ".8rem", marginRight: ".8rem"}}
+              />
           </Link>
-          <Menu.Item>
-            <Search {...props} />
-          </Menu.Item>
+              <div style ={{ marginLeft: '10px'}}>
+
+             <Search {...props} /> 
+              </div>
+              </div>
+          </ContainerDiv>
           {rightNavItems(authProviderValueObject)}
-        </Menu>
+        </StyledDiv>
       }
     </AuthConsumer >
   );
@@ -132,8 +144,65 @@ const Navbar = (props) => {
 
 const styles = {
   active: {
-    color: 'rgb(189, 122, 235)',
+    color: '#8E2DE2',
+    // borderBottom: ' #8E2DE2 3px solid',
     fontWeight: 'bold',
   }
 }
+
+const StyledDiv = styled.div`
+  /* background-color: white; */
+  background: #1C2225;
+  color: #fff;
+  overflow: auto;
+  /* margin: 0; */
+  /* padding: .6em 1em; */
+`
+
+const ContainerDiv = styled.div`
+  margin: auto;
+    max-width: 1100px;
+    overflow: auto;
+    padding: 0 20px;
+    font-size: 18px;
+    float: left;
+
+`
+
+
+const NavRight = styled.ul`
+    display:flex;
+    justify-content: space-between;
+    list-style: none;
+    float: right;
+`
+
+const StyledNavLink = styled(NavLink)`
+ text-decoration: none;
+  color: #fff;
+  font-size: 1.4em;
+  transition: background 0.6s ease;
+
+
+  h3{
+  padding: .18em .2em;
+  font-family: 'Nunito Sans', Arial, Helvetica, sans-serif; 
+   
+  &:hover {
+    background-color:  #8E2DE2;
+    /* border-bottom:  #8E2DE2 3px solid;  */
+    color: white;
+    border-radius: 3px;
+    transition: background 0.6s ease;
+  }
+  }
+
+
+`
+const NavMenuItem = styled(Menu.Item)`
+  padding: 15px;
+  color: #ffffff;
+  text-decoration: none;
+
+`
 export default withRouter(Navbar);
