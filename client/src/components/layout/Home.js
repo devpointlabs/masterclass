@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import Courses from '../Courses';
-import { Header, Segment, Card, Container } from 'semantic-ui-react';
+import { Header, Image, Segment, Card, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import HeaderText from '../../Styles/HeaderText';
 // import { useSpring, animated } from 'react-spring'
@@ -13,7 +13,7 @@ const Home = () => {
 		<Fragment>
 			<AppContainer>
 				{/* <animated.div style={props}> */}
-				<Header textAlign='left' as={HeaderText} fSize='large'>
+				{/* <Header textAlign='left' as={HeaderText} fSize='large'>
 					DevPoint <br />
 					University
 				</Header>
@@ -22,8 +22,13 @@ const Home = () => {
 				</Header>
 				<Header textAlign='left' as={HeaderText} fSize='medium'>
 					Let your SKILLS do the talking.
-				</Header>
-				<br />
+				</Header> */}
+				<Image
+				// size="massive"
+				src={require('../Images/banner-gray.png')}
+				alternate="logo"
+				style={{width: "100%", height: "100%"}}
+				/>
 			</AppContainer>
 			<div>
 				<Courses />
@@ -37,9 +42,11 @@ const Home = () => {
 };
 
 const AppContainer = styled.div`
-	background-color: rgb(53, 68, 62);
-	padding-left: 5em;
-	padding-top: 5em;
+	background-color: #343A40;
+	/* display: "flex"; 
+	justify-content: "center";  */
+	/* padding-left: 5em;
+	padding-top: 5em; */
 `;
 
 export default Home;
