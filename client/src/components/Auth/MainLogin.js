@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import ParticlesContainer from "../../Styles/ParticlesContainer";
 import LoginForm from "./Login";
-import logo from '../Images/logo-login.svg';
+import logo from '../Images/logo-picture.png';
 
 const MainLogin = (props) => {
   return (
@@ -28,6 +28,7 @@ const LoginContainer = styled.div`
   width: 50%;
   /* background-color: #0f0c29; */
   background-color: #1F1C2C;
+  /* background-color: #1C2225; */
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -56,7 +57,9 @@ const LogoContainer = styled.div`
   background: linear-gradient(to bottom right, #2a0845, #8E2DE2, #4A00E0);
   position: relative;
   .logo {
-    max-width: 450px;
+    margin: 0 auto; 
+    max-width: 500px;
+    max-height: 600px;
   }
   h1 {
     color: white;
