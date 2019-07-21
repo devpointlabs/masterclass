@@ -115,19 +115,24 @@ const Course = (props) => {
       <ShowcaseContainer style={{width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}> 
       
         <StyledCourseHeader>{course.title}</StyledCourseHeader>
-        {/* <p>{course.overview}</p> */}
+        <StyledOverview>{course.overview}</StyledOverview>
        <br/>
-        <Link to={`/course-video-view/${course_id}`}>
-        <Button color="purple">
-          Start Learning
-        </Button>
-        </Link>
+       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
+       {(!enrolled && user) ? <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/>Enroll Now</Button>
+       :
+       <Link to={`/course-video-view/${course_id}`}>
+       <Button color="purple">
+         Start Learning
+       </Button>
+       </Link>
+       }
+       
         
       
       
       </ShowcaseContainer> 
       <div style = {{display: "flex", justifyContent: "space-between", padding: "15px"}}>
-      <Header as="h1">{course.title}</Header>
+      <Header as="h1">Lesson Plan: {course.title}</Header>
       <Link to = {"/"}>
         <Button color='black'>
           <Icon name='arrow alternate circle left outline' />
@@ -135,18 +140,6 @@ const Course = (props) => {
           </Button>
         </Link>
         </div>   
-      {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
-      <div style={{padding: "15px"}}>
-
-      {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
-      <br />
-      {/* {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />} */}
-
-     {/* { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
-        {showForm ? "Close Form" : "Edit Course"}
-      </Button>}
-      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>} */}
-      </div>
       <br />
       <br/>
       <div style={{padding: "15px"}}>
@@ -175,6 +168,16 @@ const StyledCourseHeader = styled(Header)`
   letter-spacing: 3px; 
   font-size: 3rem !important; 
   font-weight: bold !important; 
+  color: #fff !important; 
+
+`
+const StyledOverview = styled.p` 
+  width: 50%; 
+  font-family: 'Nunito Sans', Arial, Helvetica, sans-serif !important; 
+  letter-spacing: 2px; 
+  font-size: 1.3rem !important; 
+  text-align: center; 
+  /* font-weight: bold !important;  */
   color: #fff !important; 
 
 `
