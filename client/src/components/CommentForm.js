@@ -45,14 +45,15 @@ const CommentForm = (props) => {
   return ( 
   <Form onSubmit = {handleSubmit}>
     <Form.Group>
-    <Form.Input 
-      label = "Title"
-      placeholder = "Question Title"
-      name = "title"
-      required 
-      value = {title}
-      onChange = {(e) => setTitle(e.target.value)}
-    /> 
+      <Form.Input 
+        label = "Title"
+        placeholder = "Question Title"
+        name = "title"
+        required 
+        value = {title}
+        onChange = {(e) => setTitle(e.target.value)}
+      /> 
+    </Form.Group> 
     <Form.TextArea 
       label = "Body"
       placeholder = "Question"
@@ -61,9 +62,8 @@ const CommentForm = (props) => {
       value = {body}
       onChange = {(e) => setBody(e.target.value)}
     /> 
-    </Form.Group> 
     <Form.Button>Submit Question</Form.Button> 
-    </Form>
+  </Form>
   );
 };
 

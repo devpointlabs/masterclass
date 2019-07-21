@@ -136,7 +136,11 @@ const VideoView = (props) => {
         content:
           <>
             <hr/>
-            <Accordion.Title style={{ color: 'white' }} active={activeIndex === l.lesson_id} index={l.lesson_id} onClick={() => handleClick      (l.lesson_id)}>
+            <Accordion.Title 
+            style={{ color: 'white' }} 
+            active={activeIndex === l.lesson_id} 
+            index={l.lesson_id} onClick={() => handleClick(l.lesson_id)}
+            >
               <Icon name="dropdown" />
               {l.lesson_name}
               <hr/>
@@ -160,7 +164,7 @@ const VideoView = (props) => {
     <VideoViewDiv>
       <VidAndQA>
         {video ? (
-          <div style={{height: '90%', width: '90%'}}>
+          <div style={{ width: '90%' }}>
             <Header as='h1' style={{ color: 'white'}}>{video.title}</Header>
             {/* <Image src = {video.url}/> */}
             <Player
@@ -177,13 +181,14 @@ const VideoView = (props) => {
             <QAClick onClick={() => toggleQA()}>Show QA's <Icon name='angle down' /></QAClick>
           }
         </ClickDiv>
-        <div style={{width: '95%', border: 'solid 3px purple', borderRadius: '5px', padding: '15px'}}>
+        <div style={{width: '95%', border: 'solid 3px grey', borderRadius: '5px', padding: '15px', background: '#4f4f4f' }}>
           { showQA ?
             <>
             <div style={{marginTop: '30px'}}>
-              <hr/>
-              <h1>Q and A</h1>
-              <Button color='teal' onClick={toggle}>
+              <h1 style={{ color: 'white', borderBottom: 'white 1px solid'}}>
+                Questions and Answers Section
+              </h1>
+              <Button color='violet' onClick={toggle}>
                 <Icon name='comment alternate outline'/>
                 Ask A Question
               </Button>
@@ -199,7 +204,7 @@ const VideoView = (props) => {
                 null
               }
               <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
-                <Comment.Group>
+                <Comment.Group style={{ width: '100%', maxWidth: '100%'}}>
                   {showComments()}
                 </Comment.Group>
               </div>
@@ -211,6 +216,7 @@ const VideoView = (props) => {
       </VidAndQA>
       <LessonsDrop>
         <StyledAccordion>
+          <h1 style={{ color: 'white' }}>Lesson Plan</h1>
           {renderLessons()}
         </StyledAccordion>
       </LessonsDrop>
@@ -221,13 +227,14 @@ const VideoView = (props) => {
 const ClickDiv = styled.div`
   display: flex;
   justify-content: center;
+  margin: 5px;
 `
 const StyledAccordion = styled(Accordion)`
   height: 100%
 `;
 
 const QAClick = styled.p`
-  color: white;
+  color: #00e9ed;
   border-radius: 5px;
   padding-left: 7px;
 
@@ -265,6 +272,7 @@ const LessonsDrop = styled.div`
   display: flex;
   flex-direction: column;
   align-content: top;
+  border: grey solid 3px;
 `;
 
 const VideoButton = styled.div`

@@ -4,7 +4,7 @@ import CommentForm from "./CommentForm";
 import Replies from "./Replies"
 import styled from 'styled-components';
 import ReplyForm from "./ReplyForm"
-import { Button, Rating, Icon, Comment, Checkbox, Label } from "semantic-ui-react";
+import { Button, Container, Icon, Comment, Checkbox, Label } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
 
 const defaultImage = "https://png.pngtree.com/svg/20161212/f93e57629c.svg"
@@ -59,11 +59,14 @@ const QAndA = (props) => {
     if (user.id === user_id){
       return (
         <>
-          <Button.Group>
-            <Button size="tiny" icon color='teal' onClick={() => toggleForm()}>
+          <Button.Group size="mini">
+            <Button size="mini" icon onClick={() => toggleForm()}>
+              Edit
               <Icon name="edit"/>
             </Button>
-            <Button size="tiny" icon color='red' onClick={()=> delete_comment(comment_id)}>
+            <Button.Or />
+            <Button size="mini" icon onClick={()=> delete_comment(comment_id)}>
+              Delete
               <Icon name='trash'/>
             </Button>
           </Button.Group>
@@ -73,7 +76,7 @@ const QAndA = (props) => {
   }
 
   return (
-    <>
+    <div style={{ background: 'grey', padding: '5px', borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
       <Comment.Content>
         {userInfo.map(u => (
           <Label as='a' image>
@@ -81,10 +84,10 @@ const QAndA = (props) => {
             {u.user_name}
           </Label>
         ))}
-        <Comment.Content>
+        <Comment.Content as='h3' style={{ color: 'white', paddingLeft: '5px' }}>
           {comment_title}
         </Comment.Content>
-        <Comment.Content>
+        <Comment.Content style={{ color: 'white', paddingLeft: '5px' }}>
           {comment_body}
         </Comment.Content>
         <div style = {{
@@ -130,17 +133,18 @@ const QAndA = (props) => {
           }
         </Comment.Group>
       </Comment.Content>
-    </>
+    </div>
   )
 }
 
 const ClickDiv = styled.div`
   display: flex;
   justify-content: flex-start;
+  margin: 5px;
 `
 
 const RepliesClick = styled.p`
-  color: blue;
+  color: #00e9ed;
   border-radius: 5px;
   padding-left: 7px;
 

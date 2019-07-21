@@ -41,11 +41,14 @@ const Reply = (props) => {
     if (user.id === user_id) {
       return (
         <>
-          <Button.Group>
-            <Button size="mini" icon color='teal' onClick={() => toggleForm()}>
+          <Button.Group size="mini">
+            <Button size="mini" icon onClick={() => toggleForm()}>
+              Edit
               <Icon name="edit"/>
             </Button>
-            <Button size="mini" icon color='red' onClick={()=> delete_reply(reply_id)}>
+            <Button.Or />
+            <Button size="mini" icon onClick={()=> delete_reply(reply_id)}>
+              Delete
               <Icon name='trash'/>
             </Button>
           </Button.Group>
