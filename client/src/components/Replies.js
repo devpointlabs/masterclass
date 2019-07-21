@@ -72,7 +72,7 @@ const Replies = (props) => {
         <Comment.Action>
             <Button size='mini' color='violet' onClick={() => toggleReplyForm()}>
               <Icon name='comment alternate outline'/>
-              Reply
+              Leave A Reply
             </Button>
         </Comment.Action>
       </Comment.Content>

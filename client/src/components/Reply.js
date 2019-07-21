@@ -43,12 +43,10 @@ const Reply = (props) => {
         <>
           <Button.Group size="mini">
             <Button size="mini" icon onClick={() => toggleForm()}>
-              Edit
               <Icon name="edit"/>
             </Button>
             <Button.Or />
             <Button size="mini" icon onClick={()=> delete_reply(reply_id)}>
-              Delete
               <Icon name='trash'/>
             </Button>
           </Button.Group>
@@ -58,16 +56,19 @@ const Reply = (props) => {
   }
 
   return(
-    <>
-      <Comment.Content>
+    <div style={{ background: '#636363', padding: '5px', border: '#4f4f4f solid 3px' ,borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
+      <Comment.Content style={{ display: 'flex', justifyContent: 'space-between'}}>
         {userInfo.map(u => (
           <Label as='a' image>
             <img src={u.user_image || defaultImage} />
             {u.user_name}
           </Label>
         ))}
+        <Comment.Action>
+          {user && renderButtons()}
+        </Comment.Action>
       </Comment.Content>
-      <Comment.Content>
+      <Comment.Content style={{ color: 'white', padding: '5px' }}>
         {reply_body}
       </Comment.Content>
       <Comment.Content>
@@ -82,12 +83,7 @@ const Reply = (props) => {
           /> : 
           null}
       </Comment.Content>
-      <Comment.Content>
-        <Comment.Action>
-          {user && renderButtons()}
-        </Comment.Action>
-      </Comment.Content>
-    </>
+    </div>
   )
 }
 

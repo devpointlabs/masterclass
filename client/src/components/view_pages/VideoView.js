@@ -135,17 +135,21 @@ const VideoView = (props) => {
         key: l.lesson_id,
         content:
           <>
-            <hr/>
+            
             <Accordion.Title 
             style={{ color: 'white' }} 
             active={activeIndex === l.lesson_id} 
             index={l.lesson_id} onClick={() => handleClick(l.lesson_id)}
             >
+            <hr/>
               <Icon name="dropdown" />
               {l.lesson_name}
               <hr/>
             </Accordion.Title>
             <Accordion.Content active={activeIndex === l.lesson_id}>
+              <h4 style={{ color: 'white', display: 'flex', justifyContent: 'center', textDecoration: 'underline'}}>
+                Video Selection
+              </h4>
               {renderVideos(l.video_lesson_id)}
             </Accordion.Content>
           </>
@@ -165,11 +169,9 @@ const VideoView = (props) => {
       <VidAndQA>
         {video ? (
           <div style={{ width: '90%' }}>
-            <Header as='h1' style={{ color: 'white'}}>{video.title}</Header>
-            {/* <Image src = {video.url}/> */}
+            <Header as='h1' style={{ color: 'white', marginTop: '5px'}}>{video.title}</Header>
             <Player
               playsInline
-              // poster="/assets/poster.png"
               src={video.url}
             />
           </div>
@@ -216,7 +218,9 @@ const VideoView = (props) => {
       </VidAndQA>
       <LessonsDrop>
         <StyledAccordion>
-          <h1 style={{ color: 'white' }}>Lesson Plan</h1>
+          <h1 style={{ color: 'white', display: 'flex', justifyContent: 'center', marginTop: '17px'}}>
+            Lesson Selection
+          </h1>
           {renderLessons()}
         </StyledAccordion>
       </LessonsDrop>
@@ -248,7 +252,6 @@ const QAClick = styled.p`
 const VideoViewDiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: top;
   justify-content: center;
   width: 100vw;
   height: 100%;
@@ -260,7 +263,7 @@ const VidAndQA = styled.div`
   width: 75%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   min-height: 100vh;
   background-image: url(${StripeBackground});

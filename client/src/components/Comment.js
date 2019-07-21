@@ -59,7 +59,7 @@ const QAndA = (props) => {
     if (user.id === user_id){
       return (
         <>
-          <Button.Group size="mini">
+          <Button.Group size="mini" style={{marginLeft: '5px'}}>
             <Button size="mini" icon onClick={() => toggleForm()}>
               Edit
               <Icon name="edit"/>
@@ -78,16 +78,21 @@ const QAndA = (props) => {
   return (
     <div style={{ background: 'grey', padding: '5px', borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
       <Comment.Content>
+        <Comment.Content style={{ display: 'flex', justifyContent: 'space-between'}}>
         {userInfo.map(u => (
           <Label as='a' image>
             <img src={u.user_image || defaultImage} />
             {u.user_name}
           </Label>
         ))}
+        <Comment.Action>
+          {user && renderButtons()}
+        </Comment.Action>
+        </Comment.Content>
         <Comment.Content as='h3' style={{ color: 'white', paddingLeft: '5px' }}>
           {comment_title}
         </Comment.Content>
-        <Comment.Content style={{ color: 'white', paddingLeft: '5px' }}>
+        <Comment.Content style={{ color: 'white', paddingLeft: '5px', marginBottom: '5px' }}>
           {comment_body}
         </Comment.Content>
         <div style = {{
@@ -111,11 +116,6 @@ const QAndA = (props) => {
         </div> 
       </Comment.Content>
       <Comment.Content>
-        <Comment.Content>
-          <Comment.Action>
-            {user && renderButtons()}
-          </Comment.Action>
-        </Comment.Content>
         <ClickDiv>
           { showReplies ?
             <RepliesClick onClick={() => toggleReplies()}>Hide Replies <Icon name='angle up' /></RepliesClick>
@@ -150,7 +150,7 @@ const RepliesClick = styled.p`
 
   &:hover {
     cursor: pointer;
-    background: grey ;
+    background: #636363 ;
     transition: background 0.7s ease;
   } 
 `
