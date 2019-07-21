@@ -256,7 +256,8 @@ const VideoViewDiv = styled.div`
   width: 100vw;
   height: 100%;
   min-height: 100vh;
-  background: #4f4f4f;
+  background: rgb(68,68,68);
+  background: linear-gradient(90deg, rgba(68,68,68,1) 75%, rgba(134,134,134,1) 87%, rgba(68,68,68,1) 100%);
 `
 
 const VidAndQA = styled.div`
