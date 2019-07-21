@@ -99,16 +99,16 @@ const Container = styled.div`
 const Card = styled.div`
 background-color: rgb(90,90,90);
 border: 2px solid black;
-// margin-left: 100px;
-// margin-right: 100px;
-// margin-top: 50px;
-	// padding: 15px;
-	// text-align: center;
-	// border-radius: 50%;
-	height: 250px;
-	width: 250px;
-	text-decoration:none
-	color: white;
+/* margin-left: 100px;
+margin-right: 100px;
+margin-top: 50px;
+padding: 15px;
+text-align: center;
+border-radius: 50%; */
+height: 250px;
+width: 250px;
+text-decoration:none;
+color: white;
 `;
 
 const Header = styled.h1`
