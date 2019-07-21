@@ -14,7 +14,6 @@ const Navbar = (props) => {
     if (user) {
       return (
         <NavRight>
-        
               <>
               <NavMenuItem
                 name="Teachers"

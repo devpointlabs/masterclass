@@ -11,7 +11,9 @@ categories = ['Ruby', 'Javascript', 'React', 'SQL', 'JQuery']
   5.times do 
     course = Course.create(
       title: Faker::Educator.course_name,
-      category: categories.sample
+      category: categories.sample, 
+      overview: Faker::Movies::Hobbit.quote,
+      image: 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'
       )
     Enrollment.create(
       role: roles.sample,

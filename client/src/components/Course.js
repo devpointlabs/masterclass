@@ -112,19 +112,19 @@ const Course = (props) => {
 
   return (
     <> 
-      <ShowcaseContainer style={{width: "100%"}}> 
-      {/* <Image
-				// size="massive"
-				src={require('./Images/stripe-background-course.png')}
-				alternate="logo"
-				style={{width: "100%", height: "100%"}}
-        /> */}
-        <div>
-        <h1>{course.title}</h1>
-        </div>
-      <Link to={`/course-video-view/${course_id}`}>
-        Course Video View
-      </Link>
+      <ShowcaseContainer style={{width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}> 
+      
+        <StyledCourseHeader>{course.title}</StyledCourseHeader>
+        {/* <p>{course.overview}</p> */}
+       <br/>
+        <Link to={`/course-video-view/${course_id}`}>
+        <Button color="purple">
+          Start Learning
+        </Button>
+        </Link>
+        
+      
+      
       </ShowcaseContainer> 
       <div style = {{display: "flex", justifyContent: "space-between", padding: "15px"}}>
       <Header as="h1">{course.title}</Header>
@@ -160,19 +160,22 @@ const Course = (props) => {
 }
 
 const ShowcaseContainer = styled(Container)`
-  width: 100vw; 
+  display: flex;
+  align-items: center; 
+  justify-content: center;
   height: 80vh; 
   background-image: url(${Showcase}); 
   background-repeat: repeat; 
-  display: flex;
-  justify-content: center;  
-  align-content: center; 
+`
 
- div > h1{
-    text-align: center;
-    margin: 0 auto;  
-  }
-  
+const StyledCourseHeader = styled(Header)`
+  display: flex; 
+  justify-content: center; 
+  font-family: 'Halant', Arial, Helvetica, sans-serif !important; 
+  letter-spacing: 3px; 
+  font-size: 3rem !important; 
+  font-weight: bold !important; 
+  color: #fff !important; 
 
 `
 
