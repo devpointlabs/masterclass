@@ -2,8 +2,9 @@ import React, { useState, useEffect, useContext, } from 'react';
 import axios from 'axios';
 import QAndA from "../Comment";
 import CommentForm from "../CommentForm";
+import StripeBackground from "../Images/StripeBackground.png";
 import {AuthContext} from '../../providers/AuthProvider'
-import { Accordion, Icon, Button, Header, Comment, } from 'semantic-ui-react';
+import { Accordion, Icon, Button, Header, Comment, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Player } from 'video-react';
 
@@ -83,13 +84,14 @@ const VideoView = (props) => {
       let video = {
         key: v.video_id,
         content:
-          <VideoButton>
+          <>
             <AccordionContent>
-              <Button onClick={()=> renderVideo(v.lesson_id, v.video_id)}>
+              <Button color='violet' fluid onClick={()=> renderVideo(v.lesson_id, v.video_id)}>
                 {v.video_title}
               </Button>
             </AccordionContent>
-          </VideoButton>
+            <br/>
+          </>
       }
       if(id === v.video_lesson_id) {
         if (videosArray.includes(video.key)===false) {
@@ -106,7 +108,7 @@ const VideoView = (props) => {
   const showComments = () => {
     return (
       comments.map( c => (
-      <Comment key={c.id}>
+      <Comment as={Container} fluid key={c.id}>
         <QAndA
           video_id={video.id}
           comment_id={c.id}
@@ -133,9 +135,11 @@ const VideoView = (props) => {
         key: l.lesson_id,
         content:
           <>
-            <Accordion.Title active={activeIndex === l.lesson_id} index={l.lesson_id} onClick={() => handleClick      (l.lesson_id)}>
+            <hr/>
+            <Accordion.Title style={{ color: 'white' }} active={activeIndex === l.lesson_id} index={l.lesson_id} onClick={() => handleClick      (l.lesson_id)}>
               <Icon name="dropdown" />
               {l.lesson_name}
+              <hr/>
             </Accordion.Title>
             <Accordion.Content active={activeIndex === l.lesson_id}>
               {renderVideos(l.video_lesson_id)}
@@ -156,15 +160,15 @@ const VideoView = (props) => {
     <VideoViewDiv>
       <VidAndQA>
         {video ? (
-          <>
-            <Header as='h1'>{video.title}</Header>
+          <div style={{height: '90%', width: '90%'}}>
+            <Header as='h1' style={{ color: 'white'}}>{video.title}</Header>
             {/* <Image src = {video.url}/> */}
             <Player
               playsInline
               // poster="/assets/poster.png"
               src={video.url}
             />
-          </>
+          </div>
         ):null}
         <ClickDiv>
           { showQA ?
@@ -173,10 +177,10 @@ const VideoView = (props) => {
             <QAClick onClick={() => toggleQA()}>Show QA's <Icon name='angle down' /></QAClick>
           }
         </ClickDiv>
-        <div>
+        <div style={{width: '95%', border: 'solid 3px purple', borderRadius: '5px', padding: '15px'}}>
           { showQA ?
             <>
-            <div style= {{marginTop: '30px'}}>
+            <div style={{marginTop: '30px'}}>
               <hr/>
               <h1>Q and A</h1>
               <Button color='teal' onClick={toggle}>
@@ -206,9 +210,9 @@ const VideoView = (props) => {
         </div>
       </VidAndQA>
       <LessonsDrop>
-        <Accordion styled>
+        <StyledAccordion>
           {renderLessons()}
-        </Accordion>
+        </StyledAccordion>
       </LessonsDrop>
     </VideoViewDiv>
   )
@@ -216,12 +220,14 @@ const VideoView = (props) => {
 
 const ClickDiv = styled.div`
   display: flex;
-
   justify-content: center;
 `
+const StyledAccordion = styled(Accordion)`
+  height: 100%
+`;
 
 const QAClick = styled.p`
-  color: blue;
+  color: white;
   border-radius: 5px;
   padding-left: 7px;
 
@@ -235,11 +241,12 @@ const QAClick = styled.p`
 const VideoViewDiv = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: top;
   justify-content: center;
   width: 100vw;
   height: 100%;
   min-height: 100vh;
+  background: #4f4f4f;
 `
 
 const VidAndQA = styled.div`
@@ -249,15 +256,15 @@ const VidAndQA = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-image: url(${StripeBackground});
+  background-repeat: repeat;
 `
 
 const LessonsDrop = styled.div`
   width: 25%;
   display: flex;
-  height: 100%;
   flex-direction: column;
   align-content: top;
-  min-height: 100vh;
 `;
 
 const VideoButton = styled.div`
@@ -265,16 +272,14 @@ const VideoButton = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
-  border: solid 1px blue;
-  border-radius: 3px;
   padding: 0px;
   margin: 5px;
-  box-shadow: 5px 5px grey;
 `;
 
 const AccordionContent = styled(Accordion.Content)`
   display: flex;
   padding: 0px;
+  justify-content: center;
 `;
 
 export default VideoView
