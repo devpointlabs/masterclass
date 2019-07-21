@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, } from 'react';
 import axios from 'axios';
 import QAndA from "../Comment";
 import CommentForm from "../CommentForm";
+import StripeBackground from "../Images/StripeBackground.png";
 import {AuthContext} from '../../providers/AuthProvider'
 import { Accordion, Icon, Button, Header, Comment, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
@@ -89,7 +90,7 @@ const VideoView = (props) => {
                 {v.video_title}
               </Button>
             </AccordionContent>
-            <hr/>
+            <br/>
           </>
       }
       if(id === v.video_lesson_id) {
@@ -134,7 +135,8 @@ const VideoView = (props) => {
         key: l.lesson_id,
         content:
           <>
-            <Accordion.Title active={activeIndex === l.lesson_id} index={l.lesson_id} onClick={() => handleClick      (l.lesson_id)}>
+            <hr/>
+            <Accordion.Title style={{ color: 'white' }} active={activeIndex === l.lesson_id} index={l.lesson_id} onClick={() => handleClick      (l.lesson_id)}>
               <Icon name="dropdown" />
               {l.lesson_name}
               <hr/>
@@ -159,7 +161,7 @@ const VideoView = (props) => {
       <VidAndQA>
         {video ? (
           <div style={{height: '90%', width: '90%'}}>
-            <Header as='h1'>{video.title}</Header>
+            <Header as='h1' style={{ color: 'white'}}>{video.title}</Header>
             {/* <Image src = {video.url}/> */}
             <Player
               playsInline
@@ -225,7 +227,7 @@ const StyledAccordion = styled(Accordion)`
 `;
 
 const QAClick = styled.p`
-  color: blue;
+  color: white;
   border-radius: 5px;
   padding-left: 7px;
 
@@ -244,6 +246,7 @@ const VideoViewDiv = styled.div`
   width: 100vw;
   height: 100%;
   min-height: 100vh;
+  background: #4f4f4f;
 `
 
 const VidAndQA = styled.div`
@@ -253,15 +256,15 @@ const VidAndQA = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  background-image: url(${StripeBackground});
+  background-repeat: repeat;
 `
 
 const LessonsDrop = styled.div`
   width: 25%;
   display: flex;
-  height: 100vh;
   flex-direction: column;
   align-content: top;
-  min-height: 100vh;
 `;
 
 const VideoButton = styled.div`
@@ -271,7 +274,6 @@ const VideoButton = styled.div`
   align-content: center;
   padding: 0px;
   margin: 5px;
-  
 `;
 
 const AccordionContent = styled(Accordion.Content)`
