@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import { Button, Header, Segment } from 'semantic-ui-react';
+import { Button, Segment } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
@@ -19,71 +19,75 @@ const Courses = (props) => {
 			setEnrollments(res.data);
 		});
 	}, []);
-
-	const CourseSlider = () => {
-		var settings = {
+	
+	function NextArrow(props) {
+		const { className, style, onClick } = props;
+		return (
+			<div
+				className={className}
+				style={{ ...style, background: "purple" }}
+				onClick={onClick}
+			/>
+		);
+	}
+		const settings = {
 			dots: false,
 			infinite: true,
 			speed: 500,
 			slidesToShow: 4,
-			slidesToScroll: 1,
+			slidesToScroll: 4,
 			arrows: true,
 			touchMove: true,
 			autoPlay: true,
-			className: 'slides'
-		};
-		return (
-			<Slider {...settings}>
-				{/* <div style={{ display: 'flex', flexwrap: 'nowrap' }}> */}
-				{courses.map((course) => (
-					<Slide
-						key={course.id}
-						id={course.id}
-						title={course.title}
-						overview={course.overview}
-						image={course.image}
-					/>
-				))}
-				{/* </div> */}
-			</Slider>
-		);
-	};
-
-	const Slide = ({ id, image, title, overview }) => (
-		<Link to={{ pathname: `/courses/${id}` }}>
-			<Card
-				style={{
-					backgroundColor: 'Blue',
-					marginLeft: '100px',
-					marginRight: '100px',
-					marginTop: '50px'
-				}}
-				key={id}
-			>
-				<div textAlign='center'>
-					{image}
-					Image Goes Here
-				</div>
-				<h3>
-					<Link to={{ pathname: `/courses/${id}` }}>{title}</Link>
-				</h3>
-				<div>
-					Overview goes here
-					{overview}
-				</div>
-			</Card>
-		</Link>
-	);
+			className: 'slides',
+			nextArrow: <NextArrow />,
+      prevArrow: <NextArrow />,
+			responsive: [
+        {
+          breakpoint: 1024,
+          settings: {
+            slidesToShow: 3,
+            slidesToScroll: 3,
+            infinite: true,
+            dots: true
+          }
+        },
+        {
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 2,
+            initialSlide: 2
+          }
+        },
+        {
+          breakpoint: 480,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1
+          }
+        }
+      ]
+		}
 
 	return (
-		<Fragment>
+			<Container style={{ height: '100px' }}>
 			<Header as='h1' textAlign='center'>
 				Courses
 			</Header>
-			<Container style={{ height: '100px' }}>
-				<CourseSlider />
+				{/* <CourseSlider /> */}
+				<Slider {...settings}>
+					{courses.map(c=>{
+						return(
+							<Card>
+								<Link to={{pathname: `courses/${c.id}`}}>
+									<h1>{c.title}</h1>
+								</Link>
+							</Card>
+						)
+					})}
+				</Slider>
 			</Container>
-		</Fragment>
 	);
 };
 
@@ -93,12 +97,25 @@ const Container = styled.div`
 	/* background: linear-gradient(350deg, rgba(2, 0, 36, 1) 0%, rgba(89, 9, 121, 0.67) 73%); */
 `;
 const Card = styled.div`
-	margin: 15px;
-	padding: 15px;
-	background-color: white;
-	border-radius: 5px;
+background-color: rgb(90,90,90);
+border: 2px solid black;
+// margin-left: 100px;
+// margin-right: 100px;
+// margin-top: 50px;
+	// padding: 15px;
+	// text-align: center;
+	// border-radius: 50%;
 	height: 250px;
-	width: 450px;
+	width: 250px;
+	text-decoration:none
+	color: white;
 `;
 
-// style={{ backgroundColor: 'black' }}
+const Header = styled.h1`
+text-shadow: 2px 2px 2px black;
+color: white;
+font-size: 35px;
+text-align: center;
+background-color: rgb(60,60,60)
+`
+
