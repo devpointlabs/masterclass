@@ -153,6 +153,7 @@ const styles = {
 const StyledDiv = styled.div`
   /* background-color: white; */
   background: #1C2225;
+  /* background: #121618; */
   color: #fff;
   overflow: auto;
   /* margin: 0; */
