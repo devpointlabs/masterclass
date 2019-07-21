@@ -70,7 +70,7 @@ const QAndAs = (props)=>{
     <>
       <div style= {{marginTop: '30px'}}>
         <hr/>
-        <h1>Q and A</h1>
+        <h1>Q and A Section</h1>
         <Button color='teal' onClick={toggle}>
           <Icon name='comment alternate outline'/>
           Ask A Question

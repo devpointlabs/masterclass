@@ -45,25 +45,25 @@ const CommentForm = (props) => {
   return ( 
   <Form onSubmit = {handleSubmit}>
     <Form.Group>
-    <Form.Input 
-      label = "Title"
-      placeholder = "Question Title"
-      name = "title"
-      required 
-      value = {title}
-      onChange = {(e) => setTitle(e.target.value)}
-    /> 
+      <Form.Input 
+        label = "Question Title"
+        placeholder = "Question Title"
+        name = "title"
+        required 
+        value = {title}
+        onChange = {(e) => setTitle(e.target.value)}
+      /> 
+    </Form.Group> 
     <Form.TextArea 
-      label = "Body"
-      placeholder = "Question"
+      label = "Question"
+      placeholder = "Question..."
       name = "body"
       required 
       value = {body}
       onChange = {(e) => setBody(e.target.value)}
     /> 
-    </Form.Group> 
-    <Form.Button>Submit Question</Form.Button> 
-    </Form>
+    <Form.Button style={{ margin: '3px'}}>Submit Question</Form.Button> 
+  </Form>
   );
 };
 
