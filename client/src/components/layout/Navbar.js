@@ -4,7 +4,7 @@ import { Menu, Image, } from "semantic-ui-react";
 import { NavLink, Link, withRouter, } from "react-router-dom";
 import axios from 'axios'; 
 import Search from './Search'; 
-import styled from 'styled-components'; 
+import styled, {keyframes} from 'styled-components'; 
 
 
 const Navbar = (props) => {
@@ -120,7 +120,7 @@ const Navbar = (props) => {
         <StyledDiv>
           <ContainerDiv>
             <div style={{display:"flex", padding: '18px'}}>
-
+          <Jello>
           <Link to="/">
             <Image
               size="mini"
@@ -129,6 +129,7 @@ const Navbar = (props) => {
               style={{display: "inline", marginLeft: ".8rem", marginRight: ".8rem"}}
               />
           </Link>
+          </Jello>
               <div style ={{ marginLeft: '10px'}}>
 
              <Search {...props} /> 
@@ -201,6 +202,77 @@ const NavMenuItem = styled(Menu.Item)`
   padding: 15px;
   color: #ffffff;
   text-decoration: none;
+
+`
+// keyframes for animation 
+const jello = keyframes`
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(0.85, 1.15, 1);
+            transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+
+@keyframes jello {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(0.85, 1.15, 1);
+            transform: scale3d(0.85, 1.15, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+`
+// Call keyframe const to animate the logo image 
+const Jello = styled.div`
+  &:hover{
+    -webkit-animation: ${jello} 0.9s both;
+	        animation: ${jello} 0.9s both;
+  }
+
 
 `
 export default withRouter(Navbar);

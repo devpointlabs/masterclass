@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext, } from "react";
 import axios from "axios";
-// import CourseForm from './CourseForm';
-import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
+import styled from 'styled-components';
+import Showcase from './Images/stripe-background-course.png' 
+import { List, Header, Segment, Button, Icon, Container, Image } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../providers/AuthProvider"
 import VideoView from "./view_pages/VideoView"
@@ -57,24 +58,12 @@ const Course = (props) => {
       return lessons.map(l => (
         
          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-         {/* <div style = {{display:"flex",}}> */}
            <Link to = {`/lessons/${l.id}`}> 
          <List.Header as="h3">{l.name}</List.Header>
          <List.Description>
            {l.description}
          </List.Description>
            </Link>
-           {/* <div>
-
-            <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
-              <Icon name="trash alternate outline" />
-            </Button>
-            <Link to={`/edit_lesson/${l.id}`}> <Button size="tiny" color="blue">
-              <Icon name="edit" />
-            </Button>
-            </Link>
-           </div> */}
-       {/* </div> */}
          </Segment>
        
       ))}
@@ -122,10 +111,21 @@ const Course = (props) => {
   }
 
   return (
-    <>   
+    <> 
+      <ShowcaseContainer style={{width: "100%"}}> 
+      {/* <Image
+				// size="massive"
+				src={require('./Images/stripe-background-course.png')}
+				alternate="logo"
+				style={{width: "100%", height: "100%"}}
+        /> */}
+        <div>
+        <h1>{course.title}</h1>
+        </div>
       <Link to={`/course-video-view/${course_id}`}>
         Course Video View
       </Link>
+      </ShowcaseContainer> 
       <div style = {{display: "flex", justifyContent: "space-between", padding: "15px"}}>
       <Header as="h1">{course.title}</Header>
       <Link to = {"/"}>
@@ -158,6 +158,23 @@ const Course = (props) => {
     </>
   )
 }
+
+const ShowcaseContainer = styled(Container)`
+  width: 100vw; 
+  height: 80vh; 
+  background-image: url(${Showcase}); 
+  background-repeat: repeat; 
+  display: flex;
+  justify-content: center;  
+  align-content: center; 
+
+ div > h1{
+    text-align: center;
+    margin: 0 auto;  
+  }
+  
+
+`
 
 export default Course;
 
