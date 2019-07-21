@@ -25,12 +25,12 @@ const Home = () => {
 				</Header> */}
 				<Image
 				// size="massive"
-				src={require('../Images/banner-gray.png')}
+				src={require('../Images/background-banner-side.png')}
 				alternate="logo"
 				style={{width: "100%", height: "100%"}}
 				/>
 			</AppContainer>
-			<div style={{backgroundColor: "#1C2225"}}>
+			<div style={{backgroundColor: "black"}}>
 				<Courses />
 			</div>
 		</Fragment>
@@ -38,7 +38,8 @@ const Home = () => {
 };
 
 const AppContainer = styled.div`
-	background-color: #343A40;
+	/* background-color: #343A40; */
+	background-color: black;
 	/* display: "flex"; 
 	justify-content: "center";  */
 	/* padding-left: 5em;
