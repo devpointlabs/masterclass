@@ -151,13 +151,10 @@ const styles = {
 }
 
 const StyledDiv = styled.div`
-  /* background-color: white; */
   /* background: #1C2225; */
   background: #191919;
   color: #fff;
   overflow: auto;
-  /* margin: 0; */
-  /* padding: .6em 1em; */
 `
 
 const ContainerDiv = styled.div`
