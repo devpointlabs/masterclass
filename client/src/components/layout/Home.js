@@ -33,10 +33,6 @@ const Home = () => {
 			<div style={{backgroundColor: "#1C2225"}}>
 				<Courses />
 			</div>
-
-			{/* <Container style={{ height: "200px", backgroundColor: "red" }}>
-        <CourseSlider />
-      </Container> */}
 		</Fragment>
 	);
 };
@@ -51,4 +47,3 @@ const AppContainer = styled.div`
 
 export default Home;
 
-// style={{ backgroundColor: 'red' }}
