@@ -13,16 +13,6 @@ const Home = () => {
 		<Fragment>
 			<AppContainer>
 				{/* <animated.div style={props}> */}
-				{/* <Header textAlign='left' as={HeaderText} fSize='large'>
-					DevPoint <br />
-					University
-				</Header>
-				<Header textAlign='left' as={HeaderText} fSize='small'>
-					Learn It, Code It, Build It
-				</Header>
-				<Header textAlign='left' as={HeaderText} fSize='medium'>
-					Let your SKILLS do the talking.
-				</Header> */}
 				<Image
 				// size="massive"
 				src={require('../Images/background-banner-side.png')}
@@ -39,11 +29,7 @@ const Home = () => {
 
 const AppContainer = styled.div`
 	/* background-color: #343A40; */
-	background-color: black;
-	/* display: "flex"; 
-	justify-content: "center";  */
-	/* padding-left: 5em;
-	padding-top: 5em; */
+	background-color: #191919;
 `;
 
 export default Home;

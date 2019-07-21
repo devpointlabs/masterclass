@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext, } from "react";
 import axios from "axios";
-// import CourseForm from './CourseForm';
-import { List, Header, Segment, Button, Icon } from "semantic-ui-react";
+import styled from 'styled-components';
+import Showcase from './Images/stripe-background-course.png' 
+import { List, Header, Segment, Button, Icon, Container, Image } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../providers/AuthProvider"
 import VideoView from "./view_pages/VideoView"
@@ -57,24 +58,12 @@ const Course = (props) => {
       return lessons.map(l => (
         
          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-         {/* <div style = {{display:"flex",}}> */}
            <Link to = {`/lessons/${l.id}`}> 
          <List.Header as="h3">{l.name}</List.Header>
          <List.Description>
            {l.description}
          </List.Description>
            </Link>
-           {/* <div>
-
-            <Button size="tiny" color="red" onClick={() => removeLesson(l.id)}>
-              <Icon name="trash alternate outline" />
-            </Button>
-            <Link to={`/edit_lesson/${l.id}`}> <Button size="tiny" color="blue">
-              <Icon name="edit" />
-            </Button>
-            </Link>
-           </div> */}
-       {/* </div> */}
          </Segment>
        
       ))}
@@ -122,12 +111,28 @@ const Course = (props) => {
   }
 
   return (
-    <>   
-      <Link to={`/course-video-view/${course_id}`}>
-        Course Video View
-      </Link>
+    <> 
+      <ShowcaseContainer style={{width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}> 
+      
+        <StyledCourseHeader>{course.title}</StyledCourseHeader>
+        <StyledOverview>{course.overview}</StyledOverview>
+       <br/>
+       {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
+       {(!enrolled && user) ? <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/>Enroll Now</Button>
+       :
+       <Link to={`/course-video-view/${course_id}`}>
+       <Button color="purple">
+         Start Learning
+       </Button>
+       </Link>
+       }
+       
+        
+      
+      
+      </ShowcaseContainer> 
       <div style = {{display: "flex", justifyContent: "space-between", padding: "15px"}}>
-      <Header as="h1">{course.title}</Header>
+      <Header as="h1">Lesson Plan: {course.title}</Header>
       <Link to = {"/"}>
         <Button color='black'>
           <Icon name='arrow alternate circle left outline' />
@@ -135,18 +140,6 @@ const Course = (props) => {
           </Button>
         </Link>
         </div>   
-      {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
-      <div style={{padding: "15px"}}>
-
-      {(!enrolled && user) && <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/></Button>}
-      <br />
-      {/* {(showForm && role =='teacher')&& <CourseForm id={props.match.params.id} edit={courseEdit} toggleForm={toggleForm} course={course} />} */}
-
-     {/* { (role == 'teacher') && <Button floated="right" color="green" onClick={() => setShowForm(!showForm)}>
-        {showForm ? "Close Form" : "Edit Course"}
-      </Button>}
-      {(role == 'teacher') && <Button floated="right" color="red" onClick={deleteCourse}>Delete</Button>} */}
-      </div>
       <br />
       <br/>
       <div style={{padding: "15px"}}>
@@ -158,6 +151,36 @@ const Course = (props) => {
     </>
   )
 }
+
+const ShowcaseContainer = styled(Container)`
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  height: 80vh; 
+  background-image: url(${Showcase}); 
+  background-repeat: repeat; 
+`
+
+const StyledCourseHeader = styled(Header)`
+  display: flex; 
+  justify-content: center; 
+  font-family: 'Halant', Arial, Helvetica, sans-serif !important; 
+  letter-spacing: 3px; 
+  font-size: 3rem !important; 
+  font-weight: bold !important; 
+  color: #fff !important; 
+
+`
+const StyledOverview = styled.p` 
+  width: 50%; 
+  font-family: 'Nunito Sans', Arial, Helvetica, sans-serif !important; 
+  letter-spacing: 2px; 
+  font-size: 1.3rem !important; 
+  text-align: center; 
+  /* font-weight: bold !important;  */
+  color: #fff !important; 
+
+`
 
 export default Course;
 
