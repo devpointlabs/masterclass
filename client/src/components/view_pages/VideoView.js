@@ -3,7 +3,7 @@ import axios from 'axios';
 import QAndA from "../Comment";
 import CommentForm from "../CommentForm";
 import {AuthContext} from '../../providers/AuthProvider'
-import { Accordion, Icon, Button, Header, Comment, } from 'semantic-ui-react';
+import { Accordion, Icon, Button, Header, Comment, Container } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Player } from 'video-react';
 
@@ -85,7 +85,7 @@ const VideoView = (props) => {
         content:
           <>
             <AccordionContent>
-              <Button fluid onClick={()=> renderVideo(v.lesson_id, v.video_id)}>
+              <Button color='violet' fluid onClick={()=> renderVideo(v.lesson_id, v.video_id)}>
                 {v.video_title}
               </Button>
             </AccordionContent>
@@ -107,7 +107,7 @@ const VideoView = (props) => {
   const showComments = () => {
     return (
       comments.map( c => (
-      <Comment key={c.id}>
+      <Comment as={Container} fluid key={c.id}>
         <QAndA
           video_id={video.id}
           comment_id={c.id}
@@ -158,7 +158,7 @@ const VideoView = (props) => {
     <VideoViewDiv>
       <VidAndQA>
         {video ? (
-          <>
+          <div style={{height: '90%', width: '90%'}}>
             <Header as='h1'>{video.title}</Header>
             {/* <Image src = {video.url}/> */}
             <Player
@@ -166,7 +166,7 @@ const VideoView = (props) => {
               // poster="/assets/poster.png"
               src={video.url}
             />
-          </>
+          </div>
         ):null}
         <ClickDiv>
           { showQA ?
@@ -175,7 +175,7 @@ const VideoView = (props) => {
             <QAClick onClick={() => toggleQA()}>Show QA's <Icon name='angle down' /></QAClick>
           }
         </ClickDiv>
-        <div style={{width: '95%', border: 'solid 3px purple', borderRadius: '5px'}}>
+        <div style={{width: '95%', border: 'solid 3px purple', borderRadius: '5px', padding: '15px'}}>
           { showQA ?
             <>
             <div style={{marginTop: '30px'}}>
@@ -208,9 +208,9 @@ const VideoView = (props) => {
         </div>
       </VidAndQA>
       <LessonsDrop>
-        <Accordion styled>
+        <StyledAccordion>
           {renderLessons()}
-        </Accordion>
+        </StyledAccordion>
       </LessonsDrop>
     </VideoViewDiv>
   )
@@ -220,6 +220,9 @@ const ClickDiv = styled.div`
   display: flex;
   justify-content: center;
 `
+const StyledAccordion = styled(Accordion)`
+  height: 100%
+`;
 
 const QAClick = styled.p`
   color: blue;

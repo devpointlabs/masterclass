@@ -56,7 +56,6 @@ const Reply = (props) => {
 
   return(
     <>
-      <hr />
       <Comment.Content>
         {userInfo.map(u => (
           <Label as='a' image>

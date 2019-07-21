@@ -74,17 +74,6 @@ const QAndA = (props) => {
 
   return (
     <>
-      <hr/>
-      <Comment.Content>
-        <Rating 
-          rating = {comment_rating}
-          defaultRating = {5}
-          maxRating= {5}
-          disabled
-          icon='star'
-          size= "small"
-        />
-      </Comment.Content>
       <Comment.Content>
         {userInfo.map(u => (
           <Label as='a' image>
@@ -147,7 +136,7 @@ const QAndA = (props) => {
 
 const ClickDiv = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 `
 
 const RepliesClick = styled.p`
