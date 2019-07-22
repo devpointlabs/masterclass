@@ -7,7 +7,6 @@ import styled from 'styled-components';
 import Slider from 'react-slick';
 
 const Courses = (props) => {
-	// const [showForm, setShowForm] = useState(false);
 	const [ courses, setCourses ] = useState([]);
 	const { user, enrollments, setEnrollments } = useContext(AuthContext);
 
