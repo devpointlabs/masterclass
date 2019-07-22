@@ -37,7 +37,7 @@ const Profile = (props) => {
     e.preventDefault()
     updateUser(user.id, { name, email, file})
     setEditing(false)
-    refreshPage() 
+    // refreshPage() 
     // props.history.push("/profile")
   }
   const editView = () => (
