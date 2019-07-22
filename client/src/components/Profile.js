@@ -87,10 +87,15 @@ const Profile = () => {
   );
 
   return (
+    <>
+    {/* <HeaderDiv>
+    <StyledHeader>Your Profile</StyledHeader>
+    </HeaderDiv> */}
     <ProfileContainer>
             <EditButton onClick={() => setEditing(!editing)}>{ editing ? "Cancel Edit" : "Edit Profile" }</EditButton>
        { editing ? editView() : profileView() }
     </ProfileContainer>
+    </> 
   );
 };
 const styles = {
@@ -114,7 +119,10 @@ const styles = {
 // }
 }
 
-
+// const HeaderDiv = styled.div`
+//   background-color: #5a5a5a;
+//   /* font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;  */
+// `
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -123,6 +131,16 @@ const fadeIn = keyframes`
     opacity: 1;
   }
 `;
+
+// const StyledHeader = styled.h1`
+//   color: #fff; 
+//   background-color: #5a5a5a; 
+//   font-family: 'Halant', Arial, Helvetica, sans-serif; 
+//   animation: ${fadeIn} 1s linear;
+//   font-size: 3rem; 
+//   padding-top: 5px; 
+//   text-align: left; 
+// `
 
 const ProfileContainer = styled.div`
 height: 100%;
