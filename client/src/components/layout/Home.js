@@ -14,15 +14,16 @@ const Home = () => {
 			<AppContainer>
 				{/* <animated.div style={props}> */}
 				<Image
-				// size="massive"
 				src={require('../Images/background-banner-side.png')}
 				alternate="logo"
-				style={{width: "100%", height: "100%"}}
+				style={{width: "100%", height: "65vh"}}
 				/>
 			</AppContainer>
 			<Section>
 				<Courses />
 			</Section>
+			<AppContainer>
+			</AppContainer>
 		</Fragment>
 	);
 };
@@ -30,11 +31,15 @@ const Home = () => {
 const AppContainer = styled.div`
 	/* background-color: #343A40; */
 	background-color: #191919;
+	min-height: 65vh;
+	border-bottom: 4px solid #8d2de3;
 `;
 const Section = styled.div`
-min-height: 75vh;
+	min-height: 75vh;
   padding-top: 20vh;
-  background-color: #808080;
+	// background-color: #808080;
+	background-color: #191919;
+	
 
 `
 export default Home;
