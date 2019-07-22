@@ -30,16 +30,13 @@ const Enrollment = (props) => {
 		});
 		return roles.map((e) => (
 			<div key={e.course_id}>
-				{/* <Header as = 'h1'>{e.role}</Header> */}
-				{/* <br /> */}
 				<Card>
 					<div>
 						<Link to={{ pathname: `/courses/${e.course_id}` }} style={{ color: 'black' }}>
 							<Card.Header textAlign='center' as='h2'>
 								{e.title}
 							</Card.Header>
-
-							<Card.Description style={{ padding: '15px' }}>
+							<Card.Description textAlign='center' style={{ padding: '10px' }}>
 								{e.overview || 'This will have an overview'}
 							</Card.Description>
 						</Link>
