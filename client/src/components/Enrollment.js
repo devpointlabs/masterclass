@@ -33,12 +33,13 @@ const Enrollment = (props) => {
 				{/* <Header as = 'h1'>{e.role}</Header> */}
 				<br />
 				<Card style={{ margin: '10px' }}>
-					<Link to={{ pathname: `/courses/${e.course_id}` }}>
-						<Image src={e.image} />
-						<Card.Header as='h2'>{e.title}</Card.Header>
+					<div style={{ minHeight: '300px', minWidth: '200px', backgroundImage: `url(${e.image})` }}>
+						<Link to={{ pathname: `/courses/${e.course_id}` }}>
+							<Card.Header as='h2'>{e.title}</Card.Header>
 
-						<Card.Description>{e.overview || 'This will have an overview'}</Card.Description>
-					</Link>
+							<Card.Description>{e.overview || 'This will have an overview'}</Card.Description>
+						</Link>
+					</div>
 					<Divider />
 					<Card.Meta>
 						{(e.role === 'student' || e.role === 'teacher') && (
