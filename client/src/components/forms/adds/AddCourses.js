@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
+import {Link} from "react-router-dom"
 import axios from "axios";
-import { Form, Header, Button, Segment, Select, Dropdown } from "semantic-ui-react";
+import { Form, Header, Button, Segment, Select, Dropdown, Icon, Menu, Sidebar } from "semantic-ui-react";
 
 const AddCourses = (props) => {
   const [title, setTitle] = useState();
@@ -9,6 +10,8 @@ const AddCourses = (props) => {
   const [image, setImage] = useState();
   const [course, setCourse] = useState();
   const [categories, setCategories] = useState([]);
+  const [visible, setVisible] = useState(false);
+
 
   useEffect(() => {
     axios.get("/api/categories")
@@ -17,6 +20,9 @@ const AddCourses = (props) => {
       })
   }, []
   )
+  const handleHideClick = () => setVisible(false); 
+  const handleShowClick = () => setVisible(true); 
+  const handleSidebarHide = () => setVisible(false)
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -42,6 +48,45 @@ const AddCourses = (props) => {
 
   return (
     <>
+      <Button.Group>
+          <Button disabled={visible} onMouseOver={handleShowClick}>
+            Show sidebar
+          </Button>
+          <Button disabled={!visible} onMouseOver={handleHideClick}>
+            Hide sidebar
+          </Button>
+        </Button.Group>
+        <Sidebar.Pushable as ={Segment}>
+      <Sidebar
+       as={Menu}
+       animation='overlay'
+       icon='labeled'
+       inverted
+       onHide={handleSidebarHide}
+       vertical
+       visible={visible}
+       width='thin'
+      >
+         <Link to="/teachers/courses">
+            <Menu.Item as='a'>
+              <Icon name='file video outline' />
+              Courses
+            </Menu.Item>
+            </Link>
+            <Link to="/teachers/QandA">
+            <Menu.Item as='a'>
+              <Icon name='comments outline' />
+              Q&A
+            </Menu.Item>
+            </Link>
+            <Link to="/forms/create">
+                <Menu.Item as='a'>
+                  <Icon name='plus square outline' />
+                   New Course
+                </Menu.Item>
+            </Link>
+
+      </Sidebar>
       <Header as="h1" textAlign="center">Create A Course</Header>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
@@ -94,6 +139,7 @@ const AddCourses = (props) => {
           <Form.Button positive>Submit</Form.Button>
         </Button.Group>
       </Form >
+      </Sidebar.Pushable>
 
     </>
   );
