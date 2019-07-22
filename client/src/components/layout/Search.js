@@ -48,7 +48,7 @@ const Search = (props) => {
 
   const renderMessage = () => {
     return (
-      <Message negative>
+      <Message negative attached="bottom">
         <Message.Header>Sorry!</Message.Header>
         <p>Please enter an item to search</p>
       </Message>
@@ -75,6 +75,7 @@ const Search = (props) => {
         onChange={(e)=> setSearch(e.target.value)}
         value={search}
         />
+        
         </Form>
       </Menu.Item>
    

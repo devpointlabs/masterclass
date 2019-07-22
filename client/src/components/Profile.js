@@ -20,9 +20,9 @@ const Profile = (props) => {
     setEmail(user.email)
   },[])
 
-  const refreshPage = () => {
-    window.location.reload();
-  }
+  // const refreshPage = () => {
+  //   window.location.reload();
+  // }
 
 
   
@@ -38,7 +38,7 @@ const Profile = (props) => {
     updateUser(user.id, { name, email, file})
     setEditing(false)
     // TODO: fix force reload temp fix
-    refreshPage() 
+    // refreshPage() 
     // props.history.push("/profile")
   }
   const editView = () => (
