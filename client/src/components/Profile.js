@@ -49,15 +49,17 @@ const Profile = () => {
     </div>
       </Grid.Column>
       <Grid.Column width={8}>
+        <StyledLabel>Name:</StyledLabel>
         <Form.Input 
-        label="Name"
+        // label="Name"
         placeholder = "Name"
         required
         value={name}
         onChange={(e)=> setName(e.target.value)}
         />
+        <StyledLabel>Email:</StyledLabel>
         <Form.Input 
-        label="Email"
+        // label="Email"
         placeholder = "Email"
         required
         value={email}
@@ -190,5 +192,9 @@ const StyledForm = styled(Form)`
    width: 500px;
    padding: 1.25em;
    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.13);
+`
+
+const StyledLabel = styled.label`
+  color: #fff; 
 `
 export default Profile;
