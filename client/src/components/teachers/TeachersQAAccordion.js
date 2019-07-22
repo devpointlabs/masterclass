@@ -127,7 +127,7 @@ const TeachersQAAccordion = (props) => {
   
   return (
     <>
-      <Accordion defaultActiveIndex={0} panels={rootPanels} styled />
+      <Accordion defaultActiveIndex={0} panels={rootPanels} />
     </>
   )
 }

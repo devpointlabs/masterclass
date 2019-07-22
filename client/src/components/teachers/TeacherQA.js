@@ -53,11 +53,14 @@ const videoPanels = (id) =>{
   let array = []
   videos.map(v =>{
     let videoObject = {key: v.video_id, title: 
-      <Accordion.Title as={Container}>
-        <Button onClick={() => fillComments(v.video_id)}>
-        {v.video_title}
-        </Button>
-      </Accordion.Title>
+      <>
+        <Accordion.Title style={{marginLeft: "30px"}}>
+          <Button color="violet" fluid onClick={() => fillComments(v.video_id)}>
+          {v.video_title}
+          </Button>
+        </Accordion.Title>
+        <br/>
+      </>
     }
     if (id === v.v_lesson_id)
     {
@@ -75,15 +78,22 @@ const videoContent = (id) =>{
         <div>
           <Accordion.Accordion panels = {videoPanels(v.v_lesson_id)}/>
         </div>
-      
-            )
+      )
     }
   })
 }
 const lessonPanels = (id) =>{
   let array = []
   lessons.map(c =>{
-    let lessonObject = { key: c.lesson_id, title: c.lesson_name, content: { content: videoContent(c.video_id)} }
+    let lessonObject = { key: c.lesson_id, title:
+      <Accordion.Title style={{color: "white", marginLeft: "20px"}}>
+        <hr/>
+        <Icon name="dropdown" />
+        {c.lesson_name}
+        <hr/>
+      </Accordion.Title>
+       , 
+       content: { content: videoContent(c.video_id)} }
     if (id === c.l_course_id){
     array.push(lessonObject)}
   })
@@ -98,7 +108,6 @@ const lessonContent=(id)=>{
   <div>
     <Accordion.Accordion panels = {lessonPanels(l.l_course_id)}/>
   </div>
-
       )
     }
   })
@@ -106,7 +115,15 @@ const lessonContent=(id)=>{
 const coursePanels = () =>{
   let array = []
   courses.map(c =>{
-    let courseObject = { key: c.c_id, title: c.c_title, content: { content:lessonContent(c.lesson_id)} }
+    let courseObject = { key: c.c_id, title:
+      <Accordion.Title style={{color: "white", marginLeft: "10px"}}>
+      <hr/>
+      <Icon name="dropdown" />
+      {c.c_title}
+      <hr/>
+    </Accordion.Title>
+       , 
+       content: { content:lessonContent(c.lesson_id)} }
     array.push(courseObject)
   })
   return(
@@ -118,11 +135,18 @@ const coursePanels = () =>{
   const CourseContent =(
     <div>
       <Accordion.Accordion panels = {coursePanels()}/>
-
     </div>
   )
   const rootPanels = [
-    {key: 1, title: 'Courses', content: {content: CourseContent}}
+    {key: 1, title: 
+      <Accordion.Title style={{color: "white"}}>
+        <hr/>
+        <Icon name="dropdown" />
+        Courses List
+        <hr/>
+      </Accordion.Title>
+      , 
+      content: {content: CourseContent}}
   ]
   // --------------------------------------------------------------
   // ==============================================================
@@ -139,26 +163,27 @@ const coursePanels = () =>{
   const renderButtons = (read, id) =>{
     if(!read){
       return (
-        <Checkbox label="Comment Read" onClick={()=>commentRead(id)}/>
+        <Checkbox label="Question Read" onClick={()=>commentRead(id)}/>
       )
     }
   }
   const showComments = () => {
     return (
-      
       comments.map( c => (
         <>
         {!c.read ? (
+          <>
+          <div style={{ width: '100%', border: "#505050 solid 3px", borderRadius: "5px", background: "#707070", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)" }}>
           <Comment key={c.id}>
-            <Comment.Content>
+            <Comment.Content as="h3" style={{display: "flex", justifyContent: "space-between",color: "white", marginLeft: "5px", marginTop: "5px"}}>
               {c.title}
+              <Comment.Action style={{marginRight: "12px"}}>
+                {renderButtons(c.read, c.id)}
+              </Comment.Action>
             </Comment.Content>
-            <Comment.Content>
+            <Comment.Content style={{color: "white", marginLeft: "12px"}}>
               {c.body}
             </Comment.Content>
-            <Comment.Action>
-              {renderButtons(c.read, c.id)}
-            </Comment.Action>
             <ClickDiv>
           { showReplies ?
             <RepliesClick onClick={() => toggleReplies()}>Hide Replies <Icon name='angle up' /></RepliesClick>
@@ -166,7 +191,7 @@ const coursePanels = () =>{
             <RepliesClick onClick={() => toggleReplies()}>Show Replies <Icon name='angle down' /></RepliesClick>
           }
         </ClickDiv>
-        <Comment.Group>
+        <Comment.Group style={{ width: "90%"}}>
           { showReplies ?
             <Replies 
               role={c.role}
@@ -176,8 +201,10 @@ const coursePanels = () =>{
           }
         </Comment.Group>
         </Comment>
+        </div>
+        <br/>
+        </>
         ): null}
-     
       </>
       ))
     )
@@ -189,15 +216,14 @@ const coursePanels = () =>{
   // -----------------Main Return in the QA component-------------------
   return (
     <>
-    <div style={{display: 'flex', justifyContent:"space-evenly"}}>
-      <Accordion defaultActiveIndex={0} panels={rootPanels} styled />
-      <div>
-        <h1>Student Questions</h1>
+    <div style={{display: 'flex', justifyContent: "space-between", background: "#808080"}}>
+      <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100vh", border: "#808080 solid 3px"}}/>
+      <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', width: "50%", background: "#5a5a5a", border: '#808080 solid 3px'}}>
+        <h1 style={{ display: 'flex', justifyContent: 'center', paddingTop: '5px', borderBottom: '#5a5a5a solid 3px', margin: "0px", color: 'white'}}>Student Questions</h1>
           <>
             <div style= {{marginTop: '30px'}}>
-              <hr/>
-                <div style={{display:'flex', justifyContent:'flex-start', marginTop:'30px'}}>
-                  <Comment.Group>
+                <div style={{display:'flex', justifyContent:'flex-start', padding: "15px"}}>
+                  <Comment.Group style={{ width: "100vw"}}>
                   {showComments()}
                   </Comment.Group>
               </div>
