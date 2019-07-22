@@ -7,7 +7,7 @@ import styled, {keyframes} from 'styled-components';
 // const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 const defaultImage = 'https://png.pngtree.com/svg/20161212/f93e57629c.svg';
 
-const Profile = () => {
+const Profile = (props) => {
   const { user, updateUser} = useContext(AuthContext);
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState("");
@@ -19,6 +19,12 @@ const Profile = () => {
     setName(user.name)
     setEmail(user.email)
   },[])
+
+  const refreshPage = () => {
+    window.location.reload();
+  }
+
+
   
   const onDrop = useCallback (acceptedFiles =>{
     //does something with the file
@@ -31,6 +37,8 @@ const Profile = () => {
     e.preventDefault()
     updateUser(user.id, { name, email, file})
     setEditing(false)
+    refreshPage() 
+    // props.history.push("/profile")
   }
   const editView = () => (
     <>
@@ -47,8 +55,6 @@ const Profile = () => {
            ? "Image successfully added"
         : "Please select an image for profile picture"}
     </div>
-      {/* </Grid.Column> */}
-      {/* <Grid.Column width={2}> */}
         <StyledLabel>Name:</StyledLabel>
         <Form.Input 
         placeholder = "Name"
@@ -66,7 +72,6 @@ const Profile = () => {
         type="email"
         onChange={(e)=> setEmail(e.target.value)}
         />
-      {/* </Grid.Column> */}
       <Divider />
       <button type="submit" className="submit">
                      Update
@@ -78,26 +83,22 @@ const Profile = () => {
   const profileView = () => (
     <>
     <StyledForm>
-      {/* <Grid.Column width={4}> */}
-        {/* <Image src={user.image || defaultImage} /> */}
         <ProfileImage size="medium" src={user.image || defaultImage} alt="profile image" />
-        <StyledLabel>Name:</StyledLabel>
+        <StyledLabelDisabled>Name:</StyledLabelDisabled>
         <Form.Input 
         placeholder = "Name"
         className="form-input-disabled"
         required
         value={user.name}
-        // onChange={(e)=> setName(e.target.value)}
         disabled={!editing}
         />
-        <StyledLabel>Email:</StyledLabel>
+        <StyledLabelDisabled>Email:</StyledLabelDisabled>
         <Form.Input 
         placeholder = "Email"
         className="form-input-disabled"
         required
         value={user.email}
         type="email"
-        // onChange={(e)=> setEmail(e.target.value)}
         disabled={!editing}
         />
       </StyledForm>
@@ -106,9 +107,6 @@ const Profile = () => {
 
   return (
     <>
-    {/* <HeaderDiv>
-    <StyledHeader>Your Profile</StyledHeader>
-    </HeaderDiv> */}
     <ProfileContainer>
             <EditButton onClick={() => setEditing(!editing)}>{ editing ? "Cancel Edit" : "Edit Profile" }</EditButton>
        { editing ? editView() : profileView() }
@@ -128,18 +126,9 @@ const styles = {
   alignItems: "center",
   borderRadius: "5px"
 }
-// label {
-//   font-size: 16px;
-//   align-self: flex-start;
-//   margin: 10px 0;
-//   color: #666;
-// }
+
 }
 
-// const HeaderDiv = styled.div`
-//   background-color: #5a5a5a;
-//   /* font-family: 'Nunito Sans', Arial, Helvetica, sans-serif;  */
-// `
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -149,15 +138,7 @@ const fadeIn = keyframes`
   }
 `;
 
-// const StyledHeader = styled.h1`
-//   color: #fff; 
-//   background-color: #5a5a5a; 
-//   font-family: 'Halant', Arial, Helvetica, sans-serif; 
-//   animation: ${fadeIn} 1s linear;
-//   font-size: 3rem; 
-//   padding-top: 5px; 
-//   text-align: left; 
-// `
+
 
 const ProfileContainer = styled.div`
 height: 100%;
@@ -165,7 +146,7 @@ height: 100%;
    width: 100%;
    margin: 0 auto;
    padding: 25px 1em;
-   animation: ${fadeIn} 1s linear;
+   /* animation: ${fadeIn} 1s linear; */
    position: relative;
    display: flex;
    flex-direction: row;
@@ -212,6 +193,11 @@ const StyledForm = styled(Form)`
     width: 100% !important; 
    }
 
+   .form-input-disabled{
+    width: 100% !important; 
+    background-color: #8e2de2  !important; 
+   }
+
    .submit {
       margin-top: 15px;
       padding: 15px 0;
@@ -228,6 +214,11 @@ const StyledForm = styled(Form)`
 `
 
 const StyledLabel = styled.label`
+  padding-top: 10px; 
+  color: #fff; 
+  align-self: flex-start; 
+`
+const StyledLabelDisabled = styled.label`
   padding-top: 10px; 
   color: #fff; 
   align-self: flex-start; 
