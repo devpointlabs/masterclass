@@ -53,8 +53,8 @@ const Profile = (props) => {
           <p>Drag 'n' drop some files here, or click to select files</p>
       } */}
       {file
-           ? "Image successfully added"
-        : "Please select an image for profile picture"}
+           ? "Your image has been added!"
+        : "Upload an image from your computer."}
     </div>
         <StyledLabel>Name:</StyledLabel>
         <Form.Input 
