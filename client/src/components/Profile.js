@@ -85,15 +85,8 @@ const Profile = () => {
 
   return (
     <ProfileContainer>
-      <Divider hidden />
-      <Grid>
-        <Grid.Row>
-          { editing ? editView() : profileView() }
-          <Grid.Column>
-            <EditButton onClick={() => setEditing(!editing)}>{ editing ? "Cancel" : "Edit" }</EditButton>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+            <EditButton onClick={() => setEditing(!editing)}>{ editing ? "Cancel Edit" : "Edit Profile" }</EditButton>
+       { editing ? editView() : profileView() }
     </ProfileContainer>
   );
 };
