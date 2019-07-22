@@ -43,11 +43,11 @@ const Reply = (props) => {
         <>
           <Button.Group size="mini">
             <Button size="mini" icon onClick={() => toggleForm()}>
-              <Icon name="edit"/>
+              <Icon name="edit" style={{ color: "teal"}}/>
             </Button>
             <Button.Or />
-            <Button size="mini" icon onClick={()=> delete_reply(reply_id)}>
-              <Icon name='trash'/>
+            <Button size="mini" icon onClick={()=> window.confirm("Are you sure you wish to delete your reply?") && delete_reply(reply_id)}>
+              <Icon name='trash' style={{ color: "red"}}/>
             </Button>
           </Button.Group>
         </>
@@ -69,6 +69,7 @@ const Reply = (props) => {
         </Comment.Action>
       </Comment.Content>
       <Comment.Content style={{ color: 'white', padding: '5px' }}>
+        <br/>
         {reply_body}
       </Comment.Content>
       <Comment.Content>

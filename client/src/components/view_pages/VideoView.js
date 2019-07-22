@@ -11,7 +11,8 @@ import { Player } from 'video-react';
 
 
 const VideoView = (props) => {
-  const [videoViews, setVideoViews] = useState([]);
+  const [videoViews, setVideoViews] = useState([])
+  const [firstVideo, setFirstVideo] = useState([])
   const [video, setVideo] = useState([])
   const [comments, setComments] = useState([])
   const [showForm, setShowForm] = useState(false)
@@ -24,15 +25,25 @@ const VideoView = (props) => {
 
   useEffect(() => {
     axios.get(`/api/course-video-view/${id}`)
-      .then( res => setVideoViews(res.data) )
+      .then( res => {
+        setVideoViews(res.data)
+        console.log(res.data)
+        // setFirstVideo(res.data)
+      })
   }, [])
-
   useEffect( ()=>{
     axios.get(`/api/courses/${id}`)
     .then(res => {
       setRole(res.data.role)
     })
   },[])
+
+  // useEffect(() => {
+  //   axios.get(`/api/lessons/${videoViews[0].lesson_id}/videos/${videoViews[0].video_id}`)
+  //   .then( res => setFirstVideo(res.data))
+  // }, [videoViews])
+
+  // console.log(firstVideo)
 
   const handleClick = (i) => {
     const newIndex = activeIndex === i ? -1 : i
@@ -77,6 +88,30 @@ const VideoView = (props) => {
       })
   }
 
+  const renderFirstVideo = (id) => {
+
+    return(
+      <>
+        <div style={{ width: '90%' }}>
+          <Header as='h1' style={{ color: 'white', marginTop: '5px'}}>
+            {video.title}
+          </Header>
+          <Player
+            playsInline
+            src={video.url}
+          />
+        </div>
+        <ClickDiv>
+        { showQA ?
+          <QAClick onClick={() => toggleQA()}>Hide QA's <Icon name='angle up' /></QAClick>
+          :
+          <QAClick onClick={() => toggleQA()}>Show QA's <Icon name='angle down' /></QAClick>
+        }
+        </ClickDiv>
+    </> 
+    )
+  }
+
   const renderVideos = (id) => {
     let videosArray = []
     let videosArray2 = []
@@ -86,7 +121,10 @@ const VideoView = (props) => {
         content:
           <>
             <AccordionContent>
-              <Button color='violet' fluid onClick={()=> renderVideo(v.lesson_id, v.video_id)}>
+              <Button 
+                color='violet' 
+                fluid onClick={()=> renderVideo(v.lesson_id, v.video_id)}
+              >
                 {v.video_title}
               </Button>
             </AccordionContent>
@@ -135,19 +173,18 @@ const VideoView = (props) => {
         key: l.lesson_id,
         content:
           <>
-            
             <Accordion.Title 
             style={{ color: 'white' }} 
             active={activeIndex === l.lesson_id} 
             index={l.lesson_id} onClick={() => handleClick(l.lesson_id)}
             >
-            <hr/>
+              <hr/>
               <Icon name="dropdown" />
               {l.lesson_name}
               <hr/>
             </Accordion.Title>
             <Accordion.Content active={activeIndex === l.lesson_id}>
-              <h4 style={{ color: 'white', display: 'flex', justifyContent: 'center', textDecoration: 'underline'}}>
+              <h4 style={VideoStyles}>
                 Video Selection
               </h4>
               {renderVideos(l.video_lesson_id)}
@@ -169,7 +206,9 @@ const VideoView = (props) => {
       <VidAndQA>
         {video ? (
           <div style={{ width: '90%' }}>
-            <Header as='h1' style={{ color: 'white', marginTop: '5px'}}>{video.title}</Header>
+            <Header as='h1' style={{ color: 'white', marginTop: '5px'}}>
+              {video.title}
+            </Header>
             <Player
               playsInline
               src={video.url}
@@ -187,7 +226,7 @@ const VideoView = (props) => {
           { showQA ?
             <>
             <div style={{marginTop: '30px'}}>
-              <h1 style={{ color: 'white', borderBottom: 'white 1px solid'}}>
+              <h1 style={QAStyles}>
                 Questions and Answers Section
               </h1>
               <Button color='violet' onClick={toggle}>
@@ -218,7 +257,7 @@ const VideoView = (props) => {
       </VidAndQA>
       <LessonsDrop>
         <StyledAccordion>
-          <h1 style={{ color: 'white', display: 'flex', justifyContent: 'center', marginTop: '17px'}}>
+          <h1 style={LessonStyles}>
             Lesson Selection
           </h1>
           {renderLessons()}
@@ -227,6 +266,28 @@ const VideoView = (props) => {
     </VideoViewDiv>
   )
 };
+
+const LessonStyles = {
+  color: "white",
+  fontFamily: "'Halant', Arial, Helvetica, sans-serif",
+  display: 'flex', 
+  justifyContent: 'center', 
+  marginTop: '17px'
+}
+
+const QAStyles = {
+  color: 'white', 
+  borderBottom: 'white 1px solid',
+  fontFamily: "'Halant', Arial, Helvetica, sans-serif"
+}
+
+const VideoStyles = {
+  color: 'white', 
+  display: 'flex', 
+  justifyContent: 'center', 
+  textDecoration: 'underline',
+  fontFamily: "'Halant', Arial, Helvetica, sans-serif"
+}
 
 const ClickDiv = styled.div`
   display: flex;
@@ -257,7 +318,7 @@ const VideoViewDiv = styled.div`
   height: 100%;
   min-height: 100vh;
   background: rgb(68,68,68);
-  background: linear-gradient(90deg, rgba(68,68,68,1) 75%, rgba(134,134,134,1) 87%, rgba(68,68,68,1) 100%);
+  background: linear-gradient(90deg, rgba(68,68,68,1) 75%, rgba(103,101,101,1) 87%, rgba(68,68,68,1) 100%);
 `
 
 const VidAndQA = styled.div`
