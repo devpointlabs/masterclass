@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useCallback, } from "react"
 import {useDropzone} from 'react-dropzone'
 import { AuthContext, } from "../providers/AuthProvider"
 import { Container, Form, Grid, Image, Divider, Header, Button, } from "semantic-ui-react"
+import styled, {keyframes} from 'styled-components'; 
 
 // const defaultImage = 'https://d30y9cdsu7xlg0.cloudfront.net/png/15724-200.png';
 const defaultImage = 'https://png.pngtree.com/svg/20161212/f93e57629c.svg';
@@ -37,11 +38,14 @@ const Profile = () => {
       <Grid.Column width={4}>
       <div style={styles.dropzone} {...getRootProps()}>
       <input {...getInputProps()} />
-      {
+      {/* {
         isDragActive ?
-          <p>Drop the files here ...</p> :
+          <p>Image added Successfully! </p> :
           <p>Drag 'n' drop some files here, or click to select files</p>
-      }
+      } */}
+      {file
+           ? "Image successfully added"
+        : "Please select an image for profile picture"}
     </div>
       </Grid.Column>
       <Grid.Column width={8}>
@@ -80,29 +84,78 @@ const Profile = () => {
   );
 
   return (
-    <Container>
+    <ProfileContainer>
       <Divider hidden />
       <Grid>
         <Grid.Row>
           { editing ? editView() : profileView() }
           <Grid.Column>
-            <Button onClick={() => setEditing(!editing)}>{ editing ? "Cancel" : "Edit" }</Button>
+            <EditButton onClick={() => setEditing(!editing)}>{ editing ? "Cancel" : "Edit" }</EditButton>
           </Grid.Column>
         </Grid.Row>
       </Grid>
-    </Container>
+    </ProfileContainer>
   );
 };
 const styles = {
   dropzone: {
-    height: "150px",
-    width: "150px", 
-    border: "1px dashed black", 
-    borderRadius: "5px", 
-    display: "flex",
-    justifyContent: "center", 
-    alignItems:"center",
-    padding: "10px",
-  }
+  
+  height: "200px",
+  backgroundColor: "#c1c1c1", 
+  width: "100%", 
+  padding: "10px", 
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+  borderRadius: "5px"
 }
+// label {
+//   font-size: 16px;
+//   align-self: flex-start;
+//   margin: 10px 0;
+//   color: #666;
+// }
+}
+
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const ProfileContainer = styled.div`
+height: 100%;
+   min-height: calc(100vh - 90px);
+   width: 100%;
+   margin: 0 auto;
+   padding: 25px 1em;
+   animation: ${fadeIn} 1s linear;
+   position: relative;
+   display: flex;
+   flex-direction: row;
+   justify-content: flex-start;
+   align-items: center;
+   background: #5a5a5a; 
+`
+
+const EditButton = styled.button`
+   position: absolute;
+   top: 0;
+   right: 0;
+   margin: 25px 1em;
+   padding: 15px 30px;
+   font-size: 16px;
+   background-color: #8e2de2;
+   -webkit-appearance: button;
+   border-radius: 5px;
+   border: none;
+   outline: none;
+   color: white;
+   cursor: pointer;
+`;
 export default Profile;
