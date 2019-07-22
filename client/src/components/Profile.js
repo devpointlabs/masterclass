@@ -34,7 +34,7 @@ const Profile = () => {
   }
   const editView = () => (
     <>
-    <Form onSubmit = {handleSubmit}>
+    <StyledForm onSubmit = {handleSubmit}>
       <Grid.Column width={4}>
       <div style={styles.dropzone} {...getRootProps()}>
       <input {...getInputProps()} />
@@ -67,19 +67,22 @@ const Profile = () => {
       </Grid.Column>
       <Divider />
       <Form.Button>Submit</Form.Button>
-    </Form>
+    </StyledForm>
     </>
   )
   
   const profileView = () => (
     <>
-      <Grid.Column width={4}>
-        <Image src={user.image || defaultImage} />
-      </Grid.Column>
+    <StyledForm>
+      {/* <Grid.Column width={4}> */}
+        {/* <Image src={user.image || defaultImage} /> */}
+        <ProfileImage size="medium" src={user.image || defaultImage} alt="profile image" />
+      {/* </Grid.Column>
       <Grid.Column width={8}>
         <Header as="h1">{user.name}</Header>
         <Header as="h1">{user.email}</Header>
-      </Grid.Column>
+      </Grid.Column> */}
+      </StyledForm>
     </>
   );
 
@@ -131,7 +134,7 @@ height: 100%;
    position: relative;
    display: flex;
    flex-direction: row;
-   justify-content: flex-start;
+   justify-content: center;
    align-items: center;
    background: #5a5a5a; 
 `
@@ -151,4 +154,23 @@ const EditButton = styled.button`
    color: white;
    cursor: pointer;
 `;
+
+const ProfileImage = styled(Image)`
+  max-width: 100%;
+   margin-bottom: 15px;
+   border-radius: 5px;
+`
+
+
+const StyledForm = styled(Form)`
+  display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   background-color: #323232;
+   border-radius: 5px;
+   width: 500px;
+   padding: 1.25em;
+   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.13);
+`
 export default Profile;
