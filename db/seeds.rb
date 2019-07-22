@@ -13,7 +13,7 @@ CourseTitle =['Ruby Fundamentals','Data Structures','Gems/Class/Modules','Git/Gi
     course = Course.create(
       title: CourseTitle.sample,
       category: categories.sample, 
-      overview: `This Course involves: #{Faker::ChuckNorris.fact}`,
+      overview: Faker::ChuckNorris.fact,
       image: 'https://getuikit.com/v2/docs/images/placeholder_600x400.svg'
       )
     Enrollment.create(
@@ -24,13 +24,13 @@ CourseTitle =['Ruby Fundamentals','Data Structures','Gems/Class/Modules','Git/Gi
       5.times do 
         lesson = Lesson.create(
           name: Faker::Educator.subject,
-          description: `This Lesson describes in detail: #{Faker::Quote.most_interesting_man_in_the_world} `,
+          description: Faker::Quote.most_interesting_man_in_the_world,
           course_id: course.id
         )
         2.times do
           v = Video.create(
             title: Faker::ProgrammingLanguage.name,
-            description: `This video covers: #{Faker::TvShows::FamilyGuy.quote}`,
+            description: Faker::TvShows::FamilyGuy.quote,
             lesson_id: lesson.id,
             url: "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
         )
