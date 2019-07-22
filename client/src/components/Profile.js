@@ -37,7 +37,6 @@ const Profile = (props) => {
     e.preventDefault()
     updateUser(user.id, { name, email, file})
     setEditing(false)
-    // TODO: fix force reload temp fix
     // refreshPage() 
     // props.history.push("/profile")
   }

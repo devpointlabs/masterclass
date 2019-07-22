@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import { Button, Segment } from 'semantic-ui-react';
+import { Button, Segment, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
@@ -19,18 +19,26 @@ const Courses = (props) => {
 		});
 	}, []);
 	
+	const next = (props) =>{
+		props.slider.slickNext()
+	}
+	const previous = (props) =>{
+		props.slider.slickPrev()
+	}
 	function NextArrow(props) {
 		const { className, style, onClick } = props;
 		return (
 			<div
 				className={className}
-				style={{ ...style, background: "purple" }}
+			
+				style={{ ...style, display:"block" }}
 				onClick={onClick}
 			/>
+			
 		);
 	}
 		const settings = {
-			dots: false,
+			dots: true,
 			infinite: true,
 			speed: 500,
 			slidesToShow: 4,
@@ -40,7 +48,24 @@ const Courses = (props) => {
 			autoPlay: true,
 			className: 'slides',
 			nextArrow: <NextArrow />,
-      prevArrow: <NextArrow />,
+			prevArrow: <NextArrow />,
+			appendDots: dots =>(
+				<div
+				style={{
+					backgroundColor: "#ddd",
+					// borderRadius: "10px",
+					padding: "5px"
+				}}
+			>
+				<ul style={{ margin: "0px" }}> {dots} </ul>
+			</div>
+			),
+			customPaging: i=>(
+
+				<div>
+					<Icon name="circle" color="white"/>
+				</div>
+			),
 			responsive: [
         {
           breakpoint: 1024,
@@ -71,18 +96,18 @@ const Courses = (props) => {
 
 	return (
 			<Container style={{ height: '100px' }}>
-			<Header as='h1' textAlign='center'>
+			<Header>
 				Courses
 			</Header>
 				{/* <CourseSlider /> */}
 				<Slider {...settings}>
 					{courses.map(c=>{
 						return(
-							<Card>
 								<Link to={{pathname: `courses/${c.id}`}}>
+							<Card>
 									<h1>{c.title}</h1>
-								</Link>
 							</Card>
+								</Link>
 						)
 					})}
 				</Slider>
@@ -94,10 +119,14 @@ export default Courses;
 
 const Container = styled.div`
 	/* background: linear-gradient(350deg, rgba(2, 0, 36, 1) 0%, rgba(89, 9, 121, 0.67) 73%); */
+	padding: 50px;
 `;
 const Card = styled.div`
-background-color: rgb(90,90,90);
-border: 2px solid black;
+background: #6A6A6A;
+background: -moz-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
+background: -webkit-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
+background: linear-gradient(to right, #6A6A6A 0%, #829BB4 100%);
+border: 1px solid #8d2de3;
 /* margin-left: 100px;
 margin-right: 100px;
 margin-top: 50px;
@@ -105,16 +134,17 @@ padding: 15px;
 text-align: center;
 border-radius: 50%; */
 height: 250px;
-width: 250px;
 text-decoration:none;
 color: white;
+text-align:center;
+font-family: Halant
+
 `;
 
 const Header = styled.h1`
-text-shadow: 2px 2px 2px black;
 color: white;
-font-size: 35px;
+font-size: 50px;
 text-align: center;
-background-color: rgb(60,60,60)
+margin-bottom: 30px;
 `
 
