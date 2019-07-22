@@ -13,8 +13,6 @@ const Search = (props) => {
 
   // Search by title, overview, and category
   const searchCourses = (e, search) => {
-    debugger
-    // setSearch("")
     e.preventDefault();
     if(search.length === 0 ){
       setAlert(true); 
@@ -67,17 +65,19 @@ const Search = (props) => {
     }
    
     <Menu.Item>
-      <Input 
-      size="mini"
-      action ={{type: "submit", }} 
-      placeholder='Search ...' 
-      icon='search'
-      onChange={(e)=> setSearch(e.target.value)}
-      value={search}
-      onSubmit={ (e, search) => searchCourses}
-      
-      />
-    </Menu.Item>
+      <Form 
+        onSubmit={ (e) => searchCourses(e,search)}
+        >
+        <Input 
+        placeholder='Search ...' 
+        action={{icon:"search"}}
+        // icon='search'
+        onChange={(e)=> setSearch(e.target.value)}
+        value={search}
+        />
+        </Form>
+      </Menu.Item>
+   
     </>
   );
 };

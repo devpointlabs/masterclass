@@ -18,7 +18,7 @@ const Course = (props) => {
   const course_id = props.match.params.id
 
   useEffect(() => {
-
+    window.scrollTo(0,0)
     axios.get(`/api/courses/${course_id}/lessons`)
     .then(res => {
       setLessons(res.data);

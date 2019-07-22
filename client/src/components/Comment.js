@@ -60,12 +60,12 @@ const QAndA = (props) => {
       return (
         <>
           <Button.Group size="mini" style={{marginLeft: '5px'}}>
-            <Button size="mini" icon onClick={() => toggleForm()}>
+            <Button size="mini" icon onClick={() => toggleForm()} style={{ color: "teal"}}>
               Edit
               <Icon name="edit"/>
             </Button>
             <Button.Or />
-            <Button size="mini" icon onClick={()=> delete_comment(comment_id)}>
+            <Button size="mini" icon onClick={()=> window.confirm("Are you sure you wish to delete your question?") && delete_comment(comment_id)} style={{ color: "red"}}>
               Delete
               <Icon name='trash'/>
             </Button>
@@ -99,9 +99,10 @@ const QAndA = (props) => {
           display: 'flex',
           alignSelf:'flex-end',
           marginTop:'10px',
-          width: '1000px'
+          width: '800px'
         }}>
-        <Comment.Content>
+        </div> 
+        <Comment.Content style={{ width: "90%"}}>
           { showForm ? 
           <CommentForm
             editComment={edit_comment}
@@ -113,7 +114,6 @@ const QAndA = (props) => {
           /> : 
           null}
         </Comment.Content>
-        </div> 
       </Comment.Content>
       <Comment.Content>
         <ClickDiv>
