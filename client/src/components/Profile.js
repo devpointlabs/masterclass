@@ -35,7 +35,7 @@ const Profile = () => {
   const editView = () => (
     <>
     <StyledForm onSubmit = {handleSubmit}>
-      <Grid.Column width={4}>
+      {/* <Grid.Column width={8}> */}
       <div style={styles.dropzone} {...getRootProps()}>
       <input {...getInputProps()} />
       {/* {
@@ -47,28 +47,30 @@ const Profile = () => {
            ? "Image successfully added"
         : "Please select an image for profile picture"}
     </div>
-      </Grid.Column>
-      <Grid.Column width={8}>
+      {/* </Grid.Column> */}
+      {/* <Grid.Column width={2}> */}
         <StyledLabel>Name:</StyledLabel>
         <Form.Input 
-        // label="Name"
         placeholder = "Name"
+        className="form-input"
         required
         value={name}
         onChange={(e)=> setName(e.target.value)}
         />
         <StyledLabel>Email:</StyledLabel>
         <Form.Input 
-        // label="Email"
         placeholder = "Email"
+        className="form-input"
         required
         value={email}
         type="email"
         onChange={(e)=> setEmail(e.target.value)}
         />
-      </Grid.Column>
+      {/* </Grid.Column> */}
       <Divider />
-      <Form.Button>Submit</Form.Button>
+      <button type="submit" className="submit">
+                     Update
+      </button>
     </StyledForm>
     </>
   )
@@ -79,11 +81,25 @@ const Profile = () => {
       {/* <Grid.Column width={4}> */}
         {/* <Image src={user.image || defaultImage} /> */}
         <ProfileImage size="medium" src={user.image || defaultImage} alt="profile image" />
-      {/* </Grid.Column>
-      <Grid.Column width={8}>
-        <Header as="h1">{user.name}</Header>
-        <Header as="h1">{user.email}</Header>
-      </Grid.Column> */}
+        <StyledLabel>Name:</StyledLabel>
+        <Form.Input 
+        placeholder = "Name"
+        className="form-input-disabled"
+        required
+        value={user.name}
+        // onChange={(e)=> setName(e.target.value)}
+        disabled={!editing}
+        />
+        <StyledLabel>Email:</StyledLabel>
+        <Form.Input 
+        placeholder = "Email"
+        className="form-input-disabled"
+        required
+        value={user.email}
+        type="email"
+        // onChange={(e)=> setEmail(e.target.value)}
+        disabled={!editing}
+        />
       </StyledForm>
     </>
   );
@@ -102,7 +118,6 @@ const Profile = () => {
 };
 const styles = {
   dropzone: {
-  
   height: "200px",
   backgroundColor: "#c1c1c1", 
   width: "100%", 
@@ -192,9 +207,29 @@ const StyledForm = styled(Form)`
    width: 500px;
    padding: 1.25em;
    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.13);
+
+   .form-input{
+    width: 100% !important; 
+   }
+
+   .submit {
+      margin-top: 15px;
+      padding: 15px 0;
+      font-size: 16px;
+      width: 100%;
+      background-color: #8e2de2;
+      -webkit-appearance: button;
+      border-radius: 5px;
+      border: none;
+      outline: none;
+      color: white;
+      cursor: pointer;
+   }
 `
 
 const StyledLabel = styled.label`
+  padding-top: 10px; 
   color: #fff; 
+  align-self: flex-start; 
 `
 export default Profile;
