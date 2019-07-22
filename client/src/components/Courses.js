@@ -126,7 +126,7 @@ background: #6A6A6A;
 background: -moz-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
 background: -webkit-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
 background: linear-gradient(to right, #6A6A6A 0%, #829BB4 100%);
-border: 2px solid #8d2de3;
+border: 1px solid #8d2de3;
 /* margin-left: 100px;
 margin-right: 100px;
 margin-top: 50px;
