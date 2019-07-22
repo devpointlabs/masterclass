@@ -20,9 +20,9 @@ const Home = () => {
 				style={{width: "100%", height: "100%"}}
 				/>
 			</AppContainer>
-			<div style={{backgroundColor: "black"}}>
+			<Section>
 				<Courses />
-			</div>
+			</Section>
 		</Fragment>
 	);
 };
@@ -31,6 +31,11 @@ const AppContainer = styled.div`
 	/* background-color: #343A40; */
 	background-color: #191919;
 `;
+const Section = styled.div`
+min-height: 75vh;
+  padding-top: 20vh;
+  background-color: #808080;
 
+`
 export default Home;
 
