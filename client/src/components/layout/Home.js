@@ -34,8 +34,8 @@ const AppContainer = styled.div`
 const Section = styled.div`
 min-height: 75vh;
   padding-top: 20vh;
-  background-color: #5a5a5a;
-  background: linear-gradient(to bottom, #9b9b9b 0%, #555555 100%);
+  background-color: #808080;
+
 `
 export default Home;
 

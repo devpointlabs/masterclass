@@ -13,8 +13,6 @@ const Search = (props) => {
 
   // Search by title, overview, and category
   const searchCourses = (e, search) => {
-    debugger
-    // setSearch("")
     e.preventDefault();
     if(search.length === 0 ){
       setAlert(true); 
