@@ -31,15 +31,18 @@ const Enrollment = (props) => {
 		return roles.map((e) => (
 			<div key={e.course_id}>
 				{/* <Header as = 'h1'>{e.role}</Header> */}
-				<br />
-				<Card style={{ margin: '10px' }}>
-					<div style={{ minHeight: '300px', minWidth: '200px', backgroundImage: `url(${e.image})` }}>
-						<Link to={{ pathname: `/courses/${e.course_id}` }}>
-							<Card.Header as='h2'>{e.title}</Card.Header>
+				{/* <br /> */}
+				<Card style={{ margin: '15px' }}>
+					<div>
+						<Link to={{ pathname: `/courses/${e.course_id}` }} style={{ color: 'black' }}>
+							<Card.Header textAlign='center' as='h2'>
+								{e.title}
+							</Card.Header>
 
 							<Card.Description>{e.overview || 'This will have an overview'}</Card.Description>
 						</Link>
 					</div>
+					<div style={{ minHeight: '300px', minWidth: '200px', backgroundImage: `url(${e.image})` }} />
 					<Divider />
 					<Card.Meta>
 						{(e.role === 'student' || e.role === 'teacher') && (
@@ -72,13 +75,7 @@ const Enrollment = (props) => {
 					<Link to='/'>Home</Link>
 				)}
 			</Header>
-			<div style={{ display: 'flex', justifyContent: 'space-around' }}>
-				{/* {user.image &&
-  <img style={{height: "250px"}}
-  src = {user.image}
-  />} */}
-				{renderEnrollments()}
-			</div>
+			<div style={{ display: 'flex', justifyContent: 'space-around' }}>{renderEnrollments()}</div>
 		</Container>
 	);
 };
