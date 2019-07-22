@@ -32,14 +32,16 @@ const Enrollment = (props) => {
 			<div key={e.course_id}>
 				{/* <Header as = 'h1'>{e.role}</Header> */}
 				{/* <br /> */}
-				<Card style={{ margin: '15px' }}>
+				<Card>
 					<div>
 						<Link to={{ pathname: `/courses/${e.course_id}` }} style={{ color: 'black' }}>
 							<Card.Header textAlign='center' as='h2'>
 								{e.title}
 							</Card.Header>
 
-							<Card.Description>{e.overview || 'This will have an overview'}</Card.Description>
+							<Card.Description style={{ padding: '15px' }}>
+								{e.overview || 'This will have an overview'}
+							</Card.Description>
 						</Link>
 					</div>
 					<div style={{ minHeight: '300px', minWidth: '200px', backgroundImage: `url(${e.image})` }} />
