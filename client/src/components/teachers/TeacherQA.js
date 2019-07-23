@@ -88,7 +88,7 @@ const lessonPanels = (id) =>{
   lessons.map(c =>{
     let lessonObject = { key: c.lesson_id, title:
       <Accordion.Title style={{color: "white", paddingLeft: "40px", fontSize: "15px", border: "#707070 solid 3px", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", marginBottom: "10px"}}>
-        <Icon name="dropdown" />
+        <Icon name="dropdown" color="violet" />
         {c.lesson_name}
       </Accordion.Title>
        , 
@@ -120,18 +120,21 @@ const coursePanels = () =>{
   let array = []
   courses.map(c =>{
     let courseObject = { key: c.c_id, title:
-      <Accordion.Title style={{color: "white", paddingLeft: "20px", fontSize: "20px", background: "#606060", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
-        <Icon name="dropdown" />
-        {c.c_title}
-      </Accordion.Title>
+        <Accordion.Title style={{color: "white", paddingLeft: "20px", fontSize: "20px",   background: "#606060", border: "#707070 solid 3px", marginBottom: "15px", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
+          <Icon name="dropdown" color="violet" />
+          {c.c_title}
+        </Accordion.Title>
        , 
        content: { content:
-        <Accordion.Content style={{ boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding: "0px", color: "white", textDecoration: "underline", fontWeight: "bold"}}>
-          <div style={{display: "flex", justifyContent: "center", fontSize: "20px"}}>
-            Lesson Selection
-          </div>
-          {lessonContent(c.lesson_id)}
-        </Accordion.Content>
+        <>
+          <Accordion.Content style={{ boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding:   "0px", color: "white", textDecoration: "underline", fontWeight: "bold"}}>
+            <div style={{display: "flex", justifyContent: "center", fontSize: "20px"}}>
+              Lesson Selection
+            </div>
+            {lessonContent(c.lesson_id)}
+          </Accordion.Content>
+          <br/>
+        </>
       } }
     array.push(courseObject)
   })
@@ -148,17 +151,17 @@ const coursePanels = () =>{
   )
   const rootPanels = [
     {key: 1, title: 
-      <Accordion.Title style={{color: "white" , fontSize: "25px", border: "#707070 solid 3px",boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
-        <Icon name="dropdown" />
-        Courses List
+      <Accordion.Title style={{color: "white" , fontSize: "25px", background: "#404040", border: "#707070 solid 3px",boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
+        <Icon name="dropdown" color="violet" />
+        Unread Questions In These Courses
       </Accordion.Title>
       , 
       content: {content:
-      <Accordion.Content style={{boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", color: "white", textDecoration: "underline", fontWeight: "bold"}}>
-        {CourseContent}
-      </Accordion.Content>
+          <Accordion.Content style={{boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", color:    "white", textDecoration: "underline", fontWeight: "bold"}}>
+            {CourseContent}
+          </Accordion.Content>
       }
-      }
+    }
   ]
   // --------------------------------------------------------------
   // ==============================================================
