@@ -27,7 +27,6 @@ const EditLessonDetails = (props) => {
         .put(`/api/lessons/${props.lesson_id}`, { name: name, description: description })
         .then(res => {
          setLesson(res.data); 
-         console.log(res.data)
          props.closeEdit(props.lesson_id)
         })
     }

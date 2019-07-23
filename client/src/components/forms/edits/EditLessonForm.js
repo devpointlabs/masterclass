@@ -88,6 +88,9 @@ const EditLessonForm = (props) => {
   }); 
   setFormLessons(lessonWithShowForm)
  }
+ const fillVideo = (id) =>{
+   axios.get(`/api/videos/${id}`)
+ }
 
 //  toggle create video form 
 const toggleCreateVideoForm = (id, createVideos) => {

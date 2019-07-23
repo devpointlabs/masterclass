@@ -63,7 +63,7 @@ const EditVideoForm = (props) => {
 //     setFormVideos(videosWithShowForm)
 //  }
 
-const toggleEditForm = (id, showEditForm) => {
+const toggleEditForm = (id, showEditForm,) => {
   videosWithShowForm.filter(v =>{
     if(id === v.id)
     {v.showEditForm = !showEditForm
@@ -88,7 +88,7 @@ const toggleEditForm = (id, showEditForm) => {
 
    //  will render the edit form for the videos 
    const renderEditForm = (id, showForm) => {
-    return <EditVideoDetails />
+    return <EditVideoDetails video_id={id} showForm={showForm} lesson_id={props.lesson_id}/>
     
     }
 
@@ -118,7 +118,7 @@ const toggleEditForm = (id, showEditForm) => {
          </List.Description>
          <div className="buttonDiv">
               <Button.Group size="tiny">
-              <Button size="tiny" color="blue" onClick={() => toggleEditForm(video.id, video.showEditForm)}>
+              <Button size="tiny" color="blue" onClick={() => toggleEditForm(video.id, video.showEditForm,)}>
               <Icon name={video.showEditForm ? "cancel" :"edit"} />
              </Button>
               <Button onClick={() => removeVideos(video.id)}>Remove</Button>
