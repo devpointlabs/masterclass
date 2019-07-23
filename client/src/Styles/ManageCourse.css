@@ -91,7 +91,9 @@ body{
 }
 
 .content-image{
-  width: 100%;
+  width: 80%;
+  height: 100%;
+  margin-left:35px;
 }
 
 .content-details {

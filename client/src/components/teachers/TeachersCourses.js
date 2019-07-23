@@ -36,7 +36,7 @@ const TeachersCourses = (props) => {
       <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-around"}}>
     {roles.map(e => (
       <div>
-<div className="container-teacher-course" style={{width: "500px", height: "400px",margin:"15px"}}  key={e.course_id} >
+<div className="container-teacher-course" style={{width: "350px", height: "300px",margin:"15px"}}  key={e.course_id} >
 <div style={{display:"flex", alignContent: "center", justifyContent:"space-between" }}>
 
   <h3 className="title">{e.category}</h3>
@@ -69,7 +69,10 @@ const TeachersCourses = (props) => {
   return (
     <CourseContainer>
       {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
-
+      <Header as='h1' textAlign='center' style={{ fontFamily: "'Merriweather', Helvetica", letterSpacing: "1px", paddingTop: "35px", paddingBottom: "20px", fontWeight: "lighter", borderBottom: "1px solid #fff"}}>
+          Manage Your Courses
+        </Header>
+        <hr />
         {enrollments ?
           renderEnrollments() :
           <>

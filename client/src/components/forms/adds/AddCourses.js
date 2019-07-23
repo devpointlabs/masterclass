@@ -3,17 +3,13 @@ import {Link} from "react-router-dom"
 import axios from "axios";
 import styled from 'styled-components'
 import ReactQuill from 'react-quill'
+import logo from '../../Images/Logo.png'
 import { Form, Header, Button, Segment, Select, Dropdown, Icon, Menu, Sidebar } from "semantic-ui-react";
 
 const AddCourses = (props) => {
-  const theForm = [
-    {title: "",
-    category:"",
-    overview:"",
-    }]
+ 
     const [body, setBody] = useState("")
-  const [form, setForm] = useState(theForm)
-  // const [title, setTitle] = useState();
+  const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [overview, setOverview] = useState();
   const [course, setCourse] = useState();
@@ -33,18 +29,18 @@ const AddCourses = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    const {title, overview, category} = form 
+    debugger
     axios
-      .post("/api/courses", { title: title, category: category, overview: body})
+      .post("/api/courses", { title: title, category: category, overview: body, image:logo})
       .then(res => {
         setCourse(res.data);
         props.history.push("/teachers/courses");
       });
     // };
   }
-  const handleChange = (name) => (e) =>{
-    setForm({...form, [name]: e.target.value})
-  }
+  // const handleChange = (name) => (e) =>{
+  //   setForm({...form, [name]: e.target.value})
+  // }
   const handleQuill  = (e) =>{
     setBody(e)
   }
@@ -110,15 +106,15 @@ const AddCourses = (props) => {
             placeholder='Enter title'
             name='title'
             required
-            value={form.title}
-            onChange={ handleChange("title")}
+            value={title}
+            onChange={e=>setTitle(e.target.value)}
           />
             <Form.Select
               label="Course Category"
               placeholder='e.g. Ruby on Rails'
               name='category'
               Select
-              value={form.category}
+              value={category}
               options={categoryOptions()}
               onChange={e =>setCategory(e.target.innerText)}
             />
