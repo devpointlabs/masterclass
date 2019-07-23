@@ -153,18 +153,18 @@ const coursePanels = () =>{
   
   const CourseContent =(
     <div>
-      <Accordion.Accordion panels = {coursePanels()}/>
+      <Accordion.Accordion as={noMax} panels = {coursePanels()}/>
     </div>
   )
   const rootPanels = [
     {key: 1, title: 
-      <Accordion.Title style={{color: "white" , fontSize: "25px", background: "#404040", border: "#707070 solid 3px",boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
+      <Accordion.Title style={{color: "white" , fontSize: "25px", background: "#404040", border: "#707070 solid 3px", width: "100%",boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
         <Icon name="dropdown" color="violet" />
         Unread Questions In These Courses
       </Accordion.Title>
       , 
       content: {content:
-          <AccordionContent style={{boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", color:    "white", textDecoration: "underline", fontWeight: "bold", width: "100%"}}>
+          <AccordionContent style={{boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", color:  "white", textDecoration: "underline", fontWeight: "bold", width: "100%"}}>
             {CourseContent}
           </AccordionContent>
       }
@@ -279,7 +279,7 @@ const coursePanels = () =>{
           </Sidebar>
           <Segment>
           <Sidebar.Pusher>
-          <div style={{display: 'flex', justifyContent: "space-between", background: "#808080", height: "100vh"}}>
+          <div style={{display: 'flex', justifyContent: "space-between", background: "#808080", height: "150vh"}}>
             <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100%", border: "#808080 solid 3px", boxShadow: "2px 2px 2px rgba(36, 36, 36, 0.77)"}}/>
             <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', width: "50%", background: "#5a5a5a", border: '#808080 solid 3px'}}>
               <h1 style={{ display: 'flex', justifyContent: 'center', paddingTop: '5px', borderBottom: '#5a5a5a solid 3px', margin: "0px", color: 'white'}}>Student Questions</h1>
@@ -320,6 +320,10 @@ const AccordionContent = styled.div`
     margin: 0px;
     overflow: hidden;
 `;
+
+const noMax = styled.div`
+  max-width: 100% !important;
+`
 
 const RepliesClick = styled.p`
   color: blue;
