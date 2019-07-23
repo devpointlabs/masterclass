@@ -19,17 +19,16 @@ const Home = () => {
 				style={{width: "100%", height: "70vh"}}
 				/>
 			</AppContainer>
-			<Section>
-			{/* <Image 
-			src={require('../Images/code-screen.png')}
-			style={{width:"100%", height: "70vh"}}
-			/>	 */}
-
-				<Courses />
-			</Section>
+	
 			{/* <Section> */}
 			{/* </Section> */}
+			{/* <AppContainer> */}
+			<Section className="bg-img">
+				<Courses />
+			</Section>
+			{/* </AppContainer> */}
 			<AppContainer>
+				<h1>hi</h1>
 			</AppContainer>
 		</Fragment>
 	);
@@ -43,17 +42,20 @@ const AppContainer = styled.div`
 `;
 const Section = styled.div`
 	min-height: 70vh;
-  // padding-top: 20vh;
+	
+  /* // padding-top: 20vh;
 	// background-color: #808080;
 	// background-color: #191919;
-	// background: url("../Images/code-screen.png")
-	background: cover;
-	background-image: url("../Images/code-screen.png");
+	// background: url("../Images/code-screen.png") */
+	/* background: rgba(25, 25, 25, 0.7);  */
 
-  background-attachment: fixed;
-  /*overlay*/
-
-	
+	.bg-img{
+		background: cover;
+		background-image: url("../Images/code-screen.png");
+		background-position: center; 
+		background-repeat: no-repeat; 
+ 		background-attachment: fixed;
+	}
 
 `
 export default Home;
