@@ -33,7 +33,6 @@ const TeachersCourses = (props) => {
 
     return (roles.map(e => (
       <div key={e.course_id}>
-        {console.log(e.overview)}
         {/* <Header as = 'h1'>{e.role}</Header> */}
         <br />
         <div>

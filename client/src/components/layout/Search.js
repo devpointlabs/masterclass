@@ -48,10 +48,11 @@ const Search = (props) => {
 
   const renderMessage = () => {
     return (
-      <Message negative>
-        <Message.Header>Sorry!</Message.Header>
+      <StyledMessage negative>
+        {/* <Message.Header>Sorry!</Message.Header> */}
         <p>Please enter an item to search</p>
-      </Message>
+      </StyledMessage>
+    //  window.alert("Sorry! Please enter an item to search!")
     )
   }
 
@@ -61,9 +62,6 @@ const Search = (props) => {
 
   return (
     <>
-    {alert && renderMessage()
-    }
-   
     <Menu.Item>
       <Form 
         onSubmit={ (e) => searchCourses(e,search)}
@@ -77,7 +75,8 @@ const Search = (props) => {
         />
         </Form>
       </Menu.Item>
-   
+      {alert && renderMessage()
+      }
     </>
   );
 };
@@ -100,6 +99,9 @@ const StyledForm = styled(Form)`
   float: center; 
   /* width: "20%"; */
   text-align: center;
+`
+const StyledMessage = styled(Message)`
+  font-size: 15px !important; 
 `
 
 export default Search;

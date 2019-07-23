@@ -3,6 +3,8 @@ import { Header, Icon, Image, Menu, Segment, Sidebar, Button} from 'semantic-ui-
 import TeachersCourses from './TeachersCourses';
 import {Link} from 'react-router-dom'; 
 import { AuthContext } from "../../providers/AuthProvider";
+import styled from 'styled-components';
+
 
 
 const TeachersView = () => {
@@ -24,7 +26,7 @@ const TeachersView = () => {
           </Button>
         </Button.Group>
 
-        {/* <Sidebar.Pushable as={Segment}> */}
+        <Sidebar.Pushable as={Segment}>
           <Sidebar
             as={Menu}
             animation='overlay'
@@ -34,6 +36,7 @@ const TeachersView = () => {
             vertical
             visible={visible}
             width='thin'
+            
           >
             <Link to="/teachers/courses">
             <Menu.Item as='a'>
@@ -47,31 +50,29 @@ const TeachersView = () => {
               Q&A
             </Menu.Item>
             </Link>
-            <Menu.Item as='a'>
-              <Icon name='settings' />
-              Settings
-            </Menu.Item>
+            <Link to="/forms/create">
+                <Menu.Item as='a'>
+                  <Icon name='plus square outline' />
+                   New Course
+                </Menu.Item>
+            </Link>
           </Sidebar>
 
-          <Sidebar.Pusher>
             <Segment basic>
-              <Header as='h2'>Courses</Header>
-              {user && 
-                <Link to="/forms/create">
-                    <Button floated="right">
-                      Add Courses
-                    </Button>
-                </Link>
-              }
+          <Sidebar.Pusher>
               <br/>
               <br/>
               {/* RENDER TEACHERS COURSES */}
               <TeachersCourses/>
-            </Segment>
           </Sidebar.Pusher>
-        {/* </Sidebar.Pushable> */}
+            </Segment>
+        </Sidebar.Pushable>
     </> 
   )
 }
+
+const StyledSeg=  styled.div`
+  margin-top:20px;
+`
 
 export default TeachersView
