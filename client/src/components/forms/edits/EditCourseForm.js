@@ -1,6 +1,8 @@
 import React, { useState, useEffect, } from "react";
 import axios from "axios";
 import { Form, Header, Segment, Select } from "semantic-ui-react";
+import ReactQuill from 'react-quill'
+
 
 const EditCourseForm = (props) => {
   const [title, setTitle] = useState()
@@ -108,6 +110,15 @@ const EditCourseForm = (props) => {
             value={overview}
             onChange={(e) => setOverview(e.target.value)}
           />
+           {/* <ReactQuill
+          onChange={handleQuill}
+          theme="snow"
+          label="Overview"
+          name = "overview"
+          type="text"
+          value={overview}
+          style={{height: 250}}
+          /> */}
           <Form.Input
             label='Image'
             placeholder='Put a thumbnail!'
