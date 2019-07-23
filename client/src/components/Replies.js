@@ -3,6 +3,7 @@ import axios from "axios";
 import {AuthContext} from '../providers/AuthProvider'
 import Reply from './Reply'
 import ReplyForm from "./ReplyForm"
+import styled from 'styled-components';
 import { Icon, Button, Comment, } from "semantic-ui-react";
 
 const Replies = (props) => {
@@ -68,15 +69,15 @@ const Replies = (props) => {
 
   return (
     <>
-      <Comment.Content>
+      <CommentContent>
         <Comment.Action>
             <Button size='mini' color='violet' onClick={() => toggleReplyForm()}>
               <Icon name='comment alternate outline'/>
               Leave A Reply
             </Button>
         </Comment.Action>
-      </Comment.Content>
-      <Comment.Content>
+      </CommentContent>
+      <CommentContent>
         { replyForm ? 
           <ReplyForm
             video_id={props.video_id}
@@ -86,10 +87,18 @@ const Replies = (props) => {
           /> : 
           null
         }
-      </Comment.Content>
+      </CommentContent>
       {showReplies()}
     </>
   )
 }
+
+const CommentContent = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0px;
+    overflow: hidden;
+`;
 
 export default Replies;

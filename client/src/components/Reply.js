@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios'
 import ReplyForm from "./ReplyForm";
+import styled from 'styled-components';
 import { Button, Icon, Comment, Label } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
 
@@ -57,7 +58,7 @@ const Reply = (props) => {
 
   return(
     <div style={{ background: '#636363', padding: '5px', border: '#4f4f4f solid 3px' ,borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
-      <Comment.Content style={{ display: 'flex', justifyContent: 'space-between'}}>
+      <CommentContent style={{ display: 'flex', justifyContent: 'space-between'}}>
         {userInfo.map(u => (
           <Label as='a' image>
             <img src={u.user_image || defaultImage} />
@@ -67,12 +68,12 @@ const Reply = (props) => {
         <Comment.Action>
           {user && renderButtons()}
         </Comment.Action>
-      </Comment.Content>
-      <Comment.Content style={{ color: 'white', padding: '5px' }}>
+      </CommentContent>
+      <CommentContent style={{ color: 'white', padding: '5px' }}>
         <br/>
         {reply_body}
-      </Comment.Content>
-      <Comment.Content>
+      </CommentContent>
+      <CommentContent>
       { showForm ? 
           <ReplyForm
             comment_id={comment_id}
@@ -83,10 +84,18 @@ const Reply = (props) => {
             addReply={addReply}
           /> : 
           null}
-      </Comment.Content>
+      </CommentContent>
     </div>
   )
 }
+
+const CommentContent = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0px;
+    overflow: hidden;
+`;
 
 export default Reply
 
