@@ -2,7 +2,8 @@ import React, {useState} from 'react'
 import { Header, Icon, Image, Button, Menu, Container, Segment, Sidebar, SidebarPushable, Breadcrumb } from 'semantic-ui-react'
 import EditCourseForm from './EditCourseForm'; 
 import styled from 'styled-components';
-import EditLessonForm from './EditLessonForm'; 
+import EditLessonForm from './EditLessonForm';
+import {Link} from 'react-router-dom' 
 import EditVideoForm from './EditVideoForm'; 
 // TODO - get rid of menu? Use breadcrumb 
 
@@ -63,24 +64,40 @@ const handleHideClick = () => setVisible(false);
      as={Menu} 
     animation='overlay'
     borderless 
+    inverted
     icon='labeled' 
     onHide={handleSidebarHide}
     vertical 
     visible ={visible}
     width='thin'>
-      <br/>
-      <Header as="h4" textAlign="left">Plan your course</Header>
-      <Menu.Item as='a' fitted="vertically" onClick={() => setStep(1)}>
+      <Link to="/teachers/courses">
+            <Menu.Item as='a'>
+              <Icon name='file video outline' />
+              Courses
+            </Menu.Item>
+            </Link>
+            <Link to="/teachers/QandA">
+            <Menu.Item as='a'>
+              <Icon name='comments outline' />
+              Q&A
+            </Menu.Item>
+            </Link>
+            <Link to="/forms/create">
+                <Menu.Item as='a'>
+                  <Icon name='plus square outline' />
+                   New Course
+                </Menu.Item>
+            </Link>
+            {/* <Menu.Item as='a' fitted="vertically" onClick={() => setStep(1)}>
         Manage Course 
-      </Menu.Item>
+      </Menu.Item> */}
+      {/* <Header as="h4" textAlign="left">Manage your content</Header> */}
       <br/>
-      <Header as="h4" textAlign="left">Manage your content</Header>
       <Menu.Item  as='a' fitted="vertically" onClick={() => setStep(2)}>
+        <Icon name="wrench"/>
         Manage lessons
       </Menu.Item>
-      <Menu.Item as='a' fitted="vertically" style={{marginTop: "10px"}} onClick={() => setStep(3)}>
-        Manage videos
-      </Menu.Item>
+   
     </Sidebar> 
 
      <Sidebar.Pusher>
