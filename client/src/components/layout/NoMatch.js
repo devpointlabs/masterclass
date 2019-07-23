@@ -10,7 +10,7 @@ const NoMatch = () => (
         // size="massive"
         bordered
         centered
-				src={require('../Images/404page.png')}
+				src={require('../Images/error-404.svg')}
 				alternate="logo"
 				style={{paddingTop: "8rem",width: "30%", height: "30%"}}
 				/>
@@ -43,7 +43,7 @@ height: 100%;
    flex-direction: column;
    justify-content: flex-start;
    align-items: center;
-   background: #5a5a5a; 
+   background: #1e1e1e; 
 `
 
 
