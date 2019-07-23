@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, } from 'react';
 import axios from 'axios';
 import { AuthContext, } from '../../providers/AuthProvider';
 import styled from 'styled-components';
-import { Accordion, Container, Button, Icon, Comment, Checkbox,  } from 'semantic-ui-react';
+import { Accordion, Menu, Segment, Sidebar, Button, Icon, Comment, Checkbox,  } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Replies from '../Replies'
 
@@ -12,8 +12,14 @@ const TeacherQA = (props) =>{
   const [enrollments, setEnrollments] = useState([])
   const [myQAs, setMyQAs]= useState([])
   const [showForm, setShowForm] = useState(false)
-
+  const [visible, setVisible] = useState(false);
   const [comments, setComments] = useState([])
+  
+  
+  const handleHideClick = () => setVisible(false); 
+  const handleShowClick = () => setVisible(true); 
+  const handleSidebarHide = () => setVisible(false);
+
 
   useEffect(()=>{
     axios.get('/api/my-courses')
@@ -231,21 +237,65 @@ const coursePanels = () =>{
   // -----------------Main Return in the QA component-------------------
   return (
     <>
-    <div style={{display: 'flex', justifyContent: "space-between", background: "#808080"}}>
-      <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100vh", border: "#808080 solid 3px", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}/>
-      <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', width: "50%", background: "#5a5a5a", border: '#808080 solid 3px'}}>
-        <h1 style={{ display: 'flex', justifyContent: 'center', paddingTop: '5px', borderBottom: '#5a5a5a solid 3px', margin: "0px", color: 'white'}}>Student Questions</h1>
-          <>
-            <div style= {{marginTop: '30px'}}>
-                <div style={{display:'flex', justifyContent:'flex-start', padding: "15px"}}>
-                  <Comment.Group style={{ width: "100vw"}}>
-                  {showComments()}
-                  </Comment.Group>
-              </div>
+    <Button.Group>
+          <Button disabled={visible} onMouseOver={handleShowClick}>
+            Show sidebar
+          </Button>
+          <Button disabled={!visible} onMouseOver={handleHideClick}>
+            Hide sidebar
+          </Button>
+        </Button.Group>
+        <Sidebar.Pushable as={Segment}>
+          <Sidebar
+            as={Menu}
+            animation='overlay'
+            icon='labeled'
+            inverted
+            onHide={handleSidebarHide}
+            vertical
+            visible={visible}
+            width='thin'
+            
+          >
+                <Link to="/teachers/courses">
+            <Menu.Item as='a'>
+              <Icon name='file video outline' />
+              Courses
+            </Menu.Item>
+            </Link>
+            <Link to="/teachers/QandA">
+            <Menu.Item as='a'>
+              <Icon name='comments outline' />
+              Q&A
+            </Menu.Item>
+            </Link>
+            <Link to="/forms/create">
+                <Menu.Item as='a'>
+                  <Icon name='plus square outline' />
+                   New Course
+                </Menu.Item>
+            </Link>
+          </Sidebar>
+          <Segment basic>
+          <Sidebar.Pusher>
+          <div style={{display: 'flex', justifyContent: "space-between", background: "#808080"}}>
+            <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100vh", border: "#808080 solid 3px", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}/>
+            <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', width: "50%", background: "#5a5a5a", border: '#808080 solid 3px'}}>
+              <h1 style={{ display: 'flex', justifyContent: 'center', paddingTop: '5px', borderBottom: '#5a5a5a solid 3px', margin: "0px", color: 'white'}}>Student Questions</h1>
+                <>
+                  <div style= {{marginTop: '30px'}}>
+                      <div style={{display:'flex', justifyContent:'flex-start', padding: "15px"}}>
+                        <Comment.Group style={{ width: "100vw"}}>
+                        {showComments()}
+                        </Comment.Group>
+                    </div>
+                  </div>
+                </>
             </div>
-          </>
-      </div>
-    </div>
+          </div>
+          </Sidebar.Pusher>
+          </Segment>
+          </Sidebar.Pushable>
   </>
   )
 

@@ -46,8 +46,10 @@ border: 15px solid rgb(189, 122, 235);
   .butt-man{
     background: url(./components/Images/code-screen.png);
     width:100%;
-    height:70vh;
+    height:80vh;
+    opacity: .8;
     z-index: -1;
+    	/* background: linear-gradient(350deg, rgb(51, 0, 190) 0%, rgba(108, 0, 197, 0.67) 73%); */
 
   }
 

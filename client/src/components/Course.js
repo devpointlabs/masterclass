@@ -152,7 +152,8 @@ const Course = (props) => {
       <ShowcaseContainer style={{width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}> 
       
         <StyledCourseHeader>{course.title}</StyledCourseHeader>
-        <StyledOverview>{course.overview}</StyledOverview>
+        <StyledOverview>
+        <div dangerouslySetInnerHTML={{__html: course.overview}}></div></StyledOverview>
        <br/>
        {/* this ternary is checking if enrolled is false and if user is true. Then it will display the button */}
        {(!enrolled && user) ? <Button icon onClick={()=>enroll(course.id)} color = "green"><Icon name="add circle"/>Enroll Now</Button>

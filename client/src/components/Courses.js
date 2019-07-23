@@ -20,12 +20,6 @@ const Courses = (props) => {
 		});
 	}, []);
 	
-	const next = (props) =>{
-		props.slider.slickNext()
-	}
-	const previous = (props) =>{
-		props.slider.slickPrev()
-	}
 	function NextArrow(props) {
 		const { className, style, onClick } = props;
 		return (
@@ -53,7 +47,7 @@ const Courses = (props) => {
 			appendDots: dots =>(
 				<div
 				style={{
-					backgroundColor: "#ddd",
+					// backgroundColor: "#ddd",
 					// borderRadius: "10px",
 					padding: "5px"
 				}}
@@ -99,21 +93,29 @@ const Courses = (props) => {
 				<div 
 				className="butt-man"
 				>
+					<div style = {{paddingTop:"15vh"}}>
+
 			<Header>
 				Courses
 			</Header>
 				{/* <CourseSlider /> */}
+				<div style={{padding: "25px"}}>
+
 				<Slider {...settings}>
 					{courses.map(c=>{
 						return(
 							<Link to={{pathname: `courses/${c.id}`}}>
 							<Card>
+								<div style={{paddingTop:"35px"}}>
 									<h1>{c.title}</h1>
+								</div>
 							</Card>
 								</Link>
 						)
 					})}
 				</Slider>
+					</div>
+					</div>
 					</div >
 	);
 };
@@ -125,10 +127,8 @@ const Container = styled.div`
 	padding: 50px;
 `;
 const Card = styled.div`
-background: #6A6A6A;
-background: -moz-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
-background: -webkit-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
-background: linear-gradient(to right, #6A6A6A 0%, #829BB4 100%);
+background: linear-gradient(350deg, rgb(51, 0, 190) 0%, rgba(108, 0, 197, 0.67) 73%);
+opacity: .87;
 border: 1px solid #8d2de3;
 /* margin-left: 100px;
 margin-right: 100px;
