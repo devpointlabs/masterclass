@@ -102,7 +102,7 @@ const handleHideClick = () => setVisible(false);
 
      <Sidebar.Pusher>
      
-      <MySegment  style={{height: "100vh"}} >
+      <MySegment  >
         {/* Renders forms */}
         <div style={{padding: "25px"}}>
 
@@ -118,7 +118,7 @@ const MySegment = styled.div`
   height: 100vh;
   width: 100%;
   // color: white;
-  background-color: white
+  background-color: blue
 `
 
 export default EditForm
