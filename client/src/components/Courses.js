@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useEffect, useContext } from 'react';
-import { Button, Segment, Icon } from 'semantic-ui-react';
+import { Button, Segment, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
@@ -109,6 +109,7 @@ const Courses = (props) => {
 							<Card>
 								<div style={{paddingTop:"35px"}}>
 									<h1>{c.title}</h1>
+									<Image centered size="small" src={c.image}/>
 								</div>
 							</Card>
 								</Link>
