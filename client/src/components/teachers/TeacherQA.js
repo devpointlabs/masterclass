@@ -52,13 +52,14 @@ const fillComments = (id) =>{
 const videoPanels = (id) =>{
   let array = []
   videos.map(v =>{
-    let videoObject = {key: v.video_id, title: 
+    let videoObject = {key: v.video_id, content: 
       <>
-        <Accordion.Title style={{marginLeft: "30px"}}>
-          <Button color="violet" fluid onClick={() => fillComments(v.video_id)}>
+        <br/>
+        <Accordion.Content style={{display: "flex", justifyContent: "center", alignItems: "center", margin: "0px", paddingTop: "0px", width: "50vw"}}>
+          <Button color="violet" style={{width: "70%", display: "flex", justifyContent: "center", alignItems: "center"}} onClick={() => fillComments(v.video_id)}>
           {v.video_title}
           </Button>
-        </Accordion.Title>
+        </Accordion.Content>
         <br/>
       </>
     }
@@ -86,14 +87,17 @@ const lessonPanels = (id) =>{
   let array = []
   lessons.map(c =>{
     let lessonObject = { key: c.lesson_id, title:
-      <Accordion.Title style={{color: "white", marginLeft: "20px"}}>
-        <hr/>
+      <Accordion.Title style={{color: "white", paddingLeft: "40px", fontSize: "15px", border: "#707070 solid 3px", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", marginBottom: "10px"}}>
         <Icon name="dropdown" />
         {c.lesson_name}
-        <hr/>
       </Accordion.Title>
        , 
-       content: { content: videoContent(c.video_id)} }
+       content: { content: 
+        <Accordion.Content style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding: "0px", color: "white", textDecoration: "underline", fontWeight: "bold", width: "50vw"}}>
+          Video Selection
+          {videoContent(c.video_id)}
+        </Accordion.Content>
+      } }
     if (id === c.l_course_id){
     array.push(lessonObject)}
   })
@@ -116,14 +120,19 @@ const coursePanels = () =>{
   let array = []
   courses.map(c =>{
     let courseObject = { key: c.c_id, title:
-      <Accordion.Title style={{color: "white", marginLeft: "10px"}}>
-      <hr/>
-      <Icon name="dropdown" />
-      {c.c_title}
-      <hr/>
-    </Accordion.Title>
+      <Accordion.Title style={{color: "white", paddingLeft: "20px", fontSize: "20px", background: "#606060", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
+        <Icon name="dropdown" />
+        {c.c_title}
+      </Accordion.Title>
        , 
-       content: { content:lessonContent(c.lesson_id)} }
+       content: { content:
+        <Accordion.Content style={{ boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding: "0px", color: "white", textDecoration: "underline", fontWeight: "bold"}}>
+          <div style={{display: "flex", justifyContent: "center", fontSize: "20px"}}>
+            Lesson Selection
+          </div>
+          {lessonContent(c.lesson_id)}
+        </Accordion.Content>
+      } }
     array.push(courseObject)
   })
   return(
@@ -139,14 +148,17 @@ const coursePanels = () =>{
   )
   const rootPanels = [
     {key: 1, title: 
-      <Accordion.Title style={{color: "white"}}>
-        <hr/>
+      <Accordion.Title style={{color: "white" , fontSize: "25px", border: "#707070 solid 3px",boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}>
         <Icon name="dropdown" />
         Courses List
-        <hr/>
       </Accordion.Title>
       , 
-      content: {content: CourseContent}}
+      content: {content:
+      <Accordion.Content style={{boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", color: "white", textDecoration: "underline", fontWeight: "bold"}}>
+        {CourseContent}
+      </Accordion.Content>
+      }
+      }
   ]
   // --------------------------------------------------------------
   // ==============================================================
@@ -217,7 +229,7 @@ const coursePanels = () =>{
   return (
     <>
     <div style={{display: 'flex', justifyContent: "space-between", background: "#808080"}}>
-      <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100vh", border: "#808080 solid 3px"}}/>
+      <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100vh", border: "#808080 solid 3px", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}/>
       <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', width: "50%", background: "#5a5a5a", border: '#808080 solid 3px'}}>
         <h1 style={{ display: 'flex', justifyContent: 'center', paddingTop: '5px', borderBottom: '#5a5a5a solid 3px', margin: "0px", color: 'white'}}>Student Questions</h1>
           <>
