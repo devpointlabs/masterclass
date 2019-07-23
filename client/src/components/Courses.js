@@ -5,6 +5,7 @@ import axios from 'axios';
 import { AuthContext } from '../providers/AuthProvider';
 import styled from 'styled-components';
 import Slider from 'react-slick';
+import codeScreen from './Images/code-screen.png'
 
 const Courses = (props) => {
 	const [ courses, setCourses ] = useState([]);
@@ -95,7 +96,9 @@ const Courses = (props) => {
 		}
 
 	return (
-			<Container style={{ height: '100px' }}>
+				<div 
+				className="butt-man"
+				>
 			<Header>
 				Courses
 			</Header>
@@ -103,7 +106,7 @@ const Courses = (props) => {
 				<Slider {...settings}>
 					{courses.map(c=>{
 						return(
-								<Link to={{pathname: `courses/${c.id}`}}>
+							<Link to={{pathname: `courses/${c.id}`}}>
 							<Card>
 									<h1>{c.title}</h1>
 							</Card>
@@ -111,7 +114,7 @@ const Courses = (props) => {
 						)
 					})}
 				</Slider>
-			</Container>
+					</div >
 	);
 };
 
@@ -146,5 +149,13 @@ color: white;
 font-size: 50px;
 text-align: center;
 margin-bottom: 30px;
+`
+
+const BackgroundImage = styled.div`
+	width:100%;
+ height:70vh;
+//  background: cover;
+ background: url(./Images/code-screen.png);
+
 `
 

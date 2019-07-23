@@ -43,7 +43,13 @@ border: 15px solid rgb(189, 122, 235);
     /* background-color: red; */
     
   }
-  
+  .butt-man{
+    background: url(./components/Images/code-screen.png);
+    width:100%;
+    height:70vh;
+    z-index: -1;
+
+  }
 
 
 /* Color Palate:
