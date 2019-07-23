@@ -201,7 +201,7 @@ const ShowcaseContainer = styled(Container)`
   align-items: center; 
   justify-content: center;
   height: 80vh; 
-  background-image: url(${Showcase}); 
+  background-image: url(${Showcase}) !important; 
   background-repeat: repeat; 
 `
 
