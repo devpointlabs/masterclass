@@ -152,6 +152,7 @@ const AddCourses = (props) => {
 const Container = styled.div`
 height: 100vh;
 padding: 15px;
+
 `
 
 export default AddCourses;

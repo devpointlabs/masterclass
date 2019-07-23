@@ -146,7 +146,7 @@ height: 100%;
    width: 100%;
    margin: 0 auto;
    padding: 25px 1em;
-   /* animation: ${fadeIn} 1s linear; */
+   animation: ${fadeIn} 1s linear;
    position: relative;
    display: flex;
    flex-direction: row;

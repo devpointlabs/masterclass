@@ -15,19 +15,38 @@ const Navbar = (props) => {
       return (
         <NavRight>
               <>
+              {toggleButton ? 
               <NavMenuItem
-                name="Teachers"
-                onClick={() => setToggleButton(!toggleButton)}
-                >
-                <StyledNavLink to="/teachers/courses"
-                exact
-                activeStyle={styles.active}
-                >
-                  <h3>
-                    Teachers
-                  </h3>
-                </StyledNavLink>
-              </NavMenuItem>
+              name="Teachers"
+              onClick={() => setToggleButton(!toggleButton)}
+              >
+              <StyledNavLink to="/teachers/courses"
+              exact
+              activeStyle={styles.active}
+              >
+                <h3>
+                  Teacher View
+                </h3>
+              </StyledNavLink>
+            </NavMenuItem>
+            :
+            <NavMenuItem
+            active={props.location.pathname === "/"}
+            onClick={() => setToggleButton(!toggleButton)}
+            >
+            <StyledNavLink to="/"
+            exact
+            activeStyle={styles.active}
+            >
+              <h3>
+              Student View
+              </h3>
+            </StyledNavLink>
+          </NavMenuItem>
+
+            
+            }
+              
               <NavMenuItem
                 active={props.location.pathname === "/my-courses"}>
                 <StyledNavLink to="/my-courses"
@@ -41,19 +60,7 @@ const Navbar = (props) => {
               </NavMenuItem>
             </>
             
-              <NavMenuItem
-                active={props.location.pathname === "/"}
-                onClick={() => setToggleButton(!toggleButton)}
-                >
-                <StyledNavLink to="/"
-                exact
-                activeStyle={styles.active}
-                >
-                  <h3>
-                  Students
-                  </h3>
-                </StyledNavLink>
-              </NavMenuItem>
+             
             <NavMenuItem
               name="My Profile"
               active={props.location.pathname === "/profile"}

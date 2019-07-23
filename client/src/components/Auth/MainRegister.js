@@ -29,7 +29,8 @@ export default MainRegister;
 const RegistrationContainer = styled.div`
   width: 50%;
   /* background-color: #0f0c29; */
-  background-color: #1F1C2C;
+  /* background-color: #1F1C2C; */
+  background-color: #1e1e1e;
   height: 100%;
   display: flex;
   flex-direction: column;
