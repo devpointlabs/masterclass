@@ -21,7 +21,7 @@ body{
   padding: 0.7em 0;
 } */
 
-.container{
+.container-teacher-course {
   /* background: #333;  */
   background: #5a5a5a; 
   /* background: #fff;  */
@@ -36,19 +36,19 @@ body{
   
 }
 @media screen and (max-width: 640px){
-  .container{
+  .container-teacher-course{
     display: block;
     width: 100%;
   }
 }
 
 @media screen and (min-width: 900px){
-  .container{
+  .container-teacher-course{
     width: 33.33333%;
   }
 }
 
-.container .title{
+.container-teacher-course .title{
   color: #fff !important;
   text-align: left;
   padding-left: 10px; 
@@ -56,7 +56,7 @@ body{
   
 }
 
-.container .paragraph {
+.container-teacher-course .paragraph {
   color: #fff !important; 
   text-align: left; 
   padding-left: 10px; 
