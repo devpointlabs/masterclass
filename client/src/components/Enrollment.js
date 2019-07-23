@@ -42,7 +42,7 @@ const Enrollment = (props) => {
 					<Image src={e.image}/>
 					<div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", background: "#5a5a5a"}}>
 						<h1 style={{textSize: "2rem", color: "#fff", paddingTop: "10px", paddingLeft: "5px", fontFamily: "'Merriweather'"}}>{e.title}</h1>
-						<p style={{padding: "10px", fontSize: "1.5rem", color:"#fff", fontFamily: "'Nunito Sans'"}}>{e.overview || 'Overview will be coming soon...'}</p>
+						<p style={{padding: "10px", fontSize: "1.5rem", color:"#fff", fontFamily: "'Nunito Sans'"}}><div dangerouslySetInnerHTML={{__html: e.overview || "Overview coming soon..."}}></div></p>
 						{(e.role === 'student' || e.role === 'teacher') && (
 							<Button size='tiny' floated="left" style={{width: "15%", color: "red"}} textAlign="center" color='gray' icon animated onClick={() => removeCourse(e.course_id)}>
 								<Button.Content visible>Unenroll</Button.Content>
