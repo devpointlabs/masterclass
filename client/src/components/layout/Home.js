@@ -23,7 +23,10 @@ const Home = () => {
 				<Courses />
 			</Section>
 			<AppContainer style={{ display: "flex", alignItems: "center", flexDirection: "column", justifyContent: "space-between"}}>
-				<div style={{display: "flex", justifyContent: "space-around", width: "100vw", paddingTop: "80px"}}>
+			<Header as='h1' textAlign='center' style={{color: "#fff", fontFamily: "'Merriweather', Helvetica", letterSpacing: "1px", paddingTop: "20px", fontWeight: "lighter", borderBottom: "1px solid #fff"}}>
+				What People Are Saying: 
+			</Header>
+				<div style={{display: "flex", justifyContent: "space-around", width: "100vw", paddingTop: "30px"}}>
 			<StyledCard>
 					<p>'What an amazing journey and experience, I learned so much during my time at DevPoint Labs! I started with some basic knowledge and with the the assistance of the intense course curriculum and the incredible staff, instructor and TA’s, I was able to build an amazing foundation and understanding of programming. I am very excited for the new and life changing opportunities ahead! I would recommend DevPoint Labs to anyone who is considering attending a coding bootcamp.'</p>
 					<div style={{display: "flex", paddingLeft: "30px"}}>
