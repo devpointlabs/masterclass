@@ -118,7 +118,6 @@ const MySegment = styled.div`
   height: 100vh;
   width: 100%;
   // color: white;
-  background-color: blue
 `
 
 export default EditForm
