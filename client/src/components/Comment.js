@@ -100,8 +100,8 @@ const QAndA = (props) => {
           {comment_body}
         </Comment.Content>
         <div style = {{
-          display: 'flex',
-          alignSelf:'flex-end',
+          // display: 'flex',
+          // alignSelf:'flex-end',
           marginTop:'10px',
           width: '800px'
         }}>
@@ -142,8 +142,8 @@ const QAndA = (props) => {
 }
 
 const ClickDiv = styled.div`
-  display: flex;
-  justify-content: flex-start;
+  // display: flex;
+  // justify-content: flex-start;
   margin: 5px;
 `
 
