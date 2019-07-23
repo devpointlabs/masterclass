@@ -8,8 +8,10 @@ import EditVideoForm from './EditVideoForm';
 
 const EditForm = (props) => {
   const [step, setStep] = useState(1); 
-  const [courseId, setCourseId] = useState(); 
-  const [lessonId, setLessonId] = useState(); 
+  const [courseId, setCourseId] = useState(""); 
+  const [lessonId, setLessonId] = useState(""); 
+  const [visible, setVisible] = useState(false);
+
 
 // get the id for the course
 const getCourseId = (id) => {
@@ -20,6 +22,9 @@ const getCourseId = (id) => {
 const getLessonId = (id) => {
   setLessonId(id)
 }
+const handleHideClick = () => setVisible(false); 
+  const handleShowClick = () => setVisible(true); 
+  const handleSidebarHide = () => setVisible(false);
 
 // Render Form Pages 
   const renderForms = (step) => {
@@ -40,13 +45,29 @@ const getLessonId = (id) => {
   return (
     <>
     {/* GO BACK BUTTON - BREADCRUMB */}
-     <Breadcrumb size="large">
+     {/* <Breadcrumb size="large">
         <Breadcrumb.Section link onClick={() => props.history.goBack("/teachers/courses")}>Courses</Breadcrumb.Section>
         <Breadcrumb.Divider icon='right chevron' />
         <Breadcrumb.Section active>Manage Courses</Breadcrumb.Section>
-      </Breadcrumb>
-    <Sidebar.Pushable as={Container}>
-    <Sidebar as={Menu} borderless icon='labeled' vertical visible width='thin'>
+      </Breadcrumb> */}
+       <Button.Group>
+          <Button disabled={visible} onMouseOver={handleShowClick}>
+            Show sidebar
+          </Button>
+          <Button disabled={!visible} onMouseOver={handleHideClick}>
+            Hide sidebar
+          </Button>
+        </Button.Group>
+    <Sidebar.Pushable as={Segment}>
+    <Sidebar
+     as={Menu} 
+    animation='overlay'
+    borderless 
+    icon='labeled' 
+    onHide={handleSidebarHide}
+    vertical 
+    visible ={visible}
+    width='thin'>
       <br/>
       <Header as="h4" textAlign="left">Plan your course</Header>
       <Menu.Item as='a' fitted="vertically" onClick={() => setStep(1)}>
@@ -57,21 +78,30 @@ const getLessonId = (id) => {
       <Menu.Item  as='a' fitted="vertically" onClick={() => setStep(2)}>
         Manage lessons
       </Menu.Item>
-      {/* <Menu.Item as='a' fitted="vertically" style={{marginTop: "10px"}} onClick={() => setStep(3)}>
+      <Menu.Item as='a' fitted="vertically" style={{marginTop: "10px"}} onClick={() => setStep(3)}>
         Manage videos
-      </Menu.Item> */}
-    </Sidebar>
+      </Menu.Item>
+    </Sidebar> 
 
-    <Sidebar.Pusher>
+     <Sidebar.Pusher>
      
-      <Segment compact={true} style={{height: "500px"}} >
+      <MySegment  style={{height: "100vh"}} >
         {/* Renders forms */}
+        <div style={{padding: "25px"}}>
+
         {renderForms(step)}
-      </Segment>
+        </div>
+      </MySegment>
     </Sidebar.Pusher>
   </Sidebar.Pushable>
   </>
   )
 }
+const MySegment = styled.div`
+  height: 100vh;
+  width: 100%;
+  // color: white;
+  background-color: white
+`
 
 export default EditForm

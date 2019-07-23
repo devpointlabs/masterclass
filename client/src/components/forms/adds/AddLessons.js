@@ -29,7 +29,6 @@ const AddLessons = (props) => {
     <Fragment>
       <Header as="h1" textAlign="center">Create Your Lesson</Header>
       <Form onSubmit={handleSubmit}>
-        <Form.Group widths='equal'>
           <Form.Input
             label='Name'
             placeholder='What will be taught?'
@@ -39,6 +38,7 @@ const AddLessons = (props) => {
             onChange={(e) => setName(e.target.value)}
 
           />
+          
           <Form.Input
             label='Description'
             placeholder='What will the lesson cover? '
@@ -47,7 +47,6 @@ const AddLessons = (props) => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
           />
-        </Form.Group>
         <Form.Button inverted color="green" >
           Submit
           </Form.Button>

@@ -19,6 +19,7 @@ const TeacherQA = (props) =>{
   const handleHideClick = () => setVisible(false); 
   const handleShowClick = () => setVisible(true); 
   const handleSidebarHide = () => setVisible(false);
+  
 
 
   useEffect(()=>{

@@ -99,7 +99,7 @@ const EditCourseForm = (props) => {
               onChange={(e) => setCategory(e.target.innerText)}
             />
             </Form.Group>
-         
+          <h4>Course Overview</h4>
              <ReactQuill
           onChange={handleQuill}
           theme="snow"
