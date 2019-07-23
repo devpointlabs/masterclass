@@ -37,7 +37,6 @@ const AddCourses = (props) => {
     axios
       .post("/api/courses", { title: title, category: category, overview: body})
       .then(res => {
-        debugger
         setCourse(res.data);
         props.history.push("/teachers/courses");
       });
@@ -108,7 +107,7 @@ const AddCourses = (props) => {
         <Form.Group widths='equal'>
           <Form.Input
             label='Course Title'
-            placeholder='e.g. Add Photos Using Cloudinary'
+            placeholder='Enter title'
             name='title'
             required
             value={form.title}

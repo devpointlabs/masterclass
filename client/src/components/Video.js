@@ -16,7 +16,6 @@ const Video = (props) => {
   // const lesson_id = props.lesson_id
 
   useEffect( () => {
-    debugger
     const lesson_id = props.match.params.lesson_id
     const video_id = props.match.params.video_id
     axios.get(`/api/lessons/${lesson_id}/videos/${video_id}`)

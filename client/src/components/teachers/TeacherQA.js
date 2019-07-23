@@ -19,6 +19,7 @@ const TeacherQA = (props) =>{
   const handleHideClick = () => setVisible(false); 
   const handleShowClick = () => setVisible(true); 
   const handleSidebarHide = () => setVisible(false);
+  
 
 
   useEffect(()=>{
@@ -62,7 +63,7 @@ const videoPanels = (id) =>{
       <>
         <br/>
         <Accordion.Content style={{display: "flex", justifyContent: "center", alignItems: "center", margin: "0px", paddingTop: "0px", width: "50vw"}}>
-          <Button color="violet" style={{width: "70%", display: "flex", justifyContent: "center", alignItems: "center"}} onClick={() => fillComments(v.video_id)}>
+          <Button color="violet" style={{width: "30%", display: "flex", justifyContent: "center", alignItems: "center"}} onClick={() => fillComments(v.video_id)}>
           {v.video_title}
           </Button>
         </Accordion.Content>
@@ -99,10 +100,10 @@ const lessonPanels = (id) =>{
       </Accordion.Title>
        , 
        content: { content: 
-        <Accordion.Content style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding: "0px", color: "white", textDecoration: "underline", fontWeight: "bold", width: "50vw"}}>
+        <AccordionContent style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding: "0px", color: "white", textDecoration: "underline", fontWeight: "bold", width: "50vw"}}>
           Video Selection
           {videoContent(c.video_id)}
-        </Accordion.Content>
+        </AccordionContent>
       } }
     if (id === c.l_course_id){
     array.push(lessonObject)}
@@ -133,12 +134,12 @@ const coursePanels = () =>{
        , 
        content: { content:
         <>
-          <Accordion.Content style={{ boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding:   "0px", color: "white", textDecoration: "underline", fontWeight: "bold"}}>
+          <AccordionContent style={{ boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", padding:   "0px", color: "white", textDecoration: "underline", fontWeight: "bold"}}>
             <div style={{display: "flex", justifyContent: "center", fontSize: "20px"}}>
               Lesson Selection
             </div>
             {lessonContent(c.lesson_id)}
-          </Accordion.Content>
+          </AccordionContent>
           <br/>
         </>
       } }
@@ -163,9 +164,9 @@ const coursePanels = () =>{
       </Accordion.Title>
       , 
       content: {content:
-          <Accordion.Content style={{boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", color:    "white", textDecoration: "underline", fontWeight: "bold"}}>
+          <AccordionContent style={{boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)", color:    "white", textDecoration: "underline", fontWeight: "bold", width: "100%"}}>
             {CourseContent}
-          </Accordion.Content>
+          </AccordionContent>
       }
     }
   ]
@@ -196,15 +197,15 @@ const coursePanels = () =>{
           <>
           <div style={{ width: '100%', border: "#505050 solid 3px", borderRadius: "5px", background: "#707070", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)" }}>
           <Comment key={c.id}>
-            <Comment.Content as="h3" style={{display: "flex", justifyContent: "space-between",color: "white", marginLeft: "5px", marginTop: "5px"}}>
+            <CommentContent as="h3" style={{display: "flex", justifyContent: "space-between",color: "white", marginLeft: "5px", marginTop: "5px"}}>
               {c.title}
               <Comment.Action style={{marginRight: "12px"}}>
                 {renderButtons(c.read, c.id)}
               </Comment.Action>
-            </Comment.Content>
-            <Comment.Content style={{color: "white", marginLeft: "12px"}}>
+            </CommentContent>
+            <CommentContent style={{color: "white", marginLeft: "12px"}}>
               {c.body}
-            </Comment.Content>
+            </CommentContent>
             <ClickDiv>
           { showReplies ?
             <RepliesClick onClick={() => toggleReplies()}>Hide Replies <Icon name='angle up' /></RepliesClick>
@@ -276,10 +277,10 @@ const coursePanels = () =>{
                 </Menu.Item>
             </Link>
           </Sidebar>
-          <Segment basic>
+          <Segment>
           <Sidebar.Pusher>
-          <div style={{display: 'flex', justifyContent: "space-between", background: "#808080"}}>
-            <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100vh", border: "#808080 solid 3px", boxShadow: "5px 8px 8px rgba(36, 36, 36, 0.77)"}}/>
+          <div style={{display: 'flex', justifyContent: "space-between", background: "#808080", height: "100vh"}}>
+            <Accordion defaultActiveIndex={0} panels={rootPanels} style={{width: "50%", height: "100%", border: "#808080 solid 3px", boxShadow: "2px 2px 2px rgba(36, 36, 36, 0.77)"}}/>
             <div style={{ display: "flex", flexDirection: "column", justifyContent: 'flex-start', width: "50%", background: "#5a5a5a", border: '#808080 solid 3px'}}>
               <h1 style={{ display: 'flex', justifyContent: 'center', paddingTop: '5px', borderBottom: '#5a5a5a solid 3px', margin: "0px", color: 'white'}}>Student Questions</h1>
                 <>
@@ -298,13 +299,27 @@ const coursePanels = () =>{
           </Sidebar.Pushable>
   </>
   )
-
-
 }
+
+const CommentContent = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0px;
+    overflow: hidden;
+`;
+
 const ClickDiv = styled.div`
   display: flex;
   justify-content: flex-end;
 `
+const AccordionContent = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0px;
+    overflow: hidden;
+`;
 
 const RepliesClick = styled.p`
   color: blue;
@@ -317,8 +332,14 @@ const RepliesClick = styled.p`
     transition: background 0.7s ease;
   } 
 `
-const QAdiv = styled.div`
-  height
+// const QAdiv = styled.div`
+//   height
+// `
+const MySegment = styled.section`
+  height: 100vh;
+  width: 100%;
+  border: 1px solid green;
+ 
 `
 
 export default TeacherQA

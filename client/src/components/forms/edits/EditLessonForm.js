@@ -118,7 +118,7 @@ const toggleCreateVideoForm = (id, createVideos) => {
   }
 
   const renderCreateVideosForm = (id, createVideos) => {
-    return <AddVideos lesson_id={id} createVideos={createVideos}/>
+    return <AddVideos lesson_id={id} createVideos={createVideos} toggle={toggleCreateVideoForm}/>
   }
 
   // remove lessons 
@@ -136,12 +136,10 @@ const toggleCreateVideoForm = (id, createVideos) => {
         <Segment key={l.id} style={{ display: "flex", flexDirection:"column" }}>
          <div style={{ display:"flex", justifyContent:"space-between"}}>
 
-        <Link to = {`/lessons/${l.id}`}> 
          <List.Header as="h3">{l.name}</List.Header>
          <List.Description>
            {l.description}
          </List.Description>
-           </Link>
          { l.showForm ? renderEditForm(l.id, l.showForm) : null}
          <div className="buttonDiv">
 
