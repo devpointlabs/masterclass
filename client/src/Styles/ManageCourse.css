@@ -21,8 +21,11 @@ body{
   padding: 0.7em 0;
 } */
 
-.container{
-  background: #333; 
+.container-teacher-course {
+  /* background: #333;  */
+  background: #5a5a5a; 
+  /* background: #fff;  */
+  border-radius: 5px; 
   padding: 1em 0;
   display: flex; 
   justify-content: center; 
@@ -33,29 +36,31 @@ body{
   
 }
 @media screen and (max-width: 640px){
-  .container{
+  .container-teacher-course{
     display: block;
     width: 100%;
   }
 }
 
 @media screen and (min-width: 900px){
-  .container{
+  .container-teacher-course{
     width: 33.33333%;
   }
 }
 
-.container .title{
-  color: #1a1a1a;
+.container-teacher-course .title{
+  color: #fff !important;
   text-align: left;
+  padding-left: 10px; 
   margin-bottom: 10px;
   
 }
 
-.container .paragraph {
-  color: #1a1a1a; 
+.container-teacher-course .paragraph {
+  color: #fff !important; 
   text-align: left; 
-  margin-bottom: 0; 
+  padding-left: 10px; 
+  margin-bottom: 15px; 
 }
 
 .content {
