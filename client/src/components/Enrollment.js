@@ -16,8 +16,10 @@ const Enrollment = (props) => {
 	}, []);
 
 	const removeCourse = (id) => {
-		axios.delete(`/api/my-courses/${id}`).then((res) => {
+		axios.delete(`/api/my-courses/${id}`)
+		.then((res) => {
 			setEnrollments(enrollments.filter((e) => e.course_id !== id));
+			props.history.push("/my-courses")
 		});
 	};
 

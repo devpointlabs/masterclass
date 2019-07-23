@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import ReplyForm from "./ReplyForm"
 import { Button, Container, Icon, Comment, Checkbox, Label } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
+// import TimeAgo from 'react-timeago';   
+
 
 const defaultImage = "https://png.pngtree.com/svg/20161212/f93e57629c.svg"
 
@@ -85,6 +87,8 @@ const QAndA = (props) => {
             {u.user_name}
           </Label>
         ))}
+        {/* <TimeAgo date={props.comment_created}/> */}
+
         <Comment.Action>
           {user && renderButtons()}
         </Comment.Action>
