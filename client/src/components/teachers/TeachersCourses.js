@@ -36,7 +36,7 @@ const TeachersCourses = (props) => {
       <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-around"}}>
     {roles.map(e => (
       <div>
-<div className="container-teacher-course" style={{width: "500px", height: "400px"}} key={e.course_id} >
+<div className="container-teacher-course" style={{width: "500px", height: "400px",margin:"15px"}}  key={e.course_id} >
 <div style={{display:"flex", alignContent: "center", justifyContent:"space-between" }}>
 
   <h3 className="title">{e.category}</h3>
