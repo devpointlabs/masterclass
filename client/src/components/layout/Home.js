@@ -23,7 +23,6 @@ const Home = () => {
 				<Courses />
 			</Section>
 			<AppContainer>
-				<h1>hi</h1>
 			</AppContainer>
 		</Fragment>
 	);

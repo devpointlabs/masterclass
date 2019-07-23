@@ -93,17 +93,15 @@ const Courses = (props) => {
 	return (
 		<>
 			{/* <div style = {{paddingTop:"15vh"}}> */}
-			<div 
-				className="butt-man"
-				>
-					<div style = {{paddingTop:"15vh"}}>
+			<div className="butt-man">
+					<div style = {{paddingTop:"15vh",}}>
 
-			<Header>
-				Courses
-			</Header>
 				{/* <CourseSlider /> */}
 				<div style={{padding: "25px"}}>
 
+			<Header >
+				Courses
+			</Header>
 				<Slider {...settings}>
 					{courses.map(c=>{
 						return(
@@ -145,7 +143,8 @@ font-family: 'Halant', Arial, Helvetica, sans-serif;
 
 const Header = styled.h1`
 color: white;
-bottom: 0; 
+margin-bottom: 0;
+// bottom: 0; 
 font-size: 36px;
 text-align: center;
 background: rgba(25, 25, 25, 0.9); 
