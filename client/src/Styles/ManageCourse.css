@@ -22,7 +22,10 @@ body{
 } */
 
 .container{
-  background: #333; 
+  /* background: #333;  */
+  background: #5a5a5a; 
+  /* background: #fff;  */
+  border-radius: 5px; 
   padding: 1em 0;
   display: flex; 
   justify-content: center; 

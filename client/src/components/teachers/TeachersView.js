@@ -17,7 +17,8 @@ const TeachersView = () => {
   const handleSidebarHide = () => setVisible(false); 
   return (
     <>
-    <Button.Group>
+    <Container>
+    <Button.Group >
           <Button disabled={visible} onMouseOver={handleShowClick}>
             Show sidebar
           </Button>
@@ -25,8 +26,9 @@ const TeachersView = () => {
             Hide sidebar
           </Button>
         </Button.Group>
+    </Container>
 
-        <Sidebar.Pushable as={Segment}>
+        <Sidebar.Pushable as={Segment} style={sidebarStyle}>
           <Sidebar
             as={Menu}
             animation='overlay'
@@ -36,6 +38,8 @@ const TeachersView = () => {
             vertical
             visible={visible}
             width='thin'
+            style={sidebarStyle}
+            
             
           >
             <Link to="/teachers/courses">
@@ -59,9 +63,9 @@ const TeachersView = () => {
           </Sidebar>
 
             <Segment basic>
-          <Sidebar.Pusher>
-              <br/>
-              <br/>
+          <Sidebar.Pusher style={sidebarStyle}>
+              {/* <br/>
+              <br/> */}
               {/* RENDER TEACHERS COURSES */}
               <TeachersCourses/>
           </Sidebar.Pusher>
@@ -74,5 +78,17 @@ const TeachersView = () => {
 const StyledSeg=  styled.div`
   margin-top:20px;
 `
+
+const Container = styled.div`
+  height: 100%; 
+  width: 100%; 
+  /* background: "#323232" */
+`
+
+const sidebarStyle = {
+  margin: "0px !important", 
+  padding: "0px !important",
+  // background: "#323232",
+}
 
 export default TeachersView

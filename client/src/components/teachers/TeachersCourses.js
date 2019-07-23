@@ -32,10 +32,11 @@ const TeachersCourses = (props) => {
         roles.push(e)
       }
     })
-
-    return (roles.map(e => (
-      <>
-<div className="container" key={e.course_id} >
+    return (
+      <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-around"}}>
+    {roles.map(e => (
+      <div>
+<div className="container" style={{width: "500px", height: "400px"}} key={e.course_id} >
 <div style={{display:"flex", alignContent: "center", justifyContent:"space-between" }}>
 
   <h3 className="title">{e.category}</h3>
@@ -58,14 +59,15 @@ const TeachersCourses = (props) => {
     </Link>
   </div>
 </div>
-      </>
-    ))
+      </div>
+    ))}
+    </div>
     )
   }
 
 
   return (
-    <CourseContainer style={{background: "purple"}}>
+    <CourseContainer>
       {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
 
         {enrollments ?
@@ -84,14 +86,13 @@ const TeachersCourses = (props) => {
 };
 
 const CourseContainer = styled.div`
-background: #323232; 
+/* background: #323232;  */
 width: 100% important!; 
 display: "flex"; 
 justify-content: center; 
-/* align-content: center; 
- */
- align-items: center; 
-/* height: 100vh;  */
+flex-wrap: wrap;
+ /* align-items: center;  */
+
 `
 
 

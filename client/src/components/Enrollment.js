@@ -29,7 +29,7 @@ const Enrollment = (props) => {
 			if (e.role === 'student') {
 				roles.push(e);
 			}
-			debugger;
+			// debugger;
 		});
 		return (
 			roles.map((e) => (
