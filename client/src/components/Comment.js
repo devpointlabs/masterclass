@@ -78,21 +78,19 @@ const QAndA = (props) => {
   }
 
   return (
-    <div style={{ background: 'grey', padding: '5px', borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
+  <div style={{ background: 'grey', padding: '5px', borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
       <Comment.Content>
-        <Comment.Content style={{ display: 'flex', justifyContent: 'space-between'}}>
-        {userInfo.map(u => (
-          <Label as='a' image>
-            <img src={u.user_image || defaultImage} />
-            {u.user_name}
-          </Label>
-        ))}
-        {/* <TimeAgo date={props.comment_created}/> */}
-
-        <Comment.Action>
-          {user && renderButtons()}
-        </Comment.Action>
-        </Comment.Content>
+              <Comment.Content style={{ display: 'flex', justifyContent: 'space-between'}}>
+              {userInfo.map(u => (
+                <Label as='a' image>
+                  <img src={u.user_image || defaultImage} />
+                  {u.user_name}
+                </Label>
+              ))}
+              <Comment.Action>
+                {user && renderButtons()}
+              </Comment.Action>
+              </Comment.Content>
         <Comment.Content as='h3' style={{ color: 'white', paddingLeft: '5px' }}>
           {comment_title}
         </Comment.Content>
@@ -100,8 +98,8 @@ const QAndA = (props) => {
           {comment_body}
         </Comment.Content>
         <div style = {{
-          // display: 'flex',
-          // alignSelf:'flex-end',
+          display: 'flex',
+          alignSelf:'flex-end',
           marginTop:'10px',
           width: '800px'
         }}>
@@ -137,13 +135,13 @@ const QAndA = (props) => {
           }
         </Comment.Group>
       </Comment.Content>
-    </div>
+     </div>
   )
 }
 
 const ClickDiv = styled.div`
-  // display: flex;
-  // justify-content: flex-start;
+  display: flex;
+  justify-content: flex-start;
   margin: 5px;
 `
 
