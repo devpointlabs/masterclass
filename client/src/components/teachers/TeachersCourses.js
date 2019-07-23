@@ -40,8 +40,9 @@ const TeachersCourses = (props) => {
             <Link to={{ pathname: `/courses/${e.course_id}/manage` }}>
               <Card fluid>
                 <Card.Header as='h2'>{e.title}</Card.Header>
-                <Card.Description>{e.overview || "This will have an overview"}
-                </Card.Description>
+                {/* <Card.Description>{e.overview || "This will have an overview"} */}
+                {/* </Card.Description> */}
+                <div dangerouslySetInnerHTML={{__html: e.overview}}></div>
               </Card>
             </Link>
         </div>

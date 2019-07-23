@@ -50,7 +50,6 @@ const AddVideos = (props) => {
     
   }
   const handleChange = (name) => (e) => {
-    // const { value, } = e.target;
     setVideo({...video, [name]: e.target.value})
   }
 
