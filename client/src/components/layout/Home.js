@@ -20,15 +20,8 @@ const Home = () => {
 				/>
 			</AppContainer>
 			<Section>
-			{/* <Image 
-			src={require('../Images/code-screen.png')}
-			style={{width:"100%", height: "70vh"}}
-			/>	 */}
-
 				<Courses />
 			</Section>
-			{/* <Section> */}
-			{/* </Section> */}
 			<AppContainer>
 			</AppContainer>
 		</Fragment>
