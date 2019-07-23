@@ -27,7 +27,8 @@ export default MainLogin;
 const LoginContainer = styled.div`
   width: 50%;
   /* background-color: #0f0c29; */
-  background-color: #1F1C2C;
+  /* background-color: #1F1C2C; */
+  background-color: #1e1e1e;
   /* background-color: #1C2225; */
   height: 100%;
   display: flex;
