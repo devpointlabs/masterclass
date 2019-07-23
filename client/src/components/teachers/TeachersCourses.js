@@ -47,7 +47,7 @@ const TeachersCourses = (props) => {
              </Button.Content>
            </Button>}
            </div>
-    <p className="paragraph">{e.overview}</p>
+    <p className="paragraph"><div dangerouslySetInnerHTML={{__html: e.overview}}></div></p>
   <div className="content">
     <Link className="a" to={{ pathname: `/courses/${e.course_id}/manage` }}>
       <div className="content-overlay"></div>
