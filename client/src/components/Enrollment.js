@@ -7,8 +7,6 @@ import styled from 'styled-components';
 
 const Enrollment = (props) => {
 	const { user, enrollments, setEnrollments } = useContext(AuthContext);
-	console.log(user);
-	// axios call to get enrollments
 	useEffect(() => {
 		axios.get('/api/my-courses').then((res) => {
 			setEnrollments(res.data);
@@ -31,34 +29,49 @@ const Enrollment = (props) => {
 			}
 			// debugger;
 		});
-		return (
-			roles.map((e) => (
-			<Grid.Column>
-			<Container key={e.course_id} >
-			{/* <div key={e.course_id}> */}
-				{/* <Card> */}
-					{/* <div> */}
-					<Link to={{ pathname: `/courses/${e.course_id}` }} >
-					<Image src={e.image}/>
-					<div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", background: "#5a5a5a"}}>
-						<h1 style={{textSize: "2rem", color: "#fff", paddingTop: "10px", paddingLeft: "5px", fontFamily: "'Merriweather'"}}>{e.title}</h1>
-						<p style={{padding: "10px", fontSize: "1.5rem", color:"#fff", fontFamily: "'Nunito Sans'"}}><div dangerouslySetInnerHTML={{__html: e.overview || "Overview coming soon..."}}></div></p>
-						{(e.role === 'student' || e.role === 'teacher') && (
-							<Button size='tiny' floated="left" style={{width: "15%", color: "red"}} textAlign="center" color='gray' icon animated onClick={() => removeCourse(e.course_id)}>
-								<Button.Content visible>Unenroll</Button.Content>
-								<Button.Content hidden>
-									<Icon name='minus' />
-								</Button.Content>
-							</Button>
-							
-						)}
-					</div>
-						</Link>
-			</Container>
-			<br/>
-			<br/>
-			</Grid.Column>
-		)));
+		if (roles){
+
+			return (
+				
+				roles.map((e) => (
+				<Grid.Column>
+				<Container key={e.course_id} >
+				{/* <div key={e.course_id}> */}
+					{/* <Card> */}
+						{/* <div> */}
+						<Link to={{ pathname: `/courses/${e.course_id}` }} >
+						<Image src={e.image}/>
+						<div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", background: "#5a5a5a"}}>
+							<h1 style={{textSize: "2rem", color: "#fff", paddingTop: "10px", paddingLeft: "5px", fontFamily: "'Merriweather'"}}>{e.title}</h1>
+							<p style={{padding: "10px", fontSize: "1.5rem", color:"#fff", fontFamily: "'Nunito Sans'"}}><div dangerouslySetInnerHTML={{__html: e.overview || "Overview coming soon..."}}></div></p>
+							{(e.role === 'student' || e.role === 'teacher') && (
+								<Button size='tiny' floated="left" style={{width: "15%", color: "red"}} textAlign="center" color='gray' icon animated onClick={() => removeCourse(e.course_id)}>
+									<Button.Content visible>Unenroll</Button.Content>
+									<Button.Content hidden>
+										<Icon name='minus' />
+									</Button.Content>
+								</Button>
+								
+							)}
+						</div>
+							</Link>
+				</Container>
+				<br/>
+				<br/>
+				</Grid.Column>
+			)));
+		}
+		else {
+			return(
+				<div>
+					<Header as='h1' textAlign='center' style={{color: "#fff", fontFamily: "'Merriweather', Helvetica", letterSpacing: "1px", paddingTop: "35px", paddingBottom: "20px", fontWeight: "lighter", borderBottom: "1px solid #fff"}}>
+						Looks like you may need to enroll is something
+						
+					</Header>
+					<Link to ='/'>Home</Link>
+				</div>
+			)
+		}
 	};
 
 	// will give a default role or user, if name is not able to be printed.
@@ -69,6 +82,7 @@ const Enrollment = (props) => {
 	};
 
 	return (
+		<>
 		<EnrollmentContainer>
 			<Header as='h1' textAlign='center' style={{color: "#fff", fontFamily: "'Merriweather', Helvetica", letterSpacing: "1px", paddingTop: "35px", paddingBottom: "20px", fontWeight: "lighter", borderBottom: "1px solid #fff"}}>
 				{user ? (
@@ -87,13 +101,20 @@ const Enrollment = (props) => {
 			</Container>
 			{/* </div> */}
 		</EnrollmentContainer>
+		<MyContainer>
+
+		</MyContainer>
+		</>
 	);
 };
 
 const EnrollmentContainer = styled.div`
 background: #323232; 
 width: 100% important!; 
-/* height: 100vh;  */
+`
+const MyContainer = styled.div`
+height: 100vh;
+background-color: #323232
 `
 
 export default Enrollment;
