@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import ReplyForm from "./ReplyForm"
 import { Button, Container, Icon, Comment, Checkbox, Label } from "semantic-ui-react";
 import {AuthContext} from '../providers/AuthProvider'
-// import TimeAgo from 'react-timeago';   
 
 
 const defaultImage = "https://png.pngtree.com/svg/20161212/f93e57629c.svg"
@@ -78,25 +77,25 @@ const QAndA = (props) => {
   }
 
   return (
-  <div style={{ background: 'grey', padding: '5px', borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
-      <Comment.Content>
-              <Comment.Content style={{ display: 'flex', justifyContent: 'space-between'}}>
-              {userInfo.map(u => (
-                <Label as='a' image>
-                  <img src={u.user_image || defaultImage} />
-                  {u.user_name}
-                </Label>
-              ))}
-              <Comment.Action>
-                {user && renderButtons()}
-              </Comment.Action>
-              </Comment.Content>
-        <Comment.Content as='h3' style={{ color: 'white', paddingLeft: '5px' }}>
+    <div style={{ background: 'grey', padding: '5px', borderRadius: '5px', overflowWrap: 'break-word', width: '100%'}}>
+      <CommentContent style={{width: "100%", margin: "0px"}}>
+        <CommentContent style={{ display: 'flex', justifyContent: 'space-between'}}>
+        {userInfo.map(u => (
+          <Label as='a' image style={{marginBottom: "8px"}}>
+            <img src={u.user_image || defaultImage} />
+            {u.user_name}
+          </Label>
+        ))}
+        <Comment.Action>
+          {user && renderButtons()}
+        </Comment.Action>
+        </CommentContent>
+        <CommentContent as='h3' style={{ color: 'white', paddingLeft: '5px' }}>
           {comment_title}
-        </Comment.Content>
-        <Comment.Content style={{ color: 'white', paddingLeft: '5px', marginBottom: '5px' }}>
+        </CommentContent>
+        <CommentContent style={{ color: 'white', paddingLeft: '5px', marginTop: '8px' }}>
           {comment_body}
-        </Comment.Content>
+        </CommentContent>
         <div style = {{
           display: 'flex',
           alignSelf:'flex-end',
@@ -104,7 +103,7 @@ const QAndA = (props) => {
           width: '800px'
         }}>
         </div> 
-        <Comment.Content style={{ width: "90%"}}>
+        <CommentContent style={{ width: "90%"}}>
           { showForm ? 
           <CommentForm
             editComment={edit_comment}
@@ -115,9 +114,9 @@ const QAndA = (props) => {
             toggleEdit={toggleForm}
           /> : 
           null}
-        </Comment.Content>
-      </Comment.Content>
-      <Comment.Content>
+        </CommentContent>
+      </CommentContent>
+      <CommentContent>
         <ClickDiv>
           { showReplies ?
             <RepliesClick onClick={() => toggleReplies()}>Hide Replies <Icon name='angle up' /></RepliesClick>
@@ -134,10 +133,18 @@ const QAndA = (props) => {
             null
           }
         </Comment.Group>
-      </Comment.Content>
-     </div>
+      </CommentContent>
+    </div>
   )
 }
+
+const CommentContent = styled.div`
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin: 0px;
+    overflow: hidden;
+`;
 
 const ClickDiv = styled.div`
   display: flex;
