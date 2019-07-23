@@ -3,6 +3,8 @@ import { Header, Card, Container, Button, Icon, Divider, Segment } from "semanti
 import { Link, } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../../providers/AuthProvider";
+import '../../Styles/ManageCourse.css'
+import styled from 'styled-components'; 
 
 const TeachersCourses = (props) => {
   const { user, enrollments, setEnrollments } = useContext(AuthContext);
@@ -32,38 +34,39 @@ const TeachersCourses = (props) => {
     })
 
     return (roles.map(e => (
-      <div key={e.course_id}>
-        {/* <Header as = 'h1'>{e.role}</Header> */}
-        <br />
-        <div>
-          <h1>{e.category}</h1>
-            <Link to={{ pathname: `/courses/${e.course_id}/manage` }}>
-              <Card fluid>
-                <Card.Header as='h2'>{e.title}</Card.Header>
-                {/* <Card.Description>{e.overview || "This will have an overview"} */}
-                {/* </Card.Description> */}
-                <div dangerouslySetInnerHTML={{__html: e.overview}}></div>
-              </Card>
-            </Link>
-        </div>
-        <div style={{display:"flex", justifyContent:"space-between" }}>
-           {(e.role === 'teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
+      <>
+<div className="container" key={e.course_id} >
+<div style={{display:"flex", alignContent: "center", justifyContent:"space-between" }}>
+
+  <h3 className="title">{e.category}</h3>
+ 
+  {(e.role === 'teacher') && <Button size="tiny" color="red" icon animated onClick={() => removeCourse(e.course_id)}>
              <Button.Content visible>Delete</Button.Content>
              <Button.Content hidden>
-               <Icon name="minus" />
+               <Icon name="trash" />
              </Button.Content>
            </Button>}
-        </div>
-        
+           </div>
+    <p className="paragraph">{e.overview}</p>
+  <div className="content">
+    <Link className="a" to={{ pathname: `/courses/${e.course_id}/manage` }}>
+      <div className="content-overlay"></div>
+      <img className="content-image" src={e.image}/>
+      <div class="content-details fadeIn-top">
+        <h3>Manage/Edit Course</h3>
       </div>
+    </Link>
+  </div>
+</div>
+      </>
     ))
     )
   }
 
 
   return (
-    <Container>
-      <div style={{ display: "flex", flexDirection: "column", }}>
+    <CourseContainer style={{background: "purple"}}>
+      {/* <div style={{ display: "flex", flexDirection: "column" }}> */}
 
         {enrollments ?
           renderEnrollments() :
@@ -73,11 +76,23 @@ const TeachersCourses = (props) => {
             </Segment>
           </>
         }
-      </div>
-    </Container>
+      {/* </div> */}
+    </CourseContainer>
 
   )
 
 };
+
+const CourseContainer = styled.div`
+background: #323232; 
+width: 100% important!; 
+display: "flex"; 
+justify-content: center; 
+/* align-content: center; 
+ */
+ align-items: center; 
+/* height: 100vh;  */
+`
+
 
 export default TeachersCourses;
