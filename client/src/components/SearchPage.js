@@ -49,7 +49,7 @@ const SearchPage = () => {
             <Image fluid src={result.image || defaultImage}/>
             <div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", background: "#5a5a5a"}}>
               <h1 style={{textSize: "2rem", color: "#fff", paddingTop: "10px", paddingLeft: "5px", fontFamily: "'Merriweather'"}}>{result.title}</h1>
-              <p style={{padding: "10px", fontSize: "1.5rem", color:"#fff", fontFamily: "'Nunito Sans'"}}>{result.overview || 'Overview will be coming soon...'}</p>
+              <p style={{padding: "10px", fontSize: "1.5rem", color:"#fff", fontFamily: "'Nunito Sans'"}}><div dangerouslySetInnerHTML={{__html: result.overview || "Overview coming soon..."}}></div></p>
               <p style={{padding: "10px", fontSize: "1.2rem", color:"#ba81ee", fontFamily: "'Nunito Sans'", fontWeight: "bolder"}}>{result.category}</p>
             </div>
               </Link>
