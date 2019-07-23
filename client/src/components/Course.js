@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, } from "react";
 import axios from "axios";
 import styled from 'styled-components';
 import Showcase from './Images/stripe-background-course.png' 
-import { List, Header, Segment, Button, Icon, Container, Image } from "semantic-ui-react";
+import { List, Header, Segment, Button, Icon, Container, Image, Accordion, Breadcrumb } from "semantic-ui-react";
 import { Link } from 'react-router-dom'
 import { AuthContext } from "../providers/AuthProvider"
 import VideoView from "./view_pages/VideoView"
@@ -15,6 +15,7 @@ const Course = (props) => {
   const [enrolled, setEnrolled] = useState(true)
   const {user, enrollments, setEnrollments } = useContext(AuthContext)
   const [role, setRole] = useState("")
+  const [activeIndex, setActiveIndex] = useState(0)
   const course_id = props.match.params.id
 
   useEffect(() => {
@@ -50,50 +51,77 @@ const Course = (props) => {
 
   }
 
+  const handleClick = (i) => {
+    const newIndex = activeIndex === i ? -1 : i
+    setActiveIndex(newIndex)
+  }
+
   
 
 
   const renderLessons = () => {
-    if (role == 'teacher') {
-      return lessons.map(l => (
+    // if (role == 'teacher') {
+    //   return lessons.map(l => (
         
-         <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-           <Link to = {`/lessons/${l.id}`}> 
-         <List.Header as="h3">{l.name}</List.Header>
-         <List.Description>
-           {l.description}
-         </List.Description>
-           </Link>
-         </Segment>
+    //      <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+    //        <Link to = {`/lessons/${l.id}`}> 
+    //      <List.Header as="h3">{l.name}</List.Header>
+    //      <List.Description>
+    //        {l.description}
+    //      </List.Description>
+    //        </Link>
+    //      </Segment>
        
-      ))}
-       else if (role == 'student'){
-         return lessons.map(l => (
+    //   ))}
+    //    else if (role == 'student'){
+    //      return lessons.map(l => (
         
-          <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
-          <Link to = {`/lessons/${l.id}`}> 
-         <List.Header as="h3">{l.name}</List.Header>
-         <List.Description>
-           {l.description}
-         </List.Description>
-           </Link>
-          </div>
-        </Segment>
-         ))
-       }
-    else {
-      return lessons.map(l => (
-        
-        <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
-          <List.Header as="h3">{l.name}</List.Header>
-          <List.Description>
-            {l.description}
-          </List.Description>
-        </div>
-      </Segment>
-      ))}
+    //       <Segment key={l.id} style={{ display: "flex", justifyContent: "space-between" }}>
+    //       <div>
+    //       <Link to = {`/lessons/${l.id}`}> 
+    //      <List.Header as="h3">{l.name}</List.Header>
+    //      <List.Description>
+    //        {l.description}
+    //      </List.Description>
+    //        </Link>
+    //       </div>
+    //     </Segment>
+    //      ))
+    //    }
+    // else {
+        let lessonsArray = []
+        let lessonsArray2 = []
+        lessons.map(l => {
+          let lesson = { 
+            key: l.id,
+            content:
+              <>
+                <Accordion.Title 
+                style={{ color: '#fff', fontSize: '1.5rem', fontFamily: "'Nunito Sans'"}} 
+                active={activeIndex === l.id} 
+                index={l.id} onClick={() => handleClick(l.id)}
+                >
+                  {/* <hr/> */}
+                  <Icon name="dropdown" />
+                  {l.name}
+                  {console.log(l.name)}
+                  <hr style={{borderColor: "#8E2DE2"}}/>
+                </Accordion.Title>
+                <Accordion.Content active={activeIndex === l.id} style={{color: "#fff"}}>
+                  <StyledHeader>Description:</StyledHeader>
+                  <StyledParagraph>{l.description}</StyledParagraph>
+                </Accordion.Content>
+              </>
+          }
+          if (lessonsArray.includes(lesson.key)===false) {
+            {
+              lessonsArray.push(lesson.key)
+              lessonsArray2.push(lesson.content)
+            }
+          }
+        })
+        return lessonsArray2
+      // }
   }
 
   const courseEdit = (data) => {
@@ -112,6 +140,15 @@ const Course = (props) => {
 
   return (
     <> 
+      <BreadCrumbDiv>
+      <Breadcrumb size="large">
+      <Breadcrumb.Section link onClick={() => props.history.push("/")} style={{color: "#fff"}}>Courses</Breadcrumb.Section>
+      <Breadcrumb.Divider icon='right chevron' />
+      <Breadcrumb.Section>{course.category}</Breadcrumb.Section>
+      <Breadcrumb.Divider icon='right chevron' />
+      <Breadcrumb.Section active style={styles.active}>{course.title}</Breadcrumb.Section>
+      </Breadcrumb>
+      </BreadCrumbDiv>
       <ShowcaseContainer style={{width: "100%", display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}> 
       
         <StyledCourseHeader>{course.title}</StyledCourseHeader>
@@ -124,6 +161,12 @@ const Course = (props) => {
        <Button color="purple">
          Start Learning
        </Button>
+       {/* <Link to = {"/"}>
+        <Button color='black'>
+          <Icon name='arrow alternate circle left outline' />
+          Go Back
+          </Button>
+        </Link> */}
        </Link>
        }
        
@@ -131,25 +174,25 @@ const Course = (props) => {
       
       
       </ShowcaseContainer> 
-      <div style = {{display: "flex", justifyContent: "space-between", padding: "15px"}}>
-      <Header as="h1">Lesson Plan: {course.title}</Header>
-      <Link to = {"/"}>
-        <Button color='black'>
-          <Icon name='arrow alternate circle left outline' />
-          Go Back
-          </Button>
-        </Link>
-        </div>   
-      <br />
-      <br/>
-      <div style={{padding: "15px"}}>
-
-      <List>
-        {renderLessons()}
-      </List>
-      </div>
+      <LessonDiv>
+        
+        <StyledAccordion >
+          <h1 style={LessonStyles}>
+            Lesson Plan
+          </h1>
+          {renderLessons()}
+        </StyledAccordion>  
+      </LessonDiv>
     </>
   )
+}
+
+const styles = {
+  active: {
+    color: '#8E2DE2',
+    // borderBottom: ' #8E2DE2 3px solid',
+    fontWeight: 'bold',
+  }
 }
 
 const ShowcaseContainer = styled(Container)`
@@ -181,6 +224,48 @@ const StyledOverview = styled.p`
   color: #fff !important; 
 
 `
+
+const LessonDiv = styled.div`
+  background: #1A1A1A; 
+  padding: 15px; 
+  height: 100%;
+   min-height: calc(100vh - 90px);
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;  
+   align-items: center; 
+`
+const LessonStyles = {
+  color: "#fff",
+  fontFamily: "'Halant', Arial, Helvetica, sans-serif",
+  display: 'flex', 
+  justifyContent: 'flex-start', 
+  marginTop: '17px'
+}
+const StyledAccordion = styled(Accordion)`
+  height: 100%; 
+  width: 50% !important; 
+`;
+
+const StyledHeader = styled.h3`
+  /* color: #8E2DE2 !important; */
+  text-decoration: underline; 
+`
+
+const StyledParagraph = styled.p`
+  font-size: 1.3rem; 
+  font-family: 'Merriweather', Arial, Helvetica, sans-serif;
+  padding-left: 15px;  
+`
+
+const BreadCrumbDiv = styled.div`
+  background: #323232; 
+  height: 30px; 
+  /* padding: 10px;  */
+  color: #fff; 
+`
+
 
 export default Course;
 
