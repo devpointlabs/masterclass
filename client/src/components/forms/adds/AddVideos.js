@@ -29,6 +29,8 @@ const AddVideos = (props) => {
 
  const  handleSubmit = (e) => {
     e.preventDefault();
+    debugger
+    props.toggle(props.id, props.createVideos)
     const {title, description, url} = video
     let data = new FormData()
     data.append('file', boob)
@@ -40,6 +42,7 @@ const AddVideos = (props) => {
       .then( res => {
         setTitle("")
         setDescription("")
+      
       })
       .catch(err => {
         console.log("You're an idiot")
@@ -47,7 +50,8 @@ const AddVideos = (props) => {
       setTitle("")
       setDescription("")
       setImage("")
-    
+      
+      
   }
   const handleChange = (name) => (e) => {
     setVideo({...video, [name]: e.target.value})
@@ -59,7 +63,7 @@ const renderAddForm = () => {
   return (
     <>
     <Form onSubmit={handleSubmit}>
-    <Form.Group widths='equal'>
+    {/* <Form.Group widths='equal'> */}
       <Form.Input
         label='Title'
         placeholder='What best describes the content of the video?'
@@ -78,18 +82,9 @@ const renderAddForm = () => {
         value={video.description}
         onChange={handleChange("description")}
       />
-    </Form.Group>
+    {/* </Form.Group> */}
     <br />
     <StyledDropzone />
-    {/* <ImageUploader
-          withPreview={true}
-          withIcon={true}
-          buttonText="Choose image"
-          onChange={onDrop}
-          imgExtension={[".jpg", ".gif", ".png", ".gif", ".mov"]}
-          maxFileSize={5242880}
-          singleImage={true}
-          /> */}
     <br />
     <Form.Button>Submit</Form.Button>
   </Form>

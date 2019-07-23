@@ -58,14 +58,14 @@ const TeachersView = () => {
             </Link>
           </Sidebar>
 
-            <Segment basic>
+            <MySegment >
           <Sidebar.Pusher>
               <br/>
               <br/>
               {/* RENDER TEACHERS COURSES */}
               <TeachersCourses/>
           </Sidebar.Pusher>
-            </Segment>
+            </MySegment>
         </Sidebar.Pushable>
     </> 
   )
@@ -73,6 +73,11 @@ const TeachersView = () => {
 
 const StyledSeg=  styled.div`
   margin-top:20px;
+`
+const MySegment = styled.div`
+  height: 100vh;
+  width: 100%;
+ 
 `
 
 export default TeachersView

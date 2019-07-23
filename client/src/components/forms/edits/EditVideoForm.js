@@ -1,5 +1,5 @@
 import React, {Fragment, useState, useEffect,}from 'react'; 
-import {Form, Button, Card, Image, Icon} from 'semantic-ui-react'
+import {Form, Button, Card, List, Segment, Icon} from 'semantic-ui-react'
 import axios from 'axios'
 import EditVideoDetails from './EditVideoDetails'; 
 
@@ -107,25 +107,31 @@ const toggleEditForm = (id, showEditForm) => {
  const renderVideos = () => {
   return (
     <>
-          <Card.Group itemsPerRow={2} textAlign="center">
+    
+          
             {formVideos.map((video) =>
-              <Card>
-                {console.log(video)}
+            <Segment key={video.id} style={{ display: "flex", flexDirection:"column" }}>
+ <div style={{ display:"flex", justifyContent:"space-between"}}>
+        <List.Header as="h3">{video.title}</List.Header>
+         <List.Description>
+           {video.description}
+         </List.Description>
+         <div className="buttonDiv">
               <Button.Group size="tiny">
               <Button size="tiny" color="blue" onClick={() => toggleEditForm(video.id, video.showEditForm)}>
               <Icon name={video.showEditForm ? "cancel" :"edit"} />
              </Button>
               <Button onClick={() => removeVideos(video.id)}>Remove</Button>
               </Button.Group>
-              { video.showEditForm ? renderEditForm(video.id) : null}
-              <Card.Header as="h3">{video.title}</Card.Header>
-              <p>{video.description}</p>
-              <Card.Content>
-                <Image size="small" src={video.url}/>
-              </Card.Content>
-              </Card>
+            </div>
+            </div>
+            { video.showEditForm ? renderEditForm(video.id) : null}
+            </Segment>
+              // <Card>
+              // <Card.Header as="h3">{video.title}</Card.Header>
+              // <p>{video.description}</p>
+              // </Card>
     )}
-          </Card.Group>
     </>
   )
 
