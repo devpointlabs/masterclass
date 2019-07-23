@@ -5,7 +5,10 @@ import ReactQuill from 'react-quill'
 
 
 const EditCourseForm = (props) => {
+
   const [title, setTitle] = useState()
+  const [body, setBody] = useState("")
+
   const [category, setCategory] = useState()
   const [overview, setOverview] = useState()
   const [image, setImage] = useState()
@@ -19,7 +22,7 @@ const EditCourseForm = (props) => {
       axios.get(`/api/courses/${course_id}`)
         .then(res => {
           setTitle(res.data.course.title)
-          setOverview(res.data.course.overview)
+          setBody(res.data.course.overview)
           setImage(res.data.course.image)
           setCategory(res.data.course.category)
         })
@@ -36,13 +39,15 @@ const EditCourseForm = (props) => {
     // e.preventDefault(); 
     props.nextStep();
   }
+  const handleQuill  = (e) =>{
+    setBody(e)
+  }
 
   const handleSubmit = e => {
     e.preventDefault();
-    debugger
     if (course_id) {
       axios
-        .put(`/api/courses/${course_id}`, { title: title, category: category, overview: overview, image: image })
+        .put(`/api/courses/${course_id}`, { title: title, category: category, overview: body, image: image })
         .then(res => {
           setCourse(res.data);
           props.getCourseId(res.data.id);
@@ -83,7 +88,6 @@ const EditCourseForm = (props) => {
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
-          <Segment>
             <Form.Select
               label="Course Category"
               placeholder='e.g. Ruby on Rails'
@@ -94,40 +98,20 @@ const EditCourseForm = (props) => {
               options={categoryOptions()}
               onChange={(e) => setCategory(e.target.innerText)}
             />
-            <Form.Input
-              label=" "
-              placeholder="Add New Category"
-              name='category'
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
-          </Segment>
-          <Form.Input
-            label='Overview'
-            placeholder='What will be covered?'
-            name='overview'
-            required
-            value={overview}
-            onChange={(e) => setOverview(e.target.value)}
-          />
-           {/* <ReactQuill
+            </Form.Group>
+         
+             <ReactQuill
           onChange={handleQuill}
           theme="snow"
           label="Overview"
           name = "overview"
           type="text"
-          value={overview}
+          value={body}
           style={{height: 250}}
-          /> */}
-          <Form.Input
-            label='Image'
-            placeholder='Put a thumbnail!'
-            name='image'
-            required
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
           />
-        </Form.Group>
+          <br/>
+          <br/>
+          <br/>
 
         <Form.Button color="green" inverted>Save Changes</Form.Button>
       </Form >
