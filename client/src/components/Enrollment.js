@@ -93,6 +93,7 @@ const Enrollment = (props) => {
 const EnrollmentContainer = styled.div`
 background: #323232; 
 width: 100% important!; 
+/* height: 100vh;  */
 `
 
 export default Enrollment;

@@ -1,6 +1,9 @@
 import React, {useContext} from 'react'; 
 import {SearchContext} from '../providers/SearchProvider';
-import { Container, Card, Image, Icon } from 'semantic-ui-react';
+import { Container, Card, Image, Icon, Grid } from 'semantic-ui-react';
+import NoSearch from './Images/noSearch.svg'
+import {Link} from 'react-router-dom'; 
+import styled from 'styled-components'; 
 
 const SearchPage = () => {
   const { searchResults, search } = useContext(SearchContext);
@@ -14,23 +17,60 @@ const SearchPage = () => {
     }
   }
 
+  const noResults = () => {
+    return (
+      <>
+      <div style={{height: "100%", width: "100%"}}>
+      <Image centered size="large" src={NoSearch} style={{paddingTop: "25px"}}/>
+      <h1 style={{textAlign: "center", paddingBottom: "7rem", paddingTop: "3rem", fontFamily: 'Nunito Sans', fontWeight:"bolder", letterSpacing: "2px", fontSize: "40px", color: "#fff"}}>Sorry! There were no results found!</h1>
+      </div>
+      </>
+    )
+  }
+
 
   return (
     <>
     {countResults()}
-    <Container>
-      {(counter === 0 ) ? <h1>Sorry! There are no results!</h1> :  <h1>There are {counter} results matching {search || "your search"}!</h1> }
+    <SearchContainer>
+      {(counter === 0 ) ? noResults() :  <h1 style={{paddingTop: "20px", paddingLeft: "20px", paddingBottom: "20px", borderBottom: "1px solid #fff", fontFamily: "'Nunito Sans'", fontSize: "30px", letterSpacing: "2px", color: "#fff"}}>There are <span style={{color: "#a356e8"}}>{counter}</span> results matching <span style={{color: "#a356e8"}}>{search || "your search"}</span></h1> }
+      <Grid columns={1}>
+        <Grid.Row>
       {searchResults.map(result => (
-        <Card fluid key={result.id}>
-          <Image src={result.image || defaultImage} size="tiny" floated="left"/>
-          <Card.Header textAlign="center">{result.title}</Card.Header>
-          <p>{result.overview}</p>
-          <Card.Content extra>{result.category}</Card.Content>
-        </Card>
+        // <Card fluid key={result.id}>
+        //   <Image src={result.image || defaultImage} size="tiny" floated="left"/>
+        //   <Card.Header textAlign="center">{result.title}</Card.Header>
+        //   <p>{result.overview}</p>
+        //   <Card.Content extra>{result.category}</Card.Content>
+        // </Card>
+        <Grid.Column>
+        <Container key={result.id} style={{width: "90vh",}} >
+            <Link to={{ pathname: `/courses/${result.id}` }} >
+            <Image fluid src={result.image || defaultImage}/>
+            <div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column", background: "#5a5a5a"}}>
+              <h1 style={{textSize: "2rem", color: "#fff", paddingTop: "10px", paddingLeft: "5px", fontFamily: "'Merriweather'"}}>{result.title}</h1>
+              <p style={{padding: "10px", fontSize: "1.5rem", color:"#fff", fontFamily: "'Nunito Sans'"}}>{result.overview || 'Overview will be coming soon...'}</p>
+              <p style={{padding: "10px", fontSize: "1.2rem", color:"#ba81ee", fontFamily: "'Nunito Sans'", fontWeight: "bolder"}}>{result.category}</p>
+            </div>
+              </Link>
+        </Container>
+        <br/>
+        <br/>
+        </Grid.Column>
       ))}
-    </Container>
+
+      </Grid.Row>
+      </Grid>
+      </SearchContainer>
     </>
   )
 }
+
+const SearchContainer = styled.div`
+background: #323232; 
+width: 100% important!;
+height: 100% important!;  
+/* height: 100vh;  */
+`
 
 export default SearchPage
