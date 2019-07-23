@@ -1,13 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import {Link} from "react-router-dom"
 import axios from "axios";
+import styled from 'styled-components'
+import ReactQuill from 'react-quill'
 import { Form, Header, Button, Segment, Select, Dropdown, Icon, Menu, Sidebar } from "semantic-ui-react";
 
 const AddCourses = (props) => {
-  const [title, setTitle] = useState();
-  const [category, setCategory] = useState();
+  const theForm = [
+    {title: "",
+    category:"",
+    overview:"",
+    }]
+    const [body, setBody] = useState("")
+  const [form, setForm] = useState(theForm)
+  // const [title, setTitle] = useState();
+  const [category, setCategory] = useState("");
   const [overview, setOverview] = useState();
-  const [image, setImage] = useState();
   const [course, setCourse] = useState();
   const [categories, setCategories] = useState([]);
   const [visible, setVisible] = useState(false);
@@ -18,22 +26,28 @@ const AddCourses = (props) => {
       .then(res => {
         setCategories(res.data)
       })
-  }, []
-  )
+  }, [])
   const handleHideClick = () => setVisible(false); 
   const handleShowClick = () => setVisible(true); 
   const handleSidebarHide = () => setVisible(false)
 
   const handleSubmit = e => {
     e.preventDefault();
-    console.log(category)
+    const {title, overview, category} = form 
     axios
-      .post("/api/courses", { title: title, category: category, overview: overview, image: image })
+      .post("/api/courses", { title: title, category: category, overview: body})
       .then(res => {
+        debugger
         setCourse(res.data);
         props.history.push("/teachers/courses");
       });
     // };
+  }
+  const handleChange = (name) => (e) =>{
+    setForm({...form, [name]: e.target.value})
+  }
+  const handleQuill  = (e) =>{
+    setBody(e)
   }
 
   const categoryOptions = () => {
@@ -48,6 +62,7 @@ const AddCourses = (props) => {
 
   return (
     <>
+
       <Button.Group>
           <Button disabled={visible} onMouseOver={handleShowClick}>
             Show sidebar
@@ -87,6 +102,7 @@ const AddCourses = (props) => {
             </Link>
 
       </Sidebar>
+      <Container>
       <Header as="h1" textAlign="center">Create A Course</Header>
       <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
@@ -95,55 +111,48 @@ const AddCourses = (props) => {
             placeholder='e.g. Add Photos Using Cloudinary'
             name='title'
             required
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            value={form.title}
+            onChange={ handleChange("title")}
           />
-          <Segment>
             <Form.Select
               label="Course Category"
               placeholder='e.g. Ruby on Rails'
               name='category'
               Select
-              value={category}
+              value={form.category}
               options={categoryOptions()}
-              onChange={(e) => setCategory(e.target.innerText)}
+              onChange={e =>setCategory(e.target.innerText)}
             />
-            <Form.Input
-              label=" "
-              placeholder="Add New Category"
-              name='category'
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-            />
-          </Segment>
-          <Form.Input
-            label='Overview'
-            placeholder='e.g. Cloudinary Start to Finish Implementation'
-            name='overview'
-            required
-            value={overview}
-            onChange={(e) => setOverview(e.target.value)}
-          />
-          <Form.Input
-            label='Image'
-            placeholder='e.g. Photo to Represent Course'
-            name='image'
-            required
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-          />
         </Form.Group>
+          <ReactQuill
+          onChange={handleQuill}
+          theme="snow"
+          label="Overview"
+          name = "overview"
+          type="text"
+          value={body}
+          style={{height: 250}}
+          />
+          <br/>
+          <br/>
+          <br/>
         <Button.Group>
           <Form.Button onClick={() => props.history.goBack("/teachers/courses")}>Cancel</Form.Button>
           <Button.Or />
           <Form.Button positive>Submit</Form.Button>
         </Button.Group>
       </Form >
+      </Container>
       </Sidebar.Pushable>
 
     </>
   );
 };
+
+const Container = styled.div`
+height: 100vh;
+padding: 15px;
+`
 
 export default AddCourses;
 

@@ -19,17 +19,12 @@ const Home = () => {
 				style={{width: "100%", height: "70vh"}}
 				/>
 			</AppContainer>
-	
-			{/* <Section> */}
-			{/* </Section> */}
-			{/* <AppContainer> */}
 			<Section className="bg-img">
 				<Courses />
 			</Section>
-			{/* </AppContainer> */}
-			<AppContainer>
+			{/* <AppContainer>
 				<h1>hi</h1>
-			</AppContainer>
+			</AppContainer> */}
 		</Fragment>
 	);
 };
@@ -41,7 +36,8 @@ const AppContainer = styled.div`
 	border-bottom: 4px solid #8d2de3;
 `;
 const Section = styled.div`
-	min-height: 70vh;
+	/* min-height: 70vh; */
+	/* max-height: 40vh;  */
 	
   /* // padding-top: 20vh;
 	// background-color: #808080;
@@ -55,6 +51,18 @@ const Section = styled.div`
 		background-position: center; 
 		background-repeat: no-repeat; 
  		background-attachment: fixed;
+		.bg-img::after{
+			/* content: ''; */
+  		position: absolute;
+  		top: 0;
+  		right: 0;
+  		width: 100%;
+  		height: 100%;
+  		z-index: 1;
+  /* black color overlay */
+  	background: rgba(25, 25, 25, 0.7);
+
+		}
 	}
 
 `

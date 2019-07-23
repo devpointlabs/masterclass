@@ -20,12 +20,6 @@ const Courses = (props) => {
 		});
 	}, []);
 	
-	const next = (props) =>{
-		props.slider.slickNext()
-	}
-	const previous = (props) =>{
-		props.slider.slickPrev()
-	}
 	function NextArrow(props) {
 		const { className, style, onClick } = props;
 		return (
@@ -98,25 +92,31 @@ const Courses = (props) => {
 
 	return (
 		<>
+			{/* <div style = {{paddingTop:"15vh"}}> */}
 			<CarouselDiv className="butt-man">
 			<Header>
 				Courses
 			</Header>
 				{/* <CourseSlider /> */}
+				<div>
 				<Slider {...settings}>
 					{courses.map(c=>{
 						return(
 							<div style={{display:"flex", justifyContent:"space-between"}}>
 							<Link to={{pathname: `courses/${c.id}`}}>
 							<Card>
+								<div style={{paddingTop:"35px"}}>
 									<h1>{c.title}</h1>
+								</div>
 							</Card>
 								</Link>
 								</div>
 						)
 					})}
 				</Slider>
-					</CarouselDiv >
+					</div>
+					</CarouselDiv>
+					{/* </div > */}
 			</>
 	);
 };
@@ -128,10 +128,8 @@ const Container = styled.div`
 	padding: 50px;
 `
 const Card = styled.div`
-background: #6A6A6A;
-background: -moz-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
-background: -webkit-linear-gradient(left, #6A6A6A 0%, #829BB4 100%);
-background: linear-gradient(to right, #6A6A6A 0%, #829BB4 100%);
+background: linear-gradient(350deg, rgb(51, 0, 190) 0%, rgba(108, 0, 197, 0.67) 73%);
+opacity: .87;
 border: 1px solid #8d2de3;
 height: 250px;
 text-decoration:none;
@@ -143,16 +141,18 @@ font-family: 'Halant', Arial, Helvetica, sans-serif;
 
 const Header = styled.h1`
 color: white;
-font-size: 50px;
+bottom: 0; 
+font-size: 36px;
 text-align: center;
-background: rgba(25, 25, 25, 0.7); 
+background: rgba(25, 25, 25, 0.9); 
+font-family: 'Halant', Arial, Helvetica, sans-serif; 
 `
 
-const BackgroundImage = styled.div`
-width:100%;
- height:70vh;
+// const BackgroundImage = styled.div`
+// width:100%;
+//  height:70vh;
 
-`
+// `
 const CarouselDiv = styled.div`
 /* height: 20vh; */
 /* background: rgba(25, 25, 25, 0.3);  */
