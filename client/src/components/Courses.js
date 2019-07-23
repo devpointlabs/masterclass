@@ -93,16 +93,20 @@ const Courses = (props) => {
 	return (
 		<>
 			{/* <div style = {{paddingTop:"15vh"}}> */}
-			<CarouselDiv className="butt-man">
+			<div 
+				className="butt-man"
+				>
+					<div style = {{paddingTop:"15vh"}}>
+
 			<Header>
 				Courses
 			</Header>
 				{/* <CourseSlider /> */}
-				<div>
+				<div style={{padding: "25px"}}>
+
 				<Slider {...settings}>
 					{courses.map(c=>{
 						return(
-							<div style={{display:"flex", justifyContent:"space-between"}}>
 							<Link to={{pathname: `courses/${c.id}`}}>
 							<Card>
 								<div style={{paddingTop:"35px"}}>
@@ -110,12 +114,12 @@ const Courses = (props) => {
 								</div>
 							</Card>
 								</Link>
-								</div>
 						)
 					})}
 				</Slider>
 					</div>
-					</CarouselDiv>
+					</div>
+					</div >
 					{/* </div > */}
 			</>
 	);
