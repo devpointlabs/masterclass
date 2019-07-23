@@ -63,6 +63,7 @@ const EditCourseForm = (props) => {
           props.getCourseId(res.data.id);
         });
     };
+    props.history.push('/teachers/courses')
   }
 
   const categoryOptions = () => {
