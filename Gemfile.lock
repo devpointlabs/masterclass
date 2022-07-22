@@ -191,7 +191,7 @@ GEM
     tty-screen (0.6.5)
     tty-tree (0.3.0)
     tty-which (0.4.1)
-    tzinfo (1.2.5)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
